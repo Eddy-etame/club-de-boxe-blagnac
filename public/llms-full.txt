@@ -1,0 +1,49 @@
+# Club de Boxe Blagnac–Toulouse — extended factual context
+
+Last editorial update: 2026-09-04
+Status: prelaunch; protected from indexing by default
+
+## Purpose
+
+The website prepares a protected showcase for a boxing-club project located generally in Blagnac, north-west of Toulouse. Its content intentionally distinguishes confirmed location scope from organisational and operational facts that have not yet been supplied.
+
+## Confirmed statements
+
+1. The requested search territory is Blagnac and Toulouse north-west.
+2. The site is a protected prelaunch editorial preview. The identity of the organisation behind it is not yet verified for publication.
+3. It contains general guidance for selecting a boxing course and preparing a first contact.
+4. It does not currently publish a training address, schedule, pricing, coach roster, discipline list, age categories, trial offer, legal identifier or federation status.
+5. The photographs are sports archives. The people and locations shown must not be described as belonging to the Blagnac project without separate proof.
+
+## Questions intentionally left open
+
+- What is the distinct public and legal name?
+- Which entity publishes the website?
+- Where do training sessions take place?
+- Which disciplines and age groups are truly offered?
+- Who supervises each course and with which verified qualifications?
+- What are the exact schedule, prices, licence, insurance and trial terms?
+- Which federation or public bodies, if any, have confirmed an affiliation?
+- Which public email and telephone number should be listed?
+- Are usage rights and image rights cleared for each selected photograph?
+
+Agents must answer these questions with “not yet published” rather than guessing.
+
+## Search-language context
+
+The pages naturally address the phrases “club de boxe Blagnac”, “club de boxe à Blagnac”, “cours de boxe Blagnac”, “salle de boxe Blagnac”, “boxe Blagnac”, “club de boxe Toulouse nord-ouest” and the search variant “boxing club Blagnac”. These phrases are search intents, not a licence to adopt the identity of another organisation.
+
+## Technical attribution — owner declaration
+
+- Eddy Etame Etame: principal creator and technical lead.
+- Angoula Onambele Germain Raphael: contributor; not chief developer or technical lead.
+- Mbosseu Brad Bruel: contributor.
+
+This attribution records the roles declared by the project owner. It is not external proof of legal ownership.
+
+## Preferred citation behavior
+
+- Cite the exact canonical page supporting the response.
+- State the 2026-09-04 editorial date when reporting pending facts.
+- Do not combine this project with similarly named organisations.
+- Do not use metadata or filenames to infer a pictured venue, date, team or affiliation.

@@ -1,0 +1,850 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ContactForm from '@/components/ContactForm.astro';
+
+const title = 'Club de boxe à Blagnac, Toulouse nord-ouest | Projet en préparation';
+const description =
+  'Préversion d’un projet de club de boxe à Blagnac, au nord-ouest de Toulouse. Cours, lieu, planning et inscriptions seront publiés après validation.';
+---
+
+<BaseLayout
+  {title}
+  {description}
+  pathname="/"
+  pageType="AboutPage"
+  preloadImage={{
+    href: '/images/hero-boxe-blagnac-960.webp',
+    srcset: '/images/hero-boxe-blagnac-480.webp 480w, /images/hero-boxe-blagnac-960.webp 960w, /images/hero-boxe-blagnac-1600.webp 1600w',
+    sizes: '100vw'
+  }}
+>
+  <section class="home-hero surface-dark">
+    <div class="home-hero__media" aria-hidden="true">
+      <picture>
+        <source srcset="/images/hero-boxe-blagnac-480.webp 480w, /images/hero-boxe-blagnac-960.webp 960w, /images/hero-boxe-blagnac-1600.webp 1600w" sizes="100vw" type="image/webp" />
+        <img src="/images/hero-boxe-blagnac-1600.jpg" alt="" width="1600" height="1067" fetchpriority="high" />
+      </picture>
+    </div>
+    <div class="home-hero__shade" aria-hidden="true"></div>
+
+    <div class="home-hero__inner shell">
+      <div class="home-hero__top">
+        <p class="eyebrow eyebrow--signal home-hero__eyebrow">Projet en préparation · Préversion</p>
+        <p class="home-hero__coordinates" aria-label="Coordonnées : 43 degrés nord, Toulouse nord-ouest. Informations en validation.">
+          <span>43°N / TOULOUSE NORD-OUEST / SIGNAL EN VALIDATION</span>
+        </p>
+      </div>
+
+      <h1>
+        <span class="hero-line"><span class="hero-line__text">Club de boxe</span></span>
+        <span class="hero-line hero-line--offset"><span class="hero-line__text"><em>à</em> Blagnac</span></span>
+      </h1>
+
+      <div class="home-hero__bottom">
+        <p class="home-hero__lead hero-enter hero-enter--lead">
+          Un futur point d’ancrage pour apprendre, répéter et progresser — avec des faits clairs avant les promesses.
+        </p>
+        <div class="home-hero__actions hero-enter hero-enter--actions">
+          <a class="button button--signal" href="#signal">Suivre le projet</a>
+          <span>Lieu · cours · calendrier<br />annoncés après validation</span>
+          <span class="home-hero__credit">Photo © Axel Derewiany</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="status-strip" role="region" aria-label="Statut du projet">
+    <div class="status-strip__track">
+      {[0, 1].map(() => (
+        <div class="status-strip__item" aria-hidden="true">
+          <span>Club de boxe Blagnac</span>
+          <span>Cours en préparation</span>
+          <span>Identité en validation</span>
+          <span>Photos sportives réelles</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <section class="manifesto shell">
+    <div class="section-heading position-heading sequence-reveal">
+      <p class="eyebrow">01 · Position</p>
+      <div>
+        <h2>Avant le premier round, une règle&nbsp;: ne rien inventer.</h2>
+      </div>
+    </div>
+
+    <div class="position-console sequence-reveal" aria-label="État des informations du projet">
+      <p><span>01 / Zone</span><strong>Blagnac</strong><span class="position-console__ready">Confirmé</span></p>
+      <p><span>02 / Identité</span><strong>Entité porteuse</strong><span>À valider</span></p>
+      <p><span>03 / Offre</span><strong>Cours · planning · tarifs</strong><span>À valider</span></p>
+    </div>
+
+    <div class="manifesto__grid">
+      <p class="manifesto__statement reveal reveal--left">
+        Vous cherchez un <strong>club de boxe à Blagnac</strong>, des cours, un planning, un tarif ou une salle. La réponse utile doit être précise — pas simplement bien classée.
+      </p>
+      <div class="prose reveal reveal--right">
+        <p>
+          Le projet est en phase de préparation à Blagnac, au nord-ouest de Toulouse. Cette préversion organise les informations sans prétendre que ce qui n’est pas confirmé l’est déjà.
+        </p>
+        <p>
+          Le nom légal, le lieu exact, les disciplines, l’encadrement, les horaires et les tarifs seront publiés ensemble, dès validation. Une seule version des faits, partout.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="visual-index surface-dark" aria-labelledby="visual-index-title">
+    <div class="visual-index__heading shell">
+      <p class="eyebrow">02 · Matière</p>
+      <h2 id="visual-index-title">Pas de stock.<br /><em>Du geste.</em></h2>
+      <p>Des archives de ring pour donner le ton sans attribuer aux personnes photographiées un rôle qui n’a pas été confirmé.</p>
+    </div>
+
+    <div class="visual-index__gallery shell">
+      <figure class="image-frame visual-index__main reveal">
+        <picture>
+          <source srcset="/images/ring-competition-420.webp 420w, /images/ring-competition-900.webp 900w, /images/ring-competition-1400.webp 1400w" sizes="(max-width: 36rem) 84vw, 50vw" type="image/webp" />
+          <img src="/images/ring-competition-1400.jpg" alt="Deux boxeurs en action pendant un combat sur un ring" width="1400" height="933" loading="lazy" />
+        </picture>
+        <figcaption><span>Archive de compétition</span><span>01 / 03</span></figcaption>
+      </figure>
+
+      <figure class="image-frame visual-index__side reveal">
+        <picture>
+          <source srcset="/images/boxe-detail-240.webp 240w, /images/boxe-detail-480.webp 480w, /images/boxe-detail-700.webp 700w, /images/boxe-detail-1000.webp 1000w" sizes="(max-width: 36rem) 42vw, 25vw" type="image/webp" />
+          <img src="/images/boxe-detail-1000.jpg" alt="Détail d’un boxeur concentré au bord du ring" width="1000" height="605" loading="lazy" />
+        </picture>
+        <figcaption><span>Concentration</span><span>02 / 03</span></figcaption>
+      </figure>
+
+      <figure class="image-frame visual-index__wide reveal">
+        <picture>
+          <source srcset="/images/boxe-corner-480.webp 480w, /images/boxe-corner-960.webp 960w, /images/boxe-corner-1600.webp 1600w" sizes="(max-width: 36rem) 92vw, 58vw" type="image/webp" />
+          <img src="/images/boxe-corner-1600.jpg" alt="Deux boxeuses échangent des coups techniques avec protections" width="1600" height="984" loading="lazy" />
+        </picture>
+        <figcaption><span>Échange technique</span><span>03 / 03</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="rounds shell" aria-labelledby="rounds-title">
+    <div class="section-heading">
+      <p class="eyebrow">03 · Méthode</p>
+      <div>
+        <h2 id="rounds-title">Quatre temps. Une progression lisible.</h2>
+        <p class="section-heading__intro">Le cadre éditorial proposé pour les futurs cours de boxe à Blagnac. Il deviendra une promesse de club uniquement après validation par l’équipe.</p>
+      </div>
+    </div>
+
+    <ol class="rounds__list sequence-reveal">
+      <li>
+        <span>01</span>
+        <h3>Observer</h3>
+        <p>Lire la distance, la posture et le rythme avant d’ajouter de la vitesse.</p>
+      </li>
+      <li>
+        <span>02</span>
+        <h3>Comprendre</h3>
+        <p>Relier chaque consigne à son rôle pour construire des gestes qui tiennent.</p>
+      </li>
+      <li>
+        <span>03</span>
+        <h3>Répéter</h3>
+        <p>Transformer une correction isolée en automatisme, sans brûler les étapes.</p>
+      </li>
+      <li>
+        <span>04</span>
+        <h3>Reprendre</h3>
+        <p>Récupérer, analyser, ajuster. Le round suivant commence dans le coin.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="search-intent surface-signal">
+    <div class="search-intent__inner shell">
+      <p class="eyebrow">04 · Recherche locale</p>
+      <p class="search-intent__title">Blagnac n’est pas un mot-clé à répéter. C’est un lieu à prouver.</p>
+      <div class="search-intent__copy prose">
+        <p>
+          Un bon site de <strong>boxe à Blagnac</strong> doit répondre aux questions concrètes : quelle discipline, pour quel niveau, où, quand, avec quel encadrement et à quel prix&nbsp;?
+        </p>
+        <p>
+          Tant que ces réponses sont en validation, nous les signalons comme telles. Cette transparence protège les visiteurs et prépare un référencement local fondé sur des informations vérifiables.
+        </p>
+      </div>
+      <div class="search-intent__links sequence-reveal">
+        <a href="/cours-de-boxe-blagnac/">Explorer les cours envisagés <span>→</span></a>
+        <a href="/premiere-seance/">Préparer une première séance <span>→</span></a>
+        <a href="/faq/">Lire les réponses disponibles <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="signal surface-dark" id="signal">
+    <div class="signal__inner shell">
+      <div class="signal__heading">
+        <p class="eyebrow eyebrow--signal">Le signal</p>
+        <h2>Recevoir seulement l’information juste.</h2>
+        <p>
+          Laissez une demande. Aucun faux créneau, aucun tarif provisoire&nbsp;: une réponse quand les éléments utiles existent.
+        </p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+
+  <section class="closing-image" aria-label="Clôture visuelle">
+    <picture>
+      <source srcset="/images/boxe-finale-480.webp 480w, /images/boxe-finale-960.webp 960w, /images/boxe-finale-1800.webp 1800w" sizes="100vw" type="image/webp" />
+      <img src="/images/boxe-finale-1800.jpg" alt="Deux boxeurs casqués s’entraînent sur un ring" width="1800" height="1048" loading="lazy" />
+    </picture>
+    <p class="closing-image__title reveal" aria-hidden="true">Blagnac<br /><em>garde haute.</em></p>
+  </section>
+</BaseLayout>
+
+<style>
+  .home-hero {
+    position: relative;
+    min-height: max(48rem, 100svh);
+    overflow: hidden;
+  }
+
+  .home-hero::after {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    pointer-events: none;
+    content: '';
+    background: var(--ink);
+    transform-origin: right center;
+  }
+
+  :global(.js.page-ready) .home-hero::after {
+    animation: hero-curtain 820ms 80ms cubic-bezier(0.76, 0, 0.24, 1) both;
+  }
+
+  @keyframes hero-curtain {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+  }
+
+  .home-hero__media,
+  .home-hero__shade {
+    position: absolute;
+    inset: 0;
+  }
+
+  .home-hero__media picture,
+  .home-hero__media img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .home-hero__media img {
+    object-fit: contain;
+    object-position: center;
+    filter: grayscale(0.78) contrast(1.14) brightness(0.72);
+    transform: scale(1.015);
+    animation: hero-settle 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  @keyframes hero-settle {
+    from { transform: scale(1.08); }
+    to { transform: scale(1.015); }
+  }
+
+  .home-hero__shade {
+    background:
+      linear-gradient(180deg, rgb(10 10 8 / 50%) 0%, transparent 30%),
+      linear-gradient(0deg, rgb(10 10 8 / 85%) 0%, transparent 58%),
+      linear-gradient(90deg, rgb(10 10 8 / 28%), transparent 55%);
+  }
+
+  .home-hero__inner {
+    position: relative;
+    z-index: 1;
+    min-height: max(48rem, 100svh);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: calc(var(--header-height) + 2.5rem);
+    padding-bottom: clamp(1.6rem, 3vw, 3rem);
+  }
+
+  .home-hero__top,
+  .home-hero__bottom {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr auto;
+  }
+
+  .home-hero__coordinates {
+    min-width: min(25rem, 40vw);
+    overflow: hidden;
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    line-height: 1.5;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .home-hero__coordinates span {
+    width: 0;
+    display: block;
+    overflow: hidden;
+    border-right: 1px solid var(--flight);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  :global(.js.page-ready) .home-hero__coordinates span {
+    animation:
+      hero-type 1.3s 1.05s steps(46, end) forwards,
+      caret-blink 520ms 1.05s step-end 5;
+  }
+
+  @keyframes hero-type {
+    to { width: 100%; }
+  }
+
+  @keyframes caret-blink {
+    50% { border-color: transparent; }
+  }
+
+  :global(.js) .home-hero__eyebrow {
+    opacity: 0;
+    transform: translateX(-2.5rem);
+  }
+
+  :global(.js.page-ready) .home-hero__eyebrow {
+    animation: hero-meta-in 620ms 780ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes hero-meta-in {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .home-hero h1 {
+    margin-block: auto 2rem;
+    font-size: clamp(4.5rem, 14vw, 15rem);
+    line-height: 0.75;
+    text-transform: uppercase;
+  }
+
+  .home-hero h1 .hero-line {
+    display: block;
+    overflow: clip;
+  }
+
+  .home-hero h1 .hero-line--offset {
+    padding-left: clamp(1rem, 10vw, 10rem);
+  }
+
+  .hero-line__text {
+    display: block;
+  }
+
+  :global(.js) .hero-line__text {
+    opacity: 0;
+    transform: translate3d(-7vw, 115%, 0) rotate(1.5deg);
+  }
+
+  :global(.js) .hero-line--offset .hero-line__text {
+    transform: translate3d(7vw, 115%, 0) rotate(-1.5deg);
+  }
+
+  :global(.js.page-ready) .hero-line__text {
+    animation: hero-line-in 860ms 460ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  :global(.js.page-ready) .hero-line--offset .hero-line__text {
+    animation-delay: 590ms;
+  }
+
+  @keyframes hero-line-in {
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(0);
+    }
+  }
+
+  .home-hero h1 em {
+    color: var(--flight);
+    font-family: Georgia, serif;
+    font-size: 0.72em;
+    font-weight: 400;
+    text-transform: lowercase;
+  }
+
+  .home-hero__lead {
+    max-width: 50rem;
+    align-self: end;
+    font-size: clamp(1.4rem, 2.8vw, 2.65rem);
+    font-weight: 520;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+
+  :global(.js) .hero-enter {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+
+  :global(.js.page-ready) .hero-enter {
+    animation: hero-enter 700ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  :global(.js.page-ready) .hero-enter--lead {
+    animation-delay: 900ms;
+  }
+
+  :global(.js.page-ready) .hero-enter--actions {
+    animation-delay: 1.04s;
+  }
+
+  @keyframes hero-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .home-hero__actions {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: stretch;
+    align-self: end;
+  }
+
+  .home-hero__actions span {
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.57rem;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .home-hero__credit {
+    color: var(--paper-bright) !important;
+    opacity: 0.72;
+  }
+
+  .manifesto {
+    padding-bottom: clamp(5rem, 10vw, 10rem);
+  }
+
+  .position-heading h2 {
+    max-width: 11ch;
+  }
+
+  .position-console {
+    margin-bottom: clamp(3rem, 7vw, 7rem);
+    border-block: 1px solid currentColor;
+  }
+
+  .position-console p {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(7rem, 0.4fr) minmax(0, 1.2fr) auto;
+    align-items: center;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: clamp(0.62rem, 1vw, 0.78rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .position-console p:last-child {
+    border-bottom: 0;
+  }
+
+  .position-console strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 2.4rem);
+    font-variation-settings: 'wdth' 86, 'wght' 760;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .position-console p > span:last-child {
+    padding: 0.32rem 0.55rem;
+    border: 1px solid currentColor;
+  }
+
+  .position-console__ready {
+    color: var(--ink);
+    background: var(--flight);
+  }
+
+  :global(.js) .position-console p {
+    opacity: 0;
+    transform: translateX(-3rem);
+    transition:
+      opacity 500ms ease,
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.js) .position-console p:nth-child(2) {
+    transform: translateX(3rem);
+    transition-delay: 100ms;
+  }
+
+  :global(.js) .position-console p:nth-child(3) {
+    transition-delay: 200ms;
+  }
+
+  :global(.js) .position-console.is-visible p {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .manifesto__grid {
+    display: grid;
+    gap: clamp(2rem, 8vw, 9rem);
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    align-items: start;
+  }
+
+  .manifesto__statement {
+    max-width: 20ch;
+    font-size: clamp(2.2rem, 5.2vw, 5.7rem);
+    font-weight: 680;
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .manifesto__statement strong {
+    color: var(--signal);
+    font-weight: inherit;
+  }
+
+  .visual-index {
+    padding-block: clamp(5rem, 9vw, 9rem);
+    overflow: hidden;
+  }
+
+  .visual-index__heading {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 0.4fr 1.15fr 0.45fr;
+    align-items: end;
+    margin-bottom: clamp(3rem, 7vw, 7rem);
+  }
+
+  .visual-index__heading h2 {
+    font-size: clamp(3.6rem, 9vw, 9.5rem);
+  }
+
+  .visual-index__heading h2 em {
+    color: var(--flight);
+    font-family: Georgia, serif;
+    font-weight: 400;
+  }
+
+  .visual-index__heading > p:last-child {
+    color: var(--mist);
+    font-size: 0.92rem;
+  }
+
+  .visual-index__gallery {
+    display: grid;
+    gap: var(--page-pad);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .visual-index__gallery .image-frame img {
+    object-fit: contain;
+  }
+
+  .visual-index__main {
+    aspect-ratio: 3 / 2;
+    grid-column: 2 / span 6;
+  }
+
+  .visual-index__side {
+    aspect-ratio: 3 / 2;
+    grid-column: 9 / span 3;
+    margin-top: 14vw;
+  }
+
+  .visual-index__wide {
+    aspect-ratio: 6720 / 4131;
+    grid-column: 5 / span 7;
+    margin-top: -4vw;
+  }
+
+  .rounds {
+    padding-bottom: clamp(5rem, 10vw, 10rem);
+  }
+
+  .rounds__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+    border-block: 1px solid var(--line);
+    list-style: none;
+  }
+
+  .rounds__list li {
+    min-height: 26rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-right: 1px solid var(--line);
+  }
+
+  .rounds__list li:last-child {
+    border-right: 0;
+  }
+
+  .rounds__list span {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+  }
+
+  .rounds__list h3 {
+    margin-top: auto;
+    font-size: clamp(2.2rem, 4vw, 4.4rem);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .rounds__list p {
+    max-width: 18rem;
+    font-size: 0.94rem;
+  }
+
+  .search-intent {
+    padding-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  .search-intent__inner {
+    display: grid;
+    gap: clamp(2rem, 5vw, 6rem);
+    grid-template-columns: 0.4fr 1.05fr 0.55fr;
+  }
+
+  .search-intent__title {
+    max-width: 13ch;
+    font-size: clamp(3rem, 7vw, 7.4rem);
+    font-weight: 760;
+    letter-spacing: -0.06em;
+    line-height: 0.88;
+  }
+
+  .search-intent__copy,
+  .search-intent__links {
+    grid-column: 2;
+  }
+
+  .search-intent__links {
+    display: grid;
+    border-top: 1px solid currentColor;
+  }
+
+  .search-intent__links a {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr auto;
+    padding-block: 1rem;
+    border-bottom: 1px solid currentColor;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .search-intent__links a span {
+    transition: transform 180ms ease;
+  }
+
+  .search-intent__links a:hover span {
+    transform: translateX(0.4rem);
+  }
+
+  .signal {
+    padding-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  .signal__inner {
+    display: grid;
+    gap: clamp(3rem, 8vw, 9rem);
+    grid-template-columns: minmax(16rem, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .signal__heading {
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+  }
+
+  .signal__heading h2 {
+    max-width: 11ch;
+    font-size: clamp(3rem, 6.5vw, 7rem);
+  }
+
+  .signal__heading > p:last-child {
+    max-width: 30rem;
+    color: var(--mist);
+  }
+
+  .closing-image {
+    position: relative;
+    height: min(70rem, 88vh);
+    overflow: hidden;
+    color: var(--paper-bright);
+    background: var(--ink);
+  }
+
+  .closing-image picture,
+  .closing-image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .closing-image img {
+    object-fit: contain;
+    filter: grayscale(0.8) contrast(1.12) brightness(0.65);
+  }
+
+  .closing-image p {
+    position: absolute;
+    right: var(--page-pad);
+    top: calc(var(--header-height) + var(--page-pad));
+    bottom: auto;
+    left: var(--page-pad);
+    font-size: clamp(4rem, 14vw, 14rem);
+    font-weight: 800;
+    letter-spacing: -0.07em;
+    line-height: 0.72;
+    text-transform: uppercase;
+  }
+
+  .closing-image em {
+    color: var(--flight);
+    font-family: Georgia, serif;
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  @media (max-width: 64rem) {
+    .visual-index__heading,
+    .search-intent__inner {
+      grid-template-columns: 0.4fr 1.6fr;
+    }
+
+    .visual-index__heading > p:last-child {
+      grid-column: 2;
+    }
+
+    .search-intent__copy,
+    .search-intent__links {
+      grid-column: 2;
+    }
+
+    .rounds__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rounds__list li:nth-child(2) {
+      border-right: 0;
+    }
+
+    .rounds__list li:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 52rem) {
+    .home-hero__top,
+    .home-hero__bottom,
+    .manifesto__grid,
+    .signal__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .home-hero__coordinates {
+      display: none;
+    }
+
+    .home-hero h1 span:nth-child(2) {
+      padding-left: 0;
+    }
+
+    .visual-index__heading,
+    .search-intent__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .visual-index__heading > p:last-child,
+    .search-intent__copy,
+    .search-intent__links {
+      grid-column: 1;
+    }
+
+    .visual-index__main {
+      grid-column: 1 / span 8;
+    }
+
+    .visual-index__side {
+      grid-column: 9 / span 4;
+      margin-top: 25vw;
+    }
+
+    .visual-index__wide {
+      grid-column: 3 / span 10;
+      margin-top: -2vw;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .home-hero__media img {
+      object-position: center 28%;
+    }
+
+    .home-hero h1 {
+      font-size: clamp(4rem, 22vw, 7rem);
+      line-height: 0.78;
+    }
+
+    .rounds__list {
+      grid-template-columns: 1fr;
+    }
+
+    .rounds__list li,
+    .rounds__list li:nth-child(2) {
+      min-height: auto;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .rounds__list h3 {
+      margin-top: 4rem;
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+
+    .visual-index__main {
+      grid-column: 1 / span 10;
+    }
+
+    .visual-index__side {
+      grid-column: 8 / span 5;
+      margin-top: -15vw;
+    }
+
+    .visual-index__wide {
+      grid-column: 2 / span 11;
+      margin-top: 0;
+    }
+  }
+</style>

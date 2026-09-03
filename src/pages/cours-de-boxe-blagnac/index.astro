@@ -1,0 +1,210 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Cours de boxe à Blagnac : programme en préparation';
+const description =
+  'Cours de boxe à Blagnac : découvrez les informations qui seront publiées sur les disciplines, niveaux, publics, horaires et modalités avant l’ouverture.';
+
+const proofRows = [
+  ['Discipline', 'Nom exact de la pratique, contenu de séance et cadre fédéral le cas échéant.', 'À confirmer'],
+  ['Public', 'Âges, prérequis, niveaux et capacité d’accueil.', 'À confirmer'],
+  ['Encadrement', 'Nom, rôle, qualifications et responsabilités de chaque intervenant.', 'À confirmer'],
+  ['Calendrier', 'Jours, heures, durée, saison et périodes de fermeture.', 'À confirmer'],
+  ['Tarif', 'Prix complet, licence, assurance, équipement et conditions d’essai.', 'À confirmer']
+];
+---
+
+<BaseLayout {title} {description} pathname="/cours-de-boxe-blagnac/">
+  <header class="page-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">Cours · Cadre · Progression</p>
+        <p class="mono">Fiche 01 / Informations en validation</p>
+      </div>
+      <h1>Cours de boxe <em>à Blagnac</em></h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead">Un programme ne vaut que s’il dit précisément ce qui se passe entre l’arrivée et la fin du round.</p>
+        <p class="page-hero__note">Cette page décrit la structure d’information prévue. Elle ne transforme pas une offre non validée en promesse commerciale.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="course-intro shell page-copy">
+    <div class="page-copy__grid">
+      <p class="eyebrow">Le point de vérité</p>
+      <div class="prose">
+        <p>
+          Une recherche comme <strong>cours de boxe Blagnac</strong>, <strong>salle de boxe Blagnac</strong> ou <strong>club de boxe Toulouse nord-ouest</strong> appelle des réponses vérifiables. Le programme final n’est pas encore publié.
+        </p>
+        <p>
+          Plutôt que d’inventer des créneaux ou des catégories, nous préparons une fiche unique qui reliera discipline, niveau, encadrement, horaire, tarif et lieu. Toute mise à jour devra modifier le même jeu de données sur l’ensemble du site.
+        </p>
+        <div class="notice">
+          <strong>Ce qui n’est pas encore confirmé reste marqué comme tel.</strong>
+          <p>La boxe anglaise, le loisir, la compétition, les cours débutants, enfants, ados ou adultes ne seront annoncés que si ces offres existent réellement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-proof surface-dark">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">Le contrat de clarté</p>
+        <div>
+          <h2>Cinq preuves avant de réserver.</h2>
+          <p class="section-heading__intro">Ce tableau deviendra le référentiel des cours dès que les données officielles auront été validées.</p>
+        </div>
+      </div>
+
+      <div class="proof-table" role="table" aria-label="État des informations sur les cours">
+        {proofRows.map(([label, expected, state], index) => (
+          <div class="proof-table__row reveal" role="row">
+            <span class="proof-table__index" role="cell">{String(index + 1).padStart(2, '0')}</span>
+            <h3 role="cell">{label}</h3>
+            <p role="cell">{expected}</p>
+            <span class="proof-table__state" role="cell">{state}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="course-image">
+    <div class="course-image__copy shell">
+      <p class="eyebrow eyebrow--signal">Archive sportive</p>
+      <p>La technique se lit dans les détails&nbsp;: regard, distance, appuis, garde.</p>
+    </div>
+    <picture>
+      <source srcset="/images/ring-competition-420.webp 420w, /images/ring-competition-900.webp 900w, /images/ring-competition-1400.webp 1400w" sizes="100vw" type="image/webp" />
+      <img src="/images/ring-competition-1400.jpg" alt="Un direct arrêté par la garde d’un boxeur casqué" width="1400" height="933" loading="lazy" />
+    </picture>
+  </section>
+
+  <section class="course-next shell page-copy">
+    <div class="page-copy__grid">
+      <p class="eyebrow">Étape suivante</p>
+      <div class="prose">
+        <h2>Commencer par les bonnes questions.</h2>
+        <p>Vous pouvez déjà préparer votre première prise de contact sans acheter de matériel ni choisir un niveau au hasard.</p>
+        <a class="button" href="/premiere-seance/">Préparer la première séance</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .course-intro .notice {
+    margin-top: 3rem;
+  }
+
+  .course-proof {
+    padding-bottom: clamp(5rem, 10vw, 10rem);
+  }
+
+  .proof-table {
+    border-top: 1px solid rgb(255 255 255 / 26%);
+  }
+
+  .proof-table__row {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 3rem minmax(8rem, 0.55fr) minmax(16rem, 1fr) auto;
+    align-items: center;
+    padding-block: clamp(1.5rem, 3vw, 2.6rem);
+    border-bottom: 1px solid rgb(255 255 255 / 26%);
+  }
+
+  .proof-table__index,
+  .proof-table__state {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+  }
+
+  .proof-table h3 {
+    font-size: clamp(1.8rem, 3.8vw, 3.8rem);
+  }
+
+  .proof-table p {
+    max-width: 37rem;
+    color: var(--mist);
+  }
+
+  .proof-table__state {
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--signal);
+    color: var(--signal);
+  }
+
+  .course-image {
+    position: relative;
+    min-height: 42rem;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    color: var(--paper-bright);
+    background: var(--ink);
+  }
+
+  .course-image picture,
+  .course-image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .course-image picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .course-image img {
+    object-fit: contain;
+    filter: grayscale(0.85) brightness(0.62) contrast(1.2);
+  }
+
+  .course-image__copy {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .course-image__copy > p:last-child {
+    max-width: 12ch;
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 780;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+  }
+
+  .course-next h2 {
+    font-size: clamp(2.6rem, 6vw, 6rem);
+  }
+
+  .course-next .button {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 48rem) {
+    .proof-table__row {
+      grid-template-columns: 2rem 1fr auto;
+    }
+
+    .proof-table__row p {
+      grid-column: 2 / -1;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .proof-table__row {
+      grid-template-columns: 2rem 1fr;
+    }
+
+    .proof-table__state {
+      grid-column: 2;
+      width: fit-content;
+    }
+  }
+</style>

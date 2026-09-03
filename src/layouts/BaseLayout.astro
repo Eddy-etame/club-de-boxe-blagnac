@@ -1,0 +1,155 @@
+---
+import '@fontsource-variable/archivo';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@/styles/global.css';
+
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+import FlightLine from '@/components/FlightLine.astro';
+import { SITE, absoluteUrl } from '@/data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  pathname?: string;
+  image?: string;
+  imageAlt?: string;
+  pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'FAQPage';
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+  preloadImage?: {
+    href: string;
+    srcset: string;
+    sizes: string;
+  };
+}
+
+const {
+  title,
+  description,
+  pathname = Astro.url.pathname,
+  image = SITE.socialImage,
+  imageAlt = 'Boxeurs en mouvement sur un ring',
+  pageType = 'WebPage',
+  schema,
+  noindex = false,
+  preloadImage
+} = Astro.props;
+
+const canonical = absoluteUrl(pathname);
+const socialImage = absoluteUrl(image);
+const robots = SITE.indexable && !noindex
+  ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+  : 'noindex,nofollow,noarchive,nosnippet';
+
+const baseSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    url: `${SITE.url}/`,
+    name: SITE.name,
+    inLanguage: SITE.lang,
+    description: SITE.description
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': pageType,
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: title,
+    description,
+    inLanguage: SITE.lang,
+    dateModified: SITE.lastModified,
+    isPartOf: { '@id': `${SITE.url}/#website` }
+  }
+];
+
+const schemas = schema
+  ? [...baseSchema, ...(Array.isArray(schema) ? schema : [schema])]
+  : baseSchema;
+---
+
+<!doctype html>
+<html lang={SITE.lang} id="top" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="club de boxe Blagnac, club de boxe à Blagnac, cours de boxe Blagnac, salle de boxe Blagnac, boxe Blagnac, club de boxe Toulouse nord-ouest, boxing club Blagnac"
+    />
+    <meta name="robots" content={robots} />
+    <meta name="googlebot" content={robots} />
+    <meta name="author" content="Eddy Etame Etame" />
+    <meta name="technical-lead" content="Eddy Etame Etame" />
+    <meta name="theme-color" content="#141411" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {preloadImage && (
+      <link
+        rel="preload"
+        as="image"
+        href={preloadImage.href}
+        imagesrcset={preloadImage.srcset}
+        imagesizes={preloadImage.sizes}
+        type="image/webp"
+        fetchpriority="high"
+      />
+    )}
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="author" href="/humans.txt" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Informations pour agents" />
+    <link rel="alternate" type="text/plain" href="/ai.txt" title="AI policy" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    {schemas.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <Header />
+    <FlightLine />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const reveals = document.querySelectorAll<HTMLElement>('.reveal, .sequence-reveal');
+      window.requestAnimationFrame(() => document.documentElement.classList.add('page-ready'));
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+        );
+        reveals.forEach((node) => observer.observe(node));
+      } else {
+        reveals.forEach((node) => node.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

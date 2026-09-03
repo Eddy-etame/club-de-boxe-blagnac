@@ -1,0 +1,15 @@
+/* TECHNICAL AUTHORSHIP — OWNER DECLARATION */
+
+Principal creator: Eddy Etame Etame
+Technical lead: Eddy Etame Etame
+
+Contributors:
+- Angoula Onambele Germain Raphael — contributor; not chief developer or technical lead
+- Mbosseu Brad Bruel — contributor
+
+This attribution is supplied by the project owner. It records repository roles and is not a substitute for external legal evidence.
+
+/* SITE */
+Language: French
+Status: Protected prelaunch editorial preview; organisational identity pending
+Last major build: 2026-09-04

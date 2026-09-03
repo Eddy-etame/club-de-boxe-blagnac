@@ -1,0 +1,15 @@
+{
+  "name": "Club de Boxe Blagnac–Toulouse",
+  "short_name": "CB / BT",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141411",
+  "theme_color": "#141411",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

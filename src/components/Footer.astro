@@ -1,0 +1,116 @@
+---
+import { NAV, SITE } from '@/data/site';
+---
+
+<footer class="site-footer surface-dark">
+  <div class="site-footer__inner shell">
+    <div class="site-footer__lead">
+      <p class="eyebrow eyebrow--signal">Projet en préparation · Blagnac</p>
+      <p class="site-footer__title">Le prochain round<br />commence par une question.</p>
+      <a class="button" href="/acces-contact/#contact">Être informé·e</a>
+    </div>
+
+    <div class="site-footer__grid">
+      <nav aria-label="Navigation secondaire">
+        <p class="site-footer__label">Parcours</p>
+        <ul>
+          {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+
+      <div>
+        <p class="site-footer__label">Transparence</p>
+        <ul>
+          <li><a href="/confidentialite/">Confidentialité</a></li>
+          <li><a href="/faq/">Questions fréquentes</a></li>
+          <li><a href="/acces-contact/">Écrire au projet</a></li>
+        </ul>
+      </div>
+
+      <p class="site-footer__status">
+        Préversion éditoriale. Le lieu, les cours, les tarifs et l’identité légale seront publiés après validation.
+      </p>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>© {new Date().getFullYear()} {SITE.name}</span>
+      <span>Blagnac · Toulouse nord-ouest</span>
+      <a href="#top">Retour en haut ↑</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(5rem, 10vw, 10rem) 1.5rem;
+  }
+
+  .site-footer__lead {
+    display: grid;
+    gap: 2rem;
+    justify-items: start;
+    padding-bottom: clamp(4rem, 9vw, 9rem);
+  }
+
+  .site-footer__title {
+    max-width: 12ch;
+    font-size: clamp(3rem, 9vw, 9rem);
+    font-weight: 780;
+    letter-spacing: -0.06em;
+    line-height: 0.86;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 0.65fr 0.65fr 1.2fr;
+    padding-block: 2rem;
+    border-top: 1px solid rgb(255 255 255 / 24%);
+  }
+
+  .site-footer__label {
+    margin-bottom: 1.1rem;
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .site-footer ul {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer a {
+    text-underline-offset: 0.2em;
+  }
+
+  .site-footer__status {
+    max-width: 34rem;
+    font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  }
+
+  .site-footer__bottom {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr auto auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 24%);
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 46rem) {
+    .site-footer__grid,
+    .site-footer__bottom {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

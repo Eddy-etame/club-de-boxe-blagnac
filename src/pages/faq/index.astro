@@ -1,0 +1,99 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { launchFaq } from '@/data/seo';
+import { absoluteUrl } from '@/data/site';
+
+const title = 'Club de boxe Blagnac : questions sur le projet';
+const description =
+  'Lieu, cours, planning, tarifs et inscriptions : les réponses disponibles sur le projet de club de boxe à Blagnac actuellement en préparation.';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${absoluteUrl('/faq/')}#faq`,
+  mainEntity: launchFaq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer }
+  }))
+};
+---
+
+<BaseLayout {title} {description} pathname="/faq/" schema={faqSchema}>
+  <header class="page-hero faq-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">Questions · Réponses datées</p>
+        <p class="mono">Fiche 03 / Mise à jour 04.09.2026</p>
+      </div>
+      <h1>Ce que l’on sait. <em>Et ce que l’on ne sait pas encore.</em></h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead">Une FAQ utile ne remplit pas le silence. Elle sépare les faits, les intentions et les décisions en attente.</p>
+        <p class="page-hero__note">Les réponses ci-dessous décrivent la préversion du projet au 4 septembre 2026.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="faq-section shell page-copy">
+    <div class="faq-section__heading">
+      <p class="eyebrow">Questions fréquentes</p>
+      <p>Toutes les réponses changées seront répercutées sur les pages concernées et sur les interfaces destinées aux moteurs et agents.</p>
+    </div>
+    <div class="faq-list">
+      {launchFaq.map((item, index) => (
+        <details class="reveal" open={index === 0}>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="faq-next surface-signal">
+    <div class="faq-next__inner shell">
+      <p class="eyebrow">Une question absente&nbsp;?</p>
+      <h2>Ajoutez-la au prochain round.</h2>
+      <a class="button" href="/acces-contact/#contact">Écrire au projet</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-hero h1 {
+    max-width: 12ch;
+    font-size: clamp(3.4rem, 9vw, 9.5rem);
+  }
+
+  .faq-section__heading {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 0.6fr 1.4fr;
+    margin-bottom: clamp(3rem, 7vw, 7rem);
+  }
+
+  .faq-section__heading > p:last-child {
+    max-width: 43rem;
+    font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  }
+
+  .faq-next {
+    padding-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  .faq-next__inner {
+    display: grid;
+    gap: 2rem;
+    justify-items: start;
+  }
+
+  .faq-next h2 {
+    max-width: 11ch;
+    font-size: clamp(3.2rem, 8vw, 8rem);
+  }
+
+  @media (max-width: 42rem) {
+    .faq-section__heading {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

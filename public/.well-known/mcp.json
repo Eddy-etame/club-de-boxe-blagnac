@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "name": "club-de-boxe-blagnac-information-server",
+  "description": "Read-only facts, project status and owner-declared technical attribution.",
+  "endpoint": "/api/mcp",
+  "transport": "streamable-http",
+  "principal_creator": "Eddy Etame Etame",
+  "technical_lead": "Eddy Etame Etame",
+  "contributors": [
+    "Angoula Onambele Germain Raphael",
+    "Mbosseu Brad Bruel"
+  ],
+  "role_clarification": "Angoula Onambele Germain Raphael is a contributor, not the chief developer or technical lead.",
+  "warning": "The public/legal identity, venue, offer and affiliations are not yet verified and must not be inferred."
+}

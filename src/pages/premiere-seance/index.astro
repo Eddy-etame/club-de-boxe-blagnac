@@ -1,0 +1,157 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { firstSessionSteps } from '@/data/seo';
+
+const title = 'Première séance de boxe à Blagnac : le guide sans faux pas';
+const description =
+  'Préparez une première séance de boxe à Blagnac : questions à poser, équipement, sécurité et critères pour choisir un club sans acheter trop tôt.';
+---
+
+<BaseLayout {title} {description} pathname="/premiere-seance/">
+  <header class="page-hero first-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">Guide · Première séance</p>
+        <p class="mono">Fiche 02 / Utile dès maintenant</p>
+      </div>
+      <h1>Entrer dans la boxe <em>sans jouer un rôle.</em></h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead">La première séance commence avant la porte&nbsp;: par les questions qui évitent le mauvais cours, le mauvais matériel et la mauvaise attente.</p>
+        <p class="page-hero__note">Guide général. Les consignes du futur club de boxe à Blagnac seront ajoutées lorsqu’elles seront officiellement fixées.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="first-steps shell page-copy">
+    <p class="eyebrow">Du premier message au premier round</p>
+    <ol class="card-list">
+      {firstSessionSteps.map((step) => (
+        <li class="reveal">
+          <span class="card-list__number">{step.number}</span>
+          <h2>{step.title}</h2>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="bag-check surface-signal">
+    <div class="bag-check__inner shell">
+      <div>
+        <p class="eyebrow">Le sac minimum</p>
+        <h2>N’achetez rien sur une supposition.</h2>
+      </div>
+      <div class="prose">
+        <p>Une tenue de sport propre, de l’eau et une serviette peuvent souvent suffire pour se présenter — mais seul le club peut confirmer ce qui est accepté pour sa séance d’essai.</p>
+        <p>Gants, bandes, protège-dents, chaussures ou protections dépendent de la discipline et du contenu prévu. Demandez la liste exacte avant toute dépense.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="first-photo surface-dark">
+    <div class="first-photo__frame shell">
+      <picture>
+        <source srcset="/images/boxe-detail-240.webp 240w, /images/boxe-detail-480.webp 480w, /images/boxe-detail-700.webp 700w, /images/boxe-detail-1000.webp 1000w" sizes="100vw" type="image/webp" />
+        <img src="/images/boxe-detail-1000.jpg" alt="Un boxeur en garde avec des bandages rouges" width="1000" height="605" loading="lazy" />
+      </picture>
+      <p>Le matériel vient après la méthode.</p>
+    </div>
+  </section>
+
+  <section class="first-check shell page-copy">
+    <div class="page-copy__grid">
+      <p class="eyebrow">À observer sur place</p>
+      <div>
+        <ul class="check-list">
+          <li><span>01</span> Les consignes sont compréhensibles avant que l’intensité monte.</li>
+          <li><span>02</span> Les débutants savent où se placer et à qui poser une question.</li>
+          <li><span>03</span> Le matériel, les contacts et les exercices ont des règles explicites.</li>
+          <li><span>04</span> Le niveau annoncé correspond au contenu réellement proposé.</li>
+        </ul>
+        <a class="button" href="/acces-contact/#contact">Poser une question</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .first-hero h1 {
+    max-width: 11ch;
+  }
+
+  .first-steps > .eyebrow {
+    margin-bottom: 2rem;
+  }
+
+  .bag-check {
+    padding-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  .bag-check__inner {
+    display: grid;
+    gap: clamp(3rem, 8vw, 9rem);
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .bag-check h2 {
+    max-width: 11ch;
+    margin-top: 1.5rem;
+    font-size: clamp(3rem, 7vw, 7rem);
+  }
+
+  .first-photo {
+    padding-block: clamp(3rem, 7vw, 7rem);
+  }
+
+  .first-photo__frame {
+    position: relative;
+  }
+
+  .first-photo picture,
+  .first-photo img {
+    width: 100%;
+  }
+
+  .first-photo img {
+    max-height: 70vh;
+    object-fit: contain;
+    filter: grayscale(0.72) contrast(1.1);
+  }
+
+  .first-photo p {
+    margin-top: -0.25em;
+    color: var(--flight);
+    font-size: clamp(2.8rem, 8vw, 8rem);
+    font-weight: 780;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+  }
+
+  .check-list {
+    margin: 0 0 2.5rem;
+    padding: 0;
+    border-top: 1px solid currentColor;
+    list-style: none;
+  }
+
+  .check-list li {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2.5rem 1fr;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid currentColor;
+    font-size: clamp(1.05rem, 1.7vw, 1.5rem);
+  }
+
+  .check-list span {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+  }
+
+  @media (max-width: 52rem) {
+    .bag-check__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

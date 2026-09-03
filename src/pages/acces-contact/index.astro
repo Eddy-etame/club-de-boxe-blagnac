@@ -1,0 +1,141 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ContactForm from '@/components/ContactForm.astro';
+
+const title = 'Contact — projet de club de boxe à Blagnac';
+const description =
+  'Contactez le projet de club de boxe à Blagnac pour être informé du lieu, des cours, du planning et des inscriptions après validation.';
+---
+
+<BaseLayout {title} {description} pathname="/acces-contact/" pageType="ContactPage">
+  <header class="page-hero contact-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">Accès · Contact</p>
+        <p class="mono">Fiche 04 / Aucun déplacement sans adresse confirmée</p>
+      </div>
+      <h1>On vous répond quand la réponse <em>existe.</em></h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead">Vous cherchez un cours de boxe à Blagnac&nbsp;? Dites-nous le niveau d’information dont vous avez besoin.</p>
+        <p class="page-hero__note">Aucune adresse de salle, téléphone ou permanence n’est publié tant que ces coordonnées ne sont pas validées.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="location-ledger shell page-copy">
+    <div class="location-ledger__grid">
+      <div>
+        <p class="eyebrow">Zone annoncée</p>
+        <p class="location-ledger__place">Blagnac<br /><em>Toulouse nord-ouest</em></p>
+      </div>
+      <div class="notice">
+        <strong>L’adresse exacte reste en validation.</strong>
+        <p>Nous ne publions ni carte, ni itinéraire, ni horaires d’ouverture avant confirmation. Cela évite de diriger des visiteurs vers une salle ou une organisation sans autorisation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-panel surface-dark" id="contact">
+    <div class="contact-panel__inner shell">
+      <div>
+        <p class="eyebrow eyebrow--signal">Votre demande</p>
+        <h2>Un message précis. Une réponse utile.</h2>
+        <p class="contact-panel__copy">Le formulaire ne réserve pas de cours. Il transmet une demande d’information au porteur du projet une fois la messagerie configurée.</p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+
+  <section class="contact-image surface-dark">
+    <picture>
+      <source srcset="/images/boxe-corner-480.webp 480w, /images/boxe-corner-960.webp 960w, /images/boxe-corner-1600.webp 1600w" sizes="100vw" type="image/webp" />
+      <img src="/images/boxe-corner-1600.jpg" alt="Deux boxeuses échangent des coups techniques avec protections" width="1600" height="984" loading="lazy" />
+    </picture>
+    <p class="shell">La réponse avant le déplacement.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-hero h1 {
+    max-width: 12ch;
+    font-size: clamp(3.8rem, 10vw, 10rem);
+  }
+
+  .location-ledger__grid {
+    display: grid;
+    gap: clamp(3rem, 8vw, 9rem);
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: end;
+  }
+
+  .location-ledger__place {
+    margin-top: 2rem;
+    font-size: clamp(4rem, 11vw, 11rem);
+    font-weight: 780;
+    letter-spacing: -0.07em;
+    line-height: 0.72;
+    text-transform: uppercase;
+  }
+
+  .location-ledger__place em {
+    color: var(--signal);
+    font-family: Georgia, serif;
+    font-size: 0.5em;
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  .contact-panel {
+    padding-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  .contact-panel__inner {
+    display: grid;
+    gap: clamp(3rem, 8vw, 9rem);
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+
+  .contact-panel h2 {
+    max-width: 10ch;
+    margin-block: 1.5rem;
+    font-size: clamp(3rem, 6.5vw, 6.7rem);
+  }
+
+  .contact-panel__copy {
+    max-width: 31rem;
+    color: var(--mist);
+  }
+
+  .contact-image {
+    position: relative;
+    padding-block: clamp(3rem, 7vw, 7rem);
+    overflow: hidden;
+  }
+
+  .contact-image picture,
+  .contact-image img {
+    width: 100%;
+  }
+
+  .contact-image img {
+    max-height: 75vh;
+    object-fit: contain;
+    filter: grayscale(0.78) contrast(1.13) brightness(0.72);
+  }
+
+  .contact-image p {
+    margin-top: -0.25em;
+    color: var(--flight);
+    font-size: clamp(3rem, 8.5vw, 8.5rem);
+    font-weight: 780;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+  }
+
+  @media (max-width: 52rem) {
+    .location-ledger__grid,
+    .contact-panel__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Confidentialité | Club de Boxe Blagnac–Toulouse';
+const description = 'Informations sur les données transmises par le formulaire de contact du projet de club de boxe à Blagnac et sur leur utilisation.';
+---
+
+<BaseLayout {title} {description} pathname="/confidentialite/">
+  <header class="page-hero legal-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">Données · Transparence</p>
+        <p class="mono">Version du 04.09.2026</p>
+      </div>
+      <h1>Vos données restent dans <em>votre demande.</em></h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead">Le formulaire recueille uniquement ce qui est nécessaire pour comprendre votre message et vous répondre.</p>
+      </div>
+    </div>
+  </header>
+
+  <article class="legal shell page-copy">
+    <div class="page-copy__grid">
+      <p class="eyebrow">Règles de traitement</p>
+      <div class="prose">
+        <h2>Données collectées</h2>
+        <p>Le formulaire peut transmettre votre nom, votre adresse e-mail, l’objet de votre demande et votre message. Le champ anti-spam et l’heure de début de saisie servent uniquement à filtrer les envois automatisés.</p>
+
+        <h2>Finalité et base</h2>
+        <p>Ces informations sont utilisées pour répondre à votre demande, sur la base de votre consentement. Elles ne servent pas à une réservation automatique, à une publicité comportementale ou à une revente.</p>
+
+        <h2>Destinataires et durée</h2>
+        <p>Les données sont transmises au porteur du projet via le prestataire d’envoi configuré au déploiement. La durée de conservation et l’identité du responsable de traitement doivent être complétées avant l’ouverture publique du formulaire.</p>
+
+        <h2>Vos droits</h2>
+        <p>Vous pourrez demander l’accès, la rectification ou la suppression de vos données via les coordonnées légales qui seront publiées avant le lancement indexable.</p>
+
+        <div class="notice">
+          <strong>Formulaire en préconfiguration.</strong>
+          <p>Tant que le destinataire légal et les paramètres d’envoi ne sont pas configurés, l’interface peut signaler que la messagerie n’est pas disponible.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-hero h1 {
+    max-width: 12ch;
+    font-size: clamp(3.7rem, 10vw, 10rem);
+  }
+
+  .legal h2 {
+    margin-top: 2.4rem;
+    font-size: clamp(2rem, 4vw, 4rem);
+  }
+
+  .legal h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal .notice {
+    margin-top: 3rem;
+  }
+</style>

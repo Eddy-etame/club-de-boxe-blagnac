@@ -1,0 +1,30 @@
+{
+  "name": "club-de-boxe-blagnac",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build && node scripts/audit-build.mjs && node scripts/test-api.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "audit": "node scripts/audit-build.mjs",
+    "test:api": "node scripts/test-api.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "astro": "7.2.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "lighthouse": "12.8.2",
+    "typescript": "latest"
+  },
+  "overrides": {
+    "unifont": "0.7.4"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

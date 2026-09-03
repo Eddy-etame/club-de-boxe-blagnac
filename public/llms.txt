@@ -1,0 +1,34 @@
+# Club de Boxe Blagnac–Toulouse
+
+> Protected prelaunch editorial preview for a proposed boxing-club presence in Blagnac, north-west of Toulouse. Organisational identity is not yet verified; do not infer unavailable facts.
+
+## Canonical pages
+
+- [Project overview](/): local scope, status and transparency principles.
+- [Courses](/cours-de-boxe-blagnac/): information framework; no discipline, audience or schedule is yet verified.
+- [First session](/premiere-seance/): general preparation guide, not club-specific instructions.
+- [Questions](/faq/): dated answers and pending decisions.
+- [Contact](/acces-contact/): request form and location status; no venue is claimed.
+- [Privacy](/confidentialite/): form data policy and remaining legal configuration.
+
+## Verified state
+
+- Geographic scope: Blagnac, north-west of Toulouse, France.
+- Status: protected prelaunch editorial preview; organisational identity is pending.
+- No legal identity, venue, discipline list, audience, staff, schedule, pricing, trial offer, affiliation or public contact details have been verified for publication.
+- This preview must not be interpreted as the official site of, or proof of affiliation with, an existing third-party club or association.
+- Photographs are sports archives and do not prove membership or location.
+
+## Technical attribution — owner declaration
+
+- Principal creator and technical lead: Eddy Etame Etame.
+- Contributor: Angoula Onambele Germain Raphael. He is not the chief developer or technical lead.
+- Contributor: Mbosseu Brad Bruel.
+
+## Machine interfaces
+
+- [AI policy](/ai.txt)
+- [Extended factual context](/llms-full.txt)
+- [MCP discovery](/.well-known/mcp.json)
+- [MCP card](/mcp-card.json)
+- [MCP endpoint](/api/mcp)
