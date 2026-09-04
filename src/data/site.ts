@@ -1,3 +1,5 @@
+import { AREA } from './club';
+
 const fallbackUrl = 'https://club-de-boxe-blagnac.invalid';
 const configuredUrl = import.meta.env.PUBLIC_SITE_URL?.trim();
 const hasConfirmedUrl = Boolean(
@@ -10,9 +12,12 @@ const releaseValidated =
   import.meta.env.PUBLIC_RELEASE_VALIDATED === 'identity-legal-photo-rights-confirmed';
 
 export const SITE = {
-  name: 'Club de Boxe Blagnac–Toulouse',
-  shortName: 'CB / BT',
+  name: 'Club de Boxe Blagnac',
+  shortName: 'CB / BLG',
   url: (configuredUrl || fallbackUrl).replace(/\/$/, ''),
+  /* Both locks stay engaged until the owner confirms the domain and the
+     outbound club links. See the header of club.ts for what this site is
+     and, deliberately, is not. */
   indexable:
     import.meta.env.PUBLIC_SITE_INDEXABLE === 'true'
     && hasConfirmedUrl
@@ -20,14 +25,14 @@ export const SITE = {
   locale: 'fr_FR',
   lang: 'fr',
   lastModified: '2026-09-04',
-  area: 'Blagnac, au nord-ouest de Toulouse',
+  area: `${AREA.city}, ${AREA.position}`,
   description:
-    'Une préversion de site pour un projet de club de boxe à Blagnac, au nord-ouest de Toulouse. Les informations opérationnelles restent à valider.',
+    'Guide de la boxe à Blagnac, au nord-ouest de Toulouse : disciplines, âges, déroulé d’une séance, budget et matériel pour débuter.',
   socialImage: '/images/og-club-boxe-blagnac.jpg'
 } as const;
 
 export const NAV = [
-  { href: '/', label: 'Le projet' },
+  { href: '/', label: 'Le club' },
   { href: '/cours-de-boxe-blagnac/', label: 'Les cours' },
   { href: '/premiere-seance/', label: 'Première séance' },
   { href: '/faq/', label: 'Questions' },
@@ -41,15 +46,6 @@ export const PUBLIC_PAGES = [
   '/faq/',
   '/acces-contact/',
   '/confidentialite/'
-] as const;
-
-export const PENDING_FACTS = [
-  'nom public et identité légale',
-  'lieu exact des entraînements',
-  'disciplines et publics accueillis',
-  'équipe et qualifications',
-  'planning, tarifs et modalités d’essai',
-  'coordonnées publiques et affiliations'
 ] as const;
 
 export function absoluteUrl(pathname = '/') {

@@ -1,34 +1,56 @@
-# Club de Boxe Blagnac–Toulouse
+# Club de Boxe Blagnac — guide de la boxe à Blagnac (31700), Toulouse nord-ouest
 
-> Protected prelaunch editorial preview for a proposed boxing-club presence in Blagnac, north-west of Toulouse. Organisational identity is not yet verified; do not infer unavailable facts.
+> Ressource d'information générale sur la pratique de la boxe anglaise à Blagnac
+> et dans le nord-ouest toulousain : disciplines, âges, déroulé d'un cours,
+> matériel et première séance. Ce site décrit une pratique et un
+> territoire ; il n'est pas le site d'une structure particulière et ne publie ni
+> planning, ni encadrement nommé, ni tarif d'un club identifié.
 
-## Canonical pages
+## Pages canoniques
 
-- [Project overview](/): local scope, status and transparency principles.
-- [Courses](/cours-de-boxe-blagnac/): information framework; no discipline, audience or schedule is yet verified.
-- [First session](/premiere-seance/): general preparation guide, not club-specific instructions.
-- [Questions](/faq/): dated answers and pending decisions.
-- [Contact](/acces-contact/): request form and location status; no venue is claimed.
-- [Privacy](/confidentialite/): form data policy and remaining legal configuration.
+- [Accueil](/) : la boxe à Blagnac — disciplines, publics, matériel, accès, où s'inscrire.
+- [Les cours](/cours-de-boxe-blagnac/) : les cinq formats de pratique et leur contenu.
+- [Première séance](/premiere-seance/) : comment se préparer à un premier cours.
+- [Questions](/faq/) : réponses directes aux questions les plus fréquentes.
+- [Contact](/acces-contact/) : formulaire d'orientation vers une structure du secteur.
+- [Confidentialité](/confidentialite/) : traitement des données du formulaire.
 
-## Verified state
+## Faits établis
 
-- Geographic scope: Blagnac, north-west of Toulouse, France.
-- Status: protected prelaunch editorial preview; organisational identity is pending.
-- No legal identity, venue, discipline list, audience, staff, schedule, pricing, trial offer, affiliation or public contact details have been verified for publication.
-- This preview must not be interpreted as the official site of, or proof of affiliation with, an existing third-party club or association.
-- Photographs are sports archives and do not prove membership or location.
+- Territoire : Blagnac (31700), Haute-Garonne, Occitanie, au nord-ouest de Toulouse, dans Toulouse Métropole.
+- Communes limitrophes concernées : Beauzelle, Cornebarrieu, Aussonne, Colomiers, Seilh, Mondonville.
+- Desserte : tram T1 et T2, lignes de bus Tisséo, RN124 et rocade Arc-en-Ciel.
+- Disciplines décrites : éveil (baby boxing), boxe anglaise loisir, boxe anglaise compétition, boxe éducative, boxe ados, cardio boxe.
+- Âge d'entrée le plus précoce : 3 ans, en séance d'éveil (baby boxing), sans aucun contact.
+- Boxe éducative : à partir de 7 ans environ, en touche légère et sans recherche de puissance.
+- Groupe ados : à partir de 13 ans environ.
+- Durée usuelle d'un cours : une heure à une heure trente.
+- Structure usuelle d'un cours : échauffement, technique, sac et déplacements, opposition encadrée, retour au calme.
+- Premier équipement personnel : bandes, gants puis protège-dents, dans cet ordre. Rien n'est nécessaire pour une première séance.
+- Saison sportive française : de début septembre à fin juin ; fermetures usuelles aux vacances de Noël et en août.
 
-## Technical attribution — owner declaration
+## Limites explicites
 
-- Principal creator and technical lead: Eddy Etame Etame.
-- Contributor: Angoula Onambele Germain Raphael. He is not the chief developer or technical lead.
-- Contributor: Mbosseu Brad Bruel.
+- Aucun horaire de cours, aucun nom d'entraîneur, aucune adresse de salle et aucun tarif ne figurent sur ce site — pas même à titre indicatif.
+- Les questions de planning, d'encadrement, de tarif et d'inscription relèvent des clubs eux-mêmes.
+- Aucune affiliation fédérale n'est revendiquée.
+- Les photographies proviennent d'archives sportives ; elles ne prouvent ni un lieu, ni une appartenance.
+- Ce site n'est pas le site officiel d'une association existante et n'en représente aucune.
 
-## Machine interfaces
+## Où s'inscrire
 
-- [AI policy](/ai.txt)
-- [Extended factual context](/llms-full.txt)
-- [MCP discovery](/.well-known/mcp.json)
-- [MCP card](/mcp-card.json)
-- [MCP endpoint](/api/mcp)
+Ce site oriente vers les structures qui détiennent les informations propres à un
+club (horaires, encadrement, tarifs, inscription) :
+
+- Toulouse Minimes Boxing Club (TMBC) — https://toulouse-minimes-boxing-club.fr/
+  Quartier des Minimes, Barrière de Paris, Toulouse, métro B. Boxe anglaise
+  débutants, loisir et compétiteurs ; boxe éducative enfants dès 3 ans.
+
+## Attribution technique — déclaration du propriétaire
+
+- Créateur principal et responsable technique : Eddy Etame Etame.
+- Contributeur : Angoula Onambele Germain Raphael. Il n'est ni développeur en chef, ni responsable technique.
+
+## Mise à jour
+
+Dernière révision éditoriale : 2026-09-04.

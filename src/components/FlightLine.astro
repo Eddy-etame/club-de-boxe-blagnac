@@ -11,6 +11,9 @@
 </aside>
 
 <style>
+  /* Colour is resolved from html[data-tone], set by the header's surface
+     tracker. Previously mix-blend-mode: difference, which forced the whole
+     document into one composited layer. */
   .flight-line {
     position: fixed;
     z-index: 45;
@@ -20,7 +23,24 @@
     width: 2.8rem;
     pointer-events: none;
     color: var(--signal);
-    mix-blend-mode: difference;
+    --line-progress: var(--flight);
+    transition: color 240ms ease;
+  }
+
+  :global(html[data-tone='light']) .flight-line {
+    color: color-mix(in srgb, var(--ink) 52%, transparent);
+    --line-progress: var(--signal);
+  }
+
+  :global(html[data-tone='signal']) .flight-line {
+    color: color-mix(in srgb, var(--ink) 62%, transparent);
+    --line-progress: var(--ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flight-line {
+      transition: none;
+    }
   }
 
   .flight-line svg {
@@ -38,7 +58,7 @@
   }
 
   .flight-line__progress {
-    stroke: var(--flight);
+    stroke: var(--line-progress);
     stroke-width: 1.5;
     stroke-dasharray: 1;
     stroke-dashoffset: calc(1 - var(--progress));

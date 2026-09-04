@@ -18,7 +18,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "latest",
-    "lighthouse": "12.8.2",
     "typescript": "latest"
   },
   "overrides": {

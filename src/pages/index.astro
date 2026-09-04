@@ -1,37 +1,89 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ContactForm from '@/components/ContactForm.astro';
+import { DISCIPLINES, GEAR, SEASON, PARTNERS, DISCIPLINE_COUNT } from '@/data/club';
+import { LOCATION, ANSWER_TARGETS, AREA_SENTENCE, NEARBY_SENTENCE } from '@/data/seo-map';
 
-const title = 'Club de boxe à Blagnac, Toulouse nord-ouest | Projet en préparation';
+const title = 'Club de boxe à Blagnac — cours de boxe anglaise, Toulouse';
 const description =
-  'Préversion d’un projet de club de boxe à Blagnac, au nord-ouest de Toulouse. Cours, lieu, planning et inscriptions seront publiés après validation.';
+  'Boxe à Blagnac (31700) : boxe anglaise, boxe éducative dès 7 ans, cours ados, loisir, cardio boxe. Âges, déroulé d’un cours, budget et première séance.';
+
+/* Audience blocks. General on purpose: each one answers "is this for me",
+   then hands off. Club-level specifics live with the clubs themselves. */
+const audiences = [
+  {
+    n: '01',
+    who: 'Les enfants, dès 3 ans',
+    text: 'L’éveil commence à 3 ans et n’apprend pas à frapper : parcours de motricité, jeux de réaction, sac mou, aucun contact. La boxe éducative prend le relais vers 7 ans, en touche légère et protections complètes — la coordination et le respect du partenaire bien avant la frappe.'
+  },
+  {
+    n: '02',
+    who: 'Les adolescents',
+    text: 'Le groupe ados fait le pont vers la boxe adulte. L’intensité monte progressivement, sous un cadre strict sur les protections. C’est là que se décide, sans pression, l’orientation loisir ou compétition.'
+  },
+  {
+    n: '03',
+    who: 'Les adultes débutants',
+    text: 'On peut commencer la boxe anglaise à 25 comme à 55 ans, sans condition physique préalable. Le premier trimestre est consacré à la garde, au déplacement et à la respiration — pas à l’opposition.'
+  },
+  {
+    n: '04',
+    who: 'Les femmes',
+    text: 'La pratique féminine a fortement progressé en France depuis les années 2000. Dans la plupart des clubs du secteur, hommes et femmes s’entraînent sur les mêmes créneaux, sans cours séparé et sans niveau imposé.'
+  },
+  {
+    n: '05',
+    who: 'Ceux qui ne veulent pas de contact',
+    text: 'Le cardio boxe reprend les déplacements, les enchaînements et le travail au sac, sans aucune opposition. C’est une entrée fréquente vers le cours loisir, et une pratique complète en soi.'
+  }
+];
+
+const faqAnswers = [
+  `La boxe se pratique à ${LOCATION.city} et dans le secteur nord-ouest de Toulouse, accessible en tram T1 et en bus Tisséo depuis ${NEARBY_SENTENCE}.`,
+  'La plupart des clubs du secteur proposent une séance d’essai avant toute adhésion, avec gants et protections prêtés. Les modalités et les montants se demandent directement au club.',
+  'Dès 3 ans. Les séances d’éveil travaillent la motricité et la réaction sans aucun contact ; la boxe éducative prend le relais vers 7 ans en touche légère, et l’opposition plus soutenue arrive à l’adolescence.',
+  'La boxe éducative se pratique en touche légère sans recherche de puissance, quand la boxe anglaise adulte autorise une opposition contrôlée avec protections.'
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: ANSWER_TARGETS.slice(0, 4).map((question, index) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: faqAnswers[index] }
+  }))
+};
 ---
 
 <BaseLayout
   {title}
   {description}
   pathname="/"
+  topTone="dark"
   pageType="AboutPage"
+  imageAlt="Boxeuse en garde pendant un entraînement de boxe anglaise"
+  schema={faqSchema}
   preloadImage={{
-    href: '/images/hero-boxe-blagnac-960.webp',
-    srcset: '/images/hero-boxe-blagnac-480.webp 480w, /images/hero-boxe-blagnac-960.webp 960w, /images/hero-boxe-blagnac-1600.webp 1600w',
+    href: '/images/garde-boxeuse-960.webp',
+    srcset: '/images/garde-boxeuse-480.webp 480w, /images/garde-boxeuse-960.webp 960w, /images/garde-boxeuse-1600.webp 1600w',
     sizes: '100vw'
   }}
 >
   <section class="home-hero surface-dark">
     <div class="home-hero__media" aria-hidden="true">
       <picture>
-        <source srcset="/images/hero-boxe-blagnac-480.webp 480w, /images/hero-boxe-blagnac-960.webp 960w, /images/hero-boxe-blagnac-1600.webp 1600w" sizes="100vw" type="image/webp" />
-        <img src="/images/hero-boxe-blagnac-1600.jpg" alt="" width="1600" height="1067" fetchpriority="high" />
+        <source srcset="/images/garde-boxeuse-480.webp 480w, /images/garde-boxeuse-960.webp 960w, /images/garde-boxeuse-1600.webp 1600w" sizes="100vw" type="image/webp" />
+        <img src="/images/garde-boxeuse-1600.jpg" alt="" width="1600" height="1067" fetchpriority="high" />
       </picture>
     </div>
     <div class="home-hero__shade" aria-hidden="true"></div>
 
     <div class="home-hero__inner shell">
       <div class="home-hero__top">
-        <p class="eyebrow eyebrow--signal home-hero__eyebrow">Projet en préparation · Préversion</p>
-        <p class="home-hero__coordinates" aria-label="Coordonnées : 43 degrés nord, Toulouse nord-ouest. Informations en validation.">
-          <span>43°N / TOULOUSE NORD-OUEST / SIGNAL EN VALIDATION</span>
+        <p class="eyebrow eyebrow--signal home-hero__eyebrow">Boxe anglaise · {LOCATION.city} {LOCATION.postalCode} · {SEASON.label}</p>
+        <p class="home-hero__coordinates" aria-label={`Boxe à ${AREA_SENTENCE}`}>
+          <span>{LOCATION.city.toUpperCase()} / TOULOUSE NORD-OUEST / {LOCATION.department.toUpperCase()}</span>
         </p>
       </div>
 
@@ -42,153 +94,244 @@ const description =
 
       <div class="home-hero__bottom">
         <p class="home-hero__lead hero-enter hero-enter--lead">
-          Un futur point d’ancrage pour apprendre, répéter et progresser — avec des faits clairs avant les promesses.
+          Boxe anglaise, éveil dès 3 ans, boxe éducative, cours ados, loisir adulte et cardio boxe. Tout ce qu’il faut savoir avant votre première séance.
         </p>
         <div class="home-hero__actions hero-enter hero-enter--actions">
-          <a class="button button--signal" href="#signal">Suivre le projet</a>
-          <span>Lieu · cours · calendrier<br />annoncés après validation</span>
+          <a class="button button--signal" href="#essai">Préparer ma première séance</a>
+          <span><a href="/cours-de-boxe-blagnac/">Découvrir les {DISCIPLINE_COUNT} disciplines →</a></span>
           <span class="home-hero__credit">Photo © Axel Derewiany</span>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="status-strip" role="region" aria-label="Statut du projet">
+  <div class="status-strip" role="region" aria-label="La boxe à Blagnac en bref">
     <div class="status-strip__track">
       {[0, 1].map(() => (
         <div class="status-strip__item" aria-hidden="true">
-          <span>Club de boxe Blagnac</span>
-          <span>Cours en préparation</span>
-          <span>Identité en validation</span>
-          <span>Photos sportives réelles</span>
+          <span>Boxe anglaise Blagnac</span>
+          <span>Éveil dès 3 ans</span>
+          <span>Cours ados</span>
+          <span>Loisir adulte</span>
+          <span>Cardio boxe</span>
+          <span>Compétition</span>
+          <span>Toulouse nord-ouest</span>
         </div>
       ))}
     </div>
   </div>
 
-  <section class="manifesto shell">
+  <section class="manifesto shell" aria-labelledby="intro-title">
     <div class="section-heading position-heading sequence-reveal">
-      <p class="eyebrow">01 · Position</p>
+      <p class="eyebrow">01 · La boxe à Blagnac</p>
       <div>
-        <h2>Avant le premier round, une règle&nbsp;: ne rien inventer.</h2>
+        <h2 id="intro-title">Un sport de patience avant d’être un sport de combat.</h2>
       </div>
     </div>
 
-    <div class="position-console sequence-reveal" aria-label="État des informations du projet">
-      <p><span>01 / Zone</span><strong>Blagnac</strong><span class="position-console__ready">Confirmé</span></p>
-      <p><span>02 / Identité</span><strong>Entité porteuse</strong><span>À valider</span></p>
-      <p><span>03 / Offre</span><strong>Cours · planning · tarifs</strong><span>À valider</span></p>
+    <div class="position-console sequence-reveal" aria-label="Repères">
+      <p><span>01 / Disciplines</span><strong>{DISCIPLINE_COUNT} formats</strong><span class="position-console__ready">Dès 3 ans</span></p>
+      <p><span>02 / Secteur</span><strong>{LOCATION.city} {LOCATION.postalCode}</strong><span class="position-console__ready">Tram T1</span></p>
+      <p><span>03 / Première fois</span><strong>Séance d’essai</strong><span class="position-console__ready">Matériel prêté</span></p>
     </div>
 
     <div class="manifesto__grid">
       <p class="manifesto__statement reveal reveal--left">
-        Vous cherchez un <strong>club de boxe à Blagnac</strong>, des cours, un planning, un tarif ou une salle. La réponse utile doit être précise — pas simplement bien classée.
+        On ne commence pas la boxe en frappant. On commence en apprenant à tenir sa garde, à se déplacer, et à respirer quand tout dit de retenir son souffle.
       </p>
       <div class="prose reveal reveal--right">
         <p>
-          Le projet est en phase de préparation à Blagnac, au nord-ouest de Toulouse. Cette préversion organise les informations sans prétendre que ce qui n’est pas confirmé l’est déjà.
+          Chercher un <strong>club de boxe à Blagnac</strong> pose toujours les mêmes questions : quelle discipline, à partir de quel âge, avec quel matériel, pour quel budget. Cette page y répond dans l’ordre, sans jargon et sans vous demander de choisir avant d’avoir compris.
         </p>
         <p>
-          Le nom légal, le lieu exact, les disciplines, l’encadrement, les horaires et les tarifs seront publiés ensemble, dès validation. Une seule version des faits, partout.
+          {LOCATION.city} se situe {LOCATION.position}, en {LOCATION.department}. Le secteur est desservi par le tram T1 et les lignes Tisséo, ce qui met les <strong>cours de boxe anglaise</strong> à portée de {NEARBY_SENTENCE}. Les quartiers d’{LOCATION.districts[0]}, du {LOCATION.districts[1]} et du {LOCATION.districts[2]} concentrent l’essentiel des équipements sportifs de la commune.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="visual-index surface-dark" aria-labelledby="visual-index-title">
+  <section class="visual-index surface-dark" aria-labelledby="disciplines-title">
     <div class="visual-index__heading shell">
-      <p class="eyebrow">02 · Matière</p>
-      <h2 id="visual-index-title">Pas de stock.<br /><em>Du geste.</em></h2>
-      <p>Des archives de ring pour donner le ton sans attribuer aux personnes photographiées un rôle qui n’a pas été confirmé.</p>
+      <p class="eyebrow">02 · Les disciplines</p>
+      <h2 id="disciplines-title">Six façons<br /><em>de boxer.</em></h2>
+      <p>De l’éveil à 3 ans au groupe compétition, chaque format répond à une intention différente. Aucune n’est un préalable à l’autre.</p>
     </div>
 
-    <div class="visual-index__gallery shell">
-      <figure class="image-frame visual-index__main reveal">
-        <picture>
-          <source srcset="/images/ring-competition-420.webp 420w, /images/ring-competition-900.webp 900w, /images/ring-competition-1400.webp 1400w" sizes="(max-width: 36rem) 84vw, 50vw" type="image/webp" />
-          <img src="/images/ring-competition-1400.jpg" alt="Deux boxeurs en action pendant un combat sur un ring" width="1400" height="933" loading="lazy" />
-        </picture>
-        <figcaption><span>Archive de compétition</span><span>01 / 03</span></figcaption>
-      </figure>
-
-      <figure class="image-frame visual-index__side reveal">
-        <picture>
-          <source srcset="/images/boxe-detail-240.webp 240w, /images/boxe-detail-480.webp 480w, /images/boxe-detail-700.webp 700w, /images/boxe-detail-1000.webp 1000w" sizes="(max-width: 36rem) 42vw, 25vw" type="image/webp" />
-          <img src="/images/boxe-detail-1000.jpg" alt="Détail d’un boxeur concentré au bord du ring" width="1000" height="605" loading="lazy" />
-        </picture>
-        <figcaption><span>Concentration</span><span>02 / 03</span></figcaption>
-      </figure>
-
-      <figure class="image-frame visual-index__wide reveal">
-        <picture>
-          <source srcset="/images/boxe-corner-480.webp 480w, /images/boxe-corner-960.webp 960w, /images/boxe-corner-1600.webp 1600w" sizes="(max-width: 36rem) 92vw, 58vw" type="image/webp" />
-          <img src="/images/boxe-corner-1600.jpg" alt="Deux boxeuses échangent des coups techniques avec protections" width="1600" height="984" loading="lazy" />
-        </picture>
-        <figcaption><span>Échange technique</span><span>03 / 03</span></figcaption>
-      </figure>
+    <div class="disciplines shell">
+      {DISCIPLINES.map((d, i) => (
+        <article class="discipline reveal" id={d.slug}>
+          <p class="discipline__index">{String(i + 1).padStart(2, '0')}</p>
+          <div class="discipline__body">
+            <h3>{d.name}</h3>
+            <p class="discipline__summary">{d.summary}</p>
+            <p class="discipline__text">{d.body}</p>
+            <dl class="discipline__meta">
+              <div><dt>Âges</dt><dd>{d.ages}</dd></div>
+              <div><dt>Contact</dt><dd>{d.contact}</dd></div>
+            </dl>
+          </div>
+        </article>
+      ))}
     </div>
+
+    <figure class="image-frame band-image shell reveal">
+      <picture>
+        <source srcset="/images/cours-collectif-sacs-480.webp 480w, /images/cours-collectif-sacs-960.webp 960w, /images/cours-collectif-sacs-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 88vw" type="image/webp" />
+        <img src="/images/cours-collectif-sacs-1600.jpg" alt="Cours collectif de boxe à Blagnac : travail au sac de frappe en salle" width="1600" height="1067" loading="lazy" />
+      </picture>
+      <figcaption><span>Travail au sac en cours collectif</span><span>Boxe anglaise</span></figcaption>
+    </figure>
   </section>
 
   <section class="rounds shell" aria-labelledby="rounds-title">
     <div class="section-heading">
-      <p class="eyebrow">03 · Méthode</p>
+      <p class="eyebrow">03 · Un cours, minute par minute</p>
       <div>
-        <h2 id="rounds-title">Quatre temps. Une progression lisible.</h2>
-        <p class="section-heading__intro">Le cadre éditorial proposé pour les futurs cours de boxe à Blagnac. Il deviendra une promesse de club uniquement après validation par l’équipe.</p>
+        <h2 id="rounds-title">Ce qui se passe entre l’arrivée et le retour au calme.</h2>
+        <p class="section-heading__intro">La structure est à peu près la même partout, quel que soit l’âge ou le niveau : un cours de boxe dure généralement une heure à une heure trente.</p>
       </div>
     </div>
 
     <ol class="rounds__list sequence-reveal">
       <li>
         <span>01</span>
-        <h3>Observer</h3>
-        <p>Lire la distance, la posture et le rythme avant d’ajouter de la vitesse.</p>
+        <h3>Échauffement</h3>
+        <p>Corde, mobilité articulaire, montée en température. Quinze minutes environ, jamais négociables.</p>
       </li>
       <li>
         <span>02</span>
-        <h3>Comprendre</h3>
-        <p>Relier chaque consigne à son rôle pour construire des gestes qui tiennent.</p>
+        <h3>Technique</h3>
+        <p>Au miroir puis aux pattes d’ours. Un geste, décomposé, corrigé, répété jusqu’à ce qu’il tienne.</p>
       </li>
       <li>
         <span>03</span>
-        <h3>Répéter</h3>
-        <p>Transformer une correction isolée en automatisme, sans brûler les étapes.</p>
+        <h3>Sac et déplacements</h3>
+        <p>La technique sous fatigue. C’est ici que se construit la condition physique propre à la boxe.</p>
       </li>
       <li>
         <span>04</span>
-        <h3>Reprendre</h3>
-        <p>Récupérer, analyser, ajuster. Le round suivant commence dans le coin.</p>
+        <h3>Opposition</h3>
+        <p>En touche contrôlée, avec protections, et seulement quand le cadre le permet. Jamais dès le premier jour.</p>
       </li>
     </ol>
   </section>
 
-  <section class="search-intent surface-signal">
-    <div class="search-intent__inner shell">
-      <p class="eyebrow">04 · Recherche locale</p>
-      <p class="search-intent__title">Blagnac n’est pas un mot-clé à répéter. C’est un lieu à prouver.</p>
-      <div class="search-intent__copy prose">
-        <p>
-          Un bon site de <strong>boxe à Blagnac</strong> doit répondre aux questions concrètes : quelle discipline, pour quel niveau, où, quand, avec quel encadrement et à quel prix&nbsp;?
-        </p>
-        <p>
-          Tant que ces réponses sont en validation, nous les signalons comme telles. Cette transparence protège les visiteurs et prépare un référencement local fondé sur des informations vérifiables.
-        </p>
+  <section class="audiences surface-signal" aria-labelledby="audiences-title">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">04 · Pour qui</p>
+        <div>
+          <h2 id="audiences-title">La boxe n’a pas de public type.</h2>
+          <p class="section-heading__intro">Enfants dès 3 ans, adolescents, adultes débutants, femmes, pratiquants sans contact : cinq entrées possibles dans le même sport.</p>
+        </div>
       </div>
-      <div class="search-intent__links sequence-reveal">
-        <a href="/cours-de-boxe-blagnac/">Explorer les cours envisagés <span>→</span></a>
-        <a href="/premiere-seance/">Préparer une première séance <span>→</span></a>
-        <a href="/faq/">Lire les réponses disponibles <span>→</span></a>
+
+      <div class="audiences__grid sequence-reveal">
+        {audiences.map((a) => (
+          <article class="audience">
+            <p class="audience__n">{a.n}</p>
+            <h3>{a.who}</h3>
+            <p>{a.text}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="signal surface-dark" id="signal">
+  <section class="practical shell" aria-labelledby="practical-title">
+    <div class="section-heading">
+      <p class="eyebrow">05 · Le matériel</p>
+      <div>
+        <h2 id="practical-title">N’achetez rien tout de suite.</h2>
+        <p class="section-heading__intro">L’erreur la plus fréquente du débutant est d’acheter une paire de gants avant son premier cours. Voici l’ordre réel des achats.</p>
+      </div>
+    </div>
+
+    <div class="gear reveal">
+      <ol>
+        {GEAR.map((g) => (
+          <li>
+            <p class="gear__item">{g.item}</p>
+            <p class="gear__when">{g.when}</p>
+            <p class="gear__detail">{g.detail}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="local surface-dark" aria-labelledby="local-title">
+    <div class="local__media" aria-hidden="true">
+      <picture>
+        <source srcset="/images/salle-de-boxe-480.webp 480w, /images/salle-de-boxe-960.webp 960w, /images/salle-de-boxe-1600.webp 1600w" sizes="100vw" type="image/webp" />
+        <img src="/images/salle-de-boxe-1600.jpg" alt="" width="1600" height="919" loading="lazy" />
+      </picture>
+    </div>
+    <div class="local__inner shell">
+      <div class="section-heading">
+        <p class="eyebrow eyebrow--signal">06 · S’y rendre</p>
+        <div>
+          <h2 id="local-title">Blagnac, et tout le nord-ouest toulousain.</h2>
+          <p class="section-heading__intro">{AREA_SENTENCE}. Le secteur est l’un des mieux desservis de la métropole.</p>
+        </div>
+      </div>
+
+      <div class="local__grid">
+        <ul class="local__transport reveal">
+          {LOCATION.transport.map((t) => (
+            <li><strong>{t.mode}</strong><span>{t.detail}</span></li>
+          ))}
+        </ul>
+        <div class="prose reveal">
+          <p>
+            Une <strong>salle de boxe à Blagnac</strong> attire au-delà de la commune : {NEARBY_SENTENCE} sont à moins de vingt minutes, et le tram met le centre de Toulouse à portée directe. C’est ce qui explique la densité de clubs sur le secteur <strong>Toulouse nord-ouest</strong>.
+          </p>
+          <p>
+            Repères utiles pour situer les équipements : {LOCATION.landmarks.join(', ')}. {SEASON.closures}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners shell" aria-labelledby="partners-title">
+    <div class="section-heading">
+      <p class="eyebrow">07 · Où s’inscrire</p>
+      <div>
+        <h2 id="partners-title">Les horaires et l’encadrement sont chez les clubs.</h2>
+        <p class="section-heading__intro">Cette page explique la pratique. Pour un planning, un tarif, un nom d’entraîneur ou une inscription, c’est au club de répondre.</p>
+      </div>
+    </div>
+
+    <div class="partners__list sequence-reveal">
+      {PARTNERS.map((club) => (
+        <article class="partner">
+          <div class="partner__head">
+            <p class="partner__short">{club.short}</p>
+            <h3><a href={club.url} rel="noopener">{club.name}</a></h3>
+            <p class="partner__area">{club.area}</p>
+          </div>
+          <div class="partner__body">
+            <p>{club.covers}</p>
+            <ul class="partner__links">
+              {club.links.map((l) => (
+                <li><a href={l.url} rel="noopener">{l.label} <span aria-hidden="true">→</span></a></li>
+              ))}
+            </ul>
+            <a class="button button--signal partner__cta" href={club.url} rel="noopener">Voir le club</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="signal surface-dark" id="essai">
     <div class="signal__inner shell">
       <div class="signal__heading">
-        <p class="eyebrow eyebrow--signal">Le signal</p>
-        <h2>Recevoir seulement l’information juste.</h2>
+        <p class="eyebrow eyebrow--signal">Première séance</p>
+        <h2>Le premier cours ne s’achète pas.</h2>
         <p>
-          Laissez une demande. Aucun faux créneau, aucun tarif provisoire&nbsp;: une réponse quand les éléments utiles existent.
+          Presque tous les clubs du secteur proposent une séance d’essai. Venez en tenue de sport, avec une bouteille d’eau : gants et protections sont prêtés. Une question sur la pratique, l’âge d’entrée ou le déroulé d’un cours ? Écrivez-nous.
         </p>
       </div>
       <ContactForm />
@@ -197,8 +340,8 @@ const description =
 
   <section class="closing-image" aria-label="Clôture visuelle">
     <picture>
-      <source srcset="/images/boxe-finale-480.webp 480w, /images/boxe-finale-960.webp 960w, /images/boxe-finale-1800.webp 1800w" sizes="100vw" type="image/webp" />
-      <img src="/images/boxe-finale-1800.jpg" alt="Deux boxeurs casqués s’entraînent sur un ring" width="1800" height="1048" loading="lazy" />
+      <source srcset="/images/frappe-au-sac-480.webp 480w, /images/frappe-au-sac-960.webp 960w, /images/frappe-au-sac-1600.webp 1600w" sizes="100vw" type="image/webp" />
+      <img src="/images/frappe-au-sac-1600.jpg" alt="Entraînement de boxe au sac de frappe dans une salle du nord-ouest toulousain" width="1600" height="959" loading="lazy" />
     </picture>
     <p class="closing-image__title reveal" aria-hidden="true">Blagnac<br /><em>garde haute.</em></p>
   </section>
@@ -211,6 +354,13 @@ const description =
     overflow: hidden;
   }
 
+  /* The curtain's RESTING state is retracted. It used to rest at scaleX(1) —
+     an opaque ink rectangle over the whole hero — and only opened via an
+     animation gated on `.page-ready`. Whenever that class was late or never
+     arrived (throttled rAF in a background tab, deferred module not yet run),
+     the hero stayed behind a solid black panel. Every hero animation below
+     follows the same rule now: rest = final state, entry = animation with
+     `both` fill, gated on `.js` alone. */
   .home-hero::after {
     position: absolute;
     z-index: 4;
@@ -218,10 +368,11 @@ const description =
     pointer-events: none;
     content: '';
     background: var(--ink);
+    transform: scaleX(0);
     transform-origin: right center;
   }
 
-  :global(.js.page-ready) .home-hero::after {
+  :global(.js) .home-hero::after {
     animation: hero-curtain 820ms 80ms cubic-bezier(0.76, 0, 0.24, 1) both;
   }
 
@@ -292,7 +443,7 @@ const description =
   }
 
   .home-hero__coordinates span {
-    width: 0;
+    width: 100%;
     display: block;
     overflow: hidden;
     border-right: 1px solid var(--flight);
@@ -300,13 +451,14 @@ const description =
     white-space: nowrap;
   }
 
-  :global(.js.page-ready) .home-hero__coordinates span {
+  :global(.js) .home-hero__coordinates span {
     animation:
-      hero-type 1.3s 1.05s steps(46, end) forwards,
+      hero-type 1.3s 1.05s steps(46, end) both,
       caret-blink 520ms 1.05s step-end 5;
   }
 
   @keyframes hero-type {
+    from { width: 0; }
     to { width: 100%; }
   }
 
@@ -315,24 +467,27 @@ const description =
   }
 
   :global(.js) .home-hero__eyebrow {
-    opacity: 0;
-    transform: translateX(-2.5rem);
-  }
-
-  :global(.js.page-ready) .home-hero__eyebrow {
-    animation: hero-meta-in 620ms 780ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation: hero-meta-in 620ms 780ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
 
   @keyframes hero-meta-in {
+    from {
+      opacity: 0;
+      transform: translateX(calc(min(2.5rem, 6vw) * -1));
+    }
     to {
       opacity: 1;
       transform: translateX(0);
     }
   }
 
+  /* The floor has to let "à BLAGNAC" — the widest line — fit inside
+     (100vw - 2 × page-pad - offset). A 4.5rem floor was wider than a 375px
+     viewport could hold, so the final C was clipped. Sized off vw only,
+     with the offset folded into the same budget. */
   .home-hero h1 {
     margin-block: auto 2rem;
-    font-size: clamp(4.5rem, 14vw, 15rem);
+    font-size: clamp(6rem, 13vw, 15rem);
     line-height: 0.75;
     text-transform: uppercase;
   }
@@ -343,7 +498,7 @@ const description =
   }
 
   .home-hero h1 .hero-line--offset {
-    padding-left: clamp(1rem, 10vw, 10rem);
+    padding-left: min(6vw, 10rem);
   }
 
   .hero-line__text {
@@ -351,23 +506,30 @@ const description =
   }
 
   :global(.js) .hero-line__text {
-    opacity: 0;
-    transform: translate3d(-7vw, 115%, 0) rotate(1.5deg);
+    animation: hero-line-in 860ms 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   :global(.js) .hero-line--offset .hero-line__text {
-    transform: translate3d(7vw, 115%, 0) rotate(-1.5deg);
-  }
-
-  :global(.js.page-ready) .hero-line__text {
-    animation: hero-line-in 860ms 460ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  :global(.js.page-ready) .hero-line--offset .hero-line__text {
+    animation-name: hero-line-in-offset;
     animation-delay: 590ms;
   }
 
   @keyframes hero-line-in {
+    from {
+      opacity: 0;
+      transform: translate3d(-7vw, 115%, 0) rotate(1.5deg);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(0);
+    }
+  }
+
+  @keyframes hero-line-in-offset {
+    from {
+      opacity: 0;
+      transform: translate3d(7vw, 115%, 0) rotate(-1.5deg);
+    }
     to {
       opacity: 1;
       transform: translate3d(0, 0, 0) rotate(0);
@@ -392,23 +554,22 @@ const description =
   }
 
   :global(.js) .hero-enter {
-    opacity: 0;
-    transform: translateY(1.5rem);
+    animation: hero-enter 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
 
-  :global(.js.page-ready) .hero-enter {
-    animation: hero-enter 700ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  }
-
-  :global(.js.page-ready) .hero-enter--lead {
+  :global(.js) .hero-enter--lead {
     animation-delay: 900ms;
   }
 
-  :global(.js.page-ready) .hero-enter--actions {
+  :global(.js) .hero-enter--actions {
     animation-delay: 1.04s;
   }
 
   @keyframes hero-enter {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
     to {
       opacity: 1;
       transform: translateY(0);
@@ -443,7 +604,11 @@ const description =
     max-width: 11ch;
   }
 
+  /* overflow: clip contains the ±3rem entry slide of the rows below. Without
+     it those transforms pushed content 48px past the viewport, where
+     body{overflow-x:clip} silently cut it instead of revealing it. */
   .position-console {
+    overflow: clip;
     margin-bottom: clamp(3rem, 7vw, 7rem);
     border-block: 1px solid currentColor;
   }
@@ -807,12 +972,36 @@ const description =
   }
 
   @media (max-width: 36rem) {
-    .home-hero__media img {
-      object-position: center 28%;
+    /* A 3:2 photo letterboxed by object-fit:contain inside a portrait hero
+       painted 375×250 in an 824px box — 574px of dead black under a floating
+       strip of image. The photo now owns a deliberate band and fills it, and
+       the type block sits on ink beneath it. The photographer credit stays
+       rendered as text in .home-hero__actions, so attribution survives the
+       crop. */
+    .home-hero__media,
+    .home-hero__shade {
+      inset: 0 0 auto 0;
+      height: 54svh;
     }
 
+    .home-hero__media img {
+      object-fit: cover;
+      object-position: center 24%;
+    }
+
+    .home-hero__shade {
+      background:
+        linear-gradient(180deg, rgb(10 10 8 / 52%) 0%, transparent 34%),
+        linear-gradient(0deg, var(--ink) 1%, rgb(10 10 8 / 22%) 54%, transparent 80%);
+    }
+
+    /* 22vw made "à BLAGNAC" 341px wide inside 288px of usable width at 320px,
+       so the final C was cut. 16.2vw is the widest ratio that keeps the
+       longest line inside the page-pad budget at 320/360/375/390/414, and the
+       6rem ceiling hands over continuously to the base rule's 6rem floor at
+       the 36rem boundary — no size jump across the breakpoint. */
     .home-hero h1 {
-      font-size: clamp(4rem, 22vw, 7rem);
+      font-size: clamp(2.4rem, 16.2vw, 6rem);
       line-height: 0.78;
     }
 
@@ -847,4 +1036,678 @@ const description =
       margin-top: 0;
     }
   }
+
+  /* ---------------------------------------------------------------- *
+   * La semaine — the weekly schedule grid.
+   * Motion here carries information rather than decoration: the slot
+   * running right now is marked from the visitor's own clock, so the
+   * page answers "is there a session on tonight" without a click.
+   * ---------------------------------------------------------------- */
+  .week {
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  .week__grid {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(6, 1fr);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid currentColor;
+  }
+
+  .week__day {
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem 0.9rem 1.6rem;
+    border-right: 1px solid var(--line);
+  }
+
+  .week__day:last-child {
+    border-right: 0;
+  }
+
+  .week__day-name {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .week__day-name span {
+    color: var(--signal);
+  }
+
+  .week__day ul {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .week__slot {
+    display: grid;
+    gap: 0.28rem;
+    padding: 0.7rem 0.75rem;
+    border: 1px solid var(--line);
+    transition:
+      border-color 220ms ease,
+      background-color 220ms ease,
+      transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .week__slot:hover {
+    border-color: currentColor;
+    transform: translateY(-2px);
+  }
+
+  .week__time {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+
+  .week__time i {
+    font-style: normal;
+    opacity: 0.5;
+  }
+
+  .week__course {
+    font-size: 0.86rem;
+    font-variation-settings: 'wdth' 88, 'wght' 680;
+    line-height: 1.05;
+  }
+
+  .week__room {
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    letter-spacing: 0.06em;
+    opacity: 0.62;
+    text-transform: uppercase;
+  }
+
+  /* Set by the script below, from the visitor's own clock. */
+  .week__slot[data-live='true'] {
+    border-color: transparent;
+    color: var(--ink);
+    background: var(--flight);
+  }
+
+  .week__slot[data-live='true'] .week__room {
+    opacity: 0.78;
+  }
+
+  .week__slot[data-live='true'] .week__time::after {
+    width: 0.4rem;
+    height: 0.4rem;
+    display: inline-block;
+    margin-left: 0.35rem;
+    content: '';
+    border-radius: 50%;
+    background: currentColor;
+    animation: week-pulse 1.6s ease-in-out infinite;
+  }
+
+  .week__slot[data-next='true'] {
+    border-color: var(--signal);
+  }
+
+  @keyframes week-pulse {
+    50% { opacity: 0.25; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .week__slot[data-live='true'] .week__time::after {
+      animation: none;
+    }
+  }
+
+  .week__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .week__foot p {
+    max-width: 42ch;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.03em;
+    opacity: 0.72;
+  }
+
+  .signal__direct {
+    margin-top: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    line-height: 1.9;
+  }
+
+  .signal__direct a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  @media (max-width: 64rem) {
+    .week__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .week__day:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .week__day:nth-child(-n + 3) {
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .week__grid {
+      grid-template-columns: 1fr;
+      border-top: 0;
+    }
+
+    .week__day {
+      padding-inline: 0;
+      border-right: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .week__day:nth-child(-n + 3) {
+      border-bottom: 0;
+    }
+
+    .week__day ul {
+      grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    }
+
+    .week__foot {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Disciplines — the SEO spine of the page. Long-form, indexable,
+   * one anchor per discipline so other pages and outbound links can
+   * target them directly.
+   * ---------------------------------------------------------------- */
+  .disciplines {
+    display: grid;
+    gap: 0;
+    margin-top: clamp(3rem, 6vw, 5.5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .discipline {
+    display: grid;
+    gap: clamp(1rem, 4vw, 3.5rem);
+    grid-template-columns: 4.5rem 1fr;
+    padding-block: clamp(2rem, 4vw, 3.4rem);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: calc(var(--header-height) + 2rem);
+  }
+
+  .discipline__index {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .discipline__body {
+    display: grid;
+    gap: 0.85rem;
+    max-width: 62ch;
+  }
+
+  .discipline h3 {
+    font-size: clamp(1.6rem, 3.4vw, 2.9rem);
+    font-variation-settings: 'wdth' 84, 'wght' 800;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+
+  .discipline__summary {
+    color: var(--flight);
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    font-weight: 560;
+  }
+
+  .discipline__text {
+    color: var(--mist);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .discipline__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+    margin: 0.5rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .discipline__meta div {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .discipline__meta dt {
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .discipline__meta dd {
+    margin: 0;
+    font-size: 0.88rem;
+  }
+
+  .band-image {
+    margin-top: clamp(3rem, 6vw, 6rem);
+  }
+
+  /* ---- Pour qui ---- */
+  .audiences {
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  .audiences__grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    background: color-mix(in srgb, var(--ink) 22%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  }
+
+  .audience {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+    padding: clamp(1.4rem, 2.4vw, 2.1rem);
+    background: var(--signal);
+  }
+
+  .audience__n {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+    opacity: 0.72;
+  }
+
+  .audience h3 {
+    font-size: clamp(1.15rem, 2vw, 1.6rem);
+    font-variation-settings: 'wdth' 88, 'wght' 760;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .audience p:last-child {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  /* ---- Budget et matériel ---- */
+  .practical {
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  .cost {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid currentColor;
+  }
+
+  .cost__row {
+    display: grid;
+    gap: 0.6rem 2rem;
+    grid-template-columns: minmax(0, 1.4fr) auto minmax(0, 1.2fr);
+    align-items: baseline;
+    padding-block: 1.15rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cost__label {
+    font-size: clamp(1rem, 1.8vw, 1.35rem);
+    font-variation-settings: 'wdth' 90, 'wght' 640;
+    letter-spacing: -0.02em;
+  }
+
+  .cost__range {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .cost__note {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    opacity: 0.7;
+  }
+
+  .gear {
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .gear h3 {
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    font-variation-settings: 'wdth' 88, 'wght' 740;
+    letter-spacing: -0.03em;
+  }
+
+  .gear ol {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    background: var(--line);
+    border: 1px solid var(--line);
+    counter-reset: gear;
+  }
+
+  .gear li {
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
+    padding: 1.3rem 1.2rem;
+    background: var(--paper);
+    counter-increment: gear;
+  }
+
+  .gear__item {
+    font-size: 1.05rem;
+    font-variation-settings: 'wdth' 90, 'wght' 700;
+    letter-spacing: -0.02em;
+  }
+
+  .gear__item::before {
+    content: '0' counter(gear) ' ';
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-variation-settings: normal;
+    letter-spacing: 0.08em;
+  }
+
+  .gear__when {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .gear__detail {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    opacity: 0.82;
+  }
+
+  /* ---- S'y rendre ---- */
+  .local {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  .local__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .local__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    filter: grayscale(0.86) brightness(0.34) contrast(1.15);
+  }
+
+  .local__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .local__grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .local__transport {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .local__transport li {
+    display: grid;
+    gap: 0.3rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .local__transport strong {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .local__transport span {
+    color: var(--mist);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 52rem) {
+    .discipline {
+      gap: 0.9rem;
+      grid-template-columns: 1fr;
+    }
+
+    .cost__row {
+      grid-template-columns: 1fr auto;
+    }
+
+    .cost__note {
+      grid-column: 1 / -1;
+    }
+
+    .local__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Où s'inscrire — the outbound handoff. This site answers "what is
+   * boxing and is it for me"; the clubs answer "when, where, how much".
+   * Styled as a destination, not a footnote, because it is the point.
+   * ---------------------------------------------------------------- */
+  .partners {
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  .partners__list {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .partner {
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 3rem);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    padding: clamp(1.6rem, 3vw, 2.6rem);
+    border: 1px solid currentColor;
+    transition: background-color 260ms ease, color 260ms ease;
+  }
+
+  .partner:hover {
+    color: var(--paper-bright);
+    background: var(--ink);
+  }
+
+  .partner__short {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  .partner h3 {
+    margin-top: 0.6rem;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-variation-settings: 'wdth' 84, 'wght' 800;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+
+  .partner h3 a {
+    text-decoration: none;
+  }
+
+  .partner h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .partner__area {
+    margin-top: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+    opacity: 0.68;
+    text-transform: uppercase;
+  }
+
+  .partner__body {
+    display: grid;
+    align-content: start;
+    gap: 1.35rem;
+  }
+
+  .partner__body > p {
+    max-width: 58ch;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .partner__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .partner__links a {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .partner__links a span {
+    transition: transform 180ms ease;
+  }
+
+  .partner__links a:hover span {
+    transform: translateX(0.35rem);
+  }
+
+  .partner__links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .partner__cta {
+    justify-self: start;
+  }
+
+  @media (max-width: 52rem) {
+    .partner {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
+
+<script>
+  /* Marks the session happening right now, and the next one due, from the
+     visitor's local clock. Pure enhancement: without JS the grid is a plain,
+     complete, readable schedule. */
+  const slots = [...document.querySelectorAll<HTMLElement>('.week__slot')];
+
+  const minutes = (time: string) => {
+    const [h, m] = time.split(':').map(Number);
+    return h * 60 + m;
+  };
+
+  const paint = () => {
+    const now = new Date();
+    /* JS getDay(): 0 = Sunday. The data uses ISO-8601: 1 = Monday. */
+    const today = now.getDay() === 0 ? 7 : now.getDay();
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+    let nextSlot: HTMLElement | null = null;
+    let nextDistance = Number.POSITIVE_INFINITY;
+
+    for (const slot of slots) {
+      const day = Number(slot.dataset.day);
+      const start = minutes(slot.dataset.start || '00:00');
+      const end = minutes(slot.dataset.end || '00:00');
+      const live = day === today && nowMinutes >= start && nowMinutes < end;
+
+      slot.toggleAttribute('data-live', live);
+      slot.removeAttribute('data-next');
+
+      /* Distance forward through the week, wrapping past Sunday. */
+      const distance = ((day - today + 7) % 7) * 1440 + start - nowMinutes;
+      if (!live && distance > 0 && distance < nextDistance) {
+        nextDistance = distance;
+        nextSlot = slot;
+      }
+    }
+
+    if (nextSlot) nextSlot.setAttribute('data-next', 'true');
+  };
+
+  if (slots.length) {
+    paint();
+    window.setInterval(paint, 60_000);
+  }
+</script>

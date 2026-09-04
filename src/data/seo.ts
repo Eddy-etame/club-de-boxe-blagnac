@@ -1,55 +1,42 @@
+import { FAQ } from './club';
+
 export type FaqItem = {
   question: string;
   answer: string;
 };
 
-export const launchFaq: FaqItem[] = [
-  {
-    question: 'Où sera situé le club de boxe à Blagnac ?',
-    answer:
-      'Le secteur visé est Blagnac, au nord-ouest de Toulouse. L’adresse exacte ne sera publiée qu’après validation du lieu.'
-  },
-  {
-    question: 'Quels cours de boxe seront proposés ?',
-    answer:
-      'Le programme définitif, les disciplines, les niveaux et les catégories d’âge sont encore en validation. Ils seront annoncés ensemble pour éviter toute information contradictoire.'
-  },
-  {
-    question: 'Quand auront lieu les inscriptions ?',
-    answer:
-      'La date d’ouverture des inscriptions n’est pas encore annoncée. Le formulaire permet uniquement de demander à être informé de la publication des informations officielles.'
-  },
-  {
-    question: 'Le planning et les tarifs sont-ils disponibles ?',
-    answer:
-      'Pas encore. Les horaires, tarifs, conditions d’essai et pièces nécessaires seront publiés dès qu’ils seront confirmés.'
-  },
-  {
-    question: 'Cette préversion représente-t-elle déjà une association identifiée ?',
-    answer:
-      'Pas à ce stade. L’identité de l’entité porteuse et ses éventuelles affiliations ne sont pas encore publiées. Cette préversion ne doit donc pas être interprétée comme le site officiel d’une association existante.'
-  }
-];
+/** The published FAQ. Single definition, shared by the page and the FAQPage graph. */
+export const launchFaq: FaqItem[] = FAQ;
 
+/**
+ * What a first visit generally involves, in order. Written as guidance that
+ * holds for any club in the sector — it prepares someone to walk in, without
+ * standing in for the club's own instructions.
+ */
 export const firstSessionSteps = [
   {
     number: '01',
-    title: 'Choisir une pratique réelle',
-    text: 'Boxe anglaise, loisir, éducative ou compétition ne désignent pas le même parcours. Vérifiez la discipline, le public accueilli et le niveau avant de vous déplacer.'
+    title: 'Prévenez avant de venir',
+    text: 'Un message ou un appel suffit. Les clubs préparent des gants et des protections à votre taille — c’est la seule raison pour laquelle ils demandent à être prévenus.'
   },
   {
     number: '02',
-    title: 'Demander le cadre',
-    text: 'Un premier échange doit préciser l’encadrement, les règles de sécurité, le matériel nécessaire et le déroulé de la séance.'
+    title: 'Arrivez un quart d’heure avant',
+    text: 'Le temps de faire le tour de la salle et de se faire expliquer le déroulé. On n’entre pas dans un cours en marche sans savoir ce qui attend.'
   },
   {
     number: '03',
-    title: 'Venir léger',
-    text: 'Pour une séance confirmée, suivez uniquement la liste de matériel communiquée par le club. N’achetez pas tout avant d’avoir reçu les consignes exactes.'
+    title: 'Venez en tenue de sport',
+    text: 'Short ou legging, tee-shirt, chaussures propres réservées à l’intérieur, une bouteille d’eau. N’achetez pas de matériel avant cette séance : tout est prêté.'
   },
   {
     number: '04',
-    title: 'Évaluer la méthode',
-    text: 'La qualité se lit dans les explications, la progressivité, l’attention portée aux débutants et la cohérence entre intensité et sécurité.'
+    title: 'Vous boxez dès le premier jour',
+    text: 'Échauffement, technique, sac. Pas d’opposition à une première séance, quel que soit le niveau — on regarde d’abord comment vous vous déplacez.'
+  },
+  {
+    number: '05',
+    title: 'Vous décidez après, pas avant',
+    text: 'La séance d’essai est presque toujours gratuite et n’engage à rien. L’adhésion se discute ensuite, une fois que vous savez si le lieu et le groupe vous conviennent.'
   }
 ];

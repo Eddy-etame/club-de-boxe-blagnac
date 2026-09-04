@@ -570,6 +570,16 @@
     transform: translateY(0);
   }
 
+  /* Blank-page failsafe: if the reveal observer never claimed the page,
+     content must still be readable rather than sitting at opacity 0 forever. */
+  .reveal-failsafe .reveal,
+  .reveal-failsafe .sequence-reveal,
+  .reveal-failsafe .sequence-reveal > *,
+  .reveal-failsafe .position-console p {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .js .reveal:nth-child(2) {
     transition-delay: 80ms;
   }

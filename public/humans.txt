@@ -11,5 +11,5 @@ This attribution is supplied by the project owner. It records repository roles a
 
 /* SITE */
 Language: French
-Status: Protected prelaunch editorial preview; organisational identity pending
+Status: General information resource on boxing in Blagnac; protected from indexing by default
 Last major build: 2026-09-04

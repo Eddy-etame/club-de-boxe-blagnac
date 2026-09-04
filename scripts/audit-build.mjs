@@ -147,6 +147,62 @@ for (const file of files.filter((item) => statSync(item).isFile())) {
   }
 }
 
+/* ------------------------------------------------------------------ *
+ * Blank-page regression guards.
+ *
+ * Two defects shipped together and made the homepage render as a solid
+ * black rectangle:
+ *   1. an opaque hero curtain whose resting state covered the viewport,
+ *      opened only by an animation gated on a second readiness class that
+ *      a throttled requestAnimationFrame never added;
+ *   2. mix-blend-mode: difference on position: fixed chrome, which forces
+ *      the whole document into one composited group.
+ * Both are invisible to a static HTML audit and to `astro check`, so they
+ * are asserted against the CSS the build actually emitted.
+ * ------------------------------------------------------------------ */
+const cssText = files
+  .filter((file) => extname(file) === '.css')
+  .map((file) => readFileSync(file, 'utf8'))
+  .join('\n');
+const inlineStyles = htmlFiles
+  .map((file) => (readFileSync(file, 'utf8').match(/<style[\s\S]*?<\/style>/gi) || []).join('\n'))
+  .join('\n');
+const allCss = `${cssText}\n${inlineStyles}`;
+
+assert(
+  !/\.page-ready/.test(allCss),
+  'A .page-ready gate is back in the emitted CSS. Entry animations must rest on their FINAL state and use animation-fill-mode: both, so content is never invisible when the readiness class is late or never arrives.'
+);
+
+assert(
+  !/mix-blend-mode\s*:\s*difference/.test(allCss),
+  'mix-blend-mode: difference is back in the emitted CSS. It forces full-document compositing and blanks the page in some rasterizers; resolve header contrast with the html[data-tone] surface tracker instead.'
+);
+
+/* The hero headline must stay inside the narrowest supported viewport.
+   "à BLAGNAC" measures ~4.87em wide; at 320px with 2×16px of page padding
+   only 288px are available, so the mobile fluid ratio has to stay at or
+   under 17vw. Read from source, not from the minified bundle, so the rule
+   is matched by its selector rather than by whichever clamp comes first. */
+const homeSource = readFileSync(join(root, 'src', 'pages', 'index.astro'), 'utf8');
+const mobileHeroBlock = homeSource.match(
+  /@media\s*\(max-width:\s*36rem\)[\s\S]*?\.home-hero h1\s*\{([\s\S]*?)\}/
+);
+assert(
+  mobileHeroBlock !== null,
+  'The mobile (36rem) .home-hero h1 rule is missing; it guards the headline against clipping at 320px.'
+);
+if (mobileHeroBlock) {
+  const ratio = mobileHeroBlock[1].match(/font-size:\s*clamp\([^,]+,\s*([\d.]+)vw/);
+  assert(ratio !== null, 'The mobile hero H1 must use a vw-based clamp so it can never exceed the viewport.');
+  if (ratio) {
+    assert(
+      Number(ratio[1]) <= 17,
+      `Mobile hero H1 is sized at ${ratio[1]}vw. Above 17vw the last letter of "BLAGNAC" is clipped at 320px.`
+    );
+  }
+}
+
 if (failures.length) {
   console.error(`Build audit failed (${failures.length}):\n- ${failures.join('\n- ')}`);
   process.exit(1);

@@ -8,6 +8,7 @@ import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import FlightLine from '@/components/FlightLine.astro';
 import { SITE, absoluteUrl } from '@/data/site';
+import { ALL_KEYWORDS, LOCATION } from '@/data/seo-map';
 
 interface Props {
   title: string;
@@ -18,6 +19,9 @@ interface Props {
   pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'FAQPage';
   schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  /** Tone of the first block on the page, so the header renders with correct
+   *  contrast before the surface tracker runs. */
+  topTone?: 'dark' | 'light' | 'signal';
   preloadImage?: {
     href: string;
     srcset: string;
@@ -34,6 +38,7 @@ const {
   pageType = 'WebPage',
   schema,
   noindex = false,
+  topTone = 'light',
   preloadImage
 } = Astro.props;
 
@@ -43,6 +48,9 @@ const robots = SITE.indexable && !noindex
   ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
   : 'noindex,nofollow,noarchive,nosnippet';
 
+/* No LocalBusiness / SportsOrganization graph: this site describes boxing in
+   an area, it is not a venue. Emitting an address, phone or opening hours
+   here would assert a place that does not exist. */
 const baseSchema = [
   {
     '@context': 'https://schema.org',
@@ -66,23 +74,53 @@ const baseSchema = [
   }
 ];
 
-const schemas = schema
-  ? [...baseSchema, ...(Array.isArray(schema) ? schema : [schema])]
-  : baseSchema;
+/* BreadcrumbList on every page below the root: cheap, and it is what search
+   results render under the title. */
+const crumbs = pathname === '/' ? null : {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: title.split(/[—|]/)[0].trim(), item: canonical }
+  ]
+};
+
+const schemas = [
+  ...baseSchema,
+  ...(crumbs ? [crumbs] : []),
+  ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])
+];
 ---
 
 <!doctype html>
-<html lang={SITE.lang} id="top" class="no-js">
+<html lang={SITE.lang} id="top" class="no-js" data-tone={topTone}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <script is:inline>
+      /* `js` puts every .reveal at opacity:0 and hands the job of showing it
+         to the IntersectionObserver in the deferred module below. If that
+         module is blocked, errors, or is still in flight, the page stays
+         permanently blank — so an unconditional failsafe reveals everything
+         if the observer has not claimed the page in time. The module clears
+         this timer the moment it runs. */
+      (function () {
+        var root = document.documentElement;
+        root.classList.replace('no-js', 'js');
+        window.__revealFailsafe = setTimeout(function () {
+          root.classList.add('reveal-failsafe');
+        }, 1500);
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="club de boxe Blagnac, club de boxe à Blagnac, cours de boxe Blagnac, salle de boxe Blagnac, boxe Blagnac, club de boxe Toulouse nord-ouest, boxing club Blagnac"
-    />
+    <meta name="keywords" content={ALL_KEYWORDS.join(', ')} />
+    {/* Geo signals. These describe the territory the content is about — they
+        do not assert a business premises, which would need a real address. */}
+    <meta name="geo.region" content={`FR-${LOCATION.departmentCode}`} />
+    <meta name="geo.placename" content={`${LOCATION.city}, ${LOCATION.department}`} />
+    <meta name="ICBM" content="43.6353, 1.3897" />
+    <meta name="geo.position" content="43.6353;1.3897" />
     <meta name="robots" content={robots} />
     <meta name="googlebot" content={robots} />
     <meta name="author" content="Eddy Etame Etame" />
@@ -134,7 +172,9 @@ const schemas = schema
 
     <script>
       const reveals = document.querySelectorAll<HTMLElement>('.reveal, .sequence-reveal');
-      window.requestAnimationFrame(() => document.documentElement.classList.add('page-ready'));
+      /* The observer is live, so the head script's blank-page failsafe is no
+         longer needed. */
+      clearTimeout((window as unknown as { __revealFailsafe?: number }).__revealFailsafe);
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
           (entries) => {

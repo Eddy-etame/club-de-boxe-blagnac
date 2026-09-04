@@ -67,14 +67,35 @@ const currentPath = Astro.url.pathname;
     align-items: center;
   }
 
+  /* Contrast is resolved per scroll position by the surface tracker below:
+     html[data-tone] tells the header which surface sits under it. This replaces
+     mix-blend-mode: difference, which forced the whole document into one
+     composited group (blank paint in several rasterizers, and a scroll-perf
+     tax on low-end mobile). */
+  .site-header {
+    --header-ink: var(--paper-bright);
+    color: var(--header-ink);
+    transition: color 240ms ease;
+  }
+
+  :global(html[data-tone='light']) .site-header,
+  :global(html[data-tone='signal']) .site-header {
+    --header-ink: var(--ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none;
+    }
+  }
+
   .brand {
     z-index: 3;
     display: inline-flex;
     width: fit-content;
     align-items: center;
     gap: 0.7rem;
-    color: white;
-    mix-blend-mode: difference;
+    color: inherit;
     text-decoration: none;
   }
 
@@ -155,8 +176,7 @@ const currentPath = Astro.url.pathname;
   .site-nav a {
     display: inline-grid;
     gap: 0.15rem;
-    color: white;
-    mix-blend-mode: difference;
+    color: inherit;
     font-size: 0.69rem;
     font-weight: 650;
     letter-spacing: 0.035em;
@@ -206,9 +226,8 @@ const currentPath = Astro.url.pathname;
       gap: 0.6rem;
       border: 0;
       padding: 0.6rem 0;
-      color: white;
+      color: inherit;
       background: transparent;
-      mix-blend-mode: difference;
       font-family: var(--font-mono);
       font-size: 0.64rem;
       letter-spacing: 0.05em;
@@ -230,7 +249,7 @@ const currentPath = Astro.url.pathname;
     }
 
     .menu-toggle[aria-expanded='true'] {
-      mix-blend-mode: normal;
+      color: var(--paper-bright);
     }
 
     .menu-toggle[aria-expanded='true'] .menu-toggle__icon {
@@ -284,7 +303,6 @@ const currentPath = Astro.url.pathname;
       padding-block: 0.62rem;
       border-top: 1px solid rgb(255 255 255 / 24%);
       color: var(--paper-bright);
-      mix-blend-mode: normal;
       font-size: clamp(1.75rem, 8vh, 4rem);
       line-height: 0.9;
     }
@@ -328,6 +346,47 @@ const currentPath = Astro.url.pathname;
       font-size: clamp(1.2rem, 7vw, 2rem);
     }
   }
+
+  /* Open menu paints on ink, whatever surface is scrolled under the header. */
+  :global(html[data-menu='open']) .site-header {
+    --header-ink: var(--paper-bright);
+  }
+
+  /* Small handsets: the lockup and the toggle have to share 343px at 375px,
+     and 288px at 320px, without either being clipped. */
+  @media (max-width: 26rem) {
+    .site-header__inner {
+      gap: 0.75rem;
+    }
+
+    .brand {
+      min-width: 0;
+      gap: 0.55rem;
+    }
+
+    .brand__mark {
+      width: 2.15rem;
+      height: 2.15rem;
+    }
+
+    .brand__code {
+      font-size: 0.44rem;
+    }
+
+    .brand__name {
+      font-size: 0.62rem;
+    }
+
+    :global(.js) .menu-toggle {
+      gap: 0.45rem;
+      font-size: 0.6rem;
+    }
+
+    .menu-toggle__icon,
+    .menu-toggle__icon::after {
+      width: 1.15rem;
+    }
+  }
 </style>
 
 <script>
@@ -335,9 +394,12 @@ const currentPath = Astro.url.pathname;
   const nav = document.querySelector<HTMLElement>('#site-nav');
   const firstLink = nav?.querySelector<HTMLAnchorElement>('a');
 
+  const root = document.documentElement;
+
   const closeMenu = (restoreFocus = false) => {
     toggle?.setAttribute('aria-expanded', 'false');
     nav?.setAttribute('data-open', 'false');
+    root.removeAttribute('data-menu');
     document.body.style.removeProperty('overflow');
     if (restoreFocus) toggle?.focus();
   };
@@ -346,6 +408,8 @@ const currentPath = Astro.url.pathname;
     const willOpen = toggle.getAttribute('aria-expanded') !== 'true';
     toggle.setAttribute('aria-expanded', String(willOpen));
     nav?.setAttribute('data-open', String(willOpen));
+    if (willOpen) root.setAttribute('data-menu', 'open');
+    else root.removeAttribute('data-menu');
     document.body.style.overflow = willOpen ? 'hidden' : '';
     if (willOpen) window.requestAnimationFrame(() => firstLink?.focus());
   });
@@ -357,4 +421,80 @@ const currentPath = Astro.url.pathname;
   window.addEventListener('resize', () => {
     if (window.innerWidth > 928) closeMenu();
   });
+
+  /* ------------------------------------------------------------------ *
+   * Surface tracker — resolves header contrast against whatever block
+   * is currently underneath it. Replaces mix-blend-mode: difference,
+   * which blanked the page in some rasterizers and forced full-document
+   * compositing on every scroll frame.
+   * ------------------------------------------------------------------ */
+  type Tone = 'dark' | 'light' | 'signal';
+
+  /* Tone is measured from the block's real background, not from a marker
+     class. Class-matching silently failed on the sub-page heroes, which are
+     ink-backgrounded through `.page-hero` and never carried `.surface-dark`
+     — the header rendered ink-on-ink and disappeared. Luminance needs no
+     one to remember to tag a new section. `surface-signal` stays an explicit
+     override: the orange sits mid-luminance but always wants ink on top. */
+  const relativeLuminance = (r: number, g: number, b: number) => {
+    const channel = (value: number) => {
+      const c = value / 255;
+      return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    };
+    return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+  };
+
+  const toneOf = (el: Element): Tone => {
+    if (el.classList.contains('surface-signal')) return 'signal';
+    let node: Element | null = el;
+    while (node && node !== document.documentElement) {
+      const match = getComputedStyle(node)
+        .backgroundColor.match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,/\s]+([\d.]+))?/);
+      if (match && (match[4] === undefined || Number(match[4]) > 0.5)) {
+        const luminance = relativeLuminance(Number(match[1]), Number(match[2]), Number(match[3]));
+        return luminance < 0.4 ? 'dark' : 'light';
+      }
+      node = node.parentElement;
+    }
+    return 'light';
+  };
+
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  let lastTone = root.getAttribute('data-tone') || '';
+
+  /* Rects are read live rather than cached: a cached offset table went stale
+     as soon as fonts swapped or a lazy image landed, and the header then
+     reported the wrong surface. Eight getBoundingClientRect reads inside one
+     rAF is well under budget. */
+  const applyTone = () => {
+    const probe = (header?.offsetHeight || 76) * 0.55;
+    const blocks = document.querySelectorAll('main > *, body > footer');
+    let tone: Tone = 'light';
+    for (const block of blocks) {
+      const rect = block.getBoundingClientRect();
+      if (probe >= rect.top && probe < rect.bottom) {
+        tone = toneOf(block);
+        break;
+      }
+    }
+    if (tone !== lastTone) {
+      lastTone = tone;
+      root.setAttribute('data-tone', tone);
+    }
+  };
+
+  let queued = false;
+  const schedule = () => {
+    if (queued) return;
+    queued = true;
+    window.requestAnimationFrame(() => {
+      applyTone();
+      queued = false;
+    });
+  };
+
+  applyTone();
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('load', schedule);
 </script>
