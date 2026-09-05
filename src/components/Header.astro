@@ -303,8 +303,15 @@ const currentPath = Astro.url.pathname;
       padding-block: 0.62rem;
       border-top: 1px solid rgb(255 255 255 / 24%);
       color: var(--paper-bright);
-      font-size: clamp(1.75rem, 8vh, 4rem);
-      line-height: 0.9;
+      /* Sized by BOTH axes. 8vh alone blew the labels off the right edge of
+         tall phones: on a 915px-tall screen it resolved to 73px, and
+         "QUESTIONS" needs roughly 4.7em of width against ~300px of usable
+         column. min() lets height cap the type on short screens while width
+         caps it on narrow ones, so no label can overflow either way. */
+      font-size: clamp(1.5rem, min(10.5vw, 7.5vh), 3.5rem);
+      line-height: 0.95;
+      overflow-wrap: anywhere;
+      hyphens: none;
     }
 
     .site-nav a span {

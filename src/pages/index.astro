@@ -66,9 +66,8 @@ const audiences = [
 
     <div class="home-hero__inner shell">
       <div class="home-hero__top">
-        <p class="eyebrow eyebrow--signal home-hero__eyebrow">Depuis {CLUB.founded} · {CLUB.members} adhérents · {CLUB.season}</p>
         <p class="home-hero__coordinates" aria-label="Club de boxe à Blagnac, ouvert du lundi au samedi de 10h à 21h30">
-          <span>BLAGNAC 31700 / {CLUB.openShort.toUpperCase()}</span>
+          <span>BLAGNAC 31700 / {CLUB.openShort.toUpperCase()} / GANTS FOURNIS</span>
         </p>
       </div>
 
@@ -94,12 +93,12 @@ const audiences = [
     <div class="status-strip__track">
       {[0, 1].map(() => (
         <div class="status-strip__item" aria-hidden="true">
-          <span>Boxe anglaise Blagnac</span>
-          <span>Éveil dès 3 ans</span>
-          <span>{CLUB.weeklyClasses} cours par semaine</span>
-          <span>{CLUB.coaches} entraîneurs diplômés</span>
-          <span>{CLUB.rings} rings</span>
-          <span>Essai gratuit</span>
+          <span>Boxe anglaise à Blagnac</span>
+          <span>Le plus jeune a trois ans</span>
+          <span>Personne ne boxe le premier jour</span>
+          <span>Gants et protections fournis</span>
+          <span>Deux rings, six jours sur sept</span>
+          <span>Un tiers de femmes sur le tapis</span>
           <span>Toulouse nord-ouest</span>
         </div>
       ))}
@@ -107,7 +106,7 @@ const audiences = [
   </div>
 
   <section class="proof shell" aria-labelledby="proof-title">
-    <h2 id="proof-title" class="sr-only">Le club en chiffres</h2>
+    <h2 id="proof-title" class="sr-only">Ce que le club est, en quatre faits</h2>
     <dl class="proof__grid sequence-reveal">
       {PROOF.map((item) => (
         <div class="proof__item">
@@ -425,7 +424,11 @@ const audiences = [
     padding-bottom: clamp(1.6rem, 3vw, 3rem);
   }
 
-  .home-hero__top,
+  .home-hero__top {
+    display: grid;
+    justify-items: end;
+  }
+
   .home-hero__bottom {
     display: grid;
     gap: 1.5rem;
@@ -454,7 +457,7 @@ const audiences = [
 
   :global(.js) .home-hero__coordinates span {
     animation:
-      hero-type 1.3s 1.05s steps(46, end) both,
+      hero-type 1.3s 1.05s steps(52, end) both,
       caret-blink 520ms 1.05s step-end 5;
   }
 
@@ -467,20 +470,6 @@ const audiences = [
     50% { border-color: transparent; }
   }
 
-  :global(.js) .home-hero__eyebrow {
-    animation: hero-meta-in 620ms 780ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  }
-
-  @keyframes hero-meta-in {
-    from {
-      opacity: 0;
-      transform: translateX(calc(min(2.5rem, 6vw) * -1));
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
 
   /* The floor has to let "à BLAGNAC" — the widest line — fit inside
      (100vw - 2 × page-pad - offset). A 4.5rem floor was wider than a 375px

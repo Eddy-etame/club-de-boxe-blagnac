@@ -182,10 +182,26 @@ export const DISCIPLINES: Discipline[] = [
 
 /** Trust signals. Concrete, countable, and stated without hedging. */
 export const PROOF = [
-  { figure: '2011', label: 'Année de création', detail: 'Quinze saisons sans interruption.' },
-  { figure: '240', label: 'Adhérents', detail: 'Dont un tiers de femmes et 90 jeunes.' },
-  { figure: '6', label: 'Entraîneurs diplômés', detail: 'Encadrement présent à chaque séance.' },
-  { figure: '21', label: 'Cours par semaine', detail: 'Six jours sur sept, midi et soir.' }
+  {
+    figure: '2011',
+    label: 'Première séance',
+    detail: 'Quinze saisons sans en manquer une seule.'
+  },
+  {
+    figure: '1/3',
+    label: 'De femmes sur le tapis',
+    detail: 'Sur tous les cours, sans créneau séparé.'
+  },
+  {
+    figure: '3 ans',
+    label: 'Le plus jeune sur le tapis',
+    detail: 'L’éveil commence avant de savoir lacer ses chaussures.'
+  },
+  {
+    figure: '0',
+    label: 'Opposition au premier cours',
+    detail: 'On regarde d’abord comment vous vous déplacez.'
+  }
 ];
 
 export const TESTIMONIALS = [
