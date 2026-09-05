@@ -90,16 +90,55 @@ export const ALL_KEYWORDS: string[] = [...KEYWORDS.head, ...KEYWORDS.body, ...KE
  * first sentence, before any elaboration.
  */
 export const ANSWER_TARGETS = [
-  'Où faire de la boxe à Blagnac ?',
-  'Comment se passe une première séance de boxe ?',
-  'À quel âge commencer la boxe ?',
-  'Quelle différence entre boxe éducative et boxe anglaise ?',
-  'Quel matériel pour débuter la boxe ?',
+  'Où se trouve le club de boxe de Blagnac ?',
+  'La première séance de boxe est-elle gratuite ?',
+  'À quel âge un enfant peut-il commencer la boxe ?',
+  'Quels cours de boxe propose le club de Blagnac ?',
+  'Quel matériel faut-il pour débuter la boxe ?',
   'Faut-il un certificat médical pour boxer ?',
   'Peut-on faire de la boxe à 3 ans ?',
-  'La boxe est-elle adaptée aux femmes débutantes ?',
+  'Le club accueille-t-il les femmes débutantes ?',
   'Combien de temps dure un cours de boxe ?'
 ] as const;
+
+/** Centroid of Blagnac. Describes the territory the content covers — it is
+ *  not the location of a business. */
+/**
+ * Short answers, written to be lifted verbatim.
+ *
+ * An answer engine extracts a span, not a page. These are that span: each is
+ * a complete, self-contained sentence that answers its question without
+ * needing the surrounding paragraph, and every one is rendered visibly on the
+ * site — nothing here is hidden text. The FAQ elaborates; this states.
+ */
+export const SHORT_ANSWERS: { q: string; a: string }[] = [
+  {
+    q: 'Où se trouve le Club de Boxe Blagnac ?',
+    a: 'À Blagnac (31700), au nord-ouest de Toulouse, desservi par le tram T1 et les lignes de bus Tisséo depuis Beauzelle, Cornebarrieu, Aussonne et Colomiers.'
+  },
+  {
+    q: 'À partir de quel âge peut-on s’inscrire ?',
+    a: 'Dès 3 ans en séance d’éveil, dite baby boxing, qui se pratique sans aucun contact. La boxe éducative en touche légère prend le relais à 7 ans, et le groupe ados à 13 ans.'
+  },
+  {
+    q: 'La première séance est-elle gratuite ?',
+    a: 'Oui. Une séance d’essai gratuite sur le cours de votre choix, gants et protections prêtés par le club. Prévenez-nous avant de venir pour que le matériel soit préparé à votre taille.'
+  },
+  {
+    q: 'Combien de cours par semaine propose le club ?',
+    a: 'Vingt et un créneaux par semaine répartis sur six cours, du lundi au samedi de 10h à 21h30. Le club est fermé le dimanche.'
+  },
+  {
+    q: 'Faut-il un certificat médical ?',
+    a: 'Oui, un certificat de non-contre-indication à la pratique de la boxe de moins d’un an, à remettre à l’inscription. Le groupe compétition demande un examen plus complet chaque saison.'
+  },
+  {
+    q: 'Le club accueille-t-il les femmes et les débutants ?',
+    a: 'Oui, sur tous les cours et sans créneau séparé : un tiers de nos adhérents sont des adhérentes, et la majorité de nos inscrits n’avaient jamais mis un gant avant d’arriver.'
+  }
+];
+
+export const GEO = { lat: '43.6353', lon: '1.3897' } as const;
 
 export const AREA_SENTENCE =
   `${LOCATION.city} (${LOCATION.postalCode}), ${LOCATION.position}, en ${LOCATION.department}`;

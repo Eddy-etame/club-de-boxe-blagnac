@@ -18,14 +18,28 @@ const { compact = false } = Astro.props;
     </div>
   </div>
 
-  <div class="field">
-    <label for="contact-subject">Votre recherche</label>
-    <input id="contact-subject" name="subject" type="text" maxlength="120" required placeholder="Débuter, reprendre, suivre le projet…" />
+  <div class="form-row">
+    <div class="field">
+      <label for="contact-phone">Téléphone</label>
+      <input id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" inputmode="tel" placeholder="06 12 34 56 78" />
+    </div>
+    <div class="field">
+      <label for="contact-subject">Le cours qui vous intéresse</label>
+      <input id="contact-subject" name="subject" type="text" maxlength="120" required placeholder="Éveil, éducative, ados, loisir, compétition, cardio" list="contact-courses" />
+      <datalist id="contact-courses">
+        <option value="Éveil — baby boxing (3 à 6 ans)"></option>
+        <option value="Boxe éducative (7 à 12 ans)"></option>
+        <option value="Boxe ados (13 à 17 ans)"></option>
+        <option value="Boxe anglaise — loisir"></option>
+        <option value="Boxe anglaise — compétition"></option>
+        <option value="Cardio boxe"></option>
+      </datalist>
+    </div>
   </div>
 
   <div class="field">
-    <label for="contact-message">Message</label>
-    <textarea id="contact-message" name="message" minlength="10" maxlength="2000" required placeholder="Dites-nous l’information qui vous serait utile."></textarea>
+    <label for="contact-message">Votre message</label>
+    <textarea id="contact-message" name="message" minlength="10" maxlength="2000" required placeholder="Votre âge, votre niveau, et vos disponibilités."></textarea>
   </div>
 
   <div class="field field--trap" aria-hidden="true">
@@ -37,11 +51,11 @@ const { compact = false } = Astro.props;
 
   <label class="consent">
     <input name="consent" type="checkbox" value="yes" required />
-    <span>J’accepte l’utilisation de ces informations uniquement pour répondre à ma demande. <a href="/confidentialite/">Voir la confidentialité</a>.</span>
+    <span>J’accepte d’être recontacté·e par e-mail ou par téléphone au sujet de ma demande. <a href="/confidentialite/">Voir la confidentialité</a>.</span>
   </label>
 
   <div class="form-actions">
-    <button class="button button--signal" type="submit">Envoyer la demande</button>
+    <button class="button button--signal" type="submit">Recevoir les informations</button>
     <p class="form-status" role="status" aria-live="polite" data-form-status></p>
   </div>
 </form>
@@ -105,7 +119,7 @@ const { compact = false } = Astro.props;
         form.reset();
         if (startedAt) startedAt.value = String(Date.now());
         if (status) {
-          status.textContent = 'Message reçu. Merci.';
+          status.textContent = 'Reçu. Nous vous envoyons les créneaux et l’adresse sous 24 h.';
           status.dataset.state = 'success';
         }
       } catch (error) {

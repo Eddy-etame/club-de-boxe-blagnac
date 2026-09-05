@@ -1,59 +1,43 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ContactForm from '@/components/ContactForm.astro';
-import { DISCIPLINES, GEAR, SEASON, PARTNERS, DISCIPLINE_COUNT } from '@/data/club';
-import { LOCATION, ANSWER_TARGETS, AREA_SENTENCE, NEARBY_SENTENCE } from '@/data/seo-map';
+import PartnerCta from '@/components/PartnerCta.astro';
+import {
+  CLUB,
+  DISCIPLINES,
+  PROOF,
+  TESTIMONIALS,
+  AREA,
+  DISCIPLINE_COUNT
+} from '@/data/club';
+import { LOCATION, NEARBY_SENTENCE } from '@/data/seo-map';
 
 const title = 'Club de boxe à Blagnac — cours de boxe anglaise, Toulouse';
 const description =
-  'Boxe à Blagnac (31700) : boxe anglaise, boxe éducative dès 7 ans, cours ados, loisir, cardio boxe. Âges, déroulé d’un cours, budget et première séance.';
+  'Club de boxe anglaise à Blagnac (31700) depuis 2011 : éveil dès 3 ans, éducative, ados, loisir, compétition, cardio boxe. 21 cours par semaine. Séance d’essai gratuite.';
 
-/* Audience blocks. General on purpose: each one answers "is this for me",
-   then hands off. Club-level specifics live with the clubs themselves. */
 const audiences = [
   {
     n: '01',
-    who: 'Les enfants, dès 3 ans',
-    text: 'L’éveil commence à 3 ans et n’apprend pas à frapper : parcours de motricité, jeux de réaction, sac mou, aucun contact. La boxe éducative prend le relais vers 7 ans, en touche légère et protections complètes — la coordination et le respect du partenaire bien avant la frappe.'
+    who: 'Vous n’avez jamais boxé',
+    text: 'C’est le cas de la majorité de nos adhérents le jour où ils poussent la porte. Le premier trimestre, on travaille la garde, le déplacement et la respiration. L’opposition vient après, si vous le voulez.'
   },
   {
     n: '02',
-    who: 'Les adolescents',
-    text: 'Le groupe ados fait le pont vers la boxe adulte. L’intensité monte progressivement, sous un cadre strict sur les protections. C’est là que se décide, sans pression, l’orientation loisir ou compétition.'
+    who: 'Votre enfant a entre 3 et 12 ans',
+    text: 'L’éveil dès 3 ans, sans aucun contact : motricité, équilibre, écoute. L’éducative à partir de 7 ans, en touche légère et protections complètes. On n’apprend pas à un enfant à frapper fort.'
   },
   {
     n: '03',
-    who: 'Les adultes débutants',
-    text: 'On peut commencer la boxe anglaise à 25 comme à 55 ans, sans condition physique préalable. Le premier trimestre est consacré à la garde, au déplacement et à la respiration — pas à l’opposition.'
+    who: 'Vous voulez la condition, pas les coups',
+    text: 'Le cardio boxe reprend tout le travail de déplacement et de sac, sans opposition ni contact. Quatre créneaux par semaine, dont deux le midi.'
   },
   {
     n: '04',
-    who: 'Les femmes',
-    text: 'La pratique féminine a fortement progressé en France depuis les années 2000. Dans la plupart des clubs du secteur, hommes et femmes s’entraînent sur les mêmes créneaux, sans cours séparé et sans niveau imposé.'
-  },
-  {
-    n: '05',
-    who: 'Ceux qui ne veulent pas de contact',
-    text: 'Le cardio boxe reprend les déplacements, les enchaînements et le travail au sac, sans aucune opposition. C’est une entrée fréquente vers le cours loisir, et une pratique complète en soi.'
+    who: 'Vous voulez monter sur un ring',
+    text: 'Le groupe compétition s’ouvre après une saison chez nous, sur avis des entraîneurs. Sparring hebdomadaire, calendrier de rencontres, suivi individuel.'
   }
 ];
-
-const faqAnswers = [
-  `La boxe se pratique à ${LOCATION.city} et dans le secteur nord-ouest de Toulouse, accessible en tram T1 et en bus Tisséo depuis ${NEARBY_SENTENCE}.`,
-  'La plupart des clubs du secteur proposent une séance d’essai avant toute adhésion, avec gants et protections prêtés. Les modalités et les montants se demandent directement au club.',
-  'Dès 3 ans. Les séances d’éveil travaillent la motricité et la réaction sans aucun contact ; la boxe éducative prend le relais vers 7 ans en touche légère, et l’opposition plus soutenue arrive à l’adolescence.',
-  'La boxe éducative se pratique en touche légère sans recherche de puissance, quand la boxe anglaise adulte autorise une opposition contrôlée avec protections.'
-];
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: ANSWER_TARGETS.slice(0, 4).map((question, index) => ({
-    '@type': 'Question',
-    name: question,
-    acceptedAnswer: { '@type': 'Answer', text: faqAnswers[index] }
-  }))
-};
 ---
 
 <BaseLayout
@@ -62,8 +46,9 @@ const faqSchema = {
   pathname="/"
   topTone="dark"
   pageType="AboutPage"
-  imageAlt="Boxeuse en garde pendant un entraînement de boxe anglaise"
-  schema={faqSchema}
+  imageAlt="Boxeuse en garde pendant un entraînement au Club de Boxe Blagnac"
+  withCourses
+  speakable={['#intro-title', '.manifesto__statement', '.discipline__summary']}
   preloadImage={{
     href: '/images/garde-boxeuse-960.webp',
     srcset: '/images/garde-boxeuse-480.webp 480w, /images/garde-boxeuse-960.webp 960w, /images/garde-boxeuse-1600.webp 1600w',
@@ -81,9 +66,9 @@ const faqSchema = {
 
     <div class="home-hero__inner shell">
       <div class="home-hero__top">
-        <p class="eyebrow eyebrow--signal home-hero__eyebrow">Boxe anglaise · {LOCATION.city} {LOCATION.postalCode} · {SEASON.label}</p>
-        <p class="home-hero__coordinates" aria-label={`Boxe à ${AREA_SENTENCE}`}>
-          <span>{LOCATION.city.toUpperCase()} / TOULOUSE NORD-OUEST / {LOCATION.department.toUpperCase()}</span>
+        <p class="eyebrow eyebrow--signal home-hero__eyebrow">Depuis {CLUB.founded} · {CLUB.members} adhérents · {CLUB.season}</p>
+        <p class="home-hero__coordinates" aria-label="Club de boxe à Blagnac, ouvert du lundi au samedi de 10h à 21h30">
+          <span>BLAGNAC 31700 / {CLUB.openShort.toUpperCase()}</span>
         </p>
       </div>
 
@@ -94,45 +79,52 @@ const faqSchema = {
 
       <div class="home-hero__bottom">
         <p class="home-hero__lead hero-enter hero-enter--lead">
-          Boxe anglaise, éveil dès 3 ans, boxe éducative, cours ados, loisir adulte et cardio boxe. Tout ce qu’il faut savoir avant votre première séance.
+          {CLUB.weeklyClasses} cours par semaine, six jours sur sept, de l’éveil à 3 ans au groupe compétition. Votre première séance est gratuite.
         </p>
         <div class="home-hero__actions hero-enter hero-enter--actions">
-          <a class="button button--signal" href="#essai">Préparer ma première séance</a>
-          <span><a href="/cours-de-boxe-blagnac/">Découvrir les {DISCIPLINE_COUNT} disciplines →</a></span>
+          <a class="button button--signal" href="#essai">Recevoir les informations</a>
+          <span>{CLUB.openLine}<br />Gants et protections prêtés.</span>
           <span class="home-hero__credit">Photo © Axel Derewiany</span>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="status-strip" role="region" aria-label="La boxe à Blagnac en bref">
+  <div class="status-strip" role="region" aria-label="Le club en bref">
     <div class="status-strip__track">
       {[0, 1].map(() => (
         <div class="status-strip__item" aria-hidden="true">
           <span>Boxe anglaise Blagnac</span>
           <span>Éveil dès 3 ans</span>
-          <span>Cours ados</span>
-          <span>Loisir adulte</span>
-          <span>Cardio boxe</span>
-          <span>Compétition</span>
+          <span>{CLUB.weeklyClasses} cours par semaine</span>
+          <span>{CLUB.coaches} entraîneurs diplômés</span>
+          <span>{CLUB.rings} rings</span>
+          <span>Essai gratuit</span>
           <span>Toulouse nord-ouest</span>
         </div>
       ))}
     </div>
   </div>
 
+  <section class="proof shell" aria-labelledby="proof-title">
+    <h2 id="proof-title" class="sr-only">Le club en chiffres</h2>
+    <dl class="proof__grid sequence-reveal">
+      {PROOF.map((item) => (
+        <div class="proof__item">
+          <dt>{item.label}</dt>
+          <dd class="proof__figure">{item.figure}</dd>
+          <dd class="proof__detail">{item.detail}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
   <section class="manifesto shell" aria-labelledby="intro-title">
     <div class="section-heading position-heading sequence-reveal">
-      <p class="eyebrow">01 · La boxe à Blagnac</p>
+      <p class="eyebrow">01 · Le club</p>
       <div>
-        <h2 id="intro-title">Un sport de patience avant d’être un sport de combat.</h2>
+        <h2 id="intro-title">Quinze saisons, deux rings, et personne qu’on laisse au fond de la salle.</h2>
       </div>
-    </div>
-
-    <div class="position-console sequence-reveal" aria-label="Repères">
-      <p><span>01 / Disciplines</span><strong>{DISCIPLINE_COUNT} formats</strong><span class="position-console__ready">Dès 3 ans</span></p>
-      <p><span>02 / Secteur</span><strong>{LOCATION.city} {LOCATION.postalCode}</strong><span class="position-console__ready">Tram T1</span></p>
-      <p><span>03 / Première fois</span><strong>Séance d’essai</strong><span class="position-console__ready">Matériel prêté</span></p>
     </div>
 
     <div class="manifesto__grid">
@@ -141,20 +133,40 @@ const faqSchema = {
       </p>
       <div class="prose reveal reveal--right">
         <p>
-          Chercher un <strong>club de boxe à Blagnac</strong> pose toujours les mêmes questions : quelle discipline, à partir de quel âge, avec quel matériel, pour quel budget. Cette page y répond dans l’ordre, sans jargon et sans vous demander de choisir avant d’avoir compris.
+          Le <strong>Club de Boxe Blagnac</strong> est ouvert depuis {CLUB.founded} à {LOCATION.city}, {LOCATION.position}. Deux rings, une salle de sacs, un espace de renforcement, et {CLUB.coaches} entraîneurs diplômés présents à chaque séance.
         </p>
         <p>
-          {LOCATION.city} se situe {LOCATION.position}, en {LOCATION.department}. Le secteur est desservi par le tram T1 et les lignes Tisséo, ce qui met les <strong>cours de boxe anglaise</strong> à portée de {NEARBY_SENTENCE}. Les quartiers d’{LOCATION.districts[0]}, du {LOCATION.districts[1]} et du {LOCATION.districts[2]} concentrent l’essentiel des équipements sportifs de la commune.
+          Nos {CLUB.members} adhérents viennent de {NEARBY_SENTENCE} autant que de Blagnac. Un tiers sont des adhérentes. Quatre-vingt-dix ont moins de dix-huit ans. Et la plupart n’avaient jamais mis un gant avant de venir.
+        </p>
+        <p>
+          <a class="inline-link" href="/cours-de-boxe-blagnac/">Voir les {DISCIPLINE_COUNT} cours →</a>
         </p>
       </div>
     </div>
   </section>
 
+  <section class="gallery-band" aria-label="La salle">
+    <figure>
+      <picture>
+        <source srcset="/images/salle-de-boxe-480.webp 480w, /images/salle-de-boxe-960.webp 960w, /images/salle-de-boxe-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
+        <img src="/images/salle-de-boxe-1600.jpg" alt="La salle du Club de Boxe Blagnac : rings et sacs de frappe" width="1600" height="919" loading="lazy" />
+      </picture>
+      <figcaption>Nos deux rings</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/images/espace-renforcement-420.webp 420w, /images/espace-renforcement-900.webp 900w, /images/espace-renforcement-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
+        <img src="/images/espace-renforcement-1400.jpg" alt="Espace de renforcement musculaire du club" width="1400" height="815" loading="lazy" />
+      </picture>
+      <figcaption>L’espace renforcement</figcaption>
+    </figure>
+  </section>
+
   <section class="visual-index surface-dark" aria-labelledby="disciplines-title">
     <div class="visual-index__heading shell">
-      <p class="eyebrow">02 · Les disciplines</p>
-      <h2 id="disciplines-title">Six façons<br /><em>de boxer.</em></h2>
-      <p>De l’éveil à 3 ans au groupe compétition, chaque format répond à une intention différente. Aucune n’est un préalable à l’autre.</p>
+      <p class="eyebrow">02 · Nos cours</p>
+      <h2 id="disciplines-title">Six cours.<br /><em>Un seul sport.</em></h2>
+      <p>De l’éveil à 3 ans au groupe compétition. Ce qui change, c’est l’âge, l’intensité et le niveau de contact — jamais l’exigence technique.</p>
     </div>
 
     <div class="disciplines shell">
@@ -162,67 +174,43 @@ const faqSchema = {
         <article class="discipline reveal" id={d.slug}>
           <p class="discipline__index">{String(i + 1).padStart(2, '0')}</p>
           <div class="discipline__body">
-            <h3>{d.name}</h3>
+            <h3><a href={`/cours-de-boxe-blagnac/${d.slug}/`}>{d.name}</a></h3>
             <p class="discipline__summary">{d.summary}</p>
             <p class="discipline__text">{d.body}</p>
             <dl class="discipline__meta">
               <div><dt>Âges</dt><dd>{d.ages}</dd></div>
               <div><dt>Contact</dt><dd>{d.contact}</dd></div>
+              <div><dt>Rythme</dt><dd>{d.rhythm}</dd></div>
             </dl>
           </div>
+          <figure class="discipline__media">
+            <picture>
+              <source
+                srcset={d.image.widths.map((w) => `/images/${d.image.file}-${w}.webp ${w}w`).join(', ')}
+                sizes="(max-width: 52rem) 92vw, 32vw"
+                type="image/webp"
+              />
+              <img
+                src={`/images/${d.image.file}-${d.image.widths[d.image.widths.length - 1]}.jpg`}
+                alt={d.image.alt}
+                width="1400"
+                height="933"
+                loading="lazy"
+              />
+            </picture>
+          </figure>
         </article>
       ))}
     </div>
-
-    <figure class="image-frame band-image shell reveal">
-      <picture>
-        <source srcset="/images/cours-collectif-sacs-480.webp 480w, /images/cours-collectif-sacs-960.webp 960w, /images/cours-collectif-sacs-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 88vw" type="image/webp" />
-        <img src="/images/cours-collectif-sacs-1600.jpg" alt="Cours collectif de boxe à Blagnac : travail au sac de frappe en salle" width="1600" height="1067" loading="lazy" />
-      </picture>
-      <figcaption><span>Travail au sac en cours collectif</span><span>Boxe anglaise</span></figcaption>
-    </figure>
-  </section>
-
-  <section class="rounds shell" aria-labelledby="rounds-title">
-    <div class="section-heading">
-      <p class="eyebrow">03 · Un cours, minute par minute</p>
-      <div>
-        <h2 id="rounds-title">Ce qui se passe entre l’arrivée et le retour au calme.</h2>
-        <p class="section-heading__intro">La structure est à peu près la même partout, quel que soit l’âge ou le niveau : un cours de boxe dure généralement une heure à une heure trente.</p>
-      </div>
-    </div>
-
-    <ol class="rounds__list sequence-reveal">
-      <li>
-        <span>01</span>
-        <h3>Échauffement</h3>
-        <p>Corde, mobilité articulaire, montée en température. Quinze minutes environ, jamais négociables.</p>
-      </li>
-      <li>
-        <span>02</span>
-        <h3>Technique</h3>
-        <p>Au miroir puis aux pattes d’ours. Un geste, décomposé, corrigé, répété jusqu’à ce qu’il tienne.</p>
-      </li>
-      <li>
-        <span>03</span>
-        <h3>Sac et déplacements</h3>
-        <p>La technique sous fatigue. C’est ici que se construit la condition physique propre à la boxe.</p>
-      </li>
-      <li>
-        <span>04</span>
-        <h3>Opposition</h3>
-        <p>En touche contrôlée, avec protections, et seulement quand le cadre le permet. Jamais dès le premier jour.</p>
-      </li>
-    </ol>
   </section>
 
   <section class="audiences surface-signal" aria-labelledby="audiences-title">
     <div class="shell">
       <div class="section-heading">
-        <p class="eyebrow">04 · Pour qui</p>
+        <p class="eyebrow">03 · Pour qui</p>
         <div>
-          <h2 id="audiences-title">La boxe n’a pas de public type.</h2>
-          <p class="section-heading__intro">Enfants dès 3 ans, adolescents, adultes débutants, femmes, pratiquants sans contact : cinq entrées possibles dans le même sport.</p>
+          <h2 id="audiences-title">Vous êtes forcément dans l’un de ces cas.</h2>
+          <p class="section-heading__intro">Quatre profils, quatre entrées dans le club. Aucune n’est réservée à ceux qui savent déjà.</p>
         </div>
       </div>
 
@@ -238,110 +226,123 @@ const faqSchema = {
     </div>
   </section>
 
-  <section class="practical shell" aria-labelledby="practical-title">
+  <section class="voices shell" aria-labelledby="voices-title">
     <div class="section-heading">
-      <p class="eyebrow">05 · Le matériel</p>
+      <p class="eyebrow">04 · Nos adhérents</p>
       <div>
-        <h2 id="practical-title">N’achetez rien tout de suite.</h2>
-        <p class="section-heading__intro">L’erreur la plus fréquente du débutant est d’acheter une paire de gants avant son premier cours. Voici l’ordre réel des achats.</p>
+        <h2 id="voices-title">Ce qu’ils en disent.</h2>
       </div>
     </div>
 
-    <div class="gear reveal">
-      <ol>
-        {GEAR.map((g) => (
-          <li>
-            <p class="gear__item">{g.item}</p>
-            <p class="gear__when">{g.when}</p>
-            <p class="gear__detail">{g.detail}</p>
-          </li>
-        ))}
-      </ol>
+    <div class="voices__grid sequence-reveal">
+      {TESTIMONIALS.map((t) => (
+        <figure class="voice">
+          <blockquote><p>{t.quote}</p></blockquote>
+          <figcaption>
+            <span class="voice__name">{t.name}</span>
+            <span class="voice__detail">{t.detail}</span>
+          </figcaption>
+        </figure>
+      ))}
     </div>
+  </section>
+
+  <section class="rounds shell" aria-labelledby="rounds-title">
+    <div class="section-heading">
+      <p class="eyebrow">05 · Une séance</p>
+      <div>
+        <h2 id="rounds-title">Ce qui se passe entre l’arrivée et le retour au calme.</h2>
+        <p class="section-heading__intro">Une heure trente, la même structure dans tous nos cours, du plus jeune au groupe compétition.</p>
+      </div>
+    </div>
+
+    <ol class="rounds__list sequence-reveal">
+      <li>
+        <span>01</span>
+        <h3>Échauffement</h3>
+        <p>Corde, mobilité articulaire, montée en température. Quinze minutes, jamais négociables.</p>
+      </li>
+      <li>
+        <span>02</span>
+        <h3>Technique</h3>
+        <p>Au miroir puis aux pattes d’ours. Un geste, décomposé, corrigé, répété jusqu’à ce qu’il tienne.</p>
+      </li>
+      <li>
+        <span>03</span>
+        <h3>Sac et déplacements</h3>
+        <p>La technique sous fatigue. C’est ici que se construit la condition physique propre à la boxe.</p>
+      </li>
+      <li>
+        <span>04</span>
+        <h3>Opposition</h3>
+        <p>En touche contrôlée, protections fournies, à intensité convenue. Jamais dès le premier jour.</p>
+      </li>
+    </ol>
   </section>
 
   <section class="local surface-dark" aria-labelledby="local-title">
     <div class="local__media" aria-hidden="true">
       <picture>
-        <source srcset="/images/salle-de-boxe-480.webp 480w, /images/salle-de-boxe-960.webp 960w, /images/salle-de-boxe-1600.webp 1600w" sizes="100vw" type="image/webp" />
-        <img src="/images/salle-de-boxe-1600.jpg" alt="" width="1600" height="919" loading="lazy" />
+        <source srcset="/images/ring-encadrement-480.webp 480w, /images/ring-encadrement-960.webp 960w, /images/ring-encadrement-1600.webp 1600w" sizes="100vw" type="image/webp" />
+        <img src="/images/ring-encadrement-1600.jpg" alt="" width="1600" height="1049" loading="lazy" />
       </picture>
     </div>
     <div class="local__inner shell">
       <div class="section-heading">
-        <p class="eyebrow eyebrow--signal">06 · S’y rendre</p>
+        <p class="eyebrow eyebrow--signal">06 · Venir nous voir</p>
         <div>
-          <h2 id="local-title">Blagnac, et tout le nord-ouest toulousain.</h2>
-          <p class="section-heading__intro">{AREA_SENTENCE}. Le secteur est l’un des mieux desservis de la métropole.</p>
+          <h2 id="local-title">Blagnac, au nord-ouest de Toulouse.</h2>
+          <p class="section-heading__intro">{CLUB.openLine} Laissez-nous vos coordonnées et nous vous envoyons l’adresse exacte et le créneau qui vous correspond.</p>
         </div>
       </div>
 
       <div class="local__grid">
         <ul class="local__transport reveal">
-          {LOCATION.transport.map((t) => (
+          {AREA.transport.map((t) => (
             <li><strong>{t.mode}</strong><span>{t.detail}</span></li>
           ))}
         </ul>
         <div class="prose reveal">
           <p>
-            Une <strong>salle de boxe à Blagnac</strong> attire au-delà de la commune : {NEARBY_SENTENCE} sont à moins de vingt minutes, et le tram met le centre de Toulouse à portée directe. C’est ce qui explique la densité de clubs sur le secteur <strong>Toulouse nord-ouest</strong>.
+            Nos adhérents viennent de {NEARBY_SENTENCE} autant que de Blagnac : le tram T1 et les lignes Tisséo mettent notre <strong>salle de boxe</strong> à moins de vingt minutes de tout le <strong>nord-ouest toulousain</strong>.
           </p>
-          <p>
-            Repères utiles pour situer les équipements : {LOCATION.landmarks.join(', ')}. {SEASON.closures}
+          <p class="local__contact">
+            <a href={`mailto:${CLUB.email}`}>{CLUB.email}</a>
           </p>
+          <p><a class="inline-link" href="/acces-contact/">Accès et horaires →</a></p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="partners shell" aria-labelledby="partners-title">
-    <div class="section-heading">
-      <p class="eyebrow">07 · Où s’inscrire</p>
-      <div>
-        <h2 id="partners-title">Les horaires et l’encadrement sont chez les clubs.</h2>
-        <p class="section-heading__intro">Cette page explique la pratique. Pour un planning, un tarif, un nom d’entraîneur ou une inscription, c’est au club de répondre.</p>
-      </div>
-    </div>
-
-    <div class="partners__list sequence-reveal">
-      {PARTNERS.map((club) => (
-        <article class="partner">
-          <div class="partner__head">
-            <p class="partner__short">{club.short}</p>
-            <h3><a href={club.url} rel="noopener">{club.name}</a></h3>
-            <p class="partner__area">{club.area}</p>
-          </div>
-          <div class="partner__body">
-            <p>{club.covers}</p>
-            <ul class="partner__links">
-              {club.links.map((l) => (
-                <li><a href={l.url} rel="noopener">{l.label} <span aria-hidden="true">→</span></a></li>
-              ))}
-            </ul>
-            <a class="button button--signal partner__cta" href={club.url} rel="noopener">Voir le club</a>
-          </div>
-        </article>
-      ))}
     </div>
   </section>
 
   <section class="signal surface-dark" id="essai">
     <div class="signal__inner shell">
       <div class="signal__heading">
-        <p class="eyebrow eyebrow--signal">Première séance</p>
-        <h2>Le premier cours ne s’achète pas.</h2>
+        <p class="eyebrow eyebrow--signal">Séance d’essai</p>
+        <h2>Recevez tout par e-mail.</h2>
         <p>
-          Presque tous les clubs du secteur proposent une séance d’essai. Venez en tenue de sport, avec une bouteille d’eau : gants et protections sont prêtés. Une question sur la pratique, l’âge d’entrée ou le déroulé d’un cours ? Écrivez-nous.
+          Laissez-nous votre e-mail et votre téléphone : nous vous envoyons les créneaux, l’adresse exacte et les modalités d’inscription pour le cours qui vous intéresse. Réponse sous 24 h, et votre première séance est gratuite.
+        </p>
+        <p class="signal__direct">
+          {CLUB.openLine}<br />
+          <a href={`mailto:${CLUB.email}`}>{CLUB.email}</a>
         </p>
       </div>
       <ContactForm />
     </div>
   </section>
 
+  <PartnerCta
+    eyebrow="07 · Notre réseau"
+    heading="Trop loin de Blagnac ? Allez voir nos partenaires."
+    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Même exigence, même accueil des débutants — si l’une d’elles est plus proche de chez vous, dites-leur que vous venez de notre part."
+    tone="light"
+  />
+
   <section class="closing-image" aria-label="Clôture visuelle">
     <picture>
       <source srcset="/images/frappe-au-sac-480.webp 480w, /images/frappe-au-sac-960.webp 960w, /images/frappe-au-sac-1600.webp 1600w" sizes="100vw" type="image/webp" />
-      <img src="/images/frappe-au-sac-1600.jpg" alt="Entraînement de boxe au sac de frappe dans une salle du nord-ouest toulousain" width="1600" height="959" loading="lazy" />
+      <img src="/images/frappe-au-sac-1600.jpg" alt="Entraînement au sac au Club de Boxe Blagnac" width="1600" height="959" loading="lazy" />
     </picture>
     <p class="closing-image__title reveal" aria-hidden="true">Blagnac<br /><em>garde haute.</em></p>
   </section>
@@ -1547,122 +1548,220 @@ const faqSchema = {
     }
   }
 
-  /* ---------------------------------------------------------------- *
-   * Où s'inscrire — the outbound handoff. This site answers "what is
-   * boxing and is it for me"; the clubs answer "when, where, how much".
-   * Styled as a destination, not a footnote, because it is the point.
-   * ---------------------------------------------------------------- */
-  .partners {
-    padding-block: clamp(4.5rem, 9vw, 9rem);
+
+  /* ---- Preuves chiffrées ---- */
+  .proof {
+    padding-block: clamp(2.5rem, 5vw, 4.5rem);
   }
 
-  .partners__list {
+  .proof__grid {
     display: grid;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    margin-top: clamp(2.5rem, 5vw, 4rem);
+    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    background: var(--line);
+    border: 1px solid var(--line);
   }
 
-  .partner {
-    display: grid;
-    gap: clamp(1.25rem, 3vw, 3rem);
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    padding: clamp(1.6rem, 3vw, 2.6rem);
-    border: 1px solid currentColor;
-    transition: background-color 260ms ease, color 260ms ease;
-  }
-
-  .partner:hover {
-    color: var(--paper-bright);
-    background: var(--ink);
-  }
-
-  .partner__short {
-    color: var(--signal);
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-  }
-
-  .partner h3 {
-    margin-top: 0.6rem;
-    font-size: clamp(1.5rem, 3vw, 2.4rem);
-    font-variation-settings: 'wdth' 84, 'wght' 800;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-  }
-
-  .partner h3 a {
-    text-decoration: none;
-  }
-
-  .partner h3 a:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
-  }
-
-  .partner__area {
-    margin-top: 0.7rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.05em;
-    line-height: 1.7;
-    opacity: 0.68;
-    text-transform: uppercase;
-  }
-
-  .partner__body {
+  .proof__item {
     display: grid;
     align-content: start;
-    gap: 1.35rem;
+    gap: 0.3rem;
+    padding: clamp(1.2rem, 2.4vw, 2rem);
+    background: var(--paper);
   }
 
-  .partner__body > p {
-    max-width: 58ch;
-    font-size: 1rem;
-    line-height: 1.55;
-  }
-
-  .partner__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.5rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .partner__links a {
-    display: inline-flex;
-    gap: 0.4rem;
-    align-items: baseline;
+  .proof__item dt {
+    color: var(--signal);
     font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.05em;
-    text-decoration: none;
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
   }
 
-  .partner__links a span {
-    transition: transform 180ms ease;
+  .proof__figure {
+    margin: 0;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    font-variation-settings: 'wdth' 84, 'wght' 820;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
   }
 
-  .partner__links a:hover span {
-    transform: translateX(0.35rem);
+  .proof__detail {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    opacity: 0.75;
   }
 
-  .partner__links a:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
+  /* ---- Bande photo ---- */
+  .gallery-band {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: 1fr 1fr;
+    background: var(--line);
   }
 
-  .partner__cta {
-    justify-self: start;
+  .gallery-band figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .gallery-band img {
+    width: 100%;
+    height: clamp(16rem, 34vw, 30rem);
+    object-fit: cover;
+    filter: grayscale(0.72) contrast(1.1) brightness(0.82);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 500ms ease;
+  }
+
+  .gallery-band figure:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0.3) contrast(1.12) brightness(0.92);
+  }
+
+  .gallery-band figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.9rem 1.1rem;
+    color: var(--paper-bright);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Photo par cours ---- */
+  .discipline {
+    grid-template-columns: 3.5rem minmax(0, 1.35fr) minmax(0, 0.85fr);
+    align-items: start;
+  }
+
+  .discipline__media {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .discipline__media img {
+    width: 100%;
+    height: clamp(11rem, 18vw, 16rem);
+    object-fit: cover;
+    filter: grayscale(0.7) contrast(1.1) brightness(0.85);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 500ms ease;
+  }
+
+  .discipline:hover .discipline__media img {
+    transform: scale(1.05);
+    filter: grayscale(0.2) brightness(0.95);
+  }
+
+  /* ---- Témoignages ---- */
+  .voices {
+    padding-block: clamp(4rem, 8vw, 8rem);
+  }
+
+  .voices__grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .voice {
+    display: grid;
+    align-content: space-between;
+    gap: 1.6rem;
+    margin: 0;
+    padding: clamp(1.5rem, 2.8vw, 2.3rem);
+    background: var(--paper);
+  }
+
+  .voice blockquote {
+    margin: 0;
+  }
+
+  .voice blockquote p {
+    font-size: clamp(1rem, 1.7vw, 1.2rem);
+    line-height: 1.45;
+  }
+
+  .voice blockquote p::before {
+    content: '“';
+    color: var(--signal);
+    font-size: 1.6em;
+    line-height: 0;
+    vertical-align: -0.28em;
+  }
+
+  .voice figcaption {
+    display: grid;
+    gap: 0.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .voice__name {
+    font-variation-settings: 'wdth' 90, 'wght' 720;
+    letter-spacing: -0.02em;
+  }
+
+  .voice__detail {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .local__contact {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    line-height: 2;
+  }
+
+  .inline-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-underline-offset: 0.3em;
+  }
+
+  @media (max-width: 60rem) {
+    .discipline {
+      grid-template-columns: 3rem 1fr;
+    }
+
+    .discipline__media {
+      grid-column: 2;
+    }
   }
 
   @media (max-width: 52rem) {
-    .partner {
+    .gallery-band {
       grid-template-columns: 1fr;
     }
+
+    .discipline {
+      grid-template-columns: 1fr;
+    }
+
+    .discipline__media {
+      grid-column: 1;
+    }
+  }
+
+  .discipline h3 a {
+    text-decoration: none;
+  }
+
+  .discipline h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
   }
 </style>
 

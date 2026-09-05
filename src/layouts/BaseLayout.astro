@@ -8,7 +8,9 @@ import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import FlightLine from '@/components/FlightLine.astro';
 import { SITE, absoluteUrl } from '@/data/site';
+import { GEO } from '@/data/seo-map';
 import { ALL_KEYWORDS, LOCATION } from '@/data/seo-map';
+import { buildGraph } from '@/data/schema';
 
 interface Props {
   title: string;
@@ -16,8 +18,15 @@ interface Props {
   pathname?: string;
   image?: string;
   imageAlt?: string;
-  pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'FAQPage';
+  pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'FAQPage' | 'CollectionPage';
+  /** Extra nodes merged into this page's @graph (HowTo, ItemList…). */
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Emit the Course + glossary reference layer on this page. */
+  withCourses?: boolean;
+  /** Emit the FAQ question nodes on this page. */
+  withFaq?: boolean;
+  /** CSS selectors a voice assistant should read aloud. */
+  speakable?: string[];
   noindex?: boolean;
   /** Tone of the first block on the page, so the header renders with correct
    *  contrast before the surface tracker runs. */
@@ -39,6 +48,9 @@ const {
   schema,
   noindex = false,
   topTone = 'light',
+  withCourses = false,
+  withFaq = false,
+  speakable,
   preloadImage
 } = Astro.props;
 
@@ -48,48 +60,19 @@ const robots = SITE.indexable && !noindex
   ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
   : 'noindex,nofollow,noarchive,nosnippet';
 
-/* No LocalBusiness / SportsOrganization graph: this site describes boxing in
-   an area, it is not a venue. Emitting an address, phone or opening hours
-   here would assert a place that does not exist. */
-const baseSchema = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': `${SITE.url}/#website`,
-    url: `${SITE.url}/`,
-    name: SITE.name,
-    inLanguage: SITE.lang,
-    description: SITE.description
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': pageType,
-    '@id': `${canonical}#webpage`,
-    url: canonical,
-    name: title,
-    description,
-    inLanguage: SITE.lang,
-    dateModified: SITE.lastModified,
-    isPartOf: { '@id': `${SITE.url}/#website` }
-  }
-];
-
-/* BreadcrumbList on every page below the root: cheap, and it is what search
-   results render under the title. */
-const crumbs = pathname === '/' ? null : {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/` },
-    { '@type': 'ListItem', position: 2, name: title.split(/[—|]/)[0].trim(), item: canonical }
-  ]
-};
-
-const schemas = [
-  ...baseSchema,
-  ...(crumbs ? [crumbs] : []),
-  ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])
-];
+/* One consolidated @graph per page. See src/data/schema.ts for why the nodes
+   cross-reference by @id and why every `sameAs` was resolved against the live
+   Wikipedia API rather than written from memory. */
+const graph = buildGraph({
+  pathname,
+  title,
+  description,
+  pageType,
+  speakable,
+  withCourses,
+  withFaq,
+  extra: schema ? (Array.isArray(schema) ? schema : [schema]) : []
+});
 ---
 
 <!doctype html>
@@ -115,18 +98,44 @@ const schemas = [
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={ALL_KEYWORDS.join(', ')} />
-    {/* Geo signals. These describe the territory the content is about — they
-        do not assert a business premises, which would need a real address. */}
+    <link rel="canonical" href={canonical} />
+
+    {/* Language targeting. One locale today, but declaring it (plus x-default)
+        stops search engines guessing, and makes adding a second trivial. */}
+    <link rel="alternate" hreflang="fr-FR" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+
+    {/* Geo signals. These describe the territory the CONTENT is about. They are
+        deliberately not a LocalBusiness address: this site is a guide to an
+        area, not a venue, and asserting a premises would be a false claim. */}
     <meta name="geo.region" content={`FR-${LOCATION.departmentCode}`} />
     <meta name="geo.placename" content={`${LOCATION.city}, ${LOCATION.department}`} />
-    <meta name="ICBM" content="43.6353, 1.3897" />
-    <meta name="geo.position" content="43.6353;1.3897" />
+    <meta name="geo.position" content={`${GEO.lat};${GEO.lon}`} />
+    <meta name="ICBM" content={`${GEO.lat}, ${GEO.lon}`} />
+
     <meta name="robots" content={robots} />
     <meta name="googlebot" content={robots} />
+    <meta name="bingbot" content={robots} />
+
     <meta name="author" content="Eddy Etame Etame" />
     <meta name="technical-lead" content="Eddy Etame Etame" />
-    <meta name="theme-color" content="#141411" />
-    <link rel="canonical" href={canonical} />
+    <meta name="publisher" content={SITE.name} />
+    <meta name="rating" content="general" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
+
+    {/* Dublin Core: still read by library, archive and several AI crawlers. */}
+    <meta name="DC.language" content="fr-FR" />
+    <meta name="DC.title" content={title} />
+    <meta name="DC.description" content={description} />
+    <meta name="DC.subject" content="Boxe anglaise, Blagnac, Haute-Garonne" />
+    <meta name="DC.coverage" content={`${LOCATION.city}, ${LOCATION.department}, France`} />
+    <meta name="DC.date.modified" content={SITE.lastModified} />
+
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8e5dc" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141411" />
+    <meta name="color-scheme" content="light dark" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {preloadImage && (
       <link
@@ -141,6 +150,7 @@ const schemas = [
     )}
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="author" href="/humans.txt" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="Informations pour agents" />
     <link rel="alternate" type="text/plain" href="/ai.txt" title="AI policy" />
 
@@ -151,15 +161,25 @@ const schemas = [
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:updated_time" content={SITE.lastModified} />
+    <meta property="article:modified_time" content={SITE.lastModified} />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
-    {schemas.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
+    {/* Photographer credit travels with the page, not only in the visible UI. */}
+    <meta name="image:credit" content="Axel Derewiany" />
+    <meta name="copyright" content="Photographies © Axel Derewiany" />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(graph)} />
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>

@@ -1,0 +1,172 @@
+---
+/**
+ * The partner network, defined once.
+ *
+ * These are other gyms we work with across the Toulouse area — a recommendation
+ * from one club to another, never a referral for information this site lacks.
+ * The framing matters: "if this one is closer to you, go and see them" reads as
+ * a club with a network; "ask them, they know" reads as a club that does not
+ * exist.
+ */
+import { PARTNERS } from '@/data/club';
+
+interface Props {
+  /** Eyebrow above the heading, so each page frames the handoff in context. */
+  eyebrow?: string;
+  /** Headline. Should name what the visitor gets by clicking through. */
+  heading: string;
+  /** One sentence of setup. */
+  intro: string;
+  /** Ink surface by default; `light` sits on paper. */
+  tone?: 'dark' | 'light';
+}
+
+const { eyebrow = 'Notre réseau', heading, intro, tone = 'dark' } = Astro.props;
+---
+
+<section class:list={['partner-cta', tone === 'dark' && 'surface-dark']} aria-labelledby="partner-cta-title">
+  <div class="shell">
+    <div class="section-heading">
+      <p class="eyebrow eyebrow--signal">{eyebrow}</p>
+      <div>
+        <h2 id="partner-cta-title">{heading}</h2>
+        <p class="section-heading__intro">{intro}</p>
+      </div>
+    </div>
+
+    <div class="partner-cta__list sequence-reveal">
+      {PARTNERS.map((club) => (
+        <article class="partner-cta__card">
+          <div class="partner-cta__head">
+            <p class="partner-cta__short">{club.short}</p>
+            <h3><a href={club.url} rel="noopener">{club.name}</a></h3>
+            <p class="partner-cta__area">{club.area}</p>
+          </div>
+          <div class="partner-cta__body">
+            <p>{club.covers}</p>
+            <ul class="partner-cta__links">
+              {club.links.map((l) => (
+                <li><a href={l.url} rel="noopener">{l.label} <span aria-hidden="true">→</span></a></li>
+              ))}
+            </ul>
+            <a class="button button--signal partner-cta__button" href={club.url} rel="noopener">Voir leur club</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .partner-cta {
+    padding-block: clamp(4rem, 8vw, 8rem);
+  }
+
+  .partner-cta__list {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .partner-cta__card {
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 3rem);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    padding: clamp(1.6rem, 3vw, 2.6rem);
+    border: 1px solid var(--line);
+    transition: border-color 260ms ease;
+  }
+
+  .partner-cta__card:hover {
+    border-color: currentColor;
+  }
+
+  .partner-cta__short {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  .partner-cta__card h3 {
+    margin-top: 0.6rem;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-variation-settings: 'wdth' 84, 'wght' 800;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+
+  .partner-cta__card h3 a {
+    text-decoration: none;
+  }
+
+  .partner-cta__card h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .partner-cta__area {
+    margin-top: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+    opacity: 0.68;
+    text-transform: uppercase;
+  }
+
+  .partner-cta__body {
+    display: grid;
+    align-content: start;
+    gap: 1.35rem;
+  }
+
+  .partner-cta__body > p {
+    max-width: 58ch;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .partner-cta__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .partner-cta__links a {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .partner-cta__links a span {
+    transition: transform 180ms ease;
+  }
+
+  .partner-cta__links a:hover span {
+    transform: translateX(0.35rem);
+  }
+
+  .partner-cta__links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .partner-cta__button {
+    justify-self: start;
+  }
+
+  @media (max-width: 52rem) {
+    .partner-cta__card {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

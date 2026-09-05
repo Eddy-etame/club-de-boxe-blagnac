@@ -1,4 +1,4 @@
-import { AREA } from './club';
+import { AREA, DISCIPLINES } from './club';
 
 const fallbackUrl = 'https://club-de-boxe-blagnac.invalid';
 const configuredUrl = import.meta.env.PUBLIC_SITE_URL?.trim();
@@ -15,9 +15,8 @@ export const SITE = {
   name: 'Club de Boxe Blagnac',
   shortName: 'CB / BLG',
   url: (configuredUrl || fallbackUrl).replace(/\/$/, ''),
-  /* Both locks stay engaged until the owner confirms the domain and the
-     outbound club links. See the header of club.ts for what this site is
-     and, deliberately, is not. */
+  /* Indexing stays locked until the final domain is confirmed. Flip both
+     env vars together; nothing else needs to change. */
   indexable:
     import.meta.env.PUBLIC_SITE_INDEXABLE === 'true'
     && hasConfirmedUrl
@@ -27,21 +26,24 @@ export const SITE = {
   lastModified: '2026-09-04',
   area: `${AREA.city}, ${AREA.position}`,
   description:
-    'Guide de la boxe à Blagnac, au nord-ouest de Toulouse : disciplines, âges, déroulé d’une séance, budget et matériel pour débuter.',
+    'Club de boxe anglaise à Blagnac (31700) depuis 2011. Six cours de l’éveil dès 3 ans au groupe compétition, 21 créneaux par semaine, séance d’essai gratuite.',
   socialImage: '/images/og-club-boxe-blagnac.jpg'
 } as const;
 
 export const NAV = [
   { href: '/', label: 'Le club' },
   { href: '/cours-de-boxe-blagnac/', label: 'Les cours' },
-  { href: '/premiere-seance/', label: 'Première séance' },
+  { href: '/premiere-seance/', label: 'Séance d’essai' },
   { href: '/faq/', label: 'Questions' },
-  { href: '/acces-contact/', label: 'Contact' }
+  { href: '/acces-contact/', label: 'Accès & contact' }
 ] as const;
+
+export const COURSE_PAGES = DISCIPLINES.map((d) => `/cours-de-boxe-blagnac/${d.slug}/`);
 
 export const PUBLIC_PAGES = [
   '/',
   '/cours-de-boxe-blagnac/',
+  ...COURSE_PAGES,
   '/premiere-seance/',
   '/faq/',
   '/acces-contact/',

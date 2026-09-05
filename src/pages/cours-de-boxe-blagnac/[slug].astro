@@ -1,0 +1,416 @@
+---
+/**
+ * One page per course.
+ *
+ * Six pages instead of six anchors on a single page. Each one targets its own
+ * query cluster — "boxe enfant Blagnac" and "cardio boxe Blagnac" are not the
+ * same search and should not compete for the same URL — and each carries its
+ * own title, description, Course graph and internal links. This is the single
+ * biggest structural SEO gain available on a site this size.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PartnerCta from '@/components/PartnerCta.astro';
+import ContactForm from '@/components/ContactForm.astro';
+import { CLUB, DISCIPLINES, TESTIMONIALS } from '@/data/club';
+import { absoluteUrl } from '@/data/site';
+
+export function getStaticPaths() {
+  return DISCIPLINES.map((discipline) => ({
+    params: { slug: discipline.slug },
+    props: { discipline }
+  }));
+}
+
+const { discipline } = Astro.props;
+const url = `/cours-de-boxe-blagnac/${discipline.slug}/`;
+
+/** Per-course search framing, so no two pages chase the same query. */
+const SEO: Record<string, { title: string; description: string; intent: string }> = {
+  'eveil-baby-boxing': {
+    title: 'Baby boxing à Blagnac — éveil dès 3 ans',
+    description:
+      'Éveil et baby boxing dès 3 ans au Club de Boxe Blagnac : motricité, équilibre, jeux de réaction, aucun contact. Deux séances par semaine, première séance gratuite.',
+    intent: 'boxe enfant 3 ans, éveil sportif, baby boxing'
+  },
+  'boxe-educative': {
+    title: 'Boxe éducative enfant à Blagnac — 7 à 12 ans',
+    description:
+      'Boxe éducative pour les 7-12 ans à Blagnac : touche légère, protections complètes, aucune recherche de puissance. Trois séances par semaine, première séance gratuite.',
+    intent: 'boxe enfant Blagnac, boxe éducative, boxe sans KO'
+  },
+  'boxe-ados': {
+    title: 'Boxe ados à Blagnac — cours 13 à 17 ans',
+    description:
+      'Cours de boxe pour adolescents de 13 à 17 ans à Blagnac : intensité progressive, cadre strict sur les protections. Trois séances par semaine, première séance gratuite.',
+    intent: 'boxe adolescent Blagnac, boxe 13 ans, boxe collège lycée'
+  },
+  'boxe-anglaise-loisir': {
+    title: 'Boxe anglaise loisir à Blagnac — adultes débutants',
+    description:
+      'Cours de boxe anglaise loisir à Blagnac pour adultes, débutants bienvenus : technique, condition physique, touche contrôlée. Cinq séances par semaine, midi et soir.',
+    intent: 'boxe adulte Blagnac, boxe débutant, boxe loisir'
+  },
+  'boxe-competition': {
+    title: 'Boxe compétition à Blagnac — sparring et rencontres',
+    description:
+      'Groupe compétition de boxe anglaise à Blagnac : sparring hebdomadaire encadré, calendrier de rencontres, suivi individuel. Accès sur avis de l’encadrement.',
+    intent: 'boxe compétition Blagnac, sparring, combat amateur'
+  },
+  'cardio-boxe': {
+    title: 'Cardio boxe à Blagnac — sans contact ni opposition',
+    description:
+      'Cardio boxe à Blagnac : déplacements, enchaînements, sac et circuits de renforcement, sans aucune opposition ni contact. Quatre séances par semaine dont deux le midi.',
+    intent: 'cardio boxe Blagnac, fitness boxe, boxe sans contact'
+  }
+};
+
+const seo = SEO[discipline.slug];
+const others = DISCIPLINES.filter((d) => d.slug !== discipline.slug);
+const voice = TESTIMONIALS[DISCIPLINES.indexOf(discipline) % TESTIMONIALS.length];
+const largest = discipline.image.widths[discipline.image.widths.length - 1];
+
+const courseSchema = {
+  '@type': 'Course',
+  '@id': `${absoluteUrl(url)}#course`,
+  name: discipline.name,
+  url: absoluteUrl(url),
+  description: discipline.body,
+  abstract: discipline.summary,
+  inLanguage: 'fr-FR',
+  teaches: discipline.session,
+  typicalAgeRange: discipline.ages,
+  educationalLevel: discipline.contact,
+  courseMode: 'onsite',
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'onsite',
+    courseSchedule: { '@type': 'Schedule', description: discipline.rhythm },
+    inLanguage: 'fr-FR'
+  }
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  pathname={url}
+  topTone="dark"
+  schema={courseSchema}
+  speakable={['.course-page__summary', '.course-page__body']}
+  imageAlt={discipline.image.alt}
+>
+  <header class="page-hero course-page-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">{discipline.ages} · {discipline.contact}</p>
+        <p class="mono">{CLUB.openShort}</p>
+      </div>
+      <h1>{discipline.name}</h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead course-page__summary">{discipline.summary}</p>
+        <p class="page-hero__note">{discipline.rhythm}. Première séance gratuite, gants et protections prêtés.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="course-page shell">
+    <div class="course-page__grid">
+      <div class="prose course-page__body">
+        <p>{discipline.body}</p>
+        <p>
+          Ce cours fait partie des <a href="/cours-de-boxe-blagnac/">six cours du Club de Boxe Blagnac</a>, ouvert depuis {CLUB.founded} au nord-ouest de Toulouse. {CLUB.openLine}
+        </p>
+      </div>
+
+      <figure class="course-page__media reveal">
+        <picture>
+          <source
+            srcset={discipline.image.widths.map((w) => `/images/${discipline.image.file}-${w}.webp ${w}w`).join(', ')}
+            sizes="(max-width: 52rem) 92vw, 46vw"
+            type="image/webp"
+          />
+          <img src={`/images/${discipline.image.file}-${largest}.jpg`} alt={discipline.image.alt} width="1400" height="933" loading="eager" />
+        </picture>
+      </figure>
+    </div>
+
+    <div class="course-page__facts">
+      <div><p class="course-page__k">Âges</p><p class="course-page__v">{discipline.ages}</p></div>
+      <div><p class="course-page__k">Contact</p><p class="course-page__v">{discipline.contact}</p></div>
+      <div><p class="course-page__k">Rythme</p><p class="course-page__v">{discipline.rhythm}</p></div>
+      <div><p class="course-page__k">Essai</p><p class="course-page__v">Gratuit, matériel prêté</p></div>
+    </div>
+  </section>
+
+  <section class="course-page-session surface-dark" aria-labelledby="session-title">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">Le déroulé</p>
+        <div>
+          <h2 id="session-title">Une séance, dans l’ordre.</h2>
+          <p class="section-heading__intro">{discipline.rhythm}. L’ordre compte autant que le contenu.</p>
+        </div>
+      </div>
+      <ol class="course-page-session__list sequence-reveal">
+        {discipline.session.map((step) => <li>{step}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="course-page-voice shell">
+    <figure class="voice voice--wide reveal">
+      <blockquote><p>{voice.quote}</p></blockquote>
+      <figcaption>
+        <span class="voice__name">{voice.name}</span>
+        <span class="voice__detail">{voice.detail}</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="course-page-others shell" aria-labelledby="others-title">
+    <div class="section-heading">
+      <p class="eyebrow">Les autres cours</p>
+      <div><h2 id="others-title">Ce n’est peut-être pas le bon.</h2></div>
+    </div>
+    <ul class="course-page-others__list sequence-reveal">
+      {others.map((d) => (
+        <li>
+          <a href={`/cours-de-boxe-blagnac/${d.slug}/`}>
+            <span class="course-page-others__name">{d.name}</span>
+            <span class="course-page-others__meta">{d.ages}</span>
+            <span class="course-page-others__sum">{d.summary}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="signal surface-dark" id="essai">
+    <div class="signal__inner shell">
+      <div class="signal__heading">
+        <p class="eyebrow eyebrow--signal">{discipline.name}</p>
+        <h2>Recevez les créneaux.</h2>
+        <p>
+          Laissez votre e-mail et votre téléphone : nous vous envoyons les créneaux de ce cours, l’adresse exacte et les modalités d’inscription. Réponse sous 24 h, première séance gratuite.
+        </p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+
+  <PartnerCta
+    heading={'Trop loin de Blagnac ?'}
+    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+    tone="light"
+  />
+</BaseLayout>
+
+<style>
+  .course-page-hero h1 {
+    max-width: 14ch;
+  }
+
+  .course-page {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .course-page__grid {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
+  }
+
+  .course-page__body p {
+    font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+    line-height: 1.6;
+  }
+
+  .course-page__media {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .course-page__media img {
+    width: 100%;
+    height: clamp(14rem, 26vw, 24rem);
+    object-fit: cover;
+    filter: grayscale(0.66) contrast(1.1) brightness(0.88);
+    transition: transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 500ms ease;
+  }
+
+  .course-page__media:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0.15) brightness(0.98);
+  }
+
+  .course-page__facts {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .course-page__facts > div {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.2rem 1.1rem;
+    background: var(--paper);
+  }
+
+  .course-page__k {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .course-page__v {
+    font-size: 0.95rem;
+    font-variation-settings: 'wdth' 90, 'wght' 640;
+    line-height: 1.3;
+  }
+
+  .course-page-session {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .course-page-session__list {
+    display: grid;
+    gap: 0;
+    margin: clamp(2rem, 4vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    border-top: 1px solid var(--line);
+  }
+
+  .course-page-session__list li {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2.5rem 1fr;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+  }
+
+  .course-page-session__list li::before {
+    content: counter(step, decimal-leading-zero);
+    counter-increment: step;
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+  }
+
+  .course-page-voice {
+    padding-block: clamp(3rem, 6vw, 6rem);
+  }
+
+  .voice--wide {
+    display: grid;
+    gap: 1.6rem;
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: clamp(1.6rem, 3vw, 2.6rem);
+    border: 1px solid var(--line);
+  }
+
+  .voice--wide blockquote {
+    margin: 0;
+  }
+
+  .voice--wide blockquote p {
+    font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+    font-variation-settings: 'wdth' 92, 'wght' 520;
+    line-height: 1.35;
+  }
+
+  .voice--wide blockquote p::before {
+    content: '“';
+    color: var(--signal);
+    font-size: 1.5em;
+    line-height: 0;
+    vertical-align: -0.28em;
+  }
+
+  .voice--wide figcaption {
+    display: grid;
+    gap: 0.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .voice__name {
+    font-variation-settings: 'wdth' 90, 'wght' 720;
+  }
+
+  .voice__detail {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .course-page-others {
+    padding-bottom: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .course-page-others__list {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    padding: 0;
+    list-style: none;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .course-page-others__list a {
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    height: 100%;
+    padding: clamp(1.2rem, 2.2vw, 1.8rem);
+    background: var(--paper);
+    text-decoration: none;
+    transition: background-color 220ms ease, color 220ms ease;
+  }
+
+  .course-page-others__list a:hover {
+    color: var(--paper-bright);
+    background: var(--ink);
+  }
+
+  .course-page-others__name {
+    font-size: clamp(1.05rem, 1.9vw, 1.4rem);
+    font-variation-settings: 'wdth' 88, 'wght' 760;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .course-page-others__meta {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .course-page-others__sum {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 52rem) {
+    .course-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

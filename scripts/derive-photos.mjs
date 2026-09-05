@@ -22,7 +22,19 @@ const WANTED = {
   'BC-079': ['shadow-boxing', [420, 900, 1400]],
   'BC-075': ['travail-aux-pattes', [420, 900, 1400]],
   'BC-028': ['salle-de-boxe', [480, 960, 1600]],
-  'BC-064': ['frappe-au-sac', [480, 960, 1600]]
+  'BC-064': ['frappe-au-sac', [480, 960, 1600]],
+  'BC-062': ['boxeuse-sac', [420, 900, 1400]],
+  'BC-067': ['renforcement-groupe', [480, 960, 1600]],
+  'BC-072': ['cours-debout-groupe', [480, 960, 1600]],
+  'BC-071': ['coaching-individuel', [420, 900, 1400]],
+  'BC-076': ['coin-de-ring', [420, 900, 1400]],
+  'BC-077': ['ring-encadrement', [480, 960, 1600]],
+  'BC-030': ['accueil-club', [420, 900, 1400]],
+  'BC-069': ['espace-renforcement', [420, 900, 1400]],
+  'BC-034': ['sparring-ring', [480, 960, 1600]],
+  'BC-021': ['cours-enfants', [420, 900, 1400]],
+  'BC-032': ['sparring-technique', [480, 960, 1600]],
+  'BC-080': ['conseil-coach', [420, 900, 1400]]
 };
 
 function parseCsvLine(line) {

@@ -11,5 +11,5 @@ This attribution is supplied by the project owner. It records repository roles a
 
 /* SITE */
 Language: French
-Status: General information resource on boxing in Blagnac; protected from indexing by default
+Status: Club de boxe anglaise a Blagnac depuis 2011; indexation verrouillee jusqu au domaine final
 Last major build: 2026-09-04

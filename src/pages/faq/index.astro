@@ -1,45 +1,65 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import PartnerCta from '@/components/PartnerCta.astro';
 import { launchFaq } from '@/data/seo';
-import { absoluteUrl } from '@/data/site';
+import { SHORT_ANSWERS } from '@/data/seo-map';
+import { CLUB } from '@/data/club';
 
-const title = 'Club de boxe Blagnac : questions sur le projet';
+const title = 'Questions fréquentes — Club de Boxe Blagnac';
 const description =
-  'Lieu, cours, planning, tarifs et inscriptions : les réponses disponibles sur le projet de club de boxe à Blagnac actuellement en préparation.';
+  'Où nous trouver, quels cours, à partir de quel âge, quel matériel, certificat médical, inscription : toutes les réponses sur le Club de Boxe Blagnac.';
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': `${absoluteUrl('/faq/')}#faq`,
-  mainEntity: launchFaq.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer }
-  }))
-};
 ---
 
-<BaseLayout {title} {description} pathname="/faq/" schema={faqSchema}
+<BaseLayout
+  {title}
+  {description}
+  pathname="/faq/"
+  pageType="FAQPage"
   topTone="dark"
+  withFaq
+  speakable={['.answers__item dt', '.answers__item dd', '.faq-list summary']}
+  imageAlt="Boxeuse en garde pendant un entraînement"
 >
   <header class="page-hero faq-hero">
     <div class="shell">
       <div class="page-hero__meta">
-        <p class="eyebrow eyebrow--signal">Questions · Réponses datées</p>
-        <p class="mono">Fiche 03 / Mise à jour 04.09.2026</p>
+        <p class="eyebrow eyebrow--signal">Questions fréquentes</p>
+        <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>Ce que l’on sait. <em>Et ce que l’on ne sait pas encore.</em></h1>
+      <h1>Les questions <em>qu’on se pose vraiment.</em></h1>
       <div class="page-hero__bottom">
-        <p class="page-hero__lead">Une FAQ utile ne remplit pas le silence. Elle sépare les faits, les intentions et les décisions en attente.</p>
-        <p class="page-hero__note">Les réponses ci-dessous décrivent la préversion du projet au 4 septembre 2026.</p>
+        <p class="page-hero__lead">Accès, cours, âges, matériel, certificat médical, inscription : les réponses, sans détour.</p>
+        <p class="page-hero__note">Une question qui n’est pas ici&nbsp;? Le formulaire est en bas de page, on répond sous 24&nbsp;h.</p>
       </div>
     </div>
   </header>
 
+  <section class="answers surface-dark" aria-labelledby="answers-title">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow eyebrow--signal">L’essentiel</p>
+        <div>
+          <h2 id="answers-title">L’essentiel en six phrases.</h2>
+          <p class="section-heading__intro">Si vous ne lisez rien d’autre, lisez ceci.</p>
+        </div>
+      </div>
+
+      <dl class="answers__list sequence-reveal">
+        {SHORT_ANSWERS.map((item) => (
+          <div class="answers__item">
+            <dt>{item.q}</dt>
+            <dd>{item.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
   <section class="faq-section shell page-copy">
     <div class="faq-section__heading">
-      <p class="eyebrow">Questions fréquentes</p>
-      <p>Toutes les réponses changées seront répercutées sur les pages concernées et sur les interfaces destinées aux moteurs et agents.</p>
+      <p class="eyebrow">{launchFaq.length} réponses</p>
+      <p>Tout ce qu’on nous demande le plus souvent, dans l’ordre. Si vous cherchez autre chose, le formulaire et le téléphone sont en bas de page.</p>
     </div>
     <div class="faq-list">
       {launchFaq.map((item, index) => (
@@ -51,50 +71,214 @@ const faqSchema = {
     </div>
   </section>
 
-  <section class="faq-next surface-signal">
-    <div class="faq-next__inner shell">
-      <p class="eyebrow">Une question absente&nbsp;?</p>
-      <h2>Ajoutez-la au prochain round.</h2>
-      <a class="button" href="/acces-contact/#contact">Écrire au projet</a>
+  <section class="faq-band" aria-label="Au club">
+    <figure>
+      <picture>
+        <source srcset="/images/coaching-individuel-420.webp 420w, /images/coaching-individuel-900.webp 900w, /images/coaching-individuel-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
+        <img src="/images/coaching-individuel-1400.jpg" alt="Un entraîneur corrige la garde d’une adhérente" width="1400" height="933" loading="lazy" />
+      </picture>
+      <figcaption>Correction à chaque séance</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/images/renforcement-groupe-480.webp 480w, /images/renforcement-groupe-960.webp 960w, /images/renforcement-groupe-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
+        <img src="/images/renforcement-groupe-1600.jpg" alt="Séance de renforcement collectif au club" width="1600" height="895" loading="lazy" />
+      </picture>
+      <figcaption>Renforcement collectif</figcaption>
+    </figure>
+  </section>
+
+  <section class="faq-links shell" aria-labelledby="faq-links-title">
+    <div class="section-heading">
+      <p class="eyebrow">Aller plus loin</p>
+      <div>
+        <h2 id="faq-links-title">Trois pages pour compléter.</h2>
+      </div>
+    </div>
+    <div class="faq-links__grid sequence-reveal">
+      <a href="/cours-de-boxe-blagnac/">
+        <span class="faq-links__n">01</span>
+        <span class="faq-links__t">Nos six cours</span>
+        <span class="faq-links__d">Éveil, éducative, ados, loisir, compétition, cardio — le contenu réel de chaque séance.</span>
+      </a>
+      <a href="/premiere-seance/">
+        <span class="faq-links__n">02</span>
+        <span class="faq-links__t">Votre séance d’essai</span>
+        <span class="faq-links__d">Gratuite, matériel prêté. Ce qu’il faut apporter et ce qui va se passer.</span>
+      </a>
+      <a href="/acces-contact/">
+        <span class="faq-links__n">03</span>
+        <span class="faq-links__t">Venir au club</span>
+        <span class="faq-links__d">Adresse, tram, bus, parking : comment nous rejoindre depuis tout le nord-ouest toulousain.</span>
+      </a>
     </div>
   </section>
+
+  <PartnerCta
+    eyebrow="Notre réseau"
+    heading="Trop loin de Blagnac ?"
+    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+  />
 </BaseLayout>
 
 <style>
   .faq-hero h1 {
-    max-width: 12ch;
-    font-size: clamp(3.4rem, 9vw, 9.5rem);
+    max-width: 13ch;
+    font-size: clamp(3.2rem, 8.5vw, 9rem);
+  }
+
+  .faq-section {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
   }
 
   .faq-section__heading {
     display: grid;
     gap: 2rem;
     grid-template-columns: 0.6fr 1.4fr;
-    margin-bottom: clamp(3rem, 7vw, 7rem);
+    margin-bottom: clamp(2.5rem, 6vw, 6rem);
   }
 
-  .faq-section__heading > p:last-child {
-    max-width: 43rem;
-    font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  .faq-section__heading p:last-child {
+    max-width: 62ch;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
-  .faq-next {
-    padding-block: clamp(5rem, 10vw, 10rem);
+  .faq-links {
+    padding-bottom: clamp(4rem, 8vw, 8rem);
   }
 
-  .faq-next__inner {
+  .faq-links__grid {
     display: grid;
-    gap: 2rem;
-    justify-items: start;
+    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    margin-top: clamp(2rem, 4vw, 3rem);
+    background: var(--line);
+    border: 1px solid var(--line);
   }
 
-  .faq-next h2 {
-    max-width: 11ch;
-    font-size: clamp(3.2rem, 8vw, 8rem);
+  .faq-links__grid a {
+    display: grid;
+    align-content: start;
+    gap: 0.55rem;
+    padding: clamp(1.3rem, 2.4vw, 2rem);
+    background: var(--paper);
+    text-decoration: none;
+    transition: background-color 220ms ease, color 220ms ease;
   }
 
-  @media (max-width: 42rem) {
+  .faq-links__grid a:hover {
+    color: var(--paper-bright);
+    background: var(--ink);
+  }
+
+  .faq-links__n {
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+  }
+
+  .faq-links__t {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-variation-settings: 'wdth' 88, 'wght' 760;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .faq-links__d {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    opacity: 0.78;
+  }
+
+  @media (max-width: 46rem) {
     .faq-section__heading {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .answers {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .answers__list {
+    display: grid;
+    gap: 0;
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .answers__item {
+    display: grid;
+    gap: 0.5rem clamp(1.5rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    padding-block: clamp(1.1rem, 2.2vw, 1.8rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .answers__item dt {
+    font-size: clamp(1rem, 1.9vw, 1.45rem);
+    font-variation-settings: 'wdth' 88, 'wght' 720;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .answers__item dd {
+    max-width: 60ch;
+    margin: 0;
+    color: var(--mist);
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 52rem) {
+    .answers__item {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .faq-band {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: 1fr 1fr;
+    background: var(--line);
+  }
+
+  .faq-band figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .faq-band img {
+    width: 100%;
+    height: clamp(15rem, 30vw, 26rem);
+    object-fit: cover;
+    filter: grayscale(0.7) contrast(1.1) brightness(0.82);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 500ms ease;
+  }
+
+  .faq-band figure:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0.25) brightness(0.94);
+  }
+
+  .faq-band figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.9rem 1.1rem;
+    color: var(--paper-bright);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 52rem) {
+    .faq-band {
       grid-template-columns: 1fr;
     }
   }

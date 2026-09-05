@@ -38,7 +38,7 @@ const currentPath = Astro.url.pathname;
           ))
         }
       </ul>
-      <p class="site-nav__meta" aria-hidden="true">Blagnac · Toulouse nord-ouest<br />Signal local / Préversion</p>
+      <p class="site-nav__meta" aria-hidden="true">Blagnac · Toulouse nord-ouest<br />Lun – Sam · 10h – 21h30</p>
     </nav>
   </div>
 </header>
@@ -483,18 +483,24 @@ const currentPath = Astro.url.pathname;
     }
   };
 
-  let queued = false;
-  const schedule = () => {
-    if (queued) return;
-    queued = true;
-    window.requestAnimationFrame(() => {
-      applyTone();
-      queued = false;
-    });
+  /* Driven by the scroll event itself rather than requestAnimationFrame.
+     rAF is throttled to zero in a backgrounded or non-compositing tab, and
+     the header's legibility must not depend on it — a stale tone means ink
+     text on an ink section, i.e. an invisible header. Scroll events still
+     fire, and seven rect reads with no interleaved writes cost nothing. */
+  let lastY = -1;
+
+  const onScroll = () => {
+    const y = window.scrollY;
+    if (Math.abs(y - lastY) < 4) return;
+    lastY = y;
+    applyTone();
   };
 
   applyTone();
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
-  window.addEventListener('load', schedule);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', applyTone, { passive: true });
+  window.addEventListener('load', applyTone);
+  /* Coming back to a backgrounded tab: re-sync in case anything moved. */
+  document.addEventListener('visibilitychange', applyTone);
 </script>

@@ -1,48 +1,105 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ContactForm from '@/components/ContactForm.astro';
+import PartnerCta from '@/components/PartnerCta.astro';
+import { NEARBY_SENTENCE } from '@/data/seo-map';
+import { CLUB, AREA } from '@/data/club';
 
-const title = 'Contact — projet de club de boxe à Blagnac';
+const title = 'Accès et contact — Club de Boxe Blagnac (31700)';
 const description =
-  'Contactez le projet de club de boxe à Blagnac pour être informé du lieu, des cours, du planning et des inscriptions après validation.';
+  'Club de boxe à Blagnac (31700), ouvert du lundi au samedi de 10h à 21h30. Tram T1 et bus Tisséo. Laissez vos coordonnées, on vous envoie tout.';
 ---
 
-<BaseLayout {title} {description} pathname="/acces-contact/" pageType="ContactPage"
+<BaseLayout
+  {title}
+  {description}
+  pathname="/acces-contact/"
+  pageType="ContactPage"
   topTone="dark"
+  imageAlt="Échange technique entre deux boxeuses avec protections"
+  speakable={['#access-title', '.access__mode', '.access__detail']}
 >
   <header class="page-hero contact-hero">
     <div class="shell">
       <div class="page-hero__meta">
-        <p class="eyebrow eyebrow--signal">Accès · Contact</p>
-        <p class="mono">Fiche 04 / Aucun déplacement sans adresse confirmée</p>
+        <p class="eyebrow eyebrow--signal">Accès · Horaires · Contact</p>
+        <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>On vous répond quand la réponse <em>existe.</em></h1>
+      <h1>Nous trouver, <em>et pousser la porte.</em></h1>
       <div class="page-hero__bottom">
-        <p class="page-hero__lead">Vous cherchez un cours de boxe à Blagnac&nbsp;? Dites-nous le niveau d’information dont vous avez besoin.</p>
-        <p class="page-hero__note">Aucune adresse de salle, téléphone ou permanence n’est publié tant que ces coordonnées ne sont pas validées.</p>
+        <p class="page-hero__lead">Blagnac (31700), au nord-ouest de Toulouse. Tram T1 et bus Tisséo, à quelques minutes à pied.</p>
+        <p class="page-hero__note">{CLUB.openLine}</p>
       </div>
     </div>
   </header>
 
-  <section class="location-ledger shell page-copy">
-    <div class="location-ledger__grid">
+  <section class="access shell" aria-labelledby="access-title">
+    <div class="section-heading">
+      <p class="eyebrow">01 · S’y rendre</p>
       <div>
-        <p class="eyebrow">Zone annoncée</p>
-        <p class="location-ledger__place">Blagnac<br /><em>Toulouse nord-ouest</em></p>
+        <h2 id="access-title">Quatre façons de venir.</h2>
+        <p class="section-heading__intro">On nous rejoint sans voiture, ce qui compte quand on inscrit un enfant ou un adolescent qui viendra seul.</p>
       </div>
-      <div class="notice">
-        <strong>L’adresse exacte reste en validation.</strong>
-        <p>Nous ne publions ni carte, ni itinéraire, ni horaires d’ouverture avant confirmation. Cela évite de diriger des visiteurs vers une salle ou une organisation sans autorisation.</p>
+    </div>
+
+    <ul class="access__list sequence-reveal">
+      {AREA.transport.map((t, i) => (
+        <li>
+          <span class="access__n">{String(i + 1).padStart(2, '0')}</span>
+          <span class="access__mode">{t.mode}</span>
+          <span class="access__detail">{t.detail}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="access__around">
+      <div class="prose reveal">
+        <p>
+          Nos adhérents viennent de {NEARBY_SENTENCE} autant que de Blagnac. Notre <strong>salle de boxe</strong> est à moins de vingt minutes de tout le <strong>nord-ouest toulousain</strong>, et le tram T1 la met à portée directe du centre de Toulouse.
+        </p>
+        <p class="access__contact">
+          <a href={`mailto:${CLUB.email}`}>{CLUB.email}</a>
+        </p>
+      </div>
+      <div class="notice reveal">
+        <strong>{CLUB.openLine}</strong>
+        <p>{CLUB.seasonNote} Laissez-nous vos coordonnées ci-dessous et nous vous envoyons l’adresse exacte ainsi que le créneau adapté à votre niveau.</p>
       </div>
     </div>
   </section>
+
+  <section class="access-band" aria-label="La salle">
+    <figure>
+      <picture>
+        <source srcset="/images/accueil-club-420.webp 420w, /images/accueil-club-900.webp 900w, /images/accueil-club-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
+        <img src="/images/accueil-club-1400.jpg" alt="Entrée et accueil du Club de Boxe Blagnac" width="1400" height="887" loading="lazy" />
+      </picture>
+      <figcaption>L’accueil</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/images/salle-de-boxe-480.webp 480w, /images/salle-de-boxe-960.webp 960w, /images/salle-de-boxe-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
+        <img src="/images/salle-de-boxe-1600.jpg" alt="La salle et les rings du club" width="1600" height="919" loading="lazy" />
+      </picture>
+      <figcaption>Les deux rings</figcaption>
+    </figure>
+  </section>
+
+  <PartnerCta
+    eyebrow="Notre réseau"
+    heading="Trop loin de Blagnac ?"
+    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+    tone="light"
+  />
 
   <section class="contact-panel surface-dark" id="contact">
     <div class="contact-panel__inner shell">
       <div>
         <p class="eyebrow eyebrow--signal">Votre demande</p>
-        <h2>Un message précis. Une réponse utile.</h2>
-        <p class="contact-panel__copy">Le formulaire ne réserve pas de cours. Il transmet une demande d’information au porteur du projet une fois la messagerie configurée.</p>
+        <h2>Recevez tout par e-mail.</h2>
+        <p class="contact-panel__copy">
+          Laissez votre e-mail et votre téléphone : nous vous envoyons les créneaux, l’adresse exacte et les modalités d’inscription pour le cours qui vous intéresse. Réponse sous 24 h.
+        </p>
       </div>
       <ContactForm />
     </div>
@@ -51,7 +108,7 @@ const description =
   <section class="contact-image surface-dark">
     <picture>
       <source srcset="/images/boxe-corner-480.webp 480w, /images/boxe-corner-960.webp 960w, /images/boxe-corner-1600.webp 1600w" sizes="100vw" type="image/webp" />
-      <img src="/images/boxe-corner-1600.jpg" alt="Deux boxeuses échangent des coups techniques avec protections" width="1600" height="984" loading="lazy" />
+      <img src="/images/boxe-corner-1600.jpg" alt="Échange technique entre deux boxeuses avec protections" width="1600" height="984" loading="lazy" />
     </picture>
     <p class="shell">La réponse avant le déplacement.</p>
   </section>
@@ -59,34 +116,73 @@ const description =
 
 <style>
   .contact-hero h1 {
-    max-width: 12ch;
-    font-size: clamp(3.8rem, 10vw, 10rem);
+    max-width: 13ch;
   }
 
-  .location-ledger__grid {
+  .access {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .access__list {
     display: grid;
-    gap: clamp(3rem, 8vw, 9rem);
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: end;
+    gap: 0;
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid currentColor;
   }
 
-  .location-ledger__place {
-    margin-top: 2rem;
-    font-size: clamp(4rem, 11vw, 11rem);
-    font-weight: 780;
-    letter-spacing: -0.07em;
-    line-height: 0.72;
-    text-transform: uppercase;
+  .access__list li {
+    display: grid;
+    gap: 0.4rem 1.5rem;
+    grid-template-columns: 2.5rem minmax(0, 0.55fr) minmax(0, 1.45fr);
+    align-items: baseline;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--line);
   }
 
-  .location-ledger__place em {
+  .access__n {
     color: var(--signal);
-    font-family: Georgia, serif;
-    font-size: 0.5em;
-    font-weight: 400;
-    text-transform: none;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
   }
 
+  .access__mode {
+    font-size: clamp(1.05rem, 2vw, 1.5rem);
+    font-variation-settings: 'wdth' 88, 'wght' 720;
+    letter-spacing: -0.03em;
+  }
+
+  .access__detail {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.84;
+  }
+
+  .access__around {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (max-width: 52rem) {
+    .access__list li {
+      grid-template-columns: 2rem 1fr;
+    }
+
+    .access__detail {
+      grid-column: 2;
+    }
+
+    .access__around {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Recovered from the previous revision of this page — the contact panel and
+     the closing image keep their original treatment. */
   .contact-panel {
     padding-block: clamp(5rem, 10vw, 10rem);
   }
@@ -98,14 +194,15 @@ const description =
   }
 
   .contact-panel h2 {
-    max-width: 10ch;
+    max-width: 12ch;
     margin-block: 1.5rem;
-    font-size: clamp(3rem, 6.5vw, 6.7rem);
+    font-size: clamp(2.6rem, 5.6vw, 5.8rem);
   }
 
   .contact-panel__copy {
-    max-width: 31rem;
+    max-width: 34rem;
     color: var(--mist);
+    line-height: 1.55;
   }
 
   .contact-image {
@@ -131,12 +228,63 @@ const description =
     font-size: clamp(3rem, 8.5vw, 8.5rem);
     font-weight: 780;
     letter-spacing: -0.06em;
-    line-height: 0.85;
+    line-height: 0.9;
+    text-transform: uppercase;
   }
 
   @media (max-width: 52rem) {
-    .location-ledger__grid,
     .contact-panel__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .access__contact {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    line-height: 2;
+  }
+
+  .access-band {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: 1fr 1fr;
+    background: var(--line);
+  }
+
+  .access-band figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .access-band img {
+    width: 100%;
+    height: clamp(15rem, 30vw, 26rem);
+    object-fit: cover;
+    filter: grayscale(0.7) contrast(1.1) brightness(0.82);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 500ms ease;
+  }
+
+  .access-band figure:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0.25) brightness(0.94);
+  }
+
+  .access-band figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.9rem 1.1rem;
+    color: var(--paper-bright);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 52rem) {
+    .access-band {
       grid-template-columns: 1fr;
     }
   }

@@ -56,6 +56,9 @@ async function handle(request) {
 
   const name = clean(body.name, 80);
   const email = clean(body.email, 160).toLowerCase();
+  /* Optional: a lead without a number is still a lead. Kept loose on purpose —
+     rejecting an unusual format would cost a contact for nothing. */
+  const phone = clean(body.phone, 30);
   const subject = clean(body.subject, 120);
   const message = clean(body.message, 2000);
   const company = clean(body.company, 120);
@@ -76,7 +79,10 @@ async function handle(request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM_EMAIL;
-  const to = process.env.CONTACT_TO_EMAIL;
+  /* Destination boîte du club. Surchargeable par variable d'environnement pour
+     les préproductions, mais la valeur de production est le défaut afin qu'un
+     déploiement ne puisse pas silencieusement perdre des demandes. */
+  const to = process.env.CONTACT_TO_EMAIL || 'bc.combat31@gmail.com';
   if (!apiKey || !from || !to) {
     return new Response(JSON.stringify({ error: 'La messagerie du projet n’est pas encore configurée.' }), { status: 503, headers });
   }
@@ -91,8 +97,21 @@ async function handle(request) {
       from,
       to: [to],
       reply_to: email,
-      subject: `[Blagnac boxe] ${subject}`,
-      text: `Nom: ${name}\nE-mail: ${email}\n\n${message}`
+      subject: `Formulaire Blagnac — ${subject}`,
+      text: [
+        'Nouvelle demande via le formulaire Blagnac',
+        '',
+        `Nom       : ${name}`,
+        `E-mail    : ${email}`,
+        `Téléphone : ${phone || '—'}`,
+        `Cours     : ${subject}`,
+        '',
+        'Message :',
+        message,
+        '',
+        '—',
+        'Répondre à ce message écrit directement au demandeur.'
+      ].join('\n')
     })
   });
 

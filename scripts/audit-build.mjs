@@ -203,6 +203,35 @@ if (mobileHeroBlock) {
   }
 }
 
+
+/* ------------------------------------------------------------------ *
+ * Voice guard.
+ *
+ * The site is a club that exists and is open. Copy that hedges — "en
+ * validation", "projet", "prochainement", "adressez-vous au club" — makes it
+ * read as unbuilt, which destroys commercial trust. That wording shipped once;
+ * it does not ship again.
+ * ------------------------------------------------------------------ */
+const HEDGES = [
+  'en validation', 'à confirmer', 'préversion', 'prochainement',
+  'nous ne publions pas', 'adressez-vous', 'selon les clubs',
+  'dans la plupart des clubs', 'ordres de grandeur', 'à demander au club',
+  'projet en préparation', 'porteur du projet', 'à valider', 'pas encore confirmé'
+];
+
+for (const file of htmlFiles) {
+  const rel = relative(dist, file);
+  const visible = stripNonVisible(readFileSync(file, 'utf8'))
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ');
+  for (const hedge of HEDGES) {
+    assert(
+      !visible.toLowerCase().includes(hedge),
+      `${rel}: visible copy contains "${hedge}". The club is open — state facts, never hedge.`
+    );
+  }
+}
+
 if (failures.length) {
   console.error(`Build audit failed (${failures.length}):\n- ${failures.join('\n- ')}`);
   process.exit(1);

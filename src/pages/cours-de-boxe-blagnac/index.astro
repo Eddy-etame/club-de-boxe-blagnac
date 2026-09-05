@@ -1,212 +1,299 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import PartnerCta from '@/components/PartnerCta.astro';
+import { CLUB, DISCIPLINES } from '@/data/club';
+import { disciplineList } from '@/data/schema';
 
-const title = 'Cours de boxe à Blagnac : programme en préparation';
+const title = 'Cours de boxe à Blagnac — 6 cours, 21 créneaux par semaine';
 const description =
-  'Cours de boxe à Blagnac : découvrez les informations qui seront publiées sur les disciplines, niveaux, publics, horaires et modalités avant l’ouverture.';
+  'Nos 6 cours de boxe anglaise à Blagnac : éveil dès 3 ans, éducative, ados, loisir, compétition, cardio boxe. 21 créneaux par semaine. Première séance gratuite.';
 
-const proofRows = [
-  ['Discipline', 'Nom exact de la pratique, contenu de séance et cadre fédéral le cas échéant.', 'À confirmer'],
-  ['Public', 'Âges, prérequis, niveaux et capacité d’accueil.', 'À confirmer'],
-  ['Encadrement', 'Nom, rôle, qualifications et responsabilités de chaque intervenant.', 'À confirmer'],
-  ['Calendrier', 'Jours, heures, durée, saison et périodes de fermeture.', 'À confirmer'],
-  ['Tarif', 'Prix complet, licence, assurance, équipement et conditions d’essai.', 'À confirmer']
-];
 ---
 
-<BaseLayout {title} {description} pathname="/cours-de-boxe-blagnac/"
+<BaseLayout
+  {title}
+  {description}
+  pathname="/cours-de-boxe-blagnac/"
   topTone="dark"
+  pageType="CollectionPage"
+  withCourses
+  schema={disciplineList()}
+  speakable={['#formats-title', '.course-item__summary']}
+  imageAlt="Cours collectif de boxe anglaise, travail au sac de frappe"
 >
-  <header class="page-hero">
+  <header class="page-hero course-hero">
     <div class="shell">
       <div class="page-hero__meta">
-        <p class="eyebrow eyebrow--signal">Cours · Cadre · Progression</p>
-        <p class="mono">Fiche 01 / Informations en validation</p>
+        <p class="eyebrow eyebrow--signal">Cours · Formats · Progression</p>
+        <p class="mono">{CLUB.season}</p>
       </div>
       <h1>Cours de boxe <em>à Blagnac</em></h1>
       <div class="page-hero__bottom">
-        <p class="page-hero__lead">Un programme ne vaut que s’il dit précisément ce qui se passe entre l’arrivée et la fin du round.</p>
-        <p class="page-hero__note">Cette page décrit la structure d’information prévue. Elle ne transforme pas une offre non validée en promesse commerciale.</p>
+        <p class="page-hero__lead">Six cours, {CLUB.weeklyClasses} créneaux par semaine, six jours sur sept. Ce qui change, c’est l’âge et le niveau de contact — jamais l’exigence technique.</p>
+        <p class="page-hero__note">{CLUB.openLine} Première séance gratuite sur le cours de votre choix.</p>
       </div>
     </div>
   </header>
 
   <section class="course-intro shell page-copy">
     <div class="page-copy__grid">
-      <p class="eyebrow">Le point de vérité</p>
+      <p class="eyebrow">Comment choisir</p>
       <div class="prose">
         <p>
-          Une recherche comme <strong>cours de boxe Blagnac</strong>, <strong>salle de boxe Blagnac</strong> ou <strong>club de boxe Toulouse nord-ouest</strong> appelle des réponses vérifiables. Le programme final n’est pas encore publié.
+          Choisir son cours revient à trancher trois questions : quel âge, quel niveau de contact, et combien de fois par semaine vous pouvez venir. Nos six cours répondent à des intentions différentes ; aucun n’est une version dégradée d’un autre.
         </p>
         <p>
-          Plutôt que d’inventer des créneaux ou des catégories, nous préparons une fiche unique qui reliera discipline, niveau, encadrement, horaire, tarif et lieu. Toute mise à jour devra modifier le même jeu de données sur l’ensemble du site.
+          Un point qui surprend souvent : le contact n’est pas le point de départ. En <strong>éveil</strong> comme en <strong>cardio boxe</strong>, il n’y en a aucun. En <strong>boxe éducative</strong>, il reste en touche légère. En loisir adulte, en touche contrôlée, protections fournies par le club.
         </p>
         <div class="notice">
-          <strong>Ce qui n’est pas encore confirmé reste marqué comme tel.</strong>
-          <p>La boxe anglaise, le loisir, la compétition, les cours débutants, enfants, ados ou adultes ne seront annoncés que si ces offres existent réellement.</p>
+          <strong>Une première séance ne comporte jamais d’opposition.</strong>
+          <p>Quel que soit le cours et quel que soit votre niveau : on regarde d’abord comment vous vous déplacez.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="course-proof surface-dark">
+  <section class="course-list surface-dark" aria-labelledby="formats-title">
     <div class="shell">
       <div class="section-heading">
-        <p class="eyebrow">Le contrat de clarté</p>
+        <p class="eyebrow">Les six formats</p>
         <div>
-          <h2>Cinq preuves avant de réserver.</h2>
-          <p class="section-heading__intro">Ce tableau deviendra le référentiel des cours dès que les données officielles auront été validées.</p>
+          <h2 id="formats-title">Ce que contient réellement une séance.</h2>
+          <p class="section-heading__intro">Le déroulé de chacun de nos cours, dans l’ordre. Chez nous, l’ordre compte autant que le contenu.</p>
         </div>
       </div>
 
-      <div class="proof-table" role="table" aria-label="État des informations sur les cours">
-        {proofRows.map(([label, expected, state], index) => (
-          <div class="proof-table__row reveal" role="row">
-            <span class="proof-table__index" role="cell">{String(index + 1).padStart(2, '0')}</span>
-            <h3 role="cell">{label}</h3>
-            <p role="cell">{expected}</p>
-            <span class="proof-table__state" role="cell">{state}</span>
-          </div>
+      <div class="course-list__items">
+        {DISCIPLINES.map((d, i) => (
+          <article class="course-item reveal" id={d.slug}>
+            <div class="course-item__head">
+              <p class="course-item__index">{String(i + 1).padStart(2, '0')}</p>
+              <h3><a href={`/cours-de-boxe-blagnac/${d.slug}/`}>{d.name}</a></h3>
+              <p class="course-item__summary">{d.summary}</p>
+              <dl class="course-item__meta">
+                <div><dt>Âges</dt><dd>{d.ages}</dd></div>
+                <div><dt>Contact</dt><dd>{d.contact}</dd></div>
+                <div><dt>Rythme</dt><dd>{d.rhythm}</dd></div>
+              </dl>
+            </div>
+            <div class="course-item__body">
+              <figure class="course-item__media">
+                <picture>
+                  <source
+                    srcset={d.image.widths.map((w) => `/images/${d.image.file}-${w}.webp ${w}w`).join(', ')}
+                    sizes="(max-width: 52rem) 92vw, 44vw"
+                    type="image/webp"
+                  />
+                  <img
+                    src={`/images/${d.image.file}-${d.image.widths[d.image.widths.length - 1]}.jpg`}
+                    alt={d.image.alt}
+                    width="1400"
+                    height="933"
+                    loading="lazy"
+                  />
+                </picture>
+              </figure>
+              <p>{d.body}</p>
+              <ol class="course-item__session">
+                {d.session.map((step) => <li>{step}</li>)}
+              </ol>
+              <p class="course-item__more">
+                <a href={`/cours-de-boxe-blagnac/${d.slug}/`}>Tout savoir sur ce cours →</a>
+              </p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
+
+    <figure class="image-frame course-band shell reveal">
+      <picture>
+        <source srcset="/images/travail-aux-pattes-420.webp 420w, /images/travail-aux-pattes-900.webp 900w, /images/travail-aux-pattes-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 88vw" type="image/webp" />
+        <img src="/images/travail-aux-pattes-1400.jpg" alt="Travail aux pattes d’ours pendant un cours de boxe anglaise" width="1400" height="861" loading="lazy" />
+      </picture>
+      <figcaption><span>Travail aux pattes d’ours</span><span>Technique encadrée</span></figcaption>
+    </figure>
   </section>
 
-  <section class="course-image">
-    <div class="course-image__copy shell">
-      <p class="eyebrow eyebrow--signal">Archive sportive</p>
-      <p>La technique se lit dans les détails&nbsp;: regard, distance, appuis, garde.</p>
-    </div>
-    <picture>
-      <source srcset="/images/ring-competition-420.webp 420w, /images/ring-competition-900.webp 900w, /images/ring-competition-1400.webp 1400w" sizes="100vw" type="image/webp" />
-      <img src="/images/ring-competition-1400.jpg" alt="Un direct arrêté par la garde d’un boxeur casqué" width="1400" height="933" loading="lazy" />
-    </picture>
-  </section>
-
-  <section class="course-next shell page-copy">
+  <section class="course-where shell page-copy">
     <div class="page-copy__grid">
-      <p class="eyebrow">Étape suivante</p>
+      <p class="eyebrow">Venir au club</p>
       <div class="prose">
-        <h2>Commencer par les bonnes questions.</h2>
-        <p>Vous pouvez déjà préparer votre première prise de contact sans acheter de matériel ni choisir un niveau au hasard.</p>
-        <a class="button" href="/premiere-seance/">Préparer la première séance</a>
+        <p>
+          Nous sommes à Blagnac (31700), au nord-ouest de Toulouse, desservis par le tram T1 et les lignes Tisséo. {CLUB.openLine}
+        </p>
+        <p>
+          {CLUB.seasonNote} Laissez-nous vos coordonnées via le <a href="/acces-contact/#contact">formulaire</a> ou écrivez à <a href={`mailto:${CLUB.email}`}>{CLUB.email}</a> : nous vous envoyons les créneaux et l’adresse exacte.
+        </p>
       </div>
     </div>
   </section>
+
+  <PartnerCta
+    eyebrow="Notre réseau"
+    heading="Trop loin de Blagnac ?"
+    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+  />
 </BaseLayout>
 
 <style>
-  .course-intro .notice {
-    margin-top: 3rem;
+  .course-hero h1 {
+    max-width: 14ch;
   }
 
-  .course-proof {
-    padding-bottom: clamp(5rem, 10vw, 10rem);
+  .course-intro,
+  .course-where {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
   }
 
-  .proof-table {
-    border-top: 1px solid rgb(255 255 255 / 26%);
+  .course-list {
+    padding-block: clamp(4rem, 8vw, 8rem);
   }
 
-  .proof-table__row {
+  .course-list__items {
     display: grid;
-    gap: 1.25rem;
-    grid-template-columns: 3rem minmax(8rem, 0.55fr) minmax(16rem, 1fr) auto;
-    align-items: center;
-    padding-block: clamp(1.5rem, 3vw, 2.6rem);
-    border-bottom: 1px solid rgb(255 255 255 / 26%);
+    gap: 0;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
   }
 
-  .proof-table__index,
-  .proof-table__state {
+  .course-item {
+    display: grid;
+    gap: clamp(1.25rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    padding-block: clamp(2rem, 4vw, 3.4rem);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: calc(var(--header-height) + 2rem);
+  }
+
+  .course-item__index {
+    color: var(--signal);
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .course-item h3 {
+    margin-top: 0.7rem;
+    font-size: clamp(1.6rem, 3.4vw, 2.9rem);
+    font-variation-settings: 'wdth' 84, 'wght' 800;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+
+  .course-item__summary {
+    margin-top: 0.6rem;
+    color: var(--flight);
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-weight: 560;
+  }
+
+  .course-item__meta {
+    display: grid;
+    gap: 0.9rem;
+    margin: 1.4rem 0 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .course-item__meta div {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .course-item__meta dt {
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
   }
 
-  .proof-table h3 {
-    font-size: clamp(1.8rem, 3.8vw, 3.8rem);
+  .course-item__meta dd {
+    margin: 0;
+    font-size: 0.88rem;
   }
 
-  .proof-table p {
-    max-width: 37rem;
+  .course-item__body > p {
+    max-width: 62ch;
     color: var(--mist);
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
-  .proof-table__state {
-    padding: 0.45rem 0.6rem;
-    border: 1px solid var(--signal);
+  .course-item__session {
+    display: grid;
+    gap: 0;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .course-item__session li {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1.8rem 1fr;
+    padding-block: 0.6rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+  }
+
+  .course-item__session li::before {
+    content: counter(step, decimal-leading-zero);
+    counter-increment: step;
     color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
   }
 
-  .course-image {
-    position: relative;
-    min-height: 42rem;
-    display: grid;
-    place-items: center;
+  .course-band {
+    margin-top: clamp(3rem, 6vw, 6rem);
+  }
+
+  @media (max-width: 52rem) {
+    .course-item {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .course-item__media {
+    margin: 0 0 1.4rem;
     overflow: hidden;
-    color: var(--paper-bright);
-    background: var(--ink);
   }
 
-  .course-image picture,
-  .course-image img {
+  .course-item__media img {
     width: 100%;
-    height: 100%;
+    height: clamp(11rem, 20vw, 17rem);
+    object-fit: cover;
+    filter: grayscale(0.68) contrast(1.1) brightness(0.86);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 500ms ease;
   }
 
-  .course-image picture {
-    position: absolute;
-    inset: 0;
+  .course-item:hover .course-item__media img {
+    transform: scale(1.04);
+    filter: grayscale(0.18) brightness(0.96);
   }
 
-  .course-image img {
-    object-fit: contain;
-    filter: grayscale(0.85) brightness(0.62) contrast(1.2);
+  .course-item h3 a {
+    text-decoration: none;
   }
 
-  .course-image__copy {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    display: grid;
-    gap: 2rem;
+  .course-item h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
   }
 
-  .course-image__copy > p:last-child {
-    max-width: 12ch;
-    font-size: clamp(3rem, 8vw, 8rem);
-    font-weight: 780;
-    letter-spacing: -0.06em;
-    line-height: 0.85;
+  .course-item__more {
+    margin-top: 1.4rem;
   }
 
-  .course-next h2 {
-    font-size: clamp(2.6rem, 6vw, 6rem);
-  }
-
-  .course-next .button {
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 48rem) {
-    .proof-table__row {
-      grid-template-columns: 2rem 1fr auto;
-    }
-
-    .proof-table__row p {
-      grid-column: 2 / -1;
-    }
-  }
-
-  @media (max-width: 34rem) {
-    .proof-table__row {
-      grid-template-columns: 2rem 1fr;
-    }
-
-    .proof-table__state {
-      grid-column: 2;
-      width: fit-content;
-    }
+  .course-item__more a {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-underline-offset: 0.3em;
   }
 </style>
