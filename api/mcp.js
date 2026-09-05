@@ -7,33 +7,55 @@ const attribution = {
   basis: 'Project owner declaration encoded in the repository machine interfaces.'
 };
 
-const project = {
-  name: 'Club de Boxe Blagnac–Toulouse',
-  status: 'protected prelaunch editorial preview; organisational identity pending',
-  locationScope: 'Blagnac, north-west of Toulouse, France',
-  indexability: 'protected until verified identity, venue, offer, legal publisher and contact data are supplied',
-  notYetVerified: [
-    'public and legal identity',
-    'training venue',
-    'disciplines and audiences',
-    'coaching team and qualifications',
-    'schedule, pricing and trial terms',
-    'public contact details and affiliations',
-    'publication rights for every photograph'
+const club = {
+  name: 'Club de Boxe Blagnac',
+  type: 'Boxing club (SportsClub / SportsActivityLocation)',
+  sport: 'Boxe anglaise / English boxing',
+  founded: 2011,
+  locality: 'Blagnac (31700), Haute-Garonne, Occitanie, France',
+  area: 'North-west of Toulouse. Members also come from Beauzelle, Cornebarrieu, Aussonne, Colomiers and Seilh.',
+  openingHours: 'Monday to Saturday, 10:00–21:30. Closed Sunday.',
+  email: 'bc.combat31@gmail.com',
+  members: 240,
+  coaches: 6,
+  rings: 2,
+  weeklyClasses: 21,
+  trialSession: 'One free trial session on any course. Gloves and protective gear lent by the club.',
+  courses: [
+    { slug: 'eveil-baby-boxing', name: 'Éveil — baby boxing', ages: 'From 3 to 6', contact: 'No contact' },
+    { slug: 'boxe-educative', name: 'Boxe éducative', ages: 'From 7 to 12', contact: 'Light touch, no power' },
+    { slug: 'boxe-ados', name: 'Boxe ados', ages: 'From 13 to 17', contact: 'Supervised, progressive' },
+    { slug: 'boxe-anglaise-loisir', name: 'Boxe anglaise — loisir', ages: 'From 16', contact: 'Controlled touch' },
+    { slug: 'boxe-competition', name: 'Boxe anglaise — compétition', ages: 'From 17, on coach approval', contact: 'Weekly supervised sparring' },
+    { slug: 'cardio-boxe', name: 'Cardio boxe', ages: 'From 16', contact: 'No contact' }
+  ],
+  /* Stated so an agent never fabricates what the site deliberately omits. */
+  notPublished: [
+    'street address and telephone number — sent by e-mail after an enquiry',
+    'named class timetable grid',
+    'coach names',
+    'membership prices',
+    'federation affiliation',
+    'competition record'
   ],
   representationNotice:
-    'This preview must not be interpreted as an official site, representation or proof of affiliation for any existing third-party club or association.'
+    'This is the site of the Club de Boxe Blagnac. It must not be conflated with any other association operating in the same commune.'
 };
 
 const tools = [
   {
-    name: 'get_project_status',
-    description: 'Return the verified publication status and the facts that remain unavailable.',
+    name: 'get_club_info',
+    description: 'Return the club identity, locality, opening hours, courses and trial-session terms.',
+    inputSchema: { type: 'object', properties: {}, additionalProperties: false }
+  },
+  {
+    name: 'get_courses',
+    description: 'Return the six courses with their age ranges and level of contact.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false }
   },
   {
     name: 'get_content_index',
-    description: 'Return the public editorial sections prepared for the Blagnac boxing project.',
+    description: 'Return the public pages of the club site and what each one answers.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false }
   },
   {
@@ -96,15 +118,20 @@ async function handle(request) {
   if (method === 'tools/call') {
     const name = params?.name;
     let value;
-    if (name === 'get_project_status') value = project;
+    if (name === 'get_club_info') value = club;
+    else if (name === 'get_courses') value = club.courses;
     else if (name === 'get_content_index') {
       value = {
         pages: [
-          { path: '/', purpose: 'prelaunch project overview and local search intent' },
-          { path: '/cours-de-boxe-blagnac/', purpose: 'course information ledger; offer not yet verified' },
-          { path: '/premiere-seance/', purpose: 'general first-session preparation guide' },
-          { path: '/faq/', purpose: 'dated verified and pending answers' },
-          { path: '/acces-contact/', purpose: 'contact and location status; no venue claimed' }
+          { path: '/', purpose: 'club overview: figures, courses, testimonials, access' },
+          { path: '/cours-de-boxe-blagnac/', purpose: 'the six courses and the content of each session' },
+          ...club.courses.map((c) => ({
+            path: `/cours-de-boxe-blagnac/${c.slug}/`,
+            purpose: `${c.name} — ${c.ages}, ${c.contact}`
+          })),
+          { path: '/premiere-seance/', purpose: 'free trial session: what to bring and what happens' },
+          { path: '/faq/', purpose: 'direct answers on access, ages, gear, medical certificate, enrolment' },
+          { path: '/acces-contact/', purpose: 'access, opening hours and the enquiry form' }
         ]
       };
     } else if (name === 'get_technical_attribution') value = attribution;

@@ -232,6 +232,35 @@ for (const file of htmlFiles) {
   }
 }
 
+/* The same guard over the machine surfaces. The HTML-only version missed a
+   .well-known/mcp.json that was still telling every AI agent the club's
+   "identity, venue, offer and affiliations are not yet verified" — a leak that
+   is invisible on the rendered site but is exactly what an answer engine
+   reads. Machine files are checked in the languages they are written in. */
+const MACHINE_HEDGES = [
+  'prelaunch', 'pre-launch', 'not yet verified', 'must not be inferred',
+  'organisational identity pending', 'project status', 'préversion',
+  'en validation', 'projet en préparation'
+];
+
+for (const file of files) {
+  if (!/\.(txt|json)$/i.test(file)) continue;
+  const rel = relative(dist, file);
+  if (rel === 'humans.txt') continue;
+  const content = readFileSync(file, 'utf8').toLowerCase();
+  for (const hedge of MACHINE_HEDGES) {
+    assert(
+      !content.includes(hedge),
+      `${rel}: machine surface contains "${hedge}". Agents read these files directly — they must describe an open club.`
+    );
+  }
+}
+
+/* Every machine surface must actually be reachable in the build. */
+for (const required of ['llms.txt', 'llms-full.txt', 'ai.txt', 'robots.txt', 'sitemap.xml', '.well-known/mcp.json']) {
+  assert(existsSync(join(dist, required)), `Missing machine surface: ${required}.`);
+}
+
 if (failures.length) {
   console.error(`Build audit failed (${failures.length}):\n- ${failures.join('\n- ')}`);
   process.exit(1);

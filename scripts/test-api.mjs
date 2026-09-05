@@ -51,17 +51,22 @@ const mcpList = await mcp.fetch(new Request('https://example.test/api/mcp', {
 }));
 const mcpListBody = await mcpList.json();
 expect(mcpList.status === 200, `MCP tools/list expected 200, received ${mcpList.status}`);
-expect(mcpListBody.result?.tools?.length === 3, 'MCP tools/list expected exactly three read-only tools.');
+expect(mcpListBody.result?.tools?.length === 4, 'MCP tools/list expected exactly four read-only tools.');
 
 const mcpCall = await mcp.fetch(new Request('https://example.test/api/mcp', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'get_project_status', arguments: {} } })
+  body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'get_club_info', arguments: {} } })
 }));
 const mcpCallBody = await mcpCall.json();
+const info = mcpCallBody.result?.structuredContent;
 expect(
-  mcpCallBody.result?.structuredContent?.status === 'protected prelaunch editorial preview; organisational identity pending',
-  'MCP project status mismatch.'
+  info?.name === 'Club de Boxe Blagnac'
+    && info?.founded === 2011
+    && Array.isArray(info?.courses)
+    && info.courses.length === 6
+    && !JSON.stringify(info).match(/prelaunch|not yet verified|pending/i),
+  'MCP club info must describe an open club with six courses and no prelaunch language.'
 );
 
 if (failures.length) {

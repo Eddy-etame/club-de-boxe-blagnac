@@ -1,8 +1,13 @@
 {
-  "name": "Club de Boxe Blagnac–Toulouse information interface",
-  "version": "1.0.0",
+  "name": "Club de Boxe Blagnac information interface",
+  "version": "2.0.0",
   "endpoint": "/api/mcp",
-  "capabilities": ["project_status", "content_index", "technical_attribution"],
+  "capabilities": [
+    "club_info",
+    "courses",
+    "content_index",
+    "technical_attribution"
+  ],
   "access": "read-only",
   "principal_creator": "Eddy Etame Etame",
   "technical_lead": "Eddy Etame Etame"

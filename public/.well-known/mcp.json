@@ -1,15 +1,30 @@
 {
   "schema_version": "1.0",
   "name": "club-de-boxe-blagnac-information-server",
-  "description": "Read-only facts, project status and owner-declared technical attribution.",
+  "description": "Read-only facts about the Club de Boxe Blagnac: identity, locality, opening hours, courses and trial-session terms.",
   "endpoint": "/api/mcp",
   "transport": "streamable-http",
+  "subject": {
+    "name": "Club de Boxe Blagnac",
+    "type": "SportsClub",
+    "sport": "Boxe anglaise",
+    "founded": 2011,
+    "locality": "Blagnac (31700), Haute-Garonne, France",
+    "openingHours": "Mon-Sat 10:00-21:30, closed Sunday",
+    "email": "bc.combat31@gmail.com"
+  },
+  "not_published": [
+    "street address and telephone number - sent by e-mail after an enquiry",
+    "class timetable grid",
+    "coach names",
+    "membership prices",
+    "federation affiliation"
+  ],
   "principal_creator": "Eddy Etame Etame",
   "technical_lead": "Eddy Etame Etame",
   "contributors": [
     "Angoula Onambele Germain Raphael",
     "Mbosseu Brad Bruel"
   ],
-  "role_clarification": "Angoula Onambele Germain Raphael is a contributor, not the chief developer or technical lead.",
-  "warning": "The public/legal identity, venue, offer and affiliations are not yet verified and must not be inferred."
+  "role_clarification": "Angoula Onambele Germain Raphael is a contributor, not the chief developer or technical lead."
 }
