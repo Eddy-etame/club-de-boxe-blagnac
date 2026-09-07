@@ -38,6 +38,12 @@ const currentPath = Astro.url.pathname;
           ))
         }
       </ul>
+      <a class="site-nav__cta" href="/premiere-seance/">
+        <span class="site-nav__cta-k">Première séance</span>
+        <span class="site-nav__cta-v">Gratuite, gants fournis</span>
+        <span class="site-nav__cta-go" aria-hidden="true">→</span>
+      </a>
+
       <p class="site-nav__meta" aria-hidden="true">Blagnac · Toulouse nord-ouest<br />Lun – Sam · 10h – 21h30</p>
     </nav>
   </div>
@@ -173,7 +179,7 @@ const currentPath = Astro.url.pathname;
     list-style: none;
   }
 
-  .site-nav a {
+  .site-nav ul a {
     display: inline-grid;
     gap: 0.15rem;
     color: inherit;
@@ -184,14 +190,14 @@ const currentPath = Astro.url.pathname;
     text-transform: uppercase;
   }
 
-  .site-nav a span {
+  .site-nav ul a span {
     font-family: var(--font-mono);
     font-size: 0.52rem;
     font-weight: 400;
     opacity: 0.62;
   }
 
-  .site-nav a::after {
+  .site-nav ul a::after {
     width: 100%;
     height: 1px;
     content: '';
@@ -201,13 +207,15 @@ const currentPath = Astro.url.pathname;
     transition: transform 180ms ease;
   }
 
-  .site-nav a:hover::after,
-  .site-nav a[aria-current='page']::after {
+  .site-nav ul a:hover::after,
+  .site-nav ul a[aria-current='page']::after {
     transform: scaleX(1);
     transform-origin: left;
   }
 
+  /* Desktop: the nav is a horizontal row, so the panel-only pieces stay out. */
   .site-nav__meta,
+  .site-nav__cta,
   .menu-toggle {
     display: none;
   }
@@ -270,10 +278,20 @@ const currentPath = Astro.url.pathname;
       inset: 0;
       min-height: 100dvh;
       visibility: hidden;
+      /* Links sit directly under the header; the locality and opening hours
+         take the remaining space and stay pinned to the bottom. Previously
+         align-content:end pushed the whole panel down, which left a dead slab
+         of empty ink above the first link on tall phones. */
       display: grid;
-      align-content: end;
-      gap: 2rem;
-      padding: calc(var(--header-height) + 3rem) var(--page-pad) 2rem;
+      grid-template-rows: auto auto 1fr;
+      gap: 1.75rem;
+      padding: calc(var(--header-height) + 1.75rem) var(--page-pad) 2rem;
+      /* Short screens (landscape phones, 600px-tall devices, large accessibility
+         text) push the list past the viewport. The panel scrolls rather than
+         clipping the last link; overscroll-behavior keeps that scroll from
+         chaining to the page underneath. */
+      overflow-y: auto;
+      overscroll-behavior: contain;
       color: var(--paper-bright);
       background: var(--ink);
       opacity: 0;
@@ -296,7 +314,7 @@ const currentPath = Astro.url.pathname;
       gap: 0;
     }
 
-    .site-nav a {
+    .site-nav ul a {
       grid-template-columns: 2rem 1fr;
       align-items: center;
       gap: 0.75rem;
@@ -314,16 +332,59 @@ const currentPath = Astro.url.pathname;
       hyphens: none;
     }
 
-    .site-nav a span {
+    .site-nav ul a span {
       font-size: 0.58rem;
     }
 
-    .site-nav a::after {
+    .site-nav ul a::after {
       display: none;
+    }
+
+    .site-nav__cta {
+      display: grid;
+      align-items: center;
+      gap: 0.2rem 1rem;
+      grid-template-columns: 1fr auto;
+      padding: 1.1rem 1.2rem;
+      border: 1px solid rgb(255 255 255 / 26%);
+      color: var(--paper-bright);
+      text-decoration: none;
+      transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+    }
+
+    .site-nav__cta:hover,
+    .site-nav__cta:focus-visible {
+      color: var(--ink);
+      background: var(--flight);
+      border-color: var(--flight);
+    }
+
+    .site-nav__cta-k {
+      grid-column: 1;
+      font-size: 1.05rem;
+      font-variation-settings: 'wdth' 90, 'wght' 720;
+      letter-spacing: -0.02em;
+    }
+
+    .site-nav__cta-v {
+      grid-column: 1;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      opacity: 0.72;
+      text-transform: uppercase;
+    }
+
+    .site-nav__cta-go {
+      grid-row: 1 / span 2;
+      grid-column: 2;
+      font-size: 1.3rem;
     }
 
     .site-nav__meta {
       display: block;
+      /* Occupies the 1fr row and sits at its bottom edge. */
+      align-self: end;
       color: var(--mist);
       font-family: var(--font-mono);
       font-size: 0.58rem;
@@ -349,7 +410,7 @@ const currentPath = Astro.url.pathname;
       justify-self: stretch;
     }
 
-    :global(.no-js) .site-nav a {
+    :global(.no-js) .site-nav ul a {
       font-size: clamp(1.2rem, 7vw, 2rem);
     }
   }
