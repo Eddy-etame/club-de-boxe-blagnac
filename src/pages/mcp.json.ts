@@ -21,6 +21,7 @@ export const GET: APIRoute = () => Response.json({
   },
   not_published: [
     'street address and telephone number - sent by e-mail after an enquiry',
+    'membership prices, and any claim that a session is free',
     'class timetable grid',
     'coach names',
     'membership prices',

@@ -5,9 +5,9 @@ import { firstSessionSteps } from '@/data/seo';
 import { CLUB, GEAR } from '@/data/club';
 import { firstSessionHowTo } from '@/data/schema';
 
-const title = 'Séance d’essai gratuite — Club de Boxe Blagnac';
+const title = 'Votre première séance — Club de Boxe Blagnac';
 const description =
-  'Votre première séance au Club de Boxe Blagnac est gratuite : ce qu’il faut apporter, ce qui va se passer, et pourquoi il n’y a jamais d’opposition le premier jour.';
+  'Votre première séance au Club de Boxe Blagnac : ce qu’il faut apporter, ce qui va se passer, et pourquoi il n’y a jamais d’opposition le premier jour.';
 
 ---
 
@@ -23,10 +23,10 @@ const description =
   <header class="page-hero first-hero">
     <div class="shell">
       <div class="page-hero__meta">
-        <p class="eyebrow eyebrow--signal">Séance d’essai · Gratuite</p>
+        <p class="eyebrow eyebrow--signal">Première séance · Sur demande</p>
         <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>Votre <em>premier</em> cours est offert.</h1>
+      <h1>Votre <em>premier</em> cours.</h1>
       <div class="page-hero__bottom">
         <p class="page-hero__lead">Personne n’arrive en sachant boxer. Chez nous, ce qui se remarque n’est pas votre niveau — c’est si vous écoutez.</p>
         <p class="page-hero__note">Gants et protections prêtés. Aucune opposition à la première séance, quels que soient votre âge et votre condition physique.</p>
@@ -118,11 +118,11 @@ const description =
     <div class="shell book__inner">
       <div>
         <p class="eyebrow eyebrow--signal">Réserver</p>
-        <h2>Recevez les créneaux par e-mail.</h2>
-        <p class="book__copy">Laissez vos coordonnées : nous vous envoyons les créneaux, l’adresse et les modalités. Réponse sous 24 h.</p>
+        <h2>Dites-nous ce que vous cherchez.</h2>
+        <p class="book__copy">Indiquez le cours et vos disponibilités. Nous répondons sous 24 h avec le créneau, l’adresse et les conditions.</p>
       </div>
       <div class="book__actions">
-        <a class="button button--signal" href="/acces-contact/#contact">Recevoir les informations</a>
+        <a class="button button--signal" href="/acces-contact/#contact">Nous écrire</a>
         <p class="book__phone"><a href={`mailto:${CLUB.email}`}>{CLUB.email}</a><br /><span>{CLUB.openLine}</span></p>
       </div>
     </div>

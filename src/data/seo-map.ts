@@ -72,7 +72,7 @@ export const KEYWORDS = {
     'boxe Colomiers',
     'gants de boxe débutant',
     'tarif club de boxe',
-    'séance d’essai boxe',
+    'contacter club de boxe',
     'certificat médical boxe',
     'licence de boxe',
     'protège-dents boxe',
@@ -91,7 +91,7 @@ export const ALL_KEYWORDS: string[] = [...KEYWORDS.head, ...KEYWORDS.body, ...KE
  */
 export const ANSWER_TARGETS = [
   'Où se trouve le club de boxe de Blagnac ?',
-  'La première séance de boxe est-elle gratuite ?',
+  'Comment contacter le club de boxe de Blagnac ?',
   'À quel âge un enfant peut-il commencer la boxe ?',
   'Quels cours de boxe propose le club de Blagnac ?',
   'Quel matériel faut-il pour débuter la boxe ?',
@@ -121,8 +121,8 @@ export const SHORT_ANSWERS: { q: string; a: string }[] = [
     a: 'Dès 3 ans en séance d’éveil, dite baby boxing, qui se pratique sans aucun contact. La boxe éducative en touche légère prend le relais à 7 ans, et le groupe ados à 13 ans.'
   },
   {
-    q: 'La première séance est-elle gratuite ?',
-    a: 'Oui. Une séance d’essai gratuite sur le cours de votre choix, gants et protections prêtés par le club. Prévenez-nous avant de venir pour que le matériel soit préparé à votre taille.'
+    q: 'Comment contacter le club ?',
+    a: 'Via le formulaire du site : indiquez le cours qui vous intéresse et vos disponibilités, et nous répondons sous 24 h avec le créneau adapté, l’adresse et les conditions.'
   },
   {
     q: 'Combien de cours par semaine propose le club ?',

@@ -42,9 +42,10 @@ const { compact = false } = Astro.props;
     <textarea id="contact-message" name="message" minlength="10" maxlength="2000" required placeholder="Votre âge, votre niveau, et vos disponibilités."></textarea>
   </div>
 
+  {/* Inlett's honeypot. Must reach the API empty; bots fill it. */}
   <div class="field field--trap" aria-hidden="true">
-    <label for="contact-company">Entreprise</label>
-    <input id="contact-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+    <label for="contact-gotcha">Entreprise</label>
+    <input id="contact-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
   </div>
 
   <input name="startedAt" type="hidden" value="" data-started-at />
@@ -55,7 +56,7 @@ const { compact = false } = Astro.props;
   </label>
 
   <div class="form-actions">
-    <button class="button button--signal" type="submit">Recevoir les informations</button>
+    <button class="button button--signal" type="submit">Envoyer ma demande</button>
     <p class="form-status" role="status" aria-live="polite" data-form-status></p>
   </div>
 </form>
@@ -91,42 +92,84 @@ const { compact = false } = Astro.props;
 </style>
 
 <script>
+  /**
+   * Submits to Inlett.
+   *
+   * The endpoint is guarded by a proof-of-work challenge: fetch a challenge,
+   * find a nonce whose SHA-256 of `challenge:nonce` starts with `difficulty`
+   * zeros, and send both with the payload.
+   *
+   * The hashing uses our own synchronous SHA-256 rather than crypto.subtle.
+   * Awaiting a WebCrypto promise per hash costs more in scheduling than in
+   * hashing: measured at 15.3s for one difficulty-4 challenge, versus 0.7s
+   * synchronously. See src/scripts/pow.ts.
+   */
+  import { solveChallenge } from '@/scripts/pow';
+
+  const API_URL = 'https://inlett.vercel.app';
+  const FORM_ID = '7869b78f-6d80-4d22-b817-4caf15800089';
+
   document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
     const startedAt = form.querySelector<HTMLInputElement>('[data-started-at]');
     const status = form.querySelector<HTMLElement>('[data-form-status]');
     const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (startedAt) startedAt.value = String(Date.now());
 
+    const say = (text: string, state: string) => {
+      if (!status) return;
+      status.textContent = text;
+      status.dataset.state = state;
+    };
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!form.reportValidity()) return;
 
-      if (status) {
-        status.textContent = 'Envoi en cours…';
-        status.dataset.state = 'pending';
+      /* Anything submitted within 2.5s of load is a bot, not a person. */
+      const opened = Number(startedAt?.value);
+      if (Number.isFinite(opened) && Date.now() - opened < 2500) {
+        say('Envoi trop rapide. Merci de réessayer.', 'error');
+        return;
       }
+
+      say('Envoi en cours…', 'pending');
       if (submit) submit.disabled = true;
 
       try {
-        const response = await fetch('/api/contact', {
+        const fields = Object.fromEntries(new FormData(form)) as Record<string, string>;
+        delete fields.startedAt;
+
+        const challenge = await fetch(`${API_URL}/api/challenge`).then((response) => {
+          if (!response.ok) throw new Error('Service momentanément indisponible. Réessayez.');
+          return response.json();
+        });
+
+        say('Vérification…', 'pending');
+        const nonce = await solveChallenge(challenge.challenge, challenge.difficulty);
+
+        const sent = await fetch(`${API_URL}/api/submit/${FORM_ID}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+          body: JSON.stringify({
+            ...fields,
+            _lang: 'fr',
+            _gotcha: fields._gotcha ?? '',
+            pow_challenge: challenge.challenge,
+            pow_timestamp: challenge.timestamp,
+            pow_nonce: nonce
+          })
         });
-        const payload = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(payload.error || 'Impossible d’envoyer la demande.');
+
+        if (!sent.ok) {
+          const payload = await sent.json().catch(() => ({}));
+          throw new Error(payload.error || 'Impossible d’envoyer votre demande.');
+        }
 
         form.reset();
         if (startedAt) startedAt.value = String(Date.now());
-        if (status) {
-          status.textContent = 'Reçu. Nous vous envoyons les créneaux et l’adresse sous 24 h.';
-          status.dataset.state = 'success';
-        }
+        say('Message reçu. Nous vous répondons sous 24 h.', 'success');
       } catch (error) {
-        if (status) {
-          status.textContent = error instanceof Error ? error.message : 'Une erreur est survenue.';
-          status.dataset.state = 'error';
-        }
+        say(error instanceof Error ? error.message : 'Une erreur est survenue.', 'error');
       } finally {
         if (submit) submit.disabled = false;
       }

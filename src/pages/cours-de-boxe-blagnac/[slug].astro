@@ -29,19 +29,19 @@ const SEO: Record<string, { title: string; description: string; intent: string }
   'eveil-baby-boxing': {
     title: 'Baby boxing à Blagnac — éveil dès 3 ans',
     description:
-      'Éveil et baby boxing dès 3 ans au Club de Boxe Blagnac : motricité, équilibre, jeux de réaction, aucun contact. Deux séances par semaine, première séance gratuite.',
+      'Éveil et baby boxing dès 3 ans au Club de Boxe Blagnac : motricité, équilibre, jeux de réaction, aucun contact. Deux séances par semaine. Écrivez-nous.',
     intent: 'boxe enfant 3 ans, éveil sportif, baby boxing'
   },
   'boxe-educative': {
     title: 'Boxe éducative enfant à Blagnac — 7 à 12 ans',
     description:
-      'Boxe éducative pour les 7-12 ans à Blagnac : touche légère, protections complètes, aucune recherche de puissance. Trois séances par semaine, première séance gratuite.',
+      'Boxe éducative pour les 7-12 ans à Blagnac : touche légère, protections complètes, aucune recherche de puissance. Trois séances par semaine. Écrivez-nous.',
     intent: 'boxe enfant Blagnac, boxe éducative, boxe sans KO'
   },
   'boxe-ados': {
     title: 'Boxe ados à Blagnac — cours 13 à 17 ans',
     description:
-      'Cours de boxe pour adolescents de 13 à 17 ans à Blagnac : intensité progressive, cadre strict sur les protections. Trois séances par semaine, première séance gratuite.',
+      'Cours de boxe pour adolescents de 13 à 17 ans à Blagnac : intensité progressive, cadre strict sur les protections. Trois séances par semaine. Écrivez-nous.',
     intent: 'boxe adolescent Blagnac, boxe 13 ans, boxe collège lycée'
   },
   'boxe-anglaise-loisir': {
@@ -108,7 +108,7 @@ const courseSchema = {
       <h1>{discipline.name}</h1>
       <div class="page-hero__bottom">
         <p class="page-hero__lead course-page__summary">{discipline.summary}</p>
-        <p class="page-hero__note">{discipline.rhythm}. Première séance gratuite, gants et protections prêtés.</p>
+        <p class="page-hero__note">{discipline.rhythm}. Gants et protections prêtés — écrivez-nous pour venir voir.</p>
       </div>
     </div>
   </header>
@@ -138,7 +138,7 @@ const courseSchema = {
       <div><p class="course-page__k">Âges</p><p class="course-page__v">{discipline.ages}</p></div>
       <div><p class="course-page__k">Contact</p><p class="course-page__v">{discipline.contact}</p></div>
       <div><p class="course-page__k">Rythme</p><p class="course-page__v">{discipline.rhythm}</p></div>
-      <div><p class="course-page__k">Essai</p><p class="course-page__v">Gratuit, matériel prêté</p></div>
+      <div><p class="course-page__k">Venir voir</p><p class="course-page__v">Sur demande, matériel prêté</p></div>
     </div>
   </section>
 
@@ -189,9 +189,9 @@ const courseSchema = {
     <div class="signal__inner shell">
       <div class="signal__heading">
         <p class="eyebrow eyebrow--signal">{discipline.name}</p>
-        <h2>Recevez les créneaux.</h2>
+        <h2>Dites-nous ce que vous cherchez.</h2>
         <p>
-          Laissez votre e-mail et votre téléphone : nous vous envoyons les créneaux de ce cours, l’adresse exacte et les modalités d’inscription. Réponse sous 24 h, première séance gratuite.
+          Indiquez vos disponibilités et votre niveau. Nous vous répondons sous 24 h avec les créneaux de ce cours, l’adresse et les conditions.
         </p>
       </div>
       <ContactForm />

@@ -94,7 +94,7 @@ const publisherNode = {
   legalName: CLUB.name,
   url: `${SITE.url}/`,
   description:
-    'Club de boxe anglaise à Blagnac, au nord-ouest de Toulouse. Six cours du baby boxing dès 3 ans au groupe compétition, 21 créneaux par semaine, séance d’essai gratuite.',
+    'Club de boxe anglaise à Blagnac, au nord-ouest de Toulouse. Six cours du baby boxing dès 3 ans au groupe compétition, 21 créneaux par semaine.',
   slogan: CLUB.tagline,
   foundingDate: String(CLUB.founded),
   sport: { '@id': id('subject') },
@@ -137,16 +137,6 @@ const publisherNode = {
     { '@type': 'LocationFeatureSpecification', name: 'Espace de renforcement', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Vestiaires', value: true }
   ],
-  makesOffer: {
-    '@type': 'Offer',
-    name: 'Séance d’essai gratuite',
-    description:
-      'Une séance d’essai gratuite sur le cours de votre choix, gants et protections prêtés.',
-    price: '0',
-    priceCurrency: 'EUR',
-    availability: 'https://schema.org/InStock',
-    url: absoluteUrl('/premiere-seance/')
-  },
   knowsAbout: [
     { '@id': id('subject') },
     ...DISCIPLINES.map((d) => ({ '@id': id(`course-${d.slug}`) }))

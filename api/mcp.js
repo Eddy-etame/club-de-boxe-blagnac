@@ -20,7 +20,7 @@ const club = {
   coaches: 6,
   rings: 2,
   weeklyClasses: 21,
-  trialSession: 'One free trial session on any course. Gloves and protective gear lent by the club.',
+  contact: 'Gloves and protective gear are lent by the club. Enquiries go through the site form; the club replies within 24 hours.',
   courses: [
     { slug: 'eveil-baby-boxing', name: 'Éveil — baby boxing', ages: 'From 3 to 6', contact: 'No contact' },
     { slug: 'boxe-educative', name: 'Boxe éducative', ages: 'From 7 to 12', contact: 'Light touch, no power' },

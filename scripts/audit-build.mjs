@@ -261,6 +261,35 @@ for (const required of ['llms.txt', 'llms-full.txt', 'ai.txt', 'robots.txt', 'si
   assert(existsSync(join(dist, required)), `Missing machine surface: ${required}.`);
 }
 
+/* No free-session claim, anywhere.
+   The club does not advertise a free trial. "Séance d'essai gratuite" was
+   spread across 20 places — pages, titles, meta descriptions, JSON-LD Offer,
+   llms.txt — and every one of them was a promise the club had not made. */
+const FREE_CLAIMS = [
+  'gratuite', 'gratuit,', 'gratuit.', 'séance d’essai gratuit', "séance d'essai gratuit",
+  'premier cours est offert', 'première séance est gratuite', 'est pour nous'
+];
+
+for (const file of htmlFiles) {
+  const rel = relative(dist, file);
+  const raw = readFileSync(file, 'utf8');
+  const visible = stripNonVisible(raw).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').toLowerCase();
+  const head = (raw.match(/<title>[\s\S]*?<\/title>/i)?.[0] || '')
+    + (raw.match(/<meta name="description"[^>]*>/i)?.[0] || '');
+  for (const claim of FREE_CLAIMS) {
+    /* "parking gratuit" is a fact about the street, not an offer. */
+    const hay = (visible + ' ' + head.toLowerCase()).replace(/parking gratuit|stationnement gratuit/g, '');
+    assert(
+      !hay.includes(claim),
+      `${rel}: contains a free-session claim ("${claim}"). The club advertises no free trial — point people at the form instead.`
+    );
+  }
+  assert(
+    !/"price"\s*:\s*"0"/.test(raw),
+    `${rel}: JSON-LD advertises a zero-price Offer. No price is published.`
+  );
+}
+
 if (failures.length) {
   console.error(`Build audit failed (${failures.length}):\n- ${failures.join('\n- ')}`);
   process.exit(1);

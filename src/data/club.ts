@@ -268,7 +268,7 @@ export const FIRST_VISIT = [
   {
     number: '05',
     title: 'Vous décidez après',
-    text: 'La séance d’essai est gratuite et n’engage à rien. Si le lieu et le groupe vous conviennent, on parle inscription. Sinon, on se sera serré la main.'
+    text: 'Rien ne vous engage. Si le lieu et le groupe vous conviennent, on parle inscription à ce moment-là. Sinon, on se sera serré la main.'
   }
 ];
 
@@ -276,7 +276,7 @@ export const GEAR = [
   {
     item: 'Rien du tout',
     when: 'Pour votre première séance',
-    detail: 'Nous prêtons gants et protections le temps de l’essai. Venez en tenue de sport, avec des chaussures propres réservées à l’intérieur.'
+    detail: 'Nous prêtons gants et protections pour vos premières séances. Venez en tenue de sport, avec des chaussures propres réservées à l’intérieur.'
   },
   {
     item: 'Bandes de maintien',
@@ -312,9 +312,9 @@ export const FAQ: { question: string; answer: string }[] = [
       'Oui, et c’est le cas de la majorité de nos adhérents à leur arrivée. Les cours loisir, cardio, éducatif et ados accueillent des débutants toute l’année. Votre première séance sert à situer votre niveau, pas à le juger.'
   },
   {
-    question: 'La première séance est-elle vraiment gratuite ?',
+    question: 'Comment se passe une première venue ?',
     answer:
-      'Oui. Une séance d’essai gratuite sur le cours de votre choix, gants et protections prêtés. Laissez-nous vos coordonnées et nous convenons ensemble d’un créneau, pour que le matériel soit préparé à votre taille.'
+      'Écrivez-nous via le formulaire en indiquant le cours qui vous intéresse et vos disponibilités. Nous vous répondons sous 24 h avec le créneau adapté, l’adresse et les conditions. Gants et protections sont prêtés : venez simplement en tenue de sport.'
   },
   {
     question: 'À quel âge un enfant peut-il commencer ?',
@@ -324,7 +324,7 @@ export const FAQ: { question: string; answer: string }[] = [
   {
     question: 'Faut-il acheter du matériel pour commencer ?',
     answer:
-      'Rien pour la première séance. Ensuite, des bandes de maintien, puis une paire de gants choisie avec votre entraîneur, puis un protège-dents avant votre première opposition. Nous prêtons les casques, les coquilles et les protège-tibias.'
+      'Rien au départ : nous prêtons gants et protections. Ensuite, des bandes de maintien, puis une paire de gants choisie avec votre entraîneur, puis un protège-dents avant votre première opposition. Nous prêtons les casques, les coquilles et les protège-tibias.'
   },
   {
     question: 'Faut-il un certificat médical ?',

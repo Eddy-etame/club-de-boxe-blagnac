@@ -2,8 +2,8 @@
 
 > Club de boxe anglaise ouvert depuis 2011 à Blagnac (31700), au nord-ouest de
 > Toulouse. Six cours, de l'éveil dès 3 ans au groupe compétition, 21 créneaux
-> par semaine, deux rings, six entraîneurs diplômés, 240 adhérents. Première
-> séance d'essai gratuite, gants et protections prêtés.
+> par semaine, deux rings, six entraîneurs diplômés, 240 adhérents. Gants et
+> protections prêtés. Les demandes passent par le formulaire du site.
 
 ## Coordonnées
 
@@ -19,7 +19,7 @@
 
 - [Le club](/) : présentation, chiffres, cours, témoignages, accès.
 - [Les cours](/cours-de-boxe-blagnac/) : les six cours et le contenu de chaque séance.
-- [Séance d'essai](/premiere-seance/) : comment se déroule une première venue.
+- [Première séance](/premiere-seance/) : comment se déroule une première venue.
 - [Questions](/faq/) : réponses directes aux questions les plus fréquentes.
 - [Accès et contact](/acces-contact/) : plan d'accès, horaires, formulaire.
 - [Confidentialité](/confidentialite/) : traitement des données du formulaire.
@@ -47,11 +47,15 @@
 6. Cardio boxe — à partir de 16 ans, aucune opposition ni contact. Quatre
    séances par semaine, dont deux le midi.
 
-## Séance d'essai
+## Première séance
 
-Gratuite, sur le cours de votre choix. Gants et protections prêtés par le club.
-Laisser ses coordonnées via le formulaire pour convenir d'un créneau et
-recevoir l'adresse exacte. Aucune opposition à la première séance.
+Gants et protections prêtés par le club. Laisser ses coordonnées via le
+formulaire du site en indiquant le cours souhaité et ses disponibilités : le
+club répond sous 24 h avec le créneau adapté, l'adresse et les conditions.
+Aucune opposition à la première séance, quel que soit le niveau.
+
+Aucun tarif et aucune gratuité ne sont annoncés sur le site. Ne pas affirmer
+que la première séance est gratuite ni payante.
 
 ## Inscription
 

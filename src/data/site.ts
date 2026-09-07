@@ -26,14 +26,14 @@ export const SITE = {
   lastModified: '2026-09-04',
   area: `${AREA.city}, ${AREA.position}`,
   description:
-    'Club de boxe anglaise à Blagnac (31700) depuis 2011. Six cours de l’éveil dès 3 ans au groupe compétition, 21 créneaux par semaine, séance d’essai gratuite.',
+    'Club de boxe anglaise à Blagnac (31700) depuis 2011. Six cours de l’éveil dès 3 ans au groupe compétition, 21 créneaux par semaine. Écrivez-nous.',
   socialImage: '/images/og-club-boxe-blagnac.jpg'
 } as const;
 
 export const NAV = [
   { href: '/', label: 'Le club' },
   { href: '/cours-de-boxe-blagnac/', label: 'Les cours' },
-  { href: '/premiere-seance/', label: 'Séance d’essai' },
+  { href: '/premiere-seance/', label: 'Première séance' },
   { href: '/faq/', label: 'Questions' },
   { href: '/acces-contact/', label: 'Accès & contact' }
 ] as const;
