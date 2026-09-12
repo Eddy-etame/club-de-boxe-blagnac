@@ -1,24 +1,23 @@
 {
   "schema_version": "1.0",
   "name": "club-de-boxe-blagnac-information-server",
-  "description": "Read-only facts about the Club de Boxe Blagnac: identity, locality, opening hours, courses and trial-session terms.",
+  "description": "Read-only facts about the Club de Boxe Blagnac: identity, locality, opening hours, courses, network and first-visit terms.",
   "endpoint": "/api/mcp",
   "transport": "streamable-http",
   "subject": {
     "name": "Club de Boxe Blagnac",
     "type": "SportsClub",
     "sport": "Boxe anglaise",
-    "founded": 2011,
     "locality": "Blagnac (31700), Haute-Garonne, France",
     "openingHours": "Mon-Sat 10:00-21:30, closed Sunday",
-    "email": "bc.combat31@gmail.com"
+    "email": "bc.combat31@gmail.com",
+    "network": "Boxing Center — https://boxingcenter.fr/"
   },
   "not_published": [
     "street address and telephone number - sent by e-mail after an enquiry",
     "membership prices, and any claim that a session is free",
     "class timetable grid",
     "coach names",
-    "membership prices",
     "federation affiliation"
   ],
   "principal_creator": "Eddy Etame Etame",

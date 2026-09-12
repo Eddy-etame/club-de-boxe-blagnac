@@ -1,11 +1,13 @@
 ---
 import { NAV, SITE } from '@/data/site';
+import { CLUB, DISCIPLINES } from '@/data/club';
+import { NETWORK, NETWORK_CLUBS } from '@/data/network';
 ---
 
 <footer class="site-footer surface-dark">
   <div class="site-footer__inner shell">
     <div class="site-footer__lead">
-      <p class="eyebrow eyebrow--signal">Ouvert depuis 2011 · Blagnac</p>
+      <p class="eyebrow eyebrow--signal">Réseau {NETWORK.name} · Blagnac</p>
       <p class="site-footer__title">Le prochain round<br />commence par un message.</p>
       <a class="button" href="/acces-contact/#contact">Nous écrire</a>
     </div>
@@ -18,17 +20,32 @@ import { NAV, SITE } from '@/data/site';
         </ul>
       </nav>
 
+      <nav aria-label="Nos cours de boxe à Blagnac">
+        <p class="site-footer__label">Nos cours</p>
+        <ul>
+          {DISCIPLINES.map((d) => <li><a href={'/cours-de-boxe-blagnac/' + d.slug + '/'}>{d.linkLabel}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav aria-label={'Clubs du réseau ' + NETWORK.name}>
+        <p class="site-footer__label">Réseau {NETWORK.name}</p>
+        <ul>
+          {NETWORK_CLUBS.map((c) => <li><a href={c.url} rel="noopener">{c.name}</a></li>)}
+          <li><a href={NETWORK.url} rel="noopener">Le réseau {NETWORK.name}</a></li>
+        </ul>
+      </nav>
+
       <div>
         <p class="site-footer__label">Transparence</p>
         <ul>
-          <li><a href="/confidentialite/">Confidentialité</a></li>
           <li><a href="/faq/">Questions fréquentes</a></li>
-          <li><a href="/acces-contact/">Accès et contact</a></li>
+          <li><a href="/mentions-legales/">Mentions légales</a></li>
+          <li><a href="/confidentialite/">Confidentialité</a></li>
         </ul>
       </div>
 
       <p class="site-footer__status">
-        Club de boxe anglaise à Blagnac depuis 2011. Six cours, 21 créneaux par semaine, deux rings, six entraîneurs diplômés.
+        Club de boxe anglaise à Blagnac (31700), membre du réseau {NETWORK.name}. Six cours, du baby boxing dès 3 ans au groupe compétition. {CLUB.openLine}
       </p>
     </div>
 
@@ -62,8 +79,8 @@ import { NAV, SITE } from '@/data/site';
 
   .site-footer__grid {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: 0.65fr 0.65fr 1.2fr;
+    gap: 2.2rem 2rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     padding-block: 2rem;
     border-top: 1px solid rgb(255 255 255 / 24%);
   }
@@ -90,7 +107,10 @@ import { NAV, SITE } from '@/data/site';
   }
 
   .site-footer__status {
-    max-width: 34rem;
+    grid-column: 1 / -1;
+    max-width: 44rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(255 255 255 / 12%);
     font-size: clamp(1.05rem, 1.55vw, 1.35rem);
   }
 
@@ -107,7 +127,13 @@ import { NAV, SITE } from '@/data/site';
     text-transform: uppercase;
   }
 
-  @media (max-width: 46rem) {
+  @media (max-width: 60rem) {
+    .site-footer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 34rem) {
     .site-footer__grid,
     .site-footer__bottom {
       grid-template-columns: 1fr;

@@ -11,15 +11,17 @@ const club = {
   name: 'Club de Boxe Blagnac',
   type: 'Boxing club (SportsClub / SportsActivityLocation)',
   sport: 'Boxe anglaise / English boxing',
-  founded: 2011,
+  network: 'Boxing Center — https://boxingcenter.fr/',
   locality: 'Blagnac (31700), Haute-Garonne, Occitanie, France',
   area: 'North-west of Toulouse. Members also come from Beauzelle, Cornebarrieu, Aussonne, Colomiers and Seilh.',
   openingHours: 'Monday to Saturday, 10:00–21:30. Closed Sunday.',
   email: 'bc.combat31@gmail.com',
-  members: 240,
-  coaches: 6,
-  rings: 2,
-  weeklyClasses: 21,
+  networkClubs: [
+    'Boxing Center Toulouse Minimes — https://boxe-toulouse.com/',
+    'Boxing Center Saint-Cyprien — https://club-boxe-toulouse.com/',
+    'Boxing Center Portet — https://boxing-center-portet.fr/',
+    'Toulouse Minimes Boxing Club, partner club — https://toulouse-minimes-boxing-club.fr/'
+  ],
   contact: 'Gloves and protective gear are lent by the club. Enquiries go through the site form; the club replies within 24 hours.',
   courses: [
     { slug: 'eveil-baby-boxing', name: 'Éveil — baby boxing', ages: 'From 3 to 6', contact: 'No contact' },
@@ -45,7 +47,7 @@ const club = {
 const tools = [
   {
     name: 'get_club_info',
-    description: 'Return the club identity, locality, opening hours, courses and trial-session terms.',
+    description: 'Return the club identity, locality, opening hours, courses, network and first-visit terms.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false }
   },
   {
@@ -123,15 +125,17 @@ async function handle(request) {
     else if (name === 'get_content_index') {
       value = {
         pages: [
-          { path: '/', purpose: 'club overview: figures, courses, testimonials, access' },
+          { path: '/', purpose: 'club overview: courses, audiences, a typical session, access, network' },
           { path: '/cours-de-boxe-blagnac/', purpose: 'the six courses and the content of each session' },
           ...club.courses.map((c) => ({
             path: `/cours-de-boxe-blagnac/${c.slug}/`,
             purpose: `${c.name} — ${c.ages}, ${c.contact}`
           })),
-          { path: '/premiere-seance/', purpose: 'free trial session: what to bring and what happens' },
+          { path: '/premiere-seance/', purpose: 'first visit: what to bring and what happens' },
           { path: '/faq/', purpose: 'direct answers on access, ages, gear, medical certificate, enrolment' },
-          { path: '/acces-contact/', purpose: 'access, opening hours and the enquiry form' }
+          { path: '/acces-contact/', purpose: 'access, opening hours and the enquiry form' },
+          { path: '/mentions-legales/', purpose: 'legal notice: editor Boxing Center, host Vercel' },
+          { path: '/confidentialite/', purpose: 'what happens to a form enquiry: data, retention, rights' }
         ]
       };
     } else if (name === 'get_technical_attribution') value = attribution;

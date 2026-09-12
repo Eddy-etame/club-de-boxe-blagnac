@@ -36,6 +36,9 @@ const RETRIEVAL_AGENTS = [
 /** Bulk training scrapers: no retrieval value, so no access. */
 const BULK_AGENTS = ['CCBot', 'Bytespider', 'ImagesiftBot', 'Omgilibot', 'Diffbot'];
 
+/** Classic search crawlers, named explicitly — including Qwant, the French engine. */
+const SEARCH_AGENTS = ['Googlebot', 'Googlebot-Image', 'Bingbot', 'Qwantify', 'DuckDuckBot'];
+
 export const GET: APIRoute = () => {
   if (!SITE.indexable) {
     return new Response('User-agent: *\nDisallow: /\n', {
@@ -45,17 +48,20 @@ export const GET: APIRoute = () => {
 
   const lines = [
     '# Club de Boxe Blagnac — boxe anglaise à Blagnac (31700), nord-ouest de Toulouse.',
-    '# Contexte machine : /llms.txt · /llms-full.txt · politique : /ai.txt',
+    '# Contexte machine : /llms.txt · /llms-full.txt · politique : /ai.txt · MCP : /.well-known/mcp.json',
     '',
     'User-agent: *',
     'Allow: /',
     '',
+    '# Search engines.',
+    ...SEARCH_AGENTS.flatMap((agent) => ['User-agent: ' + agent, 'Allow: /', '']),
     '# Answer engines: welcome. Read /llms.txt first — it carries the facts,',
     '# their scope, and what this site deliberately does not claim.',
     ...RETRIEVAL_AGENTS.flatMap((agent) => [`User-agent: ${agent}`, 'Allow: /', '']),
     '# Bulk corpus scrapers: no.',
     ...BULK_AGENTS.flatMap((agent) => [`User-agent: ${agent}`, 'Disallow: /', '']),
     `Sitemap: ${SITE.url}/sitemap.xml`,
+    'LLMs-Txt: ' + SITE.url + '/llms.txt',
     ''
   ];
 

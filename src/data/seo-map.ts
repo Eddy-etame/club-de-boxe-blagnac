@@ -22,15 +22,12 @@ export const LOCATION = {
   position: 'au nord-ouest de Toulouse',
   /** Communes whose residents realistically train in the same sector. */
   nearby: ['Beauzelle', 'Cornebarrieu', 'Aussonne', 'Colomiers', 'Seilh', 'Mondonville'],
-  /** Blagnac districts, used for genuinely local phrasing. */
-  districts: ['Andromède', 'Grand Noble', 'Ritouret', 'Barradels', 'Odyssud', 'Aéroconstellation'],
   transport: [
     { mode: 'Tram T1', detail: 'dessert Blagnac depuis Arènes, avec correspondance métro A.' },
     { mode: 'Tram T2', detail: 'relie l’aéroport de Toulouse-Blagnac à Palais de Justice.' },
     { mode: 'Bus Tisséo', detail: 'lignes vers Beauzelle, Cornebarrieu, Aussonne et Colomiers.' },
-    { mode: 'Voiture', detail: 'accès par la RN124 et la rocade Arc-en-Ciel, stationnement généralement gratuit.' }
-  ],
-  landmarks: ['Odyssud', 'aéroport de Toulouse-Blagnac', 'quartier Andromède', 'parc du Ritouret']
+    { mode: 'Voiture', detail: 'accès par la RN124 et la rocade Arc-en-Ciel, parking gratuit sur place.' }
+  ]
 } as const;
 
 /**
@@ -125,8 +122,8 @@ export const SHORT_ANSWERS: { q: string; a: string }[] = [
     a: 'Via le formulaire du site : indiquez le cours qui vous intéresse et vos disponibilités, et nous répondons sous 24 h avec le créneau adapté, l’adresse et les conditions.'
   },
   {
-    q: 'Combien de cours par semaine propose le club ?',
-    a: 'Vingt et un créneaux par semaine répartis sur six cours, du lundi au samedi de 10h à 21h30. Le club est fermé le dimanche.'
+    q: 'Quand le club est-il ouvert ?',
+    a: 'Du lundi au samedi, de 10h à 21h30, pour six cours de boxe anglaise. Le club est fermé le dimanche, aux vacances de Noël et au mois d’août.'
   },
   {
     q: 'Faut-il un certificat médical ?',
@@ -134,7 +131,7 @@ export const SHORT_ANSWERS: { q: string; a: string }[] = [
   },
   {
     q: 'Le club accueille-t-il les femmes et les débutants ?',
-    a: 'Oui, sur tous les cours et sans créneau séparé : un tiers de nos adhérents sont des adhérentes, et la majorité de nos inscrits n’avaient jamais mis un gant avant d’arriver.'
+    a: 'Oui, sur tous les cours et sans créneau séparé : les femmes s’entraînent avec tout le monde, et la majorité de nos inscrits n’avaient jamais mis un gant avant d’arriver.'
   }
 ];
 

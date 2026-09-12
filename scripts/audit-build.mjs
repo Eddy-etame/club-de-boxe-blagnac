@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { extname, join, relative } from 'node:path';
+import { createHash } from 'node:crypto';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
@@ -41,14 +42,11 @@ if (!existsSync(dist)) {
 
 const files = walk(dist);
 const htmlFiles = files.filter((file) => extname(file) === '.html');
-const textFiles = files.filter((file) => ['.html', '.css', '.js', '.json', '.txt', '.xml', '.svg'].includes(extname(file)));
 
 assert(htmlFiles.length >= 7, `Expected at least 7 HTML pages, found ${htmlFiles.length}.`);
 
-for (const file of textFiles) {
-  const content = readFileSync(file, 'utf8');
-  assert(!/boxing\s+center/i.test(content), `Forbidden network reference in ${relative(dist, file)}.`);
-}
+/* The Boxing Center name ban is lifted: the site discloses that the club
+   belongs to the Boxing Center network (owner decision, 2026-09-12). */
 
 for (const file of htmlFiles) {
   const rel = relative(dist, file);
@@ -109,7 +107,8 @@ const hasConfirmedUrl =
   /^https:\/\//i.test(configuredUrl)
   && !/\.(?:invalid|example)(?:\/|$)/i.test(configuredUrl)
   && !/localhost|127\.0\.0\.1/i.test(configuredUrl);
-const productionIndexing = indexRequested && releaseValidated && hasConfirmedUrl;
+const isPreview = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production');
+const productionIndexing = indexRequested && releaseValidated && hasConfirmedUrl && !isPreview;
 
 if (indexRequested) {
   assert(releaseValidated, 'Indexing request rejected: PUBLIC_RELEASE_VALIDATED does not confirm identity, legal publisher and photo rights.');
@@ -216,7 +215,8 @@ const HEDGES = [
   'en validation', 'à confirmer', 'préversion', 'prochainement',
   'nous ne publions pas', 'adressez-vous', 'selon les clubs',
   'dans la plupart des clubs', 'ordres de grandeur', 'à demander au club',
-  'projet en préparation', 'porteur du projet', 'à valider', 'pas encore confirmé'
+  'projet en préparation', 'porteur du projet', 'à valider', 'pas encore confirmé',
+  'préconfiguration', 'avant le lancement', 'protégé de l’indexation', "protégé de l'indexation", 'indexation verrouill'
 ];
 
 for (const file of htmlFiles) {
@@ -240,13 +240,13 @@ for (const file of htmlFiles) {
 const MACHINE_HEDGES = [
   'prelaunch', 'pre-launch', 'not yet verified', 'must not be inferred',
   'organisational identity pending', 'project status', 'préversion',
-  'en validation', 'projet en préparation'
+  'en validation', 'projet en préparation',
+  'préconfiguration', 'avant le lancement', 'protégé de l’indexation', "protégé de l'indexation", 'indexation verrouill', 'indexation verrouillee'
 ];
 
 for (const file of files) {
   if (!/\.(txt|json)$/i.test(file)) continue;
   const rel = relative(dist, file);
-  if (rel === 'humans.txt') continue;
   const content = readFileSync(file, 'utf8').toLowerCase();
   for (const hedge of MACHINE_HEDGES) {
     assert(
@@ -288,6 +288,70 @@ for (const file of htmlFiles) {
     !/"price"\s*:\s*"0"/.test(raw),
     `${rel}: JSON-LD advertises a zero-price Offer. No price is published.`
   );
+}
+
+/* Duplicate titles and descriptions. The six course pages share one template,
+   so a data slip would make two URLs compete for the same query. */
+const seenTitles = new Map();
+const seenDescriptions = new Map();
+for (const file of htmlFiles) {
+  const rel = relative(dist, file);
+  if (rel === '404.html') continue;
+  const html = readFileSync(file, 'utf8');
+  const t = html.match(/<title>(.*?)<\/title>/i)?.[1]?.trim();
+  const d = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1]?.trim();
+  if (t) {
+    assert(!seenTitles.has(t), rel + ': duplicate <title>, shared with ' + seenTitles.get(t) + '.');
+    seenTitles.set(t, rel);
+  }
+  if (d) {
+    assert(!seenDescriptions.has(d), rel + ': duplicate meta description, shared with ' + seenDescriptions.get(d) + '.');
+    seenDescriptions.set(d, rel);
+  }
+}
+
+/* Per-page social cards: every page ships its own og:image, and no two cards
+   are the same file (owner rule, 2026-09-10). */
+const ogPaths = new Map();
+for (const file of htmlFiles) {
+  const rel = relative(dist, file);
+  if (rel === '404.html') continue;
+  const og = readFileSync(file, 'utf8').match(/property="og:image" content="([^"]+)"/)?.[1] || '';
+  const path = og.replace(/^https?:\/\/[^/]+/, '');
+  assert(path.startsWith('/og/'), rel + ': og:image is not a per-page card (' + path + ').');
+  for (const [other, used] of ogPaths) assert(used !== path, rel + ': og:image shared with ' + other + '.');
+  ogPaths.set(rel, path);
+  assert(existsSync(join(dist, path)), rel + ': og:image file missing (' + path + ').');
+}
+const ogHashes = new Map();
+for (const file of files.filter((f) => relative(dist, f).startsWith('og') && f.endsWith('.jpg'))) {
+  const hash = createHash('md5').update(readFileSync(file)).digest('hex');
+  assert(!ogHashes.has(hash), relative(dist, file) + ': identical to ' + ogHashes.get(hash) + '.');
+  ogHashes.set(hash, relative(dist, file));
+}
+
+/* The MCP function is served from /api, outside dist: scan its source too. */
+const mcpSource = readFileSync(join(root, 'api', 'mcp.js'), 'utf8');
+for (const stale of [/free trial/i, /testimonial/i, /founded/i, /\b2011\b/, /\b240\b/]) {
+  assert(!stale.test(mcpSource), 'api/mcp.js: stale claim matching ' + stale + '.');
+}
+
+/* Keyword contract (src/data/mots-cles.json): every priority phrase of a page
+   must appear verbatim in that page's visible text. A copy edit that drops
+   one fails the build instead of silently losing the query. */
+const norm = (t) => t.toLowerCase().replace(/[\u00a0\u202f]/g, ' ').replace(/[\u2019']/g, "'").replace(/\s+/g, ' ');
+const decode = (t) => t.replace(/&nbsp;/g, ' ').replace(/&#39;|&apos;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"');
+const contract = JSON.parse(readFileSync(join(root, 'src', 'data', 'mots-cles.json'), 'utf8'));
+for (const [path, spec] of Object.entries(contract)) {
+  const out = outputForUrl(path);
+  if (!out || !existsSync(out)) {
+    failures.push('mots-cles.json: no built page for ' + path + '.');
+    continue;
+  }
+  const text = norm(decode(stripNonVisible(readFileSync(out, 'utf8')).replace(/<[^>]+>/g, ' ')));
+  for (const phrase of spec.priority || []) {
+    assert(text.includes(norm(phrase)), path + ': priority phrase missing from visible text: "' + phrase + '".');
+  }
 }
 
 if (failures.length) {

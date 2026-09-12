@@ -15,9 +15,9 @@ const description =
   {title}
   {description}
   pathname="/premiere-seance/"
+  network="first"
   topTone="dark"
   schema={firstSessionHowTo(firstSessionSteps)}
-  speakable={['#steps-title', '.first-steps__list h3']}
   imageAlt="Shadow boxing pendant un entraînement de boxe anglaise"
 >
   <header class="page-hero first-hero">
@@ -70,7 +70,7 @@ const description =
     <figure>
       <picture>
         <source srcset="/images/accueil-club-420.webp 420w, /images/accueil-club-900.webp 900w, /images/accueil-club-1400.webp 1400w" sizes="100vw" type="image/webp" />
-        <img src="/images/accueil-club-1400.jpg" alt="L’entrée et l’accueil du Club de Boxe Blagnac" width="1400" height="887" loading="lazy" />
+        <img src="/images/accueil-club-1400.jpg" alt="L’accueil d’une salle de boxe, là où commence une première visite" width="1400" height="887" loading="lazy" />
       </picture>
       <figcaption>L’accueil, où commence votre première visite</figcaption>
     </figure>
@@ -117,7 +117,7 @@ const description =
   <section class="book surface-dark" id="reserver">
     <div class="shell book__inner">
       <div>
-        <p class="eyebrow eyebrow--signal">Réserver</p>
+        <p class="eyebrow eyebrow--signal">Nous écrire</p>
         <h2>Dites-nous ce que vous cherchez.</h2>
         <p class="book__copy">Indiquez le cours et vos disponibilités. Nous répondons sous 24 h avec le créneau, l’adresse et les conditions.</p>
       </div>
@@ -129,9 +129,9 @@ const description =
   </section>
 
   <PartnerCta
-    eyebrow="Notre réseau"
-    heading="Trop loin de Blagnac ?"
-    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+    context="first"
+    heading="Commencer plus près de chez vous ?"
+    intro="Si Toulouse est plus pratique pour vous, les clubs du réseau Boxing Center expliquent eux aussi comment se passe une première venue."
   />
 </BaseLayout>
 

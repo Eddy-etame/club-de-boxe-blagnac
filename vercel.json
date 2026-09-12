@@ -5,30 +5,203 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        }
       ]
     },
     {
       "source": "/images/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/og/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
       ]
     },
     {
       "source": "/_astro/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
       ]
+    },
+    {
+      "source": "/(llms\\.txt|llms-full\\.txt|ai\\.txt|mcp\\.json|mcp-card\\.json)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/club-de-boxe-blagnac",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/club-boxe-blagnac",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-blagnac",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-anglaise-blagnac",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/salle-de-boxe-blagnac",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cours",
+      "destination": "/cours-de-boxe-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/cours-de-boxe",
+      "destination": "/cours-de-boxe-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/cours-boxe-blagnac",
+      "destination": "/cours-de-boxe-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/baby-boxing-blagnac",
+      "destination": "/cours-de-boxe-blagnac/eveil-baby-boxing/",
+      "permanent": true
+    },
+    {
+      "source": "/baby-boxe-blagnac",
+      "destination": "/cours-de-boxe-blagnac/eveil-baby-boxing/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-3-ans-blagnac",
+      "destination": "/cours-de-boxe-blagnac/eveil-baby-boxing/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-enfant-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-educative/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-educative-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-educative/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-ado-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-ados/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-adulte-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-anglaise-loisir/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-competition-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-competition/",
+      "permanent": true
+    },
+    {
+      "source": "/cardio-boxe-blagnac",
+      "destination": "/cours-de-boxe-blagnac/cardio-boxe/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/acces-contact/",
+      "permanent": true
+    },
+    {
+      "source": "/acces",
+      "destination": "/acces-contact/",
+      "permanent": true
+    },
+    {
+      "source": "/horaires",
+      "destination": "/acces-contact/",
+      "permanent": true
+    },
+    {
+      "source": "/plannings",
+      "destination": "/acces-contact/",
+      "permanent": true
+    },
+    {
+      "source": "/essai",
+      "destination": "/premiere-seance/",
+      "permanent": true
+    },
+    {
+      "source": "/premier-cours",
+      "destination": "/premiere-seance/",
+      "permanent": true
+    },
+    {
+      "source": "/questions",
+      "destination": "/faq/",
+      "permanent": true
     }
   ]
 }

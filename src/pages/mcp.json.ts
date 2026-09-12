@@ -6,14 +6,13 @@ export const GET: APIRoute = () => Response.json({
   schema_version: '1.0',
   name: 'club-de-boxe-blagnac-information-server',
   description:
-    'Read-only facts about the Club de Boxe Blagnac: identity, locality, opening hours, courses and trial-session terms.',
+    'Read-only facts about the Club de Boxe Blagnac: identity, locality, opening hours, courses, network and first-visit terms.',
   endpoint: '/api/mcp',
   transport: 'streamable-http',
   subject: {
     name: CLUB.name,
     type: 'SportsClub',
     sport: 'Boxe anglaise',
-    founded: CLUB.founded,
     locality: 'Blagnac (31700), Haute-Garonne, France',
     openingHours: 'Mon-Sat 10:00-21:30, closed Sunday',
     email: CLUB.email,

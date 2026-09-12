@@ -15,15 +15,17 @@
  * Any of those makes the club read as unbuilt, which is the one failure
  * mode this site cannot have.
  *
- * The outbound links in PARTNERS are a NETWORK of partner gyms across the
- * Toulouse area — presented as somewhere else you can also train, never as
- * the place that holds the answers this site is missing.
+ * The club belongs to the Boxing Center network (src/data/network.ts) and
+ * says so. Links to the other clubs present somewhere else you can also
+ * train — never the place that holds the answers this site is missing.
  * ---------------------------------------------------------------------
  */
 
 export type Discipline = {
   slug: string;
   name: string;
+  /** Anchor text for internal links: names the query, never "en savoir plus". */
+  linkLabel: string;
   summary: string;
   body: string;
   ages: string;
@@ -36,11 +38,8 @@ export type Discipline = {
 export const CLUB = {
   name: 'Club de Boxe Blagnac',
   tagline: 'Boxe anglaise à Blagnac, au nord-ouest de Toulouse.',
-  founded: 2011,
-  members: 240,
-  coaches: 6,
-  rings: 2,
-  weeklyClasses: 21,
+  /** The network the club belongs to. Disclosed on every page, never hidden. */
+  network: 'Boxing Center',
   /** Opening rhythm, stated as a fact — not a timetable grid. */
   openLine: 'Du lundi au samedi, de 10h à 21h30. Fermé le dimanche.',
   openShort: 'Lun – Sam · 10h – 21h30',
@@ -77,6 +76,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     slug: 'eveil-baby-boxing',
     name: 'Éveil — baby boxing',
+    linkLabel: 'Baby boxing à Blagnac, dès 3 ans',
     summary: 'La motricité avant la boxe, dès 3 ans.',
     body:
       'Nos séances d’éveil n’apprennent pas à frapper. Elles apprennent à tenir debout, à se déplacer, à réagir à un signal et à jouer avec un partenaire sans le bousculer. Parcours de motricité, jeux de réaction, sac mou : aucun contact, jamais. Les parents restent en salle s’ils le souhaitent.',
@@ -94,6 +94,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     slug: 'boxe-educative',
     name: 'Boxe éducative',
+    linkLabel: 'Boxe éducative enfant à Blagnac',
     summary: 'Boxe sans KO, de 7 à 12 ans.',
     body:
       'Touche légère, protections complètes, zéro recherche de puissance. Nos éducateurs travaillent la coordination, la lecture de la distance et le respect du partenaire — bien avant la frappe. Les séances passent par des jeux d’opposition plutôt que par des exercices imposés, et chaque enfant progresse à son rythme, sans classement.',
@@ -111,6 +112,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     slug: 'boxe-ados',
     name: 'Boxe ados',
+    linkLabel: 'Boxe ados à Blagnac, 13 à 17 ans',
     summary: 'Le passage vers la boxe adulte, 13–17 ans.',
     body:
       'Le groupe ados fait le pont entre l’éducative et le cours adulte. L’intensité monte progressivement, sous un cadre strict sur les protections. C’est aussi le moment où se décide, sans pression et sans que personne ne pousse, l’orientation vers la compétition ou vers une pratique de loisir.',
@@ -129,6 +131,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     slug: 'boxe-anglaise-loisir',
     name: 'Boxe anglaise — loisir',
+    linkLabel: 'Boxe anglaise adulte à Blagnac',
     summary: 'Technique et condition, sans obligation de combat.',
     body:
       'Le cours de fond du club, et celui par lequel passent la plupart de nos adhérents. On y apprend la garde, le déplacement et les enchaînements, puis on les répète jusqu’à ce qu’ils tiennent sous fatigue. L’opposition se fait au gant, en touche contrôlée : personne n’est mis en difficulté pour le principe, et personne n’est obligé de monter sur un ring.',
@@ -147,6 +150,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     slug: 'boxe-competition',
     name: 'Boxe anglaise — compétition',
+    linkLabel: 'Boxe anglaise compétition à Blagnac',
     summary: 'Le groupe qui monte sur le ring.',
     body:
       'Groupe restreint, accès sur avis de nos entraîneurs après au moins une saison chez nous. Le volume monte, le sparring devient hebdomadaire et le travail se construit autour d’un calendrier de rencontres. La sélection n’est pas un jugement : elle protège des boxeurs qui n’ont pas encore les automatismes pour tenir un rythme de combat.',
@@ -164,6 +168,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     slug: 'cardio-boxe',
     name: 'Cardio boxe',
+    linkLabel: 'Cardio boxe à Blagnac, sans contact',
     summary: 'Le geste de boxe, sans opposition.',
     body:
       'Déplacements, enchaînements, travail au sac et circuits de renforcement. Aucune opposition, aucun contact, jamais. C’est le format que choisissent les adhérents qui veulent la charge de travail de la boxe sans sa dimension d’affrontement — et c’est souvent par là qu’on bascule ensuite vers le cours loisir.',
@@ -180,66 +185,27 @@ export const DISCIPLINES: Discipline[] = [
   }
 ];
 
-/** Trust signals. Concrete, countable, and stated without hedging. */
+/** Trust signals. Every figure is a fact the site states elsewhere. */
 export const PROOF = [
-  {
-    figure: '2011',
-    label: 'Première séance',
-    detail: 'Quinze saisons sans en manquer une seule.'
-  },
-  {
-    figure: '1/3',
-    label: 'De femmes sur le tapis',
-    detail: 'Sur tous les cours, sans créneau séparé.'
-  },
   {
     figure: '3 ans',
     label: 'Le plus jeune sur le tapis',
     detail: 'L’éveil commence avant de savoir lacer ses chaussures.'
   },
   {
+    figure: '6',
+    label: 'Cours, de l’éveil à la compétition',
+    detail: 'Un seul sport, six façons de le pratiquer.'
+  },
+  {
+    figure: '6/7',
+    label: 'Jours d’ouverture',
+    detail: 'Du lundi au samedi, de 10h à 21h30.'
+  },
+  {
     figure: '0',
     label: 'Opposition au premier cours',
     detail: 'On regarde d’abord comment vous vous déplacez.'
-  }
-];
-
-export const TESTIMONIALS = [
-  {
-    quote:
-      'Je n’avais jamais mis un gant. Au bout de trois séances je savais me déplacer, au bout de trois mois je tenais un round complet. Personne ne m’a jamais fait sentir que j’étais en retard.',
-    name: 'Marion',
-    detail: 'Cours loisir · adhérente depuis 2023'
-  },
-  {
-    quote:
-      'Mon fils a commencé l’éveil à 4 ans. Ce qui m’a convaincue, c’est qu’on ne lui a pas appris à taper : on lui a appris à se tenir, à écouter, à attendre son tour. Il y va en courant.',
-    name: 'Sabrina',
-    detail: 'Parent · groupe éveil'
-  },
-  {
-    quote:
-      'J’ai fait deux salles avant celle-ci. La différence, c’est la correction : ici on te reprend à chaque séance, pas une fois par trimestre. C’est fatigant et c’est exactement ce que je cherchais.',
-    name: 'Karim',
-    detail: 'Groupe compétition'
-  },
-  {
-    quote:
-      'Je viens le midi, trois fois par semaine, et je repars travailler. Le cardio boxe m’a remis en forme sans que j’aie jamais eu à encaisser un coup. C’était ma condition pour commencer.',
-    name: 'Élodie',
-    detail: 'Cardio boxe · adhérente depuis 2024'
-  },
-  {
-    quote:
-      'À 52 ans, je pensais être trop vieux. On m’a mis avec des gens de mon niveau, pas de mon âge, et ça a tout changé. Deux saisons plus tard je n’ai pas manqué un lundi.',
-    name: 'Patrick',
-    detail: 'Cours loisir · adhérent depuis 2024'
-  },
-  {
-    quote:
-      'Ma fille est arrivée très timide à 14 ans. Elle ne fera jamais de compétition et personne ne le lui a jamais demandé. Elle a juste gagné une façon de se tenir droite.',
-    name: 'Nadia',
-    detail: 'Parent · groupe ados'
   }
 ];
 
@@ -304,7 +270,7 @@ export const FAQ: { question: string; answer: string }[] = [
   {
     question: 'Quels cours proposez-vous ?',
     answer:
-      'Six cours de boxe anglaise : éveil dès 3 ans, boxe éducative de 7 à 12 ans, groupe ados de 13 à 17 ans, loisir adulte, compétition et cardio boxe sans opposition. Vingt et un créneaux par semaine, six jours sur sept.'
+      'Six cours de boxe anglaise : éveil dès 3 ans, boxe éducative de 7 à 12 ans, groupe ados de 13 à 17 ans, loisir adulte, compétition et cardio boxe sans opposition. Du lundi au samedi, de 10h à 21h30.'
   },
   {
     question: 'Je n’ai jamais boxé. Est-ce que je peux venir ?',
@@ -334,41 +300,12 @@ export const FAQ: { question: string; answer: string }[] = [
   {
     question: 'Le club accueille-t-il les femmes ?',
     answer:
-      'Oui, sur tous les cours, sans créneau séparé. Un tiers de nos adhérents sont des adhérentes, y compris dans le groupe compétition.'
+      'Oui, sur tous les cours, sans créneau séparé. Les adhérentes s’entraînent avec tout le monde, y compris dans le groupe compétition.'
   },
   {
     question: 'Quand peut-on s’inscrire ?',
     answer:
       'Toute l’année. La saison court de septembre à fin juin et les arrivées en cours d’année sont calculées au prorata des mois restants. Nous fermons aux vacances de Noël et au mois d’août.'
-  }
-];
-
-/**
- * Partner gyms across the Toulouse area. Presented as somewhere else you can
- * also train — a network, not a referral for information we lack.
- */
-export type Partner = {
-  name: string;
-  short: string;
-  url: string;
-  area: string;
-  covers: string;
-  links: { label: string; url: string }[];
-};
-
-export const PARTNERS: Partner[] = [
-  {
-    name: 'Toulouse Minimes Boxing Club',
-    short: 'TMBC',
-    url: 'https://toulouse-minimes-boxing-club.fr/',
-    area: 'Minimes · Barrière de Paris · Métro B',
-    covers:
-      'Notre club partenaire au nord de Toulouse. Même exigence technique, même accueil des débutants, et une boxe éducative enfants dès 3 ans. Si les Minimes sont plus proches de chez vous ou de votre travail, allez les voir de notre part.',
-    links: [
-      { label: 'Le club', url: 'https://toulouse-minimes-boxing-club.fr/club' },
-      { label: 'Les activités', url: 'https://toulouse-minimes-boxing-club.fr/activites' },
-      { label: 'La galerie', url: 'https://toulouse-minimes-boxing-club.fr/galerie' }
-    ]
   }
 ];
 

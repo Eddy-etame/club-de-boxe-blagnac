@@ -11,8 +11,8 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PartnerCta from '@/components/PartnerCta.astro';
 import ContactForm from '@/components/ContactForm.astro';
-import { CLUB, DISCIPLINES, TESTIMONIALS } from '@/data/club';
-import { absoluteUrl } from '@/data/site';
+import { CLUB, DISCIPLINES } from '@/data/club';
+import { courseId, courseNode } from '@/data/schema';
 
 export function getStaticPaths() {
   return DISCIPLINES.map((discipline) => ({
@@ -66,28 +66,8 @@ const SEO: Record<string, { title: string; description: string; intent: string }
 
 const seo = SEO[discipline.slug];
 const others = DISCIPLINES.filter((d) => d.slug !== discipline.slug);
-const voice = TESTIMONIALS[DISCIPLINES.indexOf(discipline) % TESTIMONIALS.length];
 const largest = discipline.image.widths[discipline.image.widths.length - 1];
 
-const courseSchema = {
-  '@type': 'Course',
-  '@id': `${absoluteUrl(url)}#course`,
-  name: discipline.name,
-  url: absoluteUrl(url),
-  description: discipline.body,
-  abstract: discipline.summary,
-  inLanguage: 'fr-FR',
-  teaches: discipline.session,
-  typicalAgeRange: discipline.ages,
-  educationalLevel: discipline.contact,
-  courseMode: 'onsite',
-  hasCourseInstance: {
-    '@type': 'CourseInstance',
-    courseMode: 'onsite',
-    courseSchedule: { '@type': 'Schedule', description: discipline.rhythm },
-    inLanguage: 'fr-FR'
-  }
-};
 ---
 
 <BaseLayout
@@ -95,8 +75,10 @@ const courseSchema = {
   description={seo.description}
   pathname={url}
   topTone="dark"
-  schema={courseSchema}
-  speakable={['.course-page__summary', '.course-page__body']}
+  schema={courseNode(discipline.slug)}
+  mainEntity={courseId(discipline.slug)}
+  crumbs={[{ name: 'Cours de boxe à Blagnac', path: '/cours-de-boxe-blagnac/' }, { name: discipline.name, path: url }]}
+  network={discipline.slug}
   imageAlt={discipline.image.alt}
 >
   <header class="page-hero course-page-hero">
@@ -118,7 +100,7 @@ const courseSchema = {
       <div class="prose course-page__body">
         <p>{discipline.body}</p>
         <p>
-          Ce cours fait partie des <a href="/cours-de-boxe-blagnac/">six cours du Club de Boxe Blagnac</a>, ouvert depuis {CLUB.founded} au nord-ouest de Toulouse. {CLUB.openLine}
+          Ce cours fait partie des <a href="/cours-de-boxe-blagnac/">six cours du Club de Boxe Blagnac</a>, membre du réseau Boxing Center, au nord-ouest de Toulouse. {CLUB.openLine}
         </p>
       </div>
 
@@ -157,15 +139,6 @@ const courseSchema = {
     </div>
   </section>
 
-  <section class="course-page-voice shell">
-    <figure class="voice voice--wide reveal">
-      <blockquote><p>{voice.quote}</p></blockquote>
-      <figcaption>
-        <span class="voice__name">{voice.name}</span>
-        <span class="voice__detail">{voice.detail}</span>
-      </figcaption>
-    </figure>
-  </section>
 
   <section class="course-page-others shell" aria-labelledby="others-title">
     <div class="section-heading">
@@ -199,8 +172,9 @@ const courseSchema = {
   </section>
 
   <PartnerCta
-    heading={'Trop loin de Blagnac ?'}
-    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+    context={discipline.slug}
+    heading="Ce cours, ailleurs dans le réseau."
+    intro="Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Si un autre club est plus proche de chez vous ou de votre travail, allez le voir de notre part."
     tone="light"
   />
 </BaseLayout>
@@ -304,56 +278,6 @@ const courseSchema = {
     font-family: var(--font-mono);
     font-size: 0.64rem;
     letter-spacing: 0.06em;
-  }
-
-  .course-page-voice {
-    padding-block: clamp(3rem, 6vw, 6rem);
-  }
-
-  .voice--wide {
-    display: grid;
-    gap: 1.6rem;
-    max-width: 58rem;
-    margin: 0 auto;
-    padding: clamp(1.6rem, 3vw, 2.6rem);
-    border: 1px solid var(--line);
-  }
-
-  .voice--wide blockquote {
-    margin: 0;
-  }
-
-  .voice--wide blockquote p {
-    font-size: clamp(1.15rem, 2.2vw, 1.7rem);
-    font-variation-settings: 'wdth' 92, 'wght' 520;
-    line-height: 1.35;
-  }
-
-  .voice--wide blockquote p::before {
-    content: '“';
-    color: var(--signal);
-    font-size: 1.5em;
-    line-height: 0;
-    vertical-align: -0.28em;
-  }
-
-  .voice--wide figcaption {
-    display: grid;
-    gap: 0.2rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--line);
-  }
-
-  .voice__name {
-    font-variation-settings: 'wdth' 90, 'wght' 720;
-  }
-
-  .voice__detail {
-    color: var(--signal);
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
   }
 
   .course-page-others {

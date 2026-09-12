@@ -5,17 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && node scripts/audit-build.mjs && node --experimental-strip-types --no-warnings scripts/test-pow.mjs && node scripts/test-api.mjs",
+    "build": "node scripts/lastmod.mjs && astro check && astro build && node scripts/audit-build.mjs && node --experimental-strip-types --no-warnings scripts/test-pow.mjs && node scripts/test-api.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "audit": "node scripts/audit-build.mjs",
     "test:api": "node scripts/test-api.mjs",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "lastmod": "node scripts/lastmod.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "5.3.0",
+    "@fontsource/archivo-narrow": "^5.3.0",
     "@fontsource/ibm-plex-mono": "5.3.0",
-    "astro": "7.2.0"
+    "@resvg/resvg-js": "^2.6.2",
+    "astro": "7.2.0",
+    "satori": "^0.33.4",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@astrojs/check": "latest",

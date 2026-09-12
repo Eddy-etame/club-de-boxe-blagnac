@@ -4,9 +4,9 @@ import PartnerCta from '@/components/PartnerCta.astro';
 import { CLUB, DISCIPLINES } from '@/data/club';
 import { disciplineList } from '@/data/schema';
 
-const title = 'Cours de boxe à Blagnac — 6 cours, 21 créneaux par semaine';
+const title = 'Cours de boxe à Blagnac — six cours, dès 3 ans';
 const description =
-  'Nos 6 cours de boxe anglaise à Blagnac : éveil dès 3 ans, éducative, ados, loisir, compétition, cardio boxe. 21 créneaux par semaine. Écrivez-nous.';
+  'Nos six cours de boxe anglaise à Blagnac : baby boxing dès 3 ans, boxe éducative, ados, loisir adulte, compétition et cardio boxe. Du lundi au samedi.';
 
 ---
 
@@ -14,11 +14,11 @@ const description =
   {title}
   {description}
   pathname="/cours-de-boxe-blagnac/"
+  network="hub"
   topTone="dark"
   pageType="CollectionPage"
   withCourses
   schema={disciplineList()}
-  speakable={['#formats-title', '.course-item__summary']}
   imageAlt="Cours collectif de boxe anglaise, travail au sac de frappe"
 >
   <header class="page-hero course-hero">
@@ -29,7 +29,7 @@ const description =
       </div>
       <h1>Cours de boxe <em>à Blagnac</em></h1>
       <div class="page-hero__bottom">
-        <p class="page-hero__lead">Six cours, {CLUB.weeklyClasses} créneaux par semaine, six jours sur sept. Ce qui change, c’est l’âge et le niveau de contact — jamais l’exigence technique.</p>
+        <p class="page-hero__lead">Six cours, six jours sur sept, de l’éveil à 3 ans au groupe compétition. Ce qui change, c’est l’âge et le niveau de contact — jamais l’exigence technique.</p>
         <p class="page-hero__note">{CLUB.openLine} Écrivez-nous pour le cours qui vous intéresse.</p>
       </div>
     </div>
@@ -98,7 +98,7 @@ const description =
                 {d.session.map((step) => <li>{step}</li>)}
               </ol>
               <p class="course-item__more">
-                <a href={`/cours-de-boxe-blagnac/${d.slug}/`}>Tout savoir sur ce cours →</a>
+                <a href={`/cours-de-boxe-blagnac/${d.slug}/`}>{d.linkLabel} →</a>
               </p>
             </div>
           </article>
@@ -130,9 +130,9 @@ const description =
   </section>
 
   <PartnerCta
-    eyebrow="Notre réseau"
-    heading="Trop loin de Blagnac ?"
-    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+    context="hub"
+    heading="Les mêmes cours, ailleurs dans le réseau."
+    intro="Si Toulouse est plus pratique pour vous, les autres clubs Boxing Center de l’agglomération publient leurs activités et leurs horaires."
   />
 </BaseLayout>
 

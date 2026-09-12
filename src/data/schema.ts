@@ -22,9 +22,12 @@
  *    adding any new one.
  */
 
-import { CLUB, DISCIPLINES, GEAR, FAQ, PARTNERS } from './club';
+import { CLUB, DISCIPLINES, GEAR, FAQ } from './club';
+import { NETWORK, NETWORK_CLUBS, type NetworkClub } from './network';
 import { LOCATION } from './seo-map';
-import { SITE, absoluteUrl } from './site';
+import { SITE, PUBLIC_PAGES, absoluteUrl } from './site';
+import { pageLastModified, siteLastModified } from '../lib/lastmod';
+import { ROUTES, ogId } from './routes';
 
 const ENTITY = {
   boxing: {
@@ -78,30 +81,33 @@ const websiteNode = {
   about: { '@id': id('subject') },
   spatialCoverage: { '@id': id('place') },
   publisher: { '@id': id('publisher') },
-  dateModified: SITE.lastModified
+  dateModified: siteLastModified(),
+  hasPart: PUBLIC_PAGES.map((path) => ({ '@id': absoluteUrl(path) + '#webpage' }))
 };
 
 /**
- * The club itself. A SportsActivityLocation with a postal address, opening
- * hours and a phone is what earns a local pack listing and a knowledge panel —
- * an Organization without them earns nothing. Every value comes from CLUB in
+ * The club itself: a SportsClub of the Boxing Center network, located at
+ * commune level, with its real opening hours. Every value comes from CLUB in
  * club.ts, so the markup can never drift from the visible page.
  */
 const publisherNode = {
   '@type': ['SportsClub', 'SportsActivityLocation', 'LocalBusiness'],
   '@id': id('publisher'),
   name: CLUB.name,
-  legalName: CLUB.name,
   url: `${SITE.url}/`,
   description:
-    'Club de boxe anglaise à Blagnac, au nord-ouest de Toulouse. Six cours du baby boxing dès 3 ans au groupe compétition, 21 créneaux par semaine.',
+    'Club de boxe anglaise à Blagnac, au nord-ouest de Toulouse, membre du réseau Boxing Center. Six cours, du baby boxing dès 3 ans au groupe compétition, du lundi au samedi.',
   slogan: CLUB.tagline,
-  foundingDate: String(CLUB.founded),
+  /* Blagnac has other boxing associations, one with a near-identical name.
+     Stated so answer engines keep the entities apart. */
+  disambiguatingDescription:
+    'Club de boxe anglaise du réseau Boxing Center à Blagnac, distinct des autres associations de boxe de la commune.',
   sport: { '@id': id('subject') },
   email: CLUB.email,
   image: { '@id': id('primaryimage') },
-  logo: absoluteUrl('/favicon.svg'),
+  logo: { '@type': 'ImageObject', url: absoluteUrl('/icon-512.png'), width: 512, height: 512 },
   currenciesAccepted: 'EUR',
+  knowsLanguage: ['fr-FR', 'en'],
   publicAccess: true,
   isAccessibleForFree: false,
   /* Locality only. A streetAddress and telephone would have to be invented,
@@ -114,7 +120,14 @@ const publisherNode = {
     addressRegion: LOCATION.region,
     addressCountry: 'FR'
   },
-  areaServed: [{ '@id': id('place') }],
+  areaServed: [
+    { '@id': id('place') },
+    ...NEARBY_ENTITIES.map((c) => ({
+      '@type': 'City',
+      name: c.name,
+      sameAs: 'https://www.wikidata.org/wiki/' + c.qid
+    }))
+  ],
   location: { '@id': id('place') },
   openingHoursSpecification: [
     {
@@ -132,7 +145,7 @@ const publisherNode = {
     }
   ],
   amenityFeature: [
-    { '@type': 'LocationFeatureSpecification', name: 'Deux rings', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Ring de boxe', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Salle de sacs', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Espace de renforcement', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Vestiaires', value: true }
@@ -141,7 +154,17 @@ const publisherNode = {
     { '@id': id('subject') },
     ...DISCIPLINES.map((d) => ({ '@id': id(`course-${d.slug}`) }))
   ],
-  subOrganization: PARTNERS.map((_, i) => ({ '@id': id(`partner-${i}`) }))
+  parentOrganization: { '@id': NETWORK.graphId },
+  potentialAction: {
+    '@type': 'CommunicateAction',
+    name: 'Nous écrire',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: absoluteUrl('/acces-contact/#contact'),
+      inLanguage: 'fr-FR',
+      actionPlatform: ['https://schema.org/DesktopWebPlatform', 'https://schema.org/MobileWebPlatform']
+    }
+  }
 };
 
 /** The sport itself, disambiguated. Not "boxing" in general — English boxing. */
@@ -188,12 +211,7 @@ const placeNode = {
         containedInPlace: { '@type': 'Country', name: 'France' }
       }
     }
-  },
-  nearbyAttraction: NEARBY_ENTITIES.map((c) => ({
-    '@type': 'AdministrativeArea',
-    name: c.name,
-    sameAs: `https://www.wikidata.org/wiki/${c.qid}`
-  }))
+  }
 };
 
 /**
@@ -201,11 +219,13 @@ const placeNode = {
  * "a structured programme of instruction" — far more precise than dropping
  * everything into ItemList, and eligible for course-specific treatment.
  */
+export const courseId = (slug: string) => id(`course-${slug}`);
+
 const courseNodes = DISCIPLINES.map((d) => ({
   '@type': 'Course',
-  '@id': id(`course-${d.slug}`),
+  '@id': courseId(d.slug),
   name: d.name,
-  url: `${absoluteUrl('/cours-de-boxe-blagnac/')}#${d.slug}`,
+  url: absoluteUrl(`/cours-de-boxe-blagnac/${d.slug}/`),
   description: d.body,
   abstract: d.summary,
   inLanguage: 'fr-FR',
@@ -225,6 +245,13 @@ const courseNodes = DISCIPLINES.map((d) => ({
     inLanguage: 'fr-FR'
   }
 }));
+
+/** One course node, shared by the hub and the course's own page. */
+export function courseNode(slug: string) {
+  const node = courseNodes.find((c) => c['@id'] === courseId(slug));
+  if (!node) throw new Error('schema.ts: unknown course ' + slug);
+  return node;
+}
 
 /**
  * A glossary of the vocabulary the pages actually use. Answer engines lean on
@@ -320,16 +347,34 @@ const imageNode = {
   contentLocation: { '@id': id('publisher') }
 };
 
-/** The outbound clubs, so the handoff is machine-readable too. */
-const partnerNodes = PARTNERS.map((club, i) => ({
+/**
+ * The Boxing Center network and its other clubs. Their @id values are the
+ * ones the network's own sites publish (see src/data/network.ts), so crawlers
+ * merge these nodes with theirs instead of minting duplicates.
+ */
+const clubGraphId = (c: NetworkClub) => c.graphId ?? id(`network-${c.id}`);
+
+const networkNode = {
+  '@type': 'Organization',
+  '@id': NETWORK.graphId,
+  name: NETWORK.name,
+  url: NETWORK.url,
+  sameAs: [...NETWORK.sameAs],
+  subOrganization: [
+    { '@id': id('publisher') },
+    ...NETWORK_CLUBS.filter((c) => c.inNetwork).map((c) => ({ '@id': clubGraphId(c) }))
+  ]
+};
+
+const partnerNodes = NETWORK_CLUBS.map((club) => ({
   '@type': 'SportsClub',
-  '@id': id(`partner-${i}`),
+  '@id': clubGraphId(club),
   name: club.name,
-  alternateName: club.short,
   url: club.url,
-  description: club.covers,
+  description: club.pitch,
   sport: { '@id': id('subject') },
-  sameAs: club.url
+  address: { '@type': 'PostalAddress', addressLocality: club.locality, addressCountry: 'FR' },
+  ...(club.inNetwork ? { parentOrganization: { '@id': NETWORK.graphId } } : {})
 }));
 
 /* ------------------------------------------------------------------ *
@@ -343,8 +388,10 @@ export type GraphOptions = {
   title: string;
   description: string;
   pageType?: PageKind;
-  /** Sentences a voice assistant should read aloud, as CSS selectors. */
-  speakable?: string[];
+  /** Trail below Accueil for deep pages; defaults to the page itself. */
+  crumbs?: { name: string; path: string }[];
+  /** @id of the entity the page is about. */
+  mainEntity?: string;
   /** Extra nodes specific to this page (HowTo, ItemList…). */
   extra?: Record<string, unknown>[];
   /** Include the full course + glossary reference layer. */
@@ -358,7 +405,8 @@ export function buildGraph({
   title,
   description,
   pageType = 'WebPage',
-  speakable,
+  crumbs,
+  mainEntity,
   extra = [],
   withCourses = false,
   withFaq = false
@@ -377,14 +425,23 @@ export function buildGraph({
     about: { '@id': id('subject') },
     mentions: [{ '@id': id('place') }, { '@id': id('subject') }],
     primaryImageOfPage: { '@id': id('primaryimage') },
-    dateModified: SITE.lastModified,
+    dateModified: pageLastModified(pathname),
     datePublished: '2026-09-04',
     isAccessibleForFree: true
   };
 
-  if (speakable) {
-    pageNode.speakable = { '@type': 'SpeakableSpecification', cssSelector: speakable };
+  /* The page's own card, in both ratios; Google prefers the square one. */
+  const route = ROUTES.find((r) => r.path === pathname);
+  if (route) {
+    const card = absoluteUrl('/og/' + ogId(route.path));
+    pageNode.image = [
+      { '@type': 'ImageObject', url: card + '.jpg', width: 1200, height: 630 },
+      { '@type': 'ImageObject', url: card + '-carre.jpg', width: 1200, height: 1200 }
+    ];
   }
+
+  if (mainEntity) pageNode.mainEntity = { '@id': mainEntity };
+  else if (withFaq) pageNode.mainEntity = { '@id': `${canonical}#faq` };
 
   if (!isHome) {
     pageNode.breadcrumb = { '@id': `${canonical}#breadcrumb` };
@@ -397,6 +454,7 @@ export function buildGraph({
     placeNode,
     imageNode,
     pageNode,
+    networkNode,
     ...partnerNodes
   ];
 
@@ -405,9 +463,9 @@ export function buildGraph({
       '@type': 'BreadcrumbList',
       '@id': `${canonical}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/` },
-        { '@type': 'ListItem', position: 2, name: title.split(/[—|:]/)[0].trim(), item: canonical }
-      ]
+        { name: 'Accueil', path: '/' },
+        ...(crumbs ?? [{ name: title.split(/[—|:]/)[0].trim(), path: pathname }])
+      ].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: absoluteUrl(c.path) }))
     });
   }
 

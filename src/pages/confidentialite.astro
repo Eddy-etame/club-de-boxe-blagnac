@@ -1,22 +1,24 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { CLUB } from '@/data/club';
+import { NETWORK } from '@/data/network';
 
-const title = 'Confidentialité | Club de Boxe Blagnac–Toulouse';
-const description = 'Formulaire de contact du site sur la boxe à Blagnac : quelles données sont transmises, à qui, pour quoi faire, et pendant combien de temps.';
+const title = 'Confidentialité — Club de Boxe Blagnac';
+const description =
+  'Ce que devient votre demande envoyée au Club de Boxe Blagnac : données collectées, finalité, destinataires, durée de conservation et vos droits.';
+const mail = 'mailto:' + CLUB.email;
 ---
 
-<BaseLayout {title} {description} pathname="/confidentialite/"
-  topTone="dark"
->
+<BaseLayout {title} {description} pathname="/confidentialite/" topTone="dark">
   <header class="page-hero legal-hero">
     <div class="shell">
       <div class="page-hero__meta">
         <p class="eyebrow eyebrow--signal">Données · Transparence</p>
-        <p class="mono">Version du 04.09.2026</p>
+        <p class="mono">Version du 12.09.2026</p>
       </div>
       <h1>Vos données restent dans <em>votre demande.</em></h1>
       <div class="page-hero__bottom">
-        <p class="page-hero__lead">Le formulaire recueille uniquement ce qui est nécessaire pour comprendre votre message et vous répondre.</p>
+        <p class="page-hero__lead">Le formulaire recueille ce qu’il faut pour vous répondre, et rien d’autre. Pas de revente, pas de publicité, pas de profilage.</p>
       </div>
     </div>
   </header>
@@ -25,22 +27,27 @@ const description = 'Formulaire de contact du site sur la boxe à Blagnac : quel
     <div class="page-copy__grid">
       <p class="eyebrow">Règles de traitement</p>
       <div class="prose">
+        <h2>Responsable du traitement</h2>
+        <p>{NETWORK.name}, éditeur de ce site et réseau auquel appartient le {CLUB.name}. Ses coordonnées complètes figurent dans les <a href="/mentions-legales/">mentions légales</a>. Pour toute question sur vos données : <a href={mail}>{CLUB.email}</a>.</p>
+
         <h2>Données collectées</h2>
-        <p>Le formulaire peut transmettre votre nom, votre adresse e-mail, l’objet de votre demande et votre message. Le champ anti-spam et l’heure de début de saisie servent uniquement à filtrer les envois automatisés.</p>
+        <p>Uniquement ce que vous saisissez dans le formulaire : votre nom, votre adresse e-mail, votre téléphone si vous choisissez de le donner, le cours qui vous intéresse et votre message.</p>
+        <p>Trois éléments techniques accompagnent l’envoi pour écarter les robots : un champ invisible qu’un humain laisse vide, l’heure de début de saisie, et un court calcul effectué par votre navigateur. Aucun ne vous identifie.</p>
 
-        <h2>Finalité et base</h2>
-        <p>Ces informations sont utilisées pour répondre à votre demande, sur la base de votre consentement. Elles ne servent pas à une réservation automatique, à une publicité comportementale ou à une revente.</p>
+        <h2>Finalité et base légale</h2>
+        <p>Vous répondre, vous indiquer le cours et le créneau adaptés à votre âge et à votre niveau, et, si un autre club du réseau {NETWORK.name} est plus proche de chez vous, vous orienter vers lui. Le traitement repose sur votre consentement, donné en cochant la case du formulaire, et sur les échanges préalables à l’inscription que vous sollicitez.</p>
 
-        <h2>Destinataires et durée</h2>
-        <p>Les données sont transmises par e-mail à l’adresse de contact du site, via le prestataire d’envoi configuré au déploiement. Elles ne sont ni revendues, ni utilisées à des fins publicitaires, ni transmises à un tiers autre que ce prestataire technique. L’identité du responsable de traitement et la durée exacte de conservation seront précisées avant l’ouverture publique du formulaire.</p>
+        <h2>Destinataires</h2>
+        <p>L’équipe du club et du réseau {NETWORK.name} chargée de vous répondre. Le message est acheminé par Inlett, service technique de relais de formulaires, jusqu’à notre messagerie, hébergée par Google. Le site est hébergé par Vercel Inc. Ces prestataires agissent pour notre compte et n’utilisent pas vos données à leurs propres fins. Lorsque des données transitent hors de l’Union européenne, elles sont couvertes par les garanties prévues par le RGPD, notamment les clauses contractuelles types de la Commission européenne.</p>
+
+        <h2>Durée de conservation</h2>
+        <p>Trois ans au plus après notre dernier échange si votre demande reste sans suite, conformément aux recommandations de la CNIL. Si vous vous inscrivez, vos données rejoignent votre dossier d’adhérent pour la durée de l’adhésion.</p>
+
+        <h2>Cookies et stockage</h2>
+        <p>Ce site ne dépose aucun cookie et n’utilise ni traceur publicitaire ni outil de mesure d’audience. Le seul stockage utilisé est la mémoire de session de votre navigateur, pour ne pas réafficher un encart que vous avez fermé : elle ne quitte jamais votre appareil et s’efface à la fermeture de l’onglet.</p>
 
         <h2>Vos droits</h2>
-        <p>Vous pourrez demander l’accès, la rectification ou la suppression de vos données via les coordonnées légales qui seront publiées avant le lancement indexable.</p>
-
-        <div class="notice">
-          <strong>Formulaire en préconfiguration.</strong>
-          <p>Tant que le destinataire légal et les paramètres d’envoi ne sont pas configurés, l’interface peut signaler que la messagerie n’est pas disponible.</p>
-        </div>
+        <p>Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation, d’opposition et de portabilité, et vous pouvez retirer votre consentement à tout moment. Écrivez à <a href={mail}>{CLUB.email}</a> : nous répondons dans un délai d’un mois. Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL sur <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">cnil.fr</a>.</p>
       </div>
     </div>
   </article>
@@ -59,9 +66,5 @@ const description = 'Formulaire de contact du site sur la boxe à Blagnac : quel
 
   .legal h2:first-child {
     margin-top: 0;
-  }
-
-  .legal .notice {
-    margin-top: 3rem;
   }
 </style>

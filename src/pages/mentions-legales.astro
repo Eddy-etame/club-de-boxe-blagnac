@@ -1,0 +1,115 @@
+---
+/**
+ * Legal notice, modelled on the other Boxing Center network sites: the
+ * network is the editor, Vercel is the host. Only identifiers that exist in
+ * a network source are printed; nothing is made up to fill a field.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { CLUB } from '@/data/club';
+import { NETWORK } from '@/data/network';
+
+const title = 'Mentions légales — Club de Boxe Blagnac';
+const description =
+  'Mentions légales du Club de Boxe Blagnac : éditeur Boxing Center, hébergement Vercel, propriété des photographies et liens vers les clubs du réseau.';
+const clubMail = 'mailto:' + CLUB.email;
+const editorMail = 'mailto:' + NETWORK.editor.email;
+const editorTel = 'tel:' + NETWORK.editor.phoneLink;
+const networkHost = NETWORK.url.replace('https://', '').replace(/\/$/, '');
+---
+
+<BaseLayout {title} {description} pathname="/mentions-legales/" topTone="dark">
+  <header class="page-hero legal-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">Éditeur · Hébergement</p>
+        <p class="mono">Version du 12.09.2026</p>
+      </div>
+      <h1>Mentions <em>légales.</em></h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead">Qui publie ce site, qui l’héberge, et à qui appartiennent ses images.</p>
+      </div>
+    </div>
+  </header>
+
+  <article class="legal shell page-copy">
+    <div class="page-copy__grid">
+      <p class="eyebrow">Informations légales</p>
+      <div class="prose">
+        <h2>Éditeur du site</h2>
+        <p>Le site www.club-boxe-blagnac.fr est édité par {NETWORK.name}, réseau de clubs de boxe de l’agglomération toulousaine auquel appartient le {CLUB.name}.</p>
+        <dl class="legal__card">
+          <div><dt>Dénomination</dt><dd>{NETWORK.name}</dd></div>
+          <div><dt>Établissement principal</dt><dd>{NETWORK.editor.address}</dd></div>
+          <div><dt>Téléphone</dt><dd><a href={editorTel}>{NETWORK.editor.phone}</a></dd></div>
+          <div><dt>Courriel</dt><dd><a href={editorMail}>{NETWORK.editor.email}</a></dd></div>
+          <div><dt>Site du réseau</dt><dd><a href={NETWORK.url} rel="noopener">{networkHost}</a></dd></div>
+          <div><dt>Directeur de la publication</dt><dd>Le représentant légal de {NETWORK.name}</dd></div>
+        </dl>
+
+        <h2>Club de Boxe Blagnac</h2>
+        <p>Pour une question sur nos cours, une inscription ou une première venue, écrivez au club : <a href={clubMail}>{CLUB.email}</a>, ou passez par le <a href="/acces-contact/#contact">formulaire de contact</a>. {CLUB.openLine}</p>
+
+        <h2>Hébergement</h2>
+        <p>Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis — <a href="https://vercel.com" rel="noopener">vercel.com</a>.</p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>La marque, le logo et les éléments d’identité {NETWORK.name} sont la propriété de leurs titulaires. Les photographies de ce site sont l’œuvre d’Axel Derewiany et sont créditées comme telles ; toute reproduction sans autorisation est interdite. Les textes appartiennent à l’éditeur.</p>
+
+        <h2>Liens vers le réseau</h2>
+        <p>Ce site renvoie vers les sites des autres clubs {NETWORK.name}. Le contenu de ces sites relève de leurs éditeurs respectifs.</p>
+
+        <h2>Données personnelles</h2>
+        <p>Ce que devient une demande envoyée par le formulaire, et comment exercer vos droits : voir la page <a href="/confidentialite/">confidentialité</a>.</p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-hero h1 {
+    max-width: 12ch;
+    font-size: clamp(3.7rem, 10vw, 10rem);
+  }
+
+  .legal h2 {
+    margin-top: 2.4rem;
+    font-size: clamp(2rem, 4vw, 4rem);
+  }
+
+  .legal h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal__card {
+    display: grid;
+    margin: 1.6rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .legal__card > div {
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    gap: 0.4rem 1.5rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .legal__card dt {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .legal__card dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 40rem) {
+    .legal__card > div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

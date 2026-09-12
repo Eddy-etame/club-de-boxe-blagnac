@@ -11,6 +11,12 @@ const hasConfirmedUrl = Boolean(
 const releaseValidated =
   import.meta.env.PUBLIC_RELEASE_VALIDATED === 'identity-legal-photo-rights-confirmed';
 
+/* Vercel preview deployments share the production env vars, so they would
+   otherwise be indexable. Only the production deployment may be indexed;
+   local builds carry no VERCEL_ENV. */
+const vercelEnv = globalThis.process?.env?.VERCEL_ENV;
+const isPreview = Boolean(vercelEnv && vercelEnv !== 'production');
+
 export const SITE = {
   name: 'Club de Boxe Blagnac',
   shortName: 'CB / BLG',
@@ -20,13 +26,13 @@ export const SITE = {
   indexable:
     import.meta.env.PUBLIC_SITE_INDEXABLE === 'true'
     && hasConfirmedUrl
-    && releaseValidated,
+    && releaseValidated
+    && !isPreview,
   locale: 'fr_FR',
   lang: 'fr',
-  lastModified: '2026-09-04',
   area: `${AREA.city}, ${AREA.position}`,
   description:
-    'Club de boxe anglaise à Blagnac (31700) depuis 2011. Six cours de l’éveil dès 3 ans au groupe compétition, 21 créneaux par semaine. Écrivez-nous.',
+    'Club de boxe anglaise à Blagnac (31700), réseau Boxing Center : six cours, du baby boxing dès 3 ans au groupe compétition, du lundi au samedi. Écrivez-nous.',
   socialImage: '/images/og-club-boxe-blagnac.jpg'
 } as const;
 
@@ -47,6 +53,7 @@ export const PUBLIC_PAGES = [
   '/premiere-seance/',
   '/faq/',
   '/acces-contact/',
+  '/mentions-legales/',
   '/confidentialite/'
 ] as const;
 

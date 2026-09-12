@@ -15,10 +15,10 @@ const description =
   {title}
   {description}
   pathname="/faq/"
-  pageType="FAQPage"
+  pageType="WebPage"
+  network="faq"
   topTone="dark"
   withFaq
-  speakable={['.answers__item dt', '.answers__item dd', '.faq-list summary']}
   imageAlt="Boxeuse en garde pendant un entraînement"
 >
   <header class="page-hero faq-hero">
@@ -30,7 +30,7 @@ const description =
       <h1>Les questions <em>qu’on se pose vraiment.</em></h1>
       <div class="page-hero__bottom">
         <p class="page-hero__lead">Accès, cours, âges, matériel, certificat médical, inscription : les réponses, sans détour.</p>
-        <p class="page-hero__note">Une question qui n’est pas ici&nbsp;? Le formulaire est en bas de page, on répond sous 24&nbsp;h.</p>
+        <p class="page-hero__note">Une question qui n’est pas ici ? <a href="/acces-contact/#contact">Écrivez-nous</a>, on répond sous 24 h.</p>
       </div>
     </div>
   </header>
@@ -59,7 +59,7 @@ const description =
   <section class="faq-section shell page-copy">
     <div class="faq-section__heading">
       <p class="eyebrow">{launchFaq.length} réponses</p>
-      <p>Tout ce qu’on nous demande le plus souvent, dans l’ordre. Si vous cherchez autre chose, le formulaire et le téléphone sont en bas de page.</p>
+      <p>Tout ce qu’on nous demande le plus souvent, dans l’ordre. Si vous cherchez autre chose, <a href="/acces-contact/#contact">écrivez-nous</a> : réponse sous 24 h.</p>
     </div>
     <div class="faq-list">
       {launchFaq.map((item, index) => (
@@ -109,15 +109,15 @@ const description =
       <a href="/acces-contact/">
         <span class="faq-links__n">03</span>
         <span class="faq-links__t">Venir au club</span>
-        <span class="faq-links__d">Adresse, tram, bus, parking : comment nous rejoindre depuis tout le nord-ouest toulousain.</span>
+        <span class="faq-links__d">Tram, bus, voiture, vélo : comment nous rejoindre depuis tout le nord-ouest toulousain.</span>
       </a>
     </div>
   </section>
 
   <PartnerCta
-    eyebrow="Notre réseau"
-    heading="Trop loin de Blagnac ?"
-    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+    context="faq"
+    heading="Horaires, activités, formules : le reste du réseau."
+    intro="Les clubs Boxing Center de l’agglomération toulousaine détaillent leurs horaires, leurs activités et leurs formules sur leurs propres sites."
   />
 </BaseLayout>
 

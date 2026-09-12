@@ -14,10 +14,10 @@ const description =
   {title}
   {description}
   pathname="/acces-contact/"
+  network="access"
   pageType="ContactPage"
   topTone="dark"
   imageAlt="Échange technique entre deux boxeuses avec protections"
-  speakable={['#access-title', '.access__mode', '.access__detail']}
 >
   <header class="page-hero contact-hero">
     <div class="shell">
@@ -72,23 +72,23 @@ const description =
     <figure>
       <picture>
         <source srcset="/images/accueil-club-420.webp 420w, /images/accueil-club-900.webp 900w, /images/accueil-club-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
-        <img src="/images/accueil-club-1400.jpg" alt="Entrée et accueil du Club de Boxe Blagnac" width="1400" height="887" loading="lazy" />
+        <img src="/images/accueil-club-1400.jpg" alt="L’accueil d’une salle de boxe anglaise" width="1400" height="887" loading="lazy" />
       </picture>
       <figcaption>L’accueil</figcaption>
     </figure>
     <figure>
       <picture>
         <source srcset="/images/salle-de-boxe-480.webp 480w, /images/salle-de-boxe-960.webp 960w, /images/salle-de-boxe-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
-        <img src="/images/salle-de-boxe-1600.jpg" alt="La salle et les rings du club" width="1600" height="919" loading="lazy" />
+        <img src="/images/salle-de-boxe-1600.jpg" alt="Salle de boxe anglaise avec ring et sacs de frappe" width="1600" height="919" loading="lazy" />
       </picture>
-      <figcaption>Les deux rings</figcaption>
+      <figcaption>La salle</figcaption>
     </figure>
   </section>
 
   <PartnerCta
-    eyebrow="Notre réseau"
+    context="access"
     heading="Trop loin de Blagnac ?"
-    intro="Nous travaillons avec d’autres salles de l’agglomération toulousaine. Si l’une d’elles est plus proche de chez vous, allez la voir de notre part."
+    intro="Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Aux Minimes, à Saint-Cyprien ou à Portet-sur-Garonne, un autre club du réseau est peut-être plus près de chez vous."
     tone="light"
   />
 
