@@ -44,7 +44,7 @@ export const GET: APIRoute = () => {
   }
 
   const lines = [
-    '# Guide de la boxe à Blagnac (31700), nord-ouest toulousain.',
+    '# Club de Boxe Blagnac — boxe anglaise à Blagnac (31700), nord-ouest de Toulouse.',
     '# Contexte machine : /llms.txt · /llms-full.txt · politique : /ai.txt',
     '',
     'User-agent: *',
