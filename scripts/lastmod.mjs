@@ -16,7 +16,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
 const OUT = 'src/data/lastmod.json';
-const DATA = ['src/data/club.ts', 'src/data/seo.ts', 'src/data/seo-map.ts', 'src/data/copy.json', 'src/data/routes.ts', 'src/data/network.ts'];
+const DATA = ['src/data/club.ts', 'src/data/seo.ts', 'src/data/seo-map.ts', 'src/data/copy.json', 'src/data/routes.ts', 'src/data/network.ts', 'src/data/communes.ts'];
 
 function git(args) {
   return execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
@@ -51,6 +51,7 @@ function walk(dir) {
 }
 
 const slugs = [...readFileSync('src/data/club.ts', 'utf8').matchAll(/slug: '([^']+)'/g)].map((m) => m[1]);
+const communes = [...readFileSync('src/data/communes.ts', 'utf8').matchAll(/slug: '([^']+)'/g)].map((m) => m[1]);
 const dataDate = newest(DATA.map(dateOf));
 const map = {};
 
@@ -61,6 +62,8 @@ for (const file of walk('src/pages')) {
   if (rel.includes('[slug]')) {
     const base = '/' + rel.replace('[slug].astro', '');
     for (const slug of slugs) map[base + slug + '/'] = date;
+  } else if (rel.includes('[commune]')) {
+    for (const slug of communes) map['/' + rel.replace('[commune]', slug).replace(/index\.astro$/, '')] = date;
   } else {
     map['/' + rel.replace(/index\.astro$/, '').replace(/\.astro$/, '/')] = date;
   }

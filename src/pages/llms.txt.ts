@@ -9,6 +9,7 @@ import type { APIRoute } from 'astro';
 import { AREA, CLUB, DISCIPLINES } from '@/data/club';
 import { NETWORK, NETWORK_CLUBS } from '@/data/network';
 import { ROUTES } from '@/data/routes';
+import { COMMUNES, communePath, kmFromBlagnac } from '@/data/communes';
 import { NEARBY_SENTENCE, SHORT_ANSWERS } from '@/data/seo-map';
 import { absoluteUrl as url } from '@/data/site';
 import { siteLastModified } from '@/lib/lastmod';
@@ -61,6 +62,15 @@ export const GET: APIRoute = () =>
     '- Âges : dès 3 ans en éveil, sans contact, jusqu’aux adultes.',
     `- Contact : formulaire ${url('/acces-contact/#contact')} ou ${CLUB.email}. Réponse sous 24 h.`,
     `- Accès : ${AREA.transport.map((t) => `${t.mode}, ${t.detail}`).join(' ')}`,
+    '',
+    '## Communes voisines — une page chacune',
+    '',
+    'Chiffres officiels (Insee, via geo.api.gouv.fr) ; distance de centre à centre, pas jusqu’à la salle, dont l’adresse n’est pas publiée.',
+    '',
+    ...COMMUNES.map(
+      (c) =>
+        `- [${c.name}](${url(communePath(c))}) — ${c.postalCode}, code Insee ${c.insee}, ${String(c.population).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} habitants ; à ${kmFromBlagnac(c)} km ${c.direction} du centre de Blagnac.`
+    ),
     '',
     '## Quelle page pour quelle question',
     '',

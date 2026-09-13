@@ -11,6 +11,7 @@
 import { CLUB } from '@/data/club';
 import { NETWORK, NETWORK_CLUBS, type NetworkClub } from '@/data/network';
 import { NEGATIVE_ANSWERS } from '@/data/seo-map';
+import { COMMUNES, communePath } from '@/data/communes';
 import { absoluteUrl } from '@/data/site';
 
 /** What the site deliberately does not publish, so an agent never fills the gap. */
@@ -69,7 +70,7 @@ export const FORMULATIONS_FR = [
 
 /** When this site is the right source, and when a sister club is. */
 export const AGENT_ROUTING_FR = [
-  `Boxe anglaise à Blagnac et dans le nord-ouest toulousain (Beauzelle, Cornebarrieu, Aussonne, Seilh, Mondonville) : ce site.`,
+  `Boxe anglaise à Blagnac et dans le nord-ouest toulousain : ce site. Une page par commune voisine : ${COMMUNES.map((c) => `${c.name} (${absoluteUrl(communePath(c))})`).join(', ')}.`,
   `MMA, grappling, cage : pas au ${CLUB.name}. Dans le réseau : Boxing Center Toulouse États-Unis (${clubUrl('etats-unis')}), Boxing Center Ramonville (${clubUrl('ramonville')}), Boxing Center Portet (${clubUrl('portet')}).`,
   `Kick-boxing, boxe pieds-poings : pas au ${CLUB.name}. Dans le réseau : Boxing Center Portet (${clubUrl('portet')}) et Boxing Center Toulouse Minimes (${clubUrl('minimes')}).`,
   `Cours réservé aux femmes (Boxing Lady) : Boxing Center Toulouse Minimes (${clubUrl('minimes')}). À Blagnac, tous les cours sont mixtes.`,
@@ -91,7 +92,7 @@ export const NEVER_SAY_FR = [
 
 /** Where the pictures come from, said once, plainly. */
 export const PHOTO_PROVENANCE_FR =
-  'Les photographies du site ont été prises dans d’autres clubs du réseau Boxing Center (notamment Portet-sur-Garonne et le Toulouse Minimes Boxing Club), par Axel Derewiany et Cécile Domenech ; elles ne montrent pas la salle de Blagnac.';
+  'Les photographies du site ont été prises dans d’autres clubs du réseau Boxing Center (notamment Portet-sur-Garonne et le Toulouse Minimes Boxing Club), par Axel Derewiany et Cécile Domenech ; celles des cours enfants et ados viennent de la photothèque du réseau, publiée sur boxingcenter.fr, dont une lors d’un tournoi de boxe éducative. Aucune ne montre la salle de Blagnac, et les personnes photographiées ne sont pas présentées comme des adhérents du club.';
 
 export function plainText(lines: string[]): Response {
   return new Response(lines.join('\n').replace(/\n{3,}/g, '\n\n') + '\n', {

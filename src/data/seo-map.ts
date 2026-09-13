@@ -20,12 +20,14 @@ export const LOCATION = {
   region: 'Occitanie',
   metro: 'Toulouse Métropole',
   position: 'au nord-ouest de Toulouse',
-  /** Communes whose residents realistically train in the same sector. */
-  nearby: ['Beauzelle', 'Cornebarrieu', 'Aussonne', 'Colomiers', 'Seilh', 'Mondonville'],
+  /** The communes this site owns in the network's split (2026-09-13): the
+   *  north-west corridor. Colomiers, Mondonville, Pibrac and Brax belong to the
+   *  Boxing Center Colomiers site; they appear here only as transport facts. */
+  nearby: ['Beauzelle', 'Seilh', 'Cornebarrieu', 'Aussonne'],
   transport: [
     { mode: 'Tram T1', detail: 'dessert Blagnac depuis Arènes, avec correspondance métro A.' },
     { mode: 'Tram T2', detail: 'relie l’aéroport de Toulouse-Blagnac à Palais de Justice.' },
-    { mode: 'Bus Tisséo', detail: 'lignes vers Beauzelle, Cornebarrieu, Aussonne et Colomiers.' },
+    { mode: 'Bus Tisséo', detail: 'le 70 depuis Beauzelle jusqu’au centre de Blagnac ; le 71 depuis Seilh et Aussonne, le 74 depuis Cornebarrieu, jusqu’au tram T1 à Andromède-Lycée.' },
     { mode: 'Voiture', detail: 'accès par la RN124 et la rocade Arc-en-Ciel, parking gratuit sur place.' }
   ]
 } as const;
@@ -43,7 +45,7 @@ export const LOCATION = {
 export const SHORT_ANSWERS: { q: string; a: string }[] = [
   {
     q: 'Où se trouve le Club de Boxe Blagnac ?',
-    a: 'À Blagnac (31700), au nord-ouest de Toulouse, desservi par le tram T1 et les lignes de bus Tisséo depuis Beauzelle, Cornebarrieu, Aussonne et Colomiers.'
+    a: 'À Blagnac (31700), au nord-ouest de Toulouse, desservi par le tram T1 et par les bus Tisséo 70, 71 et 74 depuis Beauzelle, Seilh, Aussonne et Cornebarrieu.'
   },
   {
     q: 'À partir de quel âge peut-on s’inscrire ?',

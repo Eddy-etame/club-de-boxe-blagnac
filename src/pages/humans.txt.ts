@@ -10,6 +10,7 @@
 import type { APIRoute } from 'astro';
 import { CLUB } from '@/data/club';
 import { NETWORK } from '@/data/network';
+import { PHOTOGRAPHERS } from '@/data/photos';
 import { absoluteUrl as url } from '@/data/site';
 import { siteLastModified } from '@/lib/lastmod';
 import { NOT_PUBLISHED_FR, plainText } from '@/lib/machine';
@@ -29,7 +30,7 @@ export const GET: APIRoute = () =>
     '',
     '/* THANKS */',
     '',
-    'Photographies : Axel Derewiany, Cécile Domenech (photothèque du réseau Boxing Center)',
+    `Photographies : ${PHOTOGRAPHERS.join(', ')} ; photothèque du réseau ${NETWORK.name} (cours enfants et ados)`,
     `Réseau : ${NETWORK.name} — ${NETWORK.url}`,
     '',
     '/* SITE */',

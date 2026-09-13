@@ -12,7 +12,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { CLUB } from '@/data/club';
 import { NETWORK } from '@/data/network';
-import { PHOTOS, PHOTOGRAPHERS, photoRoom } from '@/data/photos';
+import { NETWORK_PHOTOS, PHOTOS, PHOTOGRAPHERS, photoRoom } from '@/data/photos';
 import { SITE } from '@/data/site';
 import { pageLastModified } from '@/lib/lastmod';
 
@@ -25,7 +25,13 @@ const clubMail = 'mailto:' + CLUB.email;
 const editorMail = 'mailto:' + NETWORK.editor.email;
 const editorTel = 'tel:' + NETWORK.editor.phoneLink;
 const networkHost = NETWORK.url.replace('https://', '').replace(/\/$/, '');
-const byPhotographer = PHOTOGRAPHERS.map((name) => ({ name, photos: PHOTOS.filter((p) => p.credit === name) }));
+const byPhotographer = [
+  ...PHOTOGRAPHERS.map((name) => ({ name, photos: PHOTOS.filter((p) => p.credit === name && p.evidence !== 'publisher') })),
+  { name: 'Photothèque ' + NETWORK.name, photos: NETWORK_PHOTOS }
+];
+/* "d’Axel Derewiany et de Cécile Domenech": French elides "de" before a vowel. */
+const byName = (name: string) => (/^[aeiouyéèh]/i.test(name) ? 'd’' : 'de ') + name;
+const authors = PHOTOGRAPHERS.map(byName).join(' et ');
 ---
 
 <BaseLayout {title} ogTitle="Qui édite le site du Club de Boxe Blagnac ?" {description} pathname="/mentions-legales/" topTone="dark">
@@ -49,12 +55,15 @@ const byPhotographer = PHOTOGRAPHERS.map((name) => ({ name, photos: PHOTOS.filte
         <h2>Éditeur du site</h2>
         <p>Le site {host} est édité par {NETWORK.name}, réseau de clubs de boxe de l’agglomération toulousaine auquel appartient le {CLUB.name}.</p>
         <dl class="legal__card">
-          <div><dt>Dénomination</dt><dd>{NETWORK.name}</dd></div>
+          <div><dt>Dénomination</dt><dd>{NETWORK.editor.legalName}</dd></div>
+          <div><dt>Forme juridique</dt><dd>{NETWORK.editor.form}</dd></div>
+          <div><dt>SIRET du siège</dt><dd>{NETWORK.editor.siret}</dd></div>
+          <div><dt>Immatriculation</dt><dd>{NETWORK.editor.rcs}</dd></div>
           <div><dt>Siège de l’éditeur</dt><dd>{NETWORK.editor.address}</dd></div>
           <div><dt>Téléphone de l’éditeur</dt><dd><a href={editorTel}>{NETWORK.editor.phone}</a></dd></div>
           <div><dt>Courriel de l’éditeur</dt><dd><a href={editorMail}>{NETWORK.editor.email}</a></dd></div>
           <div><dt>Site du réseau</dt><dd><a href={NETWORK.url} rel="noopener">{networkHost}</a></dd></div>
-          <div><dt>Directeur de la publication</dt><dd>Le représentant légal de {NETWORK.name}</dd></div>
+          <div><dt>Directeur de la publication</dt><dd>{NETWORK.editor.director}</dd></div>
         </dl>
         <p class="legal__note">Ces coordonnées sont celles de l’éditeur, le réseau {NETWORK.name}, à Toulouse. Ce ne sont pas celles du {CLUB.name}, que l’on joint par le <a href="/acces-contact/#contact">formulaire de contact</a> ou à <a href={clubMail}>{CLUB.email}</a>.</p>
 
@@ -65,7 +74,7 @@ const byPhotographer = PHOTOGRAPHERS.map((name) => ({ name, photos: PHOTOS.filte
         <p>Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis — <a href="https://vercel.com" rel="noopener">vercel.com</a>.</p>
 
         <h2 id="photographies">Photographies</h2>
-        <p>Les photographies de ce site ont été prises dans d’autres clubs du réseau {NETWORK.name} : aucune ne montre la salle de Blagnac. Elles sont l’œuvre de {PHOTOGRAPHERS.join(' et de ')}, et toute reproduction sans autorisation est interdite.</p>
+        <p>Les photographies de ce site ont été prises dans d’autres clubs du réseau {NETWORK.name} ou lors de ses événements : aucune ne montre la salle de Blagnac. Elles sont l’œuvre {authors} ; celles des cours enfants et ados viennent de la photothèque du réseau, publiée sur <a href={NETWORK.url} rel="noopener">{networkHost}</a>. Toute reproduction sans autorisation est interdite.</p>
         {byPhotographer.map((g) => (
           <Fragment>
             <h3 class="legal__h3">{g.name}</h3>

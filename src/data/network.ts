@@ -15,6 +15,7 @@
  * parent reading about baby boxing is sent to the network's children pages,
  * and a visitor on the access page to the network's access pages.
  */
+import { COMMUNES, communeKey } from './communes';
 
 export type Topic =
   | 'club'
@@ -55,8 +56,21 @@ export const NETWORK = {
   salles: { label: 'Toutes les salles Boxing Center', url: 'https://boxingcenter.fr/salle-de-sport-toulouse/' },
   abonnements: { label: 'Les abonnements du réseau', url: 'https://boutique.boxingcenter.fr/abonnements' },
   coaching: { label: 'Le coaching individuel du réseau', url: 'https://boutique.boxingcenter.fr/coachings' },
-  /** Legal editor of the site, exactly as the other network sites publish it. */
+  /**
+   * Legal editor of the site. Identity and publication director as
+   * boxingcenter.fr/mentions-legales/ prints them, checked against the
+   * company register (recherche-entreprises.api.gouv.fr, 2026-09-13): the
+   * SIRET is the head office's, the director is the company's directeur
+   * général. The phone is the one boxingcenter.fr shows in its header.
+   */
   editor: {
+    legalName: 'SAS Boxing Center',
+    form: 'Société par actions simplifiée au capital de 1 500 €',
+    siren: '821 817 889',
+    siret: '821 817 889 00016',
+    rcs: 'RCS Toulouse B 821 817 889',
+    registered: '2016-09-01',
+    director: 'Sébastien Dutilh, directeur général de Boxing Center',
     address: '12 rue de Fenouillet, 31200 Toulouse',
     phone: '09 39 03 67 48',
     phoneLink: '+33939036748',
@@ -187,7 +201,19 @@ const KIDS: Pick = {
   extras: [NETWORK.salles]
 };
 
+/* Beauzelle, Seilh, Cornebarrieu, Aussonne: the network's nearest rooms are
+   north Toulouse, the Minimes. */
+const NORTH_WEST: Pick = {
+  clubs: [
+    { id: 'minimes', topics: ['club', 'activites', 'plannings'] },
+    { id: 'tmbc', topics: ['club', 'activites'] },
+    { id: 'saint-cyprien', topics: ['salle'] }
+  ],
+  extras: [NETWORK.salles]
+};
+
 export const PICKS: Record<string, Pick> = {
+  ...Object.fromEntries(COMMUNES.map((c) => [communeKey(c), NORTH_WEST])),
   home: {
     clubs: [
       { id: 'minimes', topics: ['club', 'activites', 'plannings'] },
@@ -307,7 +333,14 @@ const KIDS_POPUP: Popup = {
   links: [networkLink('minimes', 'activites'), networkLink('tmbc', 'activites')]
 };
 
+const NORTH_WEST_POPUP: Popup = {
+  heading: 'Toulouse nord, aussi dans le réseau',
+  text: 'Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Si vos journées passent par le nord de Toulouse, Boxing Center Toulouse Minimes et le TMBC y accueillent aussi enfants et adultes.',
+  links: [networkLink('minimes', 'club'), networkLink('minimes', 'plannings'), networkLink('tmbc', 'club')]
+};
+
 export const POPUPS: Record<string, Popup> = {
+  ...Object.fromEntries(COMMUNES.map((c) => [communeKey(c), NORTH_WEST_POPUP])),
   home: {
     heading: 'Plus près de Toulouse ?',
     text: 'Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Aux Minimes, à Saint-Cyprien ou à Portet, un autre club du réseau vous accueille.',

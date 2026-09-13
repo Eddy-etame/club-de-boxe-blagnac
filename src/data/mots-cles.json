@@ -100,8 +100,7 @@
       "club de boxe Cornebarrieu",
       "boxe Aussonne",
       "club de boxe Aussonne",
-      "boxe Seilh",
-      "boxe Mondonville"
+      "boxe Seilh"
     ]
   },
   "/mentions-legales/": {
@@ -320,6 +319,74 @@
       "tarif boxe Blagnac",
       "inscription en cours d’année",
       "dossier d’inscription boxe"
+    ]
+  },
+  "/club-de-boxe-beauzelle/": {
+    "priority": [
+      "boxe près de Beauzelle",
+      "Beauzelle",
+      "tram T1",
+      "bus 70"
+    ],
+    "secondary": [
+      "boxe Beauzelle",
+      "club de boxe Beauzelle",
+      "club de boxe près de Beauzelle",
+      "cours de boxe Beauzelle",
+      "boxe enfant Beauzelle",
+      "boxe anglaise Beauzelle",
+      "salle de boxe près de Beauzelle"
+    ]
+  },
+  "/club-de-boxe-seilh/": {
+    "priority": [
+      "boxe près de Seilh",
+      "Seilh",
+      "bus 71",
+      "Andromède-Lycée"
+    ],
+    "secondary": [
+      "boxe Seilh",
+      "club de boxe Seilh",
+      "club de boxe près de Seilh",
+      "cours de boxe Seilh",
+      "boxe enfant Seilh",
+      "boxe anglaise Seilh",
+      "salle de boxe près de Seilh"
+    ]
+  },
+  "/club-de-boxe-cornebarrieu/": {
+    "priority": [
+      "boxe près de Cornebarrieu",
+      "Cornebarrieu",
+      "ligne 74",
+      "collège Mermoz"
+    ],
+    "secondary": [
+      "boxe Cornebarrieu",
+      "club de boxe Cornebarrieu",
+      "club de boxe près de Cornebarrieu",
+      "cours de boxe Cornebarrieu",
+      "boxe enfant Cornebarrieu",
+      "boxe anglaise Cornebarrieu",
+      "salle de boxe près de Cornebarrieu"
+    ]
+  },
+  "/club-de-boxe-aussonne/": {
+    "priority": [
+      "boxe près d’Aussonne",
+      "Aussonne",
+      "depuis Aussonne",
+      "tram T1"
+    ],
+    "secondary": [
+      "boxe Aussonne",
+      "club de boxe Aussonne",
+      "club de boxe près d’Aussonne",
+      "cours de boxe Aussonne",
+      "boxe enfant Aussonne",
+      "boxe anglaise Aussonne",
+      "salle de boxe près d’Aussonne"
     ]
   }
 }

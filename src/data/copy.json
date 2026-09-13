@@ -683,7 +683,7 @@
         "h2": "Trois soirs par semaine, après les cours",
         "paragraphs": [
           "Le groupe s’entraîne trois fois par semaine en soirée, une heure trente par séance. Venir aux trois n’est pas une obligation : deux soirs suffisent pour que la technique tienne d’une séance à l’autre. Les semaines de brevet blanc ou de bac, un seul soir garde le fil, et personne ne demande de justifier une absence.",
-          "Un ado peut venir seul. Depuis Beauzelle, Cornebarrieu, Aussonne ou Colomiers, des lignes de bus Tisséo arrivent directement. Depuis Toulouse, le tram T1 s’arrête à six minutes à pied de la salle. À vélo, la piste cyclable est continue depuis le centre de Blagnac et les arceaux sont devant l’entrée.",
+          "Un ado peut venir seul. Depuis Beauzelle, le bus 70 arrive au centre de Blagnac ; depuis Seilh, Aussonne ou Cornebarrieu, les bus 71 et 74 rejoignent le tram T1 à Andromède-Lycée. Depuis Toulouse, le tram T1 s’arrête à six minutes à pied de la salle. À vélo, la piste cyclable est continue depuis le centre de Blagnac et les arceaux sont devant l’entrée.",
           "La saison court de septembre à fin juin. Les séances continuent pendant les vacances de la Toussaint, d’hiver et de printemps : nous fermons seulement aux vacances de Noël et au mois d’août. On peut rejoindre le groupe en cours d’année, l’adhésion est alors calculée au prorata des mois restants."
         ],
         "links": [
@@ -1254,6 +1254,664 @@
       "certificat médical",
       "toute l’année",
       "de septembre à fin juin"
+    ]
+  },
+  "club-de-boxe-beauzelle": {
+    "key": "club-de-boxe-beauzelle",
+    "path": "/club-de-boxe-beauzelle/",
+    "label": "Boxe près de Beauzelle",
+    "question": "Où faire de la boxe anglaise quand on habite Beauzelle ?",
+    "title": "Club de boxe près de Beauzelle, à Blagnac en T1 ou bus 70",
+    "ogTitle": "Habiter Beauzelle, boxer à Blagnac : un tram T1 ou un bus 70",
+    "description": "Depuis Beauzelle, le tram T1 et le bus 70 vous mènent sans changement à Blagnac, dont le centre est à 3 km : boxe anglaise dès 3 ans, du lundi au samedi. Écrivez-nous.",
+    "h1Main": "Club de boxe",
+    "h1Em": "près de Beauzelle",
+    "eyebrow": "Depuis Beauzelle · tram T1 et bus 70 · dès 3 ans",
+    "lead": "Beauzelle touche Blagnac : le centre de Blagnac est à 3 km au sud de celui de Beauzelle, et le tram T1 comme le bus 70 relient les deux communes sans changement. C’est à Blagnac que nous enseignons la boxe anglaise, en six cours, de l’éveil dès 3 ans au groupe compétition, du lundi au samedi de 10h à 21h30. Écrivez-nous par le formulaire : nous répondons sous 24 h avec le créneau et l’adresse exacte de la salle.",
+    "note": "Au centre de Blagnac, le T1 s’arrête à Pasteur – Mairie de Blagnac et le bus 70 à Mairie Blagnac ; Place du Relais est desservie par les deux. L’adresse exacte de la salle vous arrive avec notre réponse, sous 24 h.",
+    "sections": [
+      {
+        "eyebrow": "Deux communes voisines",
+        "h2": "Beauzelle et Blagnac, un même code postal",
+        "paragraphs": [
+          "Beauzelle, 8 713 habitants sur la rive gauche de la Garonne, touche Blagnac et partage avec elle le code postal 31700. En 2003, la commune a développé avec Blagnac l’écoquartier Andromède ; entre Mairie Beauzelle et Mairie Blagnac, le bus 70 le traverse par les arrêts Stade Andromède et Andromède-Lycée.",
+          "Pour la boxe près de Beauzelle, le T1 et le bus 70 mènent donc à nos six cours de boxe anglaise, la seule discipline que nous enseignons : l’éveil dès 3 ans, la boxe éducative de 7 à 12 ans, le groupe ados de 13 à 17 ans, la boxe anglaise loisir et le cardio boxe dès 16 ans, puis le groupe compétition."
+        ],
+        "links": [
+          {
+            "label": "Nos six cours de boxe, de 3 ans à adulte",
+            "href": "/cours-de-boxe-blagnac/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Tram T1",
+        "h2": "Trois stations du T1 à Beauzelle, puis Blagnac sans changement",
+        "paragraphs": [
+          "La ligne T1 du tram (Palais de Justice – MEETT) compte trois stations sur la commune de Beauzelle : MEETT, son terminus, Aéroconstellation et Beauzelle-Aeroscopia. Le tram descend ensuite dans Blagnac par Andromède-Lycée, Place Georges Brassens, Grand Noble, Patinoire-Barradels et Odyssud-Ritouret ; pour le centre, descendez à Place du Relais ou à Pasteur – Mairie de Blagnac.",
+          "Tisséo fait rouler le T1 sept jours sur sept, de 5h à 0h40 du dimanche au mercredi et jusqu’à 1h20 du jeudi au samedi. Après notre fermeture, à 21h30, les trams du soir continuent de remonter depuis Place du Relais jusqu’aux stations de Beauzelle."
+        ],
+        "links": [
+          {
+            "label": "Venir au club en tram, en bus ou en voiture",
+            "href": "/acces-contact/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Bus 70 et 71",
+        "h2": "Le bus 70, de Mairie Beauzelle à Mairie Blagnac",
+        "paragraphs": [
+          "Le bus 70 (Jeanne d’Arc – Aéroconstellation) relie sans changement le centre de Beauzelle à celui de Blagnac, sept jours sur sept, jours fériés compris. Il part d’Aéroconstellation, dessert Juncassa, Centre Commercial Beauzelle, Beau Soleil, Erables, Mairie Beauzelle et Camélias, traverse Andromède, puis s’arrête à Blagnac à Place Georges Brassens, De Gaulle, Place du Relais et Mairie Blagnac.",
+          "Au retour, le dernier bus 70 vers Beauzelle quitte Place du Relais avant 21h30, heure de notre fermeture, en semaine comme le week-end : après une séance du soir, rentrez en T1.",
+          "Du lundi au vendredi, hors jours fériés, le 71 (Seilh Mairie – Aussonne Agassines) dessert Centre Commercial Beauzelle, Amandiers et Collège Elisa Deroche, puis croise le T1 à Andromède-Lycée, à Beauzelle-Aeroscopia et à Aéroconstellation ; il ne descend pas jusqu’au centre de Blagnac.",
+          "En voiture, l’axe est la route de Grenade, la M2, l’ancienne D2 : à Blagnac, elle court sur 4 260 m, du rond-point Jean-Maga jusqu’à Beauzelle, et le T1 la dessert à Place du Relais et à Pasteur – Mairie de Blagnac."
+        ]
+      },
+      {
+        "eyebrow": "Selon l’âge",
+        "h2": "De l’école à Beauzelle au lycée à Blagnac : quel cours à quel âge",
+        "paragraphs": [
+          "De 3 à 6 ans, l’éveil a lieu le mercredi et le samedi matin, sans aucun contact, parents en salle s’ils le souhaitent. Le samedi, le 71 ne circule pas : depuis Beauzelle, venez en T1 ou en bus 70, qui roulent tous les deux le week-end.",
+          "Pour les élèves de 7 à 12 ans, des écoles Les Chênes et Henri-Matisse jusqu’à la sixième au collège Elisa Deroche, la boxe éducative se pratique en touche légère, le lundi, le mercredi et le vendredi.",
+          "Depuis la rentrée 2022, les collégiens de Beauzelle ont leur collège public sur la commune, Elisa Deroche, rue de la Neste, et leur lycée de secteur est à Blagnac : le lycée polyvalent Saint-Exupéry. Notre groupe ados, de 13 à 17 ans, s’entraîne trois soirs par semaine, en opposition encadrée et à intensité progressive ; du lundi au vendredi, le bus 71 relie l’arrêt Collège Elisa Deroche au T1, à Andromède-Lycée.",
+          "Dès 16 ans, la boxe anglaise loisir compte cinq séances par semaine, midi et soir, et le cardio boxe quatre, dont deux le midi, sans aucun contact. Si vos journées passent par Andromède ou par le MEETT, le parc des expositions de la métropole, le T1 vous descend au centre de Blagnac sans changement, à midi comme le soir.",
+          "Pour un lycéen de Saint-Exupéry qui boxe déjà chez nous, le groupe compétition s’ouvre à 17 ans, après au moins une saison et sur avis de nos entraîneurs, avec sparring le samedi."
+        ],
+        "bullets": [
+          "Éveil, de 3 à 6 ans : aucun contact, le mercredi et le samedi matin",
+          "Boxe éducative, de 7 à 12 ans : touche légère, le lundi, le mercredi et le vendredi",
+          "Boxe ados, de 13 à 17 ans : opposition encadrée, trois séances par semaine en soirée",
+          "Boxe anglaise loisir, dès 16 ans : cinq séances par semaine, midi et soir",
+          "Cardio boxe, dès 16 ans : aucun contact, quatre séances dont deux le midi",
+          "Compétition, dès 17 ans : après une saison chez nous, sparring le samedi"
+        ],
+        "links": [
+          {
+            "label": "Baby boxing à Blagnac, dès 3 ans",
+            "href": "/cours-de-boxe-blagnac/eveil-baby-boxing/"
+          },
+          {
+            "label": "Boxe éducative enfant à Blagnac",
+            "href": "/cours-de-boxe-blagnac/boxe-educative/"
+          },
+          {
+            "label": "Boxe ados à Blagnac, 13 à 17 ans",
+            "href": "/cours-de-boxe-blagnac/boxe-ados/"
+          },
+          {
+            "label": "Boxe anglaise adulte à Blagnac",
+            "href": "/cours-de-boxe-blagnac/boxe-anglaise-loisir/"
+          },
+          {
+            "label": "Cardio boxe à Blagnac, sans contact",
+            "href": "/cours-de-boxe-blagnac/cardio-boxe/"
+          },
+          {
+            "label": "Boxe anglaise compétition à Blagnac",
+            "href": "/cours-de-boxe-blagnac/boxe-competition/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Horaires et demande",
+        "h2": "Du lundi au samedi, sur demande par le formulaire",
+        "paragraphs": [
+          "Nous sommes ouverts du lundi au samedi, de 10h à 21h30, et fermés le dimanche, aux vacances de Noël et au mois d’août. Les grilles Tisséo du T1 et du bus 70 citées sur cette page valent du 31 août 2026 au 4 juillet 2027, soit toute notre saison, de septembre à fin juin.",
+          "Toute inscription commence par le formulaire : indiquez qui boxera, son âge, le cours visé et les jours où il peut venir. Nous répondons sous 24 h avec le créneau, l’adresse exacte de la salle, et donc l’arrêt du T1 ou du bus 70 où descendre, ainsi que les conditions d’inscription, dont le certificat médical de non-contre-indication à la boxe de moins d’un an.",
+          "Pour votre première venue, prenez à Beauzelle le T1 ou le bus 70 qui vous dépose un quart d’heure avant la séance : un entraîneur vous fait le tour de la salle, des gants et des protections à votre taille vous attendent, et personne ne fait d’opposition le premier jour."
+        ],
+        "links": [
+          {
+            "label": "Les horaires du club",
+            "href": "/horaires/"
+          },
+          {
+            "label": "Votre première séance, étape par étape",
+            "href": "/premiere-seance/"
+          },
+          {
+            "label": "Envoyer ma demande",
+            "href": "/acces-contact/#contact"
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quelle station du T1 prendre à Beauzelle ?",
+        "answer": "Celle de votre quartier parmi MEETT, Aéroconstellation et Beauzelle-Aeroscopia : les trois sont sur la commune de Beauzelle, et le T1 continue sans changement jusqu’au centre de Blagnac, à Place du Relais et à Pasteur – Mairie de Blagnac. Malgré son nom, la station Beauzelle-Aeroscopia est bien à Beauzelle, alors que le musée Aeroscopia est à Blagnac, allée André Turcat."
+      },
+      {
+        "question": "Plutôt le tram ou le bus 70 depuis Beauzelle ?",
+        "answer": "Le bus 70 passe par le centre de Beauzelle, à Mairie Beauzelle, Camélias et Centre Commercial Beauzelle, et rejoint sans changement Place du Relais et Mairie Blagnac ; le T1 part de MEETT, d’Aéroconstellation et de Beauzelle-Aeroscopia. Pour le retour du soir, prenez le T1 : le dernier bus 70 vers Beauzelle quitte Place du Relais avant 21h30, heure de notre fermeture."
+      },
+      {
+        "question": "Mon enfant a 5 ans : quel jour venir depuis Beauzelle ?",
+        "answer": "Le mercredi ou le samedi matin, en éveil : de 3 à 6 ans, aucun contact, et vous pouvez rester en salle pendant la séance. Le samedi, le bus 71 ne circule pas, mais le T1 et le bus 70 roulent. Écrivez-nous son âge et le matin qui vous arrange : nous répondons sous 24 h avec le créneau et l’adresse exacte."
+      },
+      {
+        "question": "Mon ado est au collège Elisa Deroche : comment rejoint-il le groupe ados ?",
+        "answer": "Le groupe ados accueille les 13 à 17 ans trois soirs par semaine, et la première séance se passe sans opposition. Du lundi au vendredi, le bus 71 va de l’arrêt Collège Elisa Deroche jusqu’au T1, à Andromède-Lycée, et le T1 descend ensuite au centre de Blagnac. À l’inscription, il faut un certificat médical de non-contre-indication à la boxe de moins d’un an."
+      },
+      {
+        "question": "Le club ferme à 21h30 : peut-on rentrer à Beauzelle en tram ?",
+        "answer": "Oui. Tisséo fait rouler le T1 jusqu’à 0h40 du dimanche au mercredi et jusqu’à 1h20 du jeudi au samedi, et les trams du soir remontent jusqu’aux stations de Beauzelle : Beauzelle-Aeroscopia, Aéroconstellation et MEETT. Le bus 70, lui, ne part plus vers Beauzelle à cette heure-là. Nous sommes ouverts du lundi au samedi et fermés le dimanche."
+      }
+    ],
+    "networkHeading": "Quand le T1 ou le bus 70 vous emmène jusqu’à Toulouse",
+    "networkIntro": "Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Le T1 continue jusqu’à Palais de Justice, et le bus 70 jusqu’à Jeanne d’Arc en passant par l’arrêt Pont des Minimes : si vos journées passent par Toulouse, Boxing Center Toulouse Minimes, au nord de la ville, et Boxing Center Saint-Cyprien, sur la rive gauche comme Beauzelle, publient leurs activités et leurs horaires en ligne.",
+    "formHeading": "Écrivez-nous depuis Beauzelle.",
+    "formText": "Indiquez qui boxera, son âge, le cours qui l’intéresse et les jours où il peut venir, en tram T1 ou en bus 70. Nous vous répondons sous 24 h avec le créneau, l’adresse exacte à Blagnac et les conditions d’inscription.",
+    "ogWord": "Beauzelle",
+    "ogKicker": "Tram T1 et bus 70, sans changement",
+    "priority": [
+      "boxe près de Beauzelle",
+      "Beauzelle",
+      "tram T1",
+      "bus 70"
+    ],
+    "sources": [
+      "https://www.beauzelle.fr/decouvrir-beauzelle/",
+      "https://fr.wikipedia.org/wiki/Beauzelle",
+      "https://www.tisseo.fr/nos-mobilites/transports-en-commun/ligne-t1",
+      "https://www.tisseo.fr/sites/default/files/fh/ligneT1.html",
+      "https://fr.wikipedia.org/wiki/Ligne_T1_du_tramway_de_Toulouse",
+      "https://www.tisseo.fr/sites/default/files/fh/ligne70.html",
+      "https://www.tisseo.fr/sites/default/files/fh/ligne71.html",
+      "https://fr.wikipedia.org/wiki/Route_de_Grenade",
+      "https://www.beauzelle.fr/contacts/college-elisa-deroche/",
+      "https://www.beauzelle.fr/jeunesse-11-a-18-ans/",
+      "https://www.mairie-blagnac.fr/annuaires/equipements/equipement/aeroscopia",
+      "https://boxe-toulouse.com/",
+      "https://club-boxe-toulouse.com/"
+    ]
+  },
+  "club-de-boxe-seilh": {
+    "key": "club-de-boxe-seilh",
+    "path": "/club-de-boxe-seilh/",
+    "label": "Boxe près de Seilh",
+    "question": "Où faire de la boxe anglaise quand on habite Seilh ?",
+    "title": "Club de boxe près de Seilh — à Blagnac, bus 71 et tram T1",
+    "ogTitle": "Vous habitez Seilh ? Bus 71, puis tram T1 : on boxe à Blagnac",
+    "description": "Vous habitez Seilh ? Nos six cours de boxe anglaise sont à Blagnac, 6 km au sud : bus 71 puis tram T1 à Andromède-Lycée en semaine, TAD 171 le samedi. Dès 3 ans.",
+    "h1Main": "Club de boxe",
+    "h1Em": "près de Seilh",
+    "eyebrow": "Seilh (31840) · Blagnac, 6 km au sud",
+    "lead": "Pour faire de la boxe près de Seilh, c’est à Blagnac : son centre est à 6 km au sud de celui de Seilh, et nous y donnons nos six cours de boxe anglaise du lundi au samedi, de 10h à 21h30. En semaine, le bus 71 vous conduit de Seilh Mairie à Andromède-Lycée, à Blagnac, où le tram T1 prend le relais jusqu’à Pasteur-Mairie de Blagnac ; le samedi, sans bus 71, le transport à la demande TAD 171 dessert Seilh, sur réservation.",
+    "note": "Notre salle est à Blagnac (31700) : l’adresse exacte vous est envoyée avec notre réponse au formulaire. Ouvert du lundi au samedi, de 10h à 21h30, fermé le dimanche. En période scolaire, le dernier bus 71 vers Seilh quitte Andromède-Lycée à 20h32 ; le samedi, le 71 ne circule pas et le TAD 171 dessert tous les arrêts de Seilh, sur réservation.",
+    "sections": [
+      {
+        "eyebrow": "En semaine",
+        "h2": "De Seilh Mairie à Andromède-Lycée, puis le T1 dans Blagnac",
+        "paragraphs": [
+          "Le bus 71 part de Seilh Mairie et dessert, dans l’ordre, Ader, Aussonnelle, Rond-point du Golf, Boisson, Tricheries et Laubis. Il traverse ensuite Beauzelle, par son centre commercial et le collège Élisa Deroche, puis atteint Andromède-Lycée, à Blagnac, à côté du lycée Saint-Exupéry.",
+          "Le 71 circule du lundi au vendredi, jamais le samedi, le dimanche ni les jours fériés. La commune de Seilh annonce un service de 6h à 20h30, avec un bus toutes les 20 à 30 minutes aux heures de pointe et toutes les heures le reste du temps ; les bus de la ligne sont accessibles en fauteuil roulant.",
+          "À Andromède-Lycée, prenez le T1 en direction de Palais de Justice : Place Georges Brassens, Grand Noble, Patinoire-Barradels, Odyssud-Ritouret, Place du Relais, puis Pasteur-Mairie de Blagnac. En semaine, entre 6h30 et 20h, une rame passe toutes les 12 minutes à Andromède-Lycée, puis toutes les 6 minutes à partir d’Odyssud-Ritouret. L’adresse exacte, envoyée avec notre réponse, vous indique la station où descendre."
+        ],
+        "links": [
+          {
+            "label": "Venir au club en tram, en bus ou à vélo",
+            "href": "/acces-contact/"
+          },
+          {
+            "label": "Le bus 71, Seilh Mairie – Aussonne Agassines, sur tisseo.fr",
+            "href": "https://www.tisseo.fr/nos-mobilites/transports-en-commun/ligne-71"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Le soir et le samedi",
+        "h2": "Après le 71 de 20h32, et le samedi : le TAD 171",
+        "paragraphs": [
+          "En période scolaire, le dernier 71 vers Seilh quitte Andromède-Lycée à 20h32 et arrive à Seilh Mairie à 20h44 ; nous fermons à 21h30. Plus tard, prenez le T1 en direction de MEETT jusqu’à Aéroconstellation, à Beauzelle, deux stations après Andromède-Lycée. La commune de Seilh y annonce quatre départs du TAD 171, à 21h30, 22h30, 23h30 et 0h30, et Tisséo précise que ses départs du soir depuis Aéroconstellation se font sans réservation.",
+          "Le samedi, le 71 ne roule pas : le TAD 171 dessert tous les arrêts de Seilh, toutes les 30 minutes selon la commune, et vous conduit à Aéroconstellation, où le T1 passe alors toutes les 15 minutes vers Blagnac. Il se réserve par téléphone au moins deux heures avant le départ, ou en ligne dans le calculateur d’itinéraire de tisseo.fr ; pour un trajet avant 8h30, la réservation se fait la veille avant 22h. C’est le trajet de l’éveil du samedi matin et du sparring du groupe compétition."
+        ],
+        "links": [
+          {
+            "label": "Nos horaires, du lundi au samedi",
+            "href": "/horaires/"
+          },
+          {
+            "label": "Le TAD 171, Aéroconstellation – Colomiers Gare SNCF, sur tisseo.fr",
+            "href": "https://www.tisseo.fr/nos-mobilites/transports-en-commun/ligne-171"
+          }
+        ]
+      },
+      {
+        "eyebrow": "À vélo, par Beauzelle",
+        "h2": "Seilh ne touche pas Blagnac : la route passe par Beauzelle",
+        "paragraphs": [
+          "Seilh n’a aucune limite commune avec Blagnac : ses voisines sont Merville, Gagnac-sur-Garonne, Aussonne, Fenouillet et Beauzelle. Entre les deux, Beauzelle s’étend sur la rive gauche de la Garonne, et c’est par elle que passent le bus 71 et la liaison cyclable vers Blagnac.",
+          "Cette liaison, c’est la ligne 13 du Réseau Express Vélo, qui emprunte la route de Toulouse à Seilh et la route de Grenade à Beauzelle. Après un an de travaux, la réhabilitation de la route de Grenade, avec sa liaison vélo entre Blagnac, Beauzelle et Seilh, s’est achevée à l’été 2024. Pour une première séance par le REV 13, rien à charger sur le porte-bagages : nous prêtons gants et protections, vous venez en tenue de sport."
+        ],
+        "links": [
+          {
+            "label": "Votre première séance, pas à pas",
+            "href": "/premiere-seance/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Six cours, selon l’âge",
+        "h2": "Quel cours pour qui, quand on part de Seilh",
+        "paragraphs": [
+          "Depuis Seilh, le jour du cours décide du trajet : du lundi au vendredi, le bus 71 et le tram ; le samedi, le TAD 171 ou la voiture. Voici nos six cours de boxe anglaise, et ce que chacun change pour venir."
+        ],
+        "bullets": [
+          "De 3 à 6 ans, l’éveil, dit baby boxing, sans aucun contact : le mercredi, jour de 71, et le samedi matin, jour de TAD 171.",
+          "De 7 à 12 ans, la boxe éducative, en touche légère : le lundi, le mercredi et le vendredi, trois jours où le 71 circule.",
+          "De 13 à 17 ans, le groupe ados, en opposition encadrée : trois séances par semaine en soirée ; au retour, le dernier 71 quitte Andromède-Lycée à 20h32.",
+          "Dès 16 ans, la boxe anglaise loisir, en touche contrôlée : cinq séances par semaine, le midi et le soir ; en milieu de journée, le 71 passe toutes les heures.",
+          "Dès 16 ans, la cardio boxe, sans aucun contact : quatre séances par semaine, dont deux le midi, à caler sur ce 71 horaire.",
+          "Dès 17 ans, le groupe compétition, sur avis de l’encadrement et après au moins une saison chez nous : sparring le samedi, jour de TAD 171."
+        ],
+        "links": [
+          {
+            "label": "Les six cours de boxe anglaise du club",
+            "href": "/cours-de-boxe-blagnac/"
+          },
+          {
+            "label": "Baby boxing à Blagnac, dès 3 ans",
+            "href": "/cours-de-boxe-blagnac/eveil-baby-boxing/"
+          },
+          {
+            "label": "Boxe éducative enfant à Blagnac",
+            "href": "/cours-de-boxe-blagnac/boxe-educative/"
+          },
+          {
+            "label": "Cardio boxe à Blagnac, sans contact",
+            "href": "/cours-de-boxe-blagnac/cardio-boxe/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Collégiens et lycéens",
+        "h2": "D’Élisa Deroche à Saint-Exupéry, la ligne 71 mène au groupe ados",
+        "paragraphs": [
+          "Les collégiens de Seilh vont au collège Élisa Deroche, à Beauzelle, ouvert à la rentrée 2022 : son secteur réunit Beauzelle, Seilh et le secteur Andromède de Blagnac. Leur lycée, Saint-Exupéry, est à Blagnac, à côté de la station Andromède-Lycée. Le 71 dessert les deux : l’arrêt Collège Elisa Deroche, puis Andromède-Lycée, où se prend le T1.",
+          "Trois soirs par semaine, notre groupe ados enchaîne corde, sac, pattes d’ours et opposition encadrée ; pour un élève d’Élisa Deroche ou de Saint-Exupéry, l’aller vers Blagnac reprend le trajet de la semaine, le 71 jusqu’à Andromède-Lycée, puis le tram. Au retour, le dernier 71 vers Seilh part d’Andromède-Lycée à 20h32 en période scolaire ; plus tard, c’est le T1 jusqu’à Aéroconstellation et le TAD 171, ou la voiture."
+        ],
+        "links": [
+          {
+            "label": "Boxe ados à Blagnac, 13 à 17 ans",
+            "href": "/cours-de-boxe-blagnac/boxe-ados/"
+          },
+          {
+            "label": "Boxe anglaise compétition à Blagnac",
+            "href": "/cours-de-boxe-blagnac/boxe-competition/"
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Y a-t-il un club de boxe à Seilh même ?",
+        "answer": "Oui : la liste des associations sportives de la commune compte un club de boxe, Seilh Boxing. Nous sommes un autre club de ce réseau, à Blagnac, dont le centre est à 6 km au sud de celui de Seilh. Nous y enseignons la boxe anglaise, et elle seule, en six cours, de l’éveil dès 3 ans au groupe compétition."
+      },
+      {
+        "question": "Combien de temps faut-il pour aller de Seilh à Blagnac en bus ?",
+        "answer": "Sur la fiche horaire Tisséo, en période scolaire, le 71 relie Andromède-Lycée à Seilh Mairie en 12 à 27 minutes selon l’heure : 13 minutes en milieu de journée, près d’une demi-heure en fin d’après-midi. S’y ajoutent l’attente du 71, toutes les 20 à 30 minutes aux heures de pointe et toutes les heures le reste du temps, et celle du T1, toutes les 12 minutes en semaine à Andromède-Lycée, jusqu’à la station que vous indique notre réponse."
+      },
+      {
+        "question": "Peut-on venir de Seilh le samedi sans voiture ?",
+        "answer": "Oui, avec le TAD 171, le transport à la demande de Tisséo : le samedi, il dessert tous les arrêts de Seilh, toutes les 30 minutes selon la commune, jusqu’à Aéroconstellation, où le T1 passe toutes les 15 minutes vers Blagnac. Réservez-le par téléphone au moins deux heures avant le départ, ou en ligne sur tisseo.fr ; pour un trajet avant 8h30, la veille avant 22h. Le samedi, nous accueillons l’éveil le matin et le sparring du groupe compétition."
+      },
+      {
+        "question": "Mon enfant a 5 ans et nous habitons Seilh : quel cours, quel jour ?",
+        "answer": "L’éveil, de 3 à 6 ans, sans aucun contact, deux séances par semaine : le mercredi et le samedi matin. Le mercredi, le 71 jusqu’à Andromède-Lycée puis le T1 vous amènent à Blagnac ; le samedi, c’est le TAD 171, à réserver la veille avant 22h si vous partez avant 8h30, ou la voiture. Vous pouvez rester en salle pendant la séance."
+      },
+      {
+        "question": "Que faut-il nous écrire quand on part de Seilh ?",
+        "answer": "Le cours qui vous intéresse, l’âge s’il s’agit d’un enfant, les jours où vous êtes libre et la façon dont vous viendrez : 71 depuis votre arrêt de Seilh en semaine, TAD 171 le samedi, vélo par le REV 13 ou voiture. Toute demande passe par le formulaire ; nous répondons sous 24 h avec le créneau adapté, l’adresse exacte à Blagnac et les modalités d’inscription."
+      }
+    ],
+    "networkHeading": "Au-delà de Blagnac, par le T1",
+    "networkIntro": "Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Le tram T1 que vous prenez à Andromède-Lycée continue après Pasteur-Mairie de Blagnac jusqu’à Palais de Justice, à Toulouse : si vos journées se passent en ville, Boxing Center Toulouse Minimes et Boxing Center Saint-Cyprien publient leurs activités et leurs horaires.",
+    "formHeading": "De Seilh, dites-nous le cours et le jour.",
+    "formText": "Indiquez le cours, l’âge s’il s’agit d’un enfant, votre arrêt de départ à Seilh, et si vous viendrez en semaine par le bus 71 ou le samedi par le TAD 171. Nous vous répondons sous 24 h avec le créneau adapté, l’adresse exacte à Blagnac et les modalités d’inscription.",
+    "ogWord": "Seilh",
+    "ogKicker": "Bus 71 + T1 · Blagnac, 6 km",
+    "priority": [
+      "boxe près de Seilh",
+      "Seilh",
+      "bus 71",
+      "Andromède-Lycée"
+    ],
+    "sources": [
+      "https://fr.wikipedia.org/wiki/Seilh",
+      "https://www.tisseo.fr/sites/default/files/fh/ligne71.html",
+      "https://www.tisseo.fr/nos-mobilites/transports-en-commun/ligne-71",
+      "https://www.mairie-seilh.fr/mon-quotidien/mobilite/transports",
+      "https://www.tisseo.fr/sites/default/files/fh/ligneT1.html",
+      "https://www.tisseo.fr/nos-mobilites/transports-en-commun/ligne-t1",
+      "https://fr.wikipedia.org/wiki/Ligne_T1_du_tramway_de_Toulouse",
+      "https://www.tisseo.fr/sites/default/files/fh/TAD171.html",
+      "https://www.tisseo.fr/nos-mobilites/transports-en-commun/ligne-171",
+      "https://www.beauzelle.fr/beauzelle-2030-ma-ville-de-demain/",
+      "https://www.beauzelle.fr/decouvrir-beauzelle/",
+      "https://metropole.toulouse.fr/un-reseau-express-pour-les-velos",
+      "https://espace-presse.haute-garonne.fr/georges-meric-inaugure-le-nouveau-college-de-beauzelle-vendredi-23-septembre/",
+      "https://elisa-deroche.ecollege.haute-garonne.fr/l-etablissement/",
+      "https://mairie-seilh.fr/mes-loisirs/sport/les-associations-sportives",
+      "https://boxingcenter.fr/",
+      "https://boxe-toulouse.com/",
+      "https://club-boxe-toulouse.com/"
+    ]
+  },
+  "club-de-boxe-cornebarrieu": {
+    "key": "club-de-boxe-cornebarrieu",
+    "path": "/club-de-boxe-cornebarrieu/",
+    "label": "Boxe près de Cornebarrieu",
+    "question": "Où faire de la boxe anglaise quand on habite Cornebarrieu ?",
+    "title": "Club de boxe près de Cornebarrieu : à Blagnac, ligne 74",
+    "ogTitle": "Depuis Cornebarrieu : la ligne 74 jusqu’à Andromède-Lycée, puis le tram T1 vers Blagnac",
+    "description": "Boxe près de Cornebarrieu : six cours de boxe anglaise dès 3 ans à Blagnac, dont le centre est à 5 km. Ligne 74 en semaine, TAD 171 le samedi. Écrivez-nous.",
+    "h1Main": "Club de boxe",
+    "h1Em": "près de Cornebarrieu",
+    "eyebrow": "31700 · Cornebarrieu–Blagnac · ligne 74 et tram T1",
+    "lead": "Si vous habitez Cornebarrieu, c’est à Blagnac que nous vous accueillons : son centre est à 5 km à vol d’oiseau de celui de Cornebarrieu, et la ligne 74 de Tisséo relie Mairie Cornebarrieu à Andromède-Lycée, où le tram T1 prend le relais vers le centre de Blagnac. Nous y donnons six cours de boxe anglaise, de l’éveil dès 3 ans à la compétition, du lundi au samedi de 10h à 21h30. Chaque demande passe par le formulaire : nous répondons avec l’adresse exacte et le créneau qui vous correspond.",
+    "note": "La ligne 74 ne circule que du lundi au vendredi ; le samedi, jour de l’éveil et du sparring, venez en TAD 171, à vélo ou en voiture. L’adresse exacte à Blagnac arrive avec notre réponse au formulaire.",
+    "sections": [
+      {
+        "eyebrow": "Où nous trouver",
+        "h2": "Faire de la boxe près de Cornebarrieu : notre club est à Blagnac",
+        "paragraphs": [
+          "Pour les Cornebarriens, Blagnac est la commune voisine à l’est, sous le même code postal, 31700. Son centre est à 5 km à vol d’oiseau de celui de Cornebarrieu, et à 7,3 à 8,4 km par la route selon Mappy.",
+          "Nous y ouvrons du lundi au samedi, de 10h à 21h30. Cinq de ces six jours, la ligne 74 relie les deux communes ; le samedi, elle ne circule pas et c’est le TAD 171 qui dessert Cornebarrieu. Nous fermons le dimanche, aux vacances de Noël et au mois d’août ; les inscriptions sont ouvertes toute l’année.",
+          "L’adresse exacte vous parvient avec notre réponse au formulaire, en même temps que le créneau qui correspond à votre cours : c’est elle qui vous dira à quel arrêt du T1 descendre. D’ici là, nous préparons des gants et des protections à votre taille."
+        ],
+        "links": [
+          {
+            "label": "Venir au club en tram, en bus, à vélo",
+            "href": "/acces-contact/"
+          },
+          {
+            "label": "Nos horaires, du lundi au samedi",
+            "href": "/horaires/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Selon l’âge",
+        "h2": "Quel cours, à quel âge, quand on vient de Cornebarrieu",
+        "paragraphs": [
+          "Cornebarrieu n’a ni collège ni lycée : son guide pratique donne comme établissements d’affectation le collège Mermoz et le lycée Saint-Exupéry, tous deux à Blagnac, et la carte scolaire rattache toutes les rues de la commune au collège Jean Mermoz. Pour un élève de Mermoz ou de Saint-Exupéry, la boxe se passe donc dans la commune où il a déjà cours, sur la ligne 74 qu’il connaît : en période scolaire, deux départs du matin continuent d’Andromède-Lycée jusqu’à l’arrêt Collège Mermoz, à 7h31 et à 7h45.",
+          "Entre la sixième à Mermoz et la terminale à Saint-Exupéry, un élève de Cornebarrieu passe par plusieurs de nos cours : la boxe éducative jusqu’à 12 ans, le groupe ados de 13 à 17 ans, puis, dès 16 ans, la boxe anglaise loisir ou la cardio boxe ; la compétition s’ouvre à 17 ans."
+        ],
+        "bullets": [
+          "Éveil — baby boxing, de 3 à 6 ans, sans aucun contact : le mercredi, jour de ligne 74, et le samedi matin, jour sans.",
+          "Boxe éducative, de 7 à 12 ans, en touche légère : le lundi, le mercredi et le vendredi, trois jours où la 74 circule.",
+          "Boxe ados, de 13 à 17 ans, en opposition encadrée : trois séances par semaine en soirée, dans la commune du collège Mermoz et du lycée Saint-Exupéry.",
+          "Boxe anglaise loisir, dès 16 ans, en touche contrôlée : cinq séances par semaine, le midi et le soir ; en période scolaire, la dernière 74 vers Cornebarrieu quitte Andromède-Lycée à 21h.",
+          "Cardio boxe, dès 16 ans, sans aucun contact : quatre séances par semaine, dont deux le midi, quand la commune annonce une 74 toutes les 65 minutes.",
+          "Compétition, dès 17 ans, sur avis de nos entraîneurs après au moins une saison chez nous : quatre séances par semaine, dont le sparring du samedi, jour où l’on vient de Cornebarrieu en TAD 171 ou par la route."
+        ],
+        "links": [
+          {
+            "label": "Les six cours de boxe anglaise du club",
+            "href": "/cours-de-boxe-blagnac/"
+          },
+          {
+            "label": "Boxe enfant à Blagnac, de 3 à 17 ans",
+            "href": "/boxe-enfant-blagnac/"
+          },
+          {
+            "label": "Boxe ados à Blagnac, 13 à 17 ans",
+            "href": "/cours-de-boxe-blagnac/boxe-ados/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "En semaine",
+        "h2": "La ligne 74 jusqu’à Andromède-Lycée, puis le tram T1",
+        "paragraphs": [
+          "La ligne 74 de Tisséo est la liaison directe entre Cornebarrieu et Blagnac. Partie de Mondonville, elle dessert à Cornebarrieu Clinique des Cèdres, Monges et Mairie Cornebarrieu, puis Joseph Strauss et Centre commercial Blagnac avant Andromède-Lycée. Sur la fiche horaire 2026-2027, le premier départ en période scolaire passe à Mairie Cornebarrieu à 6h17 et arrive à Andromède-Lycée à 6h29 : 12 minutes.",
+          "Elle circule du lundi au vendredi, toutes les 15 à 30 minutes aux heures de pointe d’après la commune, et ne roule ni le samedi, ni le dimanche, ni les jours fériés ; pendant les vacances scolaires, elle suit une grille à part. En période scolaire, le dernier départ de Mairie Cornebarrieu vers Blagnac est à 20h40, et le dernier retour quitte Andromède-Lycée à 21h pour arriver à Mairie Cornebarrieu à 21h13 ; pendant les vacances, ce dernier retour part à 20h45. Depuis le 3 mars 2025, des départs supplémentaires relient Monges à Andromède-Lycée : la fiche 2026-2027 en compte quatre, à 6h30, 7h10, 7h55 et 17h40.",
+          "À Andromède-Lycée, le tram T1, direction Palais de Justice, descend vers le centre de Blagnac par Place Georges Brassens, Grand Noble, Patinoire Barradels, Odyssud-Ritouret, Place du Relais et Pasteur-Mairie de Blagnac. Il passe toutes les 6 minutes au plus en semaine, toutes les 8 minutes au plus le samedi. L’arrêt où descendre dépend de l’adresse exacte, que nous vous envoyons en réponse à votre message.",
+          "Au retour vers Cornebarrieu, l’arrêt République des lignes 74 et 75 n’est plus desservi en direction de Mondonville depuis juin 2025 : descendez à Latécoère, 300 m en amont sur la route de Toulouse. Et ne confondez pas la 74 avec la 75 : celle-ci dessert aussi Cornebarrieu, mais elle relie Mondonville à Colomiers, pas à Blagnac."
+        ],
+        "links": [
+          {
+            "label": "Tous les accès au club de Blagnac",
+            "href": "/acces-contact/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Le samedi et le soir",
+        "h2": "Le samedi, sans ligne 74 : le TAD 171 jusqu’au tram T1",
+        "paragraphs": [
+          "Le samedi, la 74 ne roule pas. Le TAD 171, le transport à la demande de Tisséo, dessert alors l’ensemble des arrêts de Cornebarrieu, avec un premier départ à 6h50 et un dernier à 20h50 sur sa fiche 2026-2027, et rejoint le pôle d’échanges d’Aéroconstellation, station du tram T1 à Beauzelle.",
+          "Pour l’éveil du samedi matin ou le sparring du groupe compétition, réservez le TAD 171 auprès de Tisséo au moins 2 heures avant le départ, jusqu’à Aéroconstellation ; le T1, direction Palais de Justice, vous amène ensuite au centre de Blagnac. Au retour, le T1, direction MEETT, vous remonte à Aéroconstellation, d’où le TAD 171 repart le week-end sans réservation.",
+          "En semaine, nous fermons à 21h30, et le dernier bus vers Cornebarrieu est la 74 de 21h au départ d’Andromède-Lycée, en période scolaire. Le TAD 171 part aussi d’Aéroconstellation en soirée, sans réservation, mais sa fiche s’arrête à 20h50. Au-delà, venez en voiture ou à vélo.",
+          "En journée, en semaine, le TAD 170 Aussonne - Colomiers - Cornebarrieu dessert une partie des arrêts de Cornebarrieu, premier départ à 6h20, dernier à 20h50, et rejoint lui aussi Aéroconstellation : il se réserve au moins 2 heures avant, sauf au départ d’Aéroconstellation."
+        ],
+        "links": [
+          {
+            "label": "Baby boxing à Blagnac, dès 3 ans",
+            "href": "/cours-de-boxe-blagnac/eveil-baby-boxing/"
+          },
+          {
+            "label": "Boxe anglaise compétition à Blagnac",
+            "href": "/cours-de-boxe-blagnac/boxe-competition/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Voiture et vélo",
+        "h2": "Par la route, ou à vélo par la passerelle de Pinot",
+        "paragraphs": [
+          "En voiture, Mappy compte 11 à 14 minutes entre Blagnac et Cornebarrieu, pour 7,3 à 8,4 km. C’est l’option qui ne dépend d’aucun horaire de bus, le samedi matin comme après la dernière 74 du soir.",
+          "À vélo, l’association toulousaine 2p2r décrit un itinéraire, mis à jour en juin 2021, qui suit le tram T1 dans Blagnac jusqu’à la place Georges Brassens, franchit la RD902 par la passerelle de Pinot et arrive 2,8 km plus loin au rond-point de la N224 et de la rue A. Béteille, entrée nord de l’usine Aéroconstellation. L’AF3V situe ce rond-point à Cornebarrieu : c’est là que commence la voie verte de l’itinéraire Airbus A380.",
+          "Un vélo pliant, une fois plié, voyage dans les bus et les trams Tisséo : de quoi faire l’aller en ligne 74 et le retour en pédalant. Dans le bus comme sur le vélo, rien d’encombrant à porter : pour vos premières séances, nous prêtons gants et protections ; il vous faut une tenue de sport, des chaussures propres réservées à l’intérieur et une bouteille d’eau."
+        ],
+        "links": [
+          {
+            "label": "Ce qui se passe à votre première séance",
+            "href": "/premiere-seance/"
+          },
+          {
+            "label": "S’inscrire au club",
+            "href": "/inscription/"
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Le Club de Boxe Blagnac est-il à Cornebarrieu ?",
+        "answer": "Non, il est à Blagnac, la commune voisine à l’est, qui partage avec Cornebarrieu le code postal 31700 ; les deux centres sont à 5 km à vol d’oiseau. Nous envoyons l’adresse exacte en réponse à votre message via le formulaire, avec le créneau qui correspond à votre cours."
+      },
+      {
+        "question": "Quel bus prendre à Cornebarrieu pour aller à Blagnac ?",
+        "answer": "La ligne 74 de Tisséo, du lundi au vendredi : montez à Clinique des Cèdres, Monges ou Mairie Cornebarrieu, et descendez à Andromède-Lycée, où le tram T1 prend le relais vers le centre de Blagnac. Ne montez pas dans la 75 : elle dessert aussi Cornebarrieu, mais elle va à Colomiers."
+      },
+      {
+        "question": "Peut-on venir boxer le samedi depuis Cornebarrieu sans voiture ?",
+        "answer": "Oui, avec le TAD 171, puisque la ligne 74 ne circule pas le samedi. Ce transport à la demande de Tisséo dessert le week-end tous les arrêts de Cornebarrieu et rejoint le tram T1 à Aéroconstellation : réservez l’aller au moins 2 heures avant ; au retour, au départ d’Aéroconstellation, aucune réservation n’est nécessaire. Sinon, venez à vélo, par la passerelle de Pinot, ou en voiture."
+      },
+      {
+        "question": "Mon enfant est au collège Mermoz : quel cours lui correspond ?",
+        "answer": "Jusqu’à 12 ans, la boxe éducative, en touche légère, le lundi, le mercredi et le vendredi ; à partir de 13 ans, le groupe ados, trois séances par semaine en soirée. Le collège Jean Mermoz est le collège de secteur de toutes les rues de Cornebarrieu, et la ligne 74 prolonge deux départs du matin jusqu’à l’arrêt Collège Mermoz, à 7h31 et à 7h45. Écrivez-nous son âge via le formulaire : nous répondons sous 24 h avec le créneau et l’adresse."
+      },
+      {
+        "question": "Quand le club est-il ouvert, et jusqu’à quelle heure roule la ligne 74 ?",
+        "answer": "Nous sommes ouverts du lundi au samedi, de 10h à 21h30, et fermés le dimanche, aux vacances de Noël et au mois d’août. En période scolaire, la dernière 74 vers Cornebarrieu quitte Andromède-Lycée à 21h, à 20h45 pendant les vacances, et la ligne ne roule pas le samedi : après ce dernier bus, venez en voiture ou à vélo ; le samedi, prenez le TAD 171."
+      }
+    ],
+    "networkHeading": "Côté Toulouse, les autres clubs du réseau",
+    "networkIntro": "Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Cornebarrieu est à 11 km de Toulouse : si vos journées se passent en ville, Boxing Center Toulouse Minimes, Saint-Cyprien, Portet-sur-Garonne et Ramonville publient leurs cours et leurs horaires en ligne, et le TMBC, club partenaire du réseau, enseigne la boxe anglaise aux Minimes.",
+    "formHeading": "Avant de prendre la 74, écrivez-nous.",
+    "formText": "Indiquez le cours visé, l’âge de la personne qui boxera et vos jours libres, en semaine ou le samedi. Nous répondons sous 24 h avec le créneau et l’adresse exacte à Blagnac : de quoi préparer le trajet en ligne 74, en TAD 171 ou par la route.",
+    "ogWord": "Cornebarrieu",
+    "ogKicker": "Ligne 74 + tram T1 · Blagnac",
+    "priority": [
+      "boxe près de Cornebarrieu",
+      "Cornebarrieu",
+      "ligne 74",
+      "collège Mermoz"
+    ],
+    "sources": [
+      "https://fr.wikipedia.org/wiki/Cornebarrieu",
+      "https://www.habitants.fr/cornebarrieu",
+      "https://www.tisseo.fr/sites/default/files/nouvelles-fiches-horaires/Tisseo_ligne_74web.pdf",
+      "https://www.cornebarrieu.fr/les-transports-au-quotidien/",
+      "https://www.cornebarrieu.fr/tisseo-renforce-la-ligne-74-avec-des-departs-supplementaires-des-lundi-3-mars/",
+      "https://www.tisseo.fr/nos-mobilites/transports-en-commun/ligne-t1",
+      "https://fr.wikipedia.org/wiki/Ligne_T1_du_tramway_de_Toulouse",
+      "https://www.tisseo.fr/sites/default/files/fh/TAD170.html",
+      "https://www.tisseo.fr/sites/default/files/fh/TAD171.html",
+      "https://www.cornebarrieu.fr/wdp/wp-content/uploads/2024/05/2023-2024-Guide-pratique_WEB.pdf",
+      "https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-carte-scolaire-colleges-publics/records?where=code_insee%3D%2231150%22",
+      "https://annuaire-education.fr/etablissement/blagnac/college-jean-mermoz/0311581A.html",
+      "https://www.mairie-blagnac.fr/annuaires/equipements/equipement/lycee-polyvalent-saint-exupery",
+      "https://fr.mappy.com/itineraire/blagnac/cornebarrieu",
+      "https://2p2r.org/balades-guides/5-itineraires-de-balades/article/acces-a-la-voie-verte-de-l-itineraire-a380-depuis-toulouse?lang=fr",
+      "https://www.af3v.org/les-voies-vertes/voies/80-voie-verte-itineraire-airbus-a380-en-haute-garonne/"
+    ]
+  },
+  "club-de-boxe-aussonne": {
+    "key": "club-de-boxe-aussonne",
+    "path": "/club-de-boxe-aussonne/",
+    "label": "Boxe près d’Aussonne",
+    "question": "Où faire de la boxe anglaise quand on habite Aussonne ?",
+    "title": "Club de boxe près d’Aussonne — à Blagnac, tram T1",
+    "ogTitle": "Vous habitez Aussonne ? Le tram T1 part de MEETT vers nos six cours de boxe, à Blagnac",
+    "description": "Vous habitez Aussonne ? Nos six cours de boxe anglaise sont à Blagnac, à 6 km : tram T1 depuis MEETT, bus 71, TAD ou liO 388. Dès 3 ans, du lundi au samedi.",
+    "h1Main": "Club de boxe",
+    "h1Em": "près d’Aussonne",
+    "eyebrow": "Aussonne 31840 → Blagnac 31700 · 6 km",
+    "lead": "Vous habitez Aussonne : nos cours de boxe anglaise sont à Blagnac (31700), dont le centre est à 6 km au sud-est de celui d’Aussonne. Le tram T1 y mène depuis MEETT, son terminus nord, au parc des expositions que la commune d’Aussonne accueille. Nos six cours reçoivent dès 3 ans, du lundi au samedi, de 10h à 21h30 ; écrivez-nous par le formulaire et nous répondons avec l’adresse exacte et le créneau adapté.",
+    "note": "Lignes, arrêts et horaires cités d’après les fiches Tisséo et liO valables pour la saison 2026-2027. Le bus 71 ne roule ni le week-end ni les jours fériés ; la ligne liO 388 ne circule pas le 1er mai.",
+    "sections": [
+      {
+        "eyebrow": "La réponse",
+        "h2": "Aussonne, Blagnac : 6 km de centre à centre",
+        "paragraphs": [
+          "Le Club de Boxe Blagnac est à Blagnac (31700) : 6 km séparent le centre d’Aussonne de celui de Blagnac, au sud-est. Entre les deux, un arrêt concentre les correspondances : Aéroconstellation, que la fiche horaire du car liO 388 range déjà parmi les arrêts de Blagnac, et où s’arrêtent le tram T1, le bus 71, les TAD 170 et 171 et la ligne régionale liO 388.",
+          "Nous y donnons six cours de boxe anglaise, de l’éveil dès 3 ans au groupe compétition, du lundi au samedi, de 10h à 21h30 ; le club ferme le dimanche. Le samedi, jour sans bus 71, le TAD 171 dessert l’ensemble des arrêts d’Aussonne sur réservation, et la ligne liO 388 circule aussi depuis République et Périac.",
+          "Toute demande passe par le formulaire en bas de page : dites-nous si vous viendrez par le T1, le bus 71, un TAD ou la route. Nous répondons sous 24 h avec l’adresse exacte, qui vous indique à quelle station du T1 descendre, le créneau qui vous correspond et les conditions d’inscription."
+        ],
+        "links": [
+          {
+            "label": "Accès et contact du club de boxe à Blagnac",
+            "href": "/acces-contact/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Tram T1",
+        "h2": "Le tram T1 depuis MEETT, terminus nord de la ligne",
+        "paragraphs": [
+          "Le tram T1 relie Palais de Justice à MEETT, son terminus nord, au parc des expositions et centre de conventions de Toulouse, que la commune d’Aussonne accueille sur 55 hectares. La ligne y arrive depuis le 31 août 2020.",
+          "Depuis MEETT, le tram descend vers Blagnac par Aéroconstellation, Beauzelle - Aeroscopia, Andromède-Lycée, Place Georges Brassens, Grand Noble, Patinoire-Barradels, Odyssud-Ritouret et Place du Relais, puis atteint Pasteur-Mairie de Blagnac, neuvième station après MEETT.",
+          "Au bout de ce trajet, six minutes à pied séparent notre salle de son arrêt du T1 : l’adresse exacte, dans notre réponse, vous dit lequel."
+        ]
+      },
+      {
+        "eyebrow": "Bus, TAD, liO",
+        "h2": "Bus 71, TAD 170 et 171, liO 388 : les autres lignes depuis Aussonne",
+        "paragraphs": [
+          "Hors tram, quatre lignes relient Aussonne à Aéroconstellation, station du T1 : le bus 71 et le TAD 170 du lundi au vendredi, le TAD 171 le week-end et le soir, la ligne régionale liO 388 tous les jours sauf le 1er mai.",
+          "Pour le transport à la demande, aucune réservation au départ d’Aéroconstellation : présentez-vous au quai cinq minutes avant l’horaire. Depuis un arrêt d’Aussonne, la réservation se fait sur tisseo.fr, au moins deux heures à l’avance, et la veille avant 22 h pour un départ avant 8h30."
+        ],
+        "bullets": [
+          "Bus 71 (Seilh Mairie / Aussonne Agassines) : il part d’Aussonne Agassines et dessert Vignes, Collège d’Aussonne, École Jules Ferry, Mairie Aussonne, Les Jardins du Panariol, Cague L’Oule et Périac, puis Aéroconstellation, Beauzelle - Aeroscopia et Andromède-Lycée. Du lundi au vendredi, hors jours fériés.",
+          "TAD 170 : 23 départs du lundi au vendredi, le premier à 6h20, le dernier à 20h50, entre une partie des arrêts d’Aussonne, Aéroconstellation et Colomiers Gare SNCF ; le conducteur trace l’itinéraire selon les réservations.",
+          "TAD 171 : le week-end, il dessert l’ensemble des arrêts d’Aussonne ; le soir, il part d’Aéroconstellation. Son premier départ est à 6h50, son dernier à 20h50.",
+          "liO 388 : depuis République et Périac, à Aussonne, la ligne régionale gagne Aéroconstellation et Andromède Lycée, arrêts que sa fiche horaire place à Blagnac, puis Hôpital Purpan et Toulouse Arènes, en correspondance avec le métro A. Réseau liO, distinct de Tisséo.",
+          "Ligne 30 (Aéroport / MEETT) : du lundi au vendredi, hors jours fériés, elle part de MEETT et croise le T1 à Aéroconstellation, puis à Odyssud-Ritouret, avant l’aéroport."
+        ]
+      },
+      {
+        "eyebrow": "Selon l’âge",
+        "h2": "Quel cours selon l’âge, et quel jour venir d’Aussonne",
+        "paragraphs": [
+          "Le cours dépend de l’âge ; le trajet depuis Aussonne dépend du jour. Du lundi au vendredi, le bus 71 et le TAD 170 complètent le tram T1 ; le samedi, le TAD 171, sur réservation, et la ligne liO 388 prennent le relais.",
+          "Pour un collégien de Germaine Tillion, le bus 71 part de l’arrêt Collège d’Aussonne et rejoint Andromède-Lycée, qui est aussi une station du tram T1. Le lycée Saint-Exupéry, lui, est à Blagnac : un lycéen qui y a cours est déjà dans la commune de nos cours en sortant."
+        ],
+        "bullets": [
+          "Éveil, de 3 à 6 ans, sans aucun contact : le mercredi, jour de bus 71, et le samedi matin, jour de TAD 171 sur réservation.",
+          "Boxe éducative, de 7 à 12 ans, en touche légère : le lundi, le mercredi et le vendredi, trois jours où roulent le bus 71 et le TAD 170.",
+          "Boxe ados, de 13 à 17 ans, en opposition encadrée : trois séances par semaine, en soirée ; au retour, le dernier TAD 171 quitte Aéroconstellation à 20h50.",
+          "Boxe anglaise loisir, dès 16 ans, en touche contrôlée : cinq séances par semaine, le midi et le soir.",
+          "Cardio boxe, dès 16 ans, sans aucun contact : quatre séances par semaine, dont deux le midi.",
+          "Compétition, dès 17 ans, sur avis de l’encadrement et après au moins une saison chez nous : quatre séances par semaine, dont le sparring du samedi, un jour sans bus 71."
+        ],
+        "links": [
+          {
+            "label": "Boxe enfant à Blagnac, de 3 à 17 ans",
+            "href": "/boxe-enfant-blagnac/"
+          },
+          {
+            "label": "Les six cours de boxe à Blagnac",
+            "href": "/cours-de-boxe-blagnac/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "Samedi, soir, voiture",
+        "h2": "Le samedi et le soir, sans bus 71 depuis Aussonne",
+        "paragraphs": [
+          "Le samedi, l’éveil du matin et le sparring du groupe compétition tombent un jour sans bus 71. Le TAD 171 dessert alors l’ensemble des arrêts d’Aussonne, sur réservation, jusqu’à Aéroconstellation, où le tram T1 prend la suite vers Pasteur-Mairie de Blagnac. La ligne liO 388 roule aussi le samedi depuis République et Périac, et le T1 part directement de MEETT.",
+          "Le soir, le club ferme à 21h30 et le dernier TAD 171 quitte Aéroconstellation à 20h50. Après une séance plus tardive, le tram T1 vous ramène à MEETT, sur la commune d’Aussonne : il remonte vers son terminus bien après notre fermeture.",
+          "En voiture, la RN 224 relie Aussonne à la route métropolitaine 902, dite Voie Lactée, à la sortie Parc des Expositions Sud MEETT. Cette 2 × 2 voies, qui file vers l’aéroport de Toulouse-Blagnac, déroule ensuite les sorties Garossos, AéroConstellation, Centre Commercial et Porte de Bordebasse. La sortie à prendre dépend de l’adresse exacte, que nous vous envoyons."
+        ],
+        "links": [
+          {
+            "label": "Les horaires du club, du lundi au samedi",
+            "href": "/horaires/"
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Le tram T1 relie-t-il Aussonne à Blagnac ?",
+        "answer": "Oui, depuis MEETT, son terminus nord, au parc des expositions installé sur la commune d’Aussonne. Le tram passe par Aéroconstellation, Beauzelle - Aeroscopia et Andromède-Lycée, et atteint Pasteur-Mairie de Blagnac neuf stations après MEETT. Notre salle est à six minutes à pied d’un arrêt du T1 : son nom figure dans notre réponse, avec l’adresse exacte."
+      },
+      {
+        "question": "Le bus 71 va-t-il jusqu’à Pasteur-Mairie de Blagnac ?",
+        "answer": "Non. Le 71 croise le tram T1 à Aéroconstellation, Beauzelle - Aeroscopia et Andromède-Lycée, puis repart vers Beauzelle et Seilh Mairie : pour Pasteur-Mairie de Blagnac, montez dans le T1 à l’un de ces trois arrêts. Le 71 circule du lundi au vendredi, ni le week-end ni les jours fériés."
+      },
+      {
+        "question": "À quelle distance de Blagnac se trouve Aussonne ?",
+        "answer": "Le centre d’Aussonne est à 6 km au nord-ouest du centre de Blagnac. Votre trajet dépend de votre point de départ, que vous montiez dans le bus 71 à Aussonne Agassines ou à Périac, et de notre adresse, que nous vous envoyons sous 24 h en réponse au formulaire."
+      },
+      {
+        "question": "Mon enfant est au collège Germaine Tillion : quel cours lui correspond ?",
+        "answer": "Avant 13 ans, la boxe éducative, en touche légère, le lundi, le mercredi et le vendredi. À partir de 13 ans, le groupe ados, trois séances par semaine en soirée. Pour venir, le bus 71 dessert le collège par l’arrêt Collège d’Aussonne, du lundi au vendredi, et rejoint le tram T1 à Aéroconstellation. Écrivez-nous son âge et ses jours libres : nous répondons avec le créneau et l’adresse exacte à Blagnac."
+      },
+      {
+        "question": "Faut-il réserver le TAD pour venir d’Aussonne ?",
+        "answer": "Oui, depuis un arrêt d’Aussonne : sur tisseo.fr, au moins deux heures avant, ou la veille avant 22 h pour un départ avant 8h30. Au départ d’Aéroconstellation, aucune réservation : présentez-vous au quai cinq minutes avant l’horaire. Le TAD 170 roule du lundi au vendredi ; le TAD 171, le week-end et le soir."
+      }
+    ],
+    "networkHeading": "Si la journée finit à Toulouse",
+    "networkIntro": "Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Depuis Aussonne, la ligne liO 388 finit à Toulouse Arènes, sur le métro A, et le tram T1 continue jusqu’à Palais de Justice : si vos journées se passent en ville, les clubs du réseau aux Minimes et à Saint-Cyprien publient leurs activités et leurs horaires en ligne.",
+    "formHeading": "Vous partez d’Aussonne ? Dites-nous par où.",
+    "formText": "Indiquez le cours, l’âge de la personne qui boxera et la façon dont vous viendrez : tram T1 depuis MEETT, bus 71, TAD 170 ou 171, liO 388 ou voiture. Nous répondons sous 24 h avec le créneau adapté et l’adresse exacte à Blagnac.",
+    "ogWord": "Aussonne",
+    "ogKicker": "Aussonne → Blagnac · 6 km",
+    "priority": [
+      "boxe près d’Aussonne",
+      "Aussonne",
+      "depuis Aussonne",
+      "tram T1"
+    ],
+    "sources": [
+      "https://fr.wikipedia.org/wiki/Aussonne",
+      "https://www.tisseo.fr/sites/default/files/fh/ligneT1.html",
+      "https://fr.wikipedia.org/wiki/Ligne_T1_du_tramway_de_Toulouse",
+      "https://www.tisseo.fr/sites/default/files/fh/ligne71.html",
+      "https://www.tisseo.fr/sites/default/files/fh/TAD170.html",
+      "https://www.tisseo.fr/sites/default/files/fh/TAD171.html",
+      "https://storage.googleapis.com/is-wp-90-prod/uploads-prod/2026/07/31-FH-388-092026.pdf",
+      "https://www.tisseo.fr/sites/default/files/fh/ligne30.html",
+      "https://fr.wikipedia.org/wiki/Route_m%C3%A9tropolitaine_902_(Toulouse_M%C3%A9tropole)",
+      "https://germaine-tillion.ecollege.haute-garonne.fr/",
+      "https://www.aussonne.fr/mon-quotidien/culture/https-meett-fr/"
     ]
   }
 }

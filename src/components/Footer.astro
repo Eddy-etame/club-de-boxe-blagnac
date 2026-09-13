@@ -2,6 +2,7 @@
 import { NAV, SITE } from '@/data/site';
 import { CLUB, DISCIPLINES } from '@/data/club';
 import { NETWORK, NETWORK_CLUBS } from '@/data/network';
+import { COMMUNES, communePath } from '@/data/communes';
 ---
 
 <footer class="site-footer surface-dark">
@@ -26,6 +27,13 @@ import { NETWORK, NETWORK_CLUBS } from '@/data/network';
           {DISCIPLINES.map((d) => <li><a href={'/cours-de-boxe-blagnac/' + d.slug + '/'}>{d.linkLabel}</a></li>)}
           <li><a href="/boxe-enfant-blagnac/">Boxe enfant à Blagnac, de 3 à 17 ans</a></li>
           <li><a href="/boxe-femme-blagnac/">Boxe femme à Blagnac, sur tous nos cours</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="La boxe autour de Blagnac">
+        <p class="site-footer__label">Autour de Blagnac</p>
+        <ul>
+          {COMMUNES.map((c) => <li><a href={communePath(c)}>Boxe près de {c.name}</a></li>)}
         </ul>
       </nav>
 
@@ -83,7 +91,7 @@ import { NETWORK, NETWORK_CLUBS } from '@/data/network';
   .site-footer__grid {
     display: grid;
     gap: 2.2rem 2rem;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     padding-block: 2rem;
     border-top: 1px solid rgb(255 255 255 / 24%);
   }

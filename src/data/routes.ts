@@ -15,6 +15,8 @@
  */
 import { DISCIPLINES } from './club';
 import { PUBLIC_PAGES } from './site';
+import { copyFor } from './copy';
+import { COMMUNES, communeKey, communePath, kmFromBlagnac } from './communes';
 
 export type OgCard = {
   /** The subject, set enormous. Upper-cased by the renderer. */
@@ -95,7 +97,7 @@ export const ROUTES: Route[] = [
     label: 'Boxe enfant à Blagnac',
     question: 'Quelle boxe pour mon enfant à Blagnac, selon son âge, et est-ce sans danger ?',
     answers: 'Trois cours selon l’âge, de 3 à 17 ans : éveil sans contact, boxe éducative, groupe ados.',
-    og: { word: 'Boxe enfant', kicker: 'De 3 à 17 ans · trois cours', photo: 'boxe-detail-1000.jpg' }
+    og: { word: 'Boxe enfant', kicker: 'De 3 à 17 ans · trois cours', photo: 'boxe-enfant-blagnac-700.jpg' }
   },
   {
     path: '/boxe-femme-blagnac/',
@@ -118,6 +120,23 @@ export const ROUTES: Route[] = [
     answers: 'Inscription toute l’année, ce que comprend l’adhésion, le certificat médical et le dossier.',
     og: { word: 'Inscription', kicker: 'Toute l’année · certificat', photo: 'conseil-coach-1400.jpg' }
   },
+  /* One page per commune of the corridor: the question and label come from
+     the page copy, the card from the commune's own photo. */
+  ...COMMUNES.map((c) => {
+    const copy = copyFor(communeKey(c));
+    if (!copy?.question || !copy.label) throw new Error(`routes.ts: no page copy for commune "${c.slug}"`);
+    return {
+      path: communePath(c),
+      label: copy.label,
+      question: copy.question,
+      answers: copy.description.replace(/\s*(?:Écrivez-nous|Nous écrire)\.?$/, ''),
+      og: {
+        word: c.name,
+        kicker: copy.ogKicker ?? `${kmFromBlagnac(c)} km de Blagnac`,
+        photo: `${c.photo.file}-${c.photo.widths[c.photo.widths.length - 1]}.jpg`
+      }
+    };
+  }),
   {
     path: '/premiere-seance/',
     label: 'Première séance',

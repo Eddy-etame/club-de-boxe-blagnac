@@ -10,7 +10,8 @@ import {
   AREA,
   DISCIPLINE_COUNT
 } from '@/data/club';
-import { LOCATION, NEARBY_SENTENCE } from '@/data/seo-map';
+import { LOCATION } from '@/data/seo-map';
+import CommuneLinks from '@/components/CommuneLinks.astro';
 
 const title = 'Club de Boxe Blagnac (31700) — boxe anglaise dès 3 ans';
 const ogTitle = 'Un club de boxe anglaise à Blagnac, du baby boxing à la compétition';
@@ -137,7 +138,7 @@ const audiences = [
           Le <strong>Club de Boxe Blagnac</strong> enseigne la boxe anglaise à {LOCATION.city}, {LOCATION.position}, et fait partie du <a href="https://boxingcenter.fr/" rel="noopener">réseau Boxing Center</a>. Un ring, une salle de sacs, un espace de renforcement, et des entraîneurs diplômés sur le tapis à chaque séance, jamais assis au bureau.
         </p>
         <p>
-          Nos adhérents viennent de {NEARBY_SENTENCE} autant que de Blagnac. Des enfants de 3 ans, des adolescents, des adultes qui reprennent le sport, des femmes sur tous les cours, et la plupart n’avaient jamais mis un gant avant de venir.
+          Nos adhérents viennent de <CommuneLinks /> autant que de Blagnac. Des enfants de 3 ans, des adolescents, des adultes qui reprennent le sport, des femmes sur tous les cours, et la plupart n’avaient jamais mis un gant avant de venir.
         </p>
         <p>
           <a class="inline-link" href="/cours-de-boxe-blagnac/">Voir les {DISCIPLINE_COUNT} cours →</a>
@@ -285,7 +286,7 @@ const audiences = [
         </ul>
         <div class="prose reveal">
           <p>
-            Nos adhérents viennent de {NEARBY_SENTENCE} autant que de Blagnac : le tram T1 et les lignes Tisséo mettent notre <strong>salle de boxe</strong> à moins de vingt minutes de tout le <strong>nord-ouest toulousain</strong>.
+            Nos adhérents viennent de <CommuneLinks /> autant que de Blagnac : le tram T1 et les lignes Tisséo mettent notre <strong>salle de boxe</strong> à moins de vingt minutes de tout le <strong>nord-ouest toulousain</strong>.
           </p>
           <p class="local__contact">
             <a href={`mailto:${CLUB.email}`}>{CLUB.email}</a>

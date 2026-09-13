@@ -1,4 +1,5 @@
 import { AREA, DISCIPLINES } from './club';
+import { COMMUNE_PAGES } from './communes';
 
 const fallbackUrl = 'https://club-de-boxe-blagnac.invalid';
 const configuredUrl = import.meta.env.PUBLIC_SITE_URL?.trim();
@@ -59,6 +60,7 @@ export const PUBLIC_PAGES = [
   '/boxe-femme-blagnac/',
   '/horaires/',
   '/inscription/',
+  ...COMMUNE_PAGES,
   '/premiere-seance/',
   '/faq/',
   '/acces-contact/',

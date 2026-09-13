@@ -14,6 +14,7 @@ import { LOCATION } from '@/data/seo-map';
 import { pageLastModified } from '@/lib/lastmod';
 import { buildGraph } from '@/data/schema';
 import { ROUTES, ogId } from '@/data/routes';
+import { PHOTOS } from '@/data/photos';
 
 interface Props {
   title: string;
@@ -71,6 +72,10 @@ const {
   faq,
   preloadImage
 } = Astro.props;
+
+/* Every credit the photo registry holds: two photographers and the network's photothèque. */
+const credits = [...new Set(PHOTOS.map((p) => p.credit))];
+const copyrightLine = 'Photographies © ' + credits.slice(0, -1).join(', ') + ' et ' + credits[credits.length - 1];
 
 const canonical = absoluteUrl(pathname);
 /* Each page ships its own social card (src/pages/og/[page].jpg.ts). */
@@ -213,8 +218,8 @@ const graph = buildGraph({
     <meta name="twitter:image:alt" content={socialAlt} />
 
     {/* Photographer credit travels with the page, not only in the visible UI. */}
-    <meta name="image:credit" content="Axel Derewiany, Cécile Domenech" />
-    <meta name="copyright" content="Photographies © Axel Derewiany et Cécile Domenech" />
+    <meta name="image:credit" content={credits.join(', ')} />
+    <meta name="copyright" content={copyrightLine} />
 
     {!noindex && <script is:inline type="application/ld+json" set:html={JSON.stringify(graph)} />}
   </head>

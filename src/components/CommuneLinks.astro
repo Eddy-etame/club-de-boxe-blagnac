@@ -1,0 +1,11 @@
+---
+/**
+ * "Beauzelle, Seilh, Cornebarrieu et Aussonne", each name a link to its
+ * commune page. The same list as NEARBY_SENTENCE, which the text files use.
+ */
+import { COMMUNES, communePath } from '@/data/communes';
+---
+
+{COMMUNES.map((c, i) => (
+  <Fragment>{i === 0 ? '' : i === COMMUNES.length - 1 ? ' et ' : ', '}<a href={communePath(c)}>{c.name}</a></Fragment>
+))}

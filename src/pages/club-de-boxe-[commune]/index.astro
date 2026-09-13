@@ -1,0 +1,24 @@
+---
+/**
+ * One page per commune of Blagnac's corridor (src/data/communes.ts): where to
+ * box when you live there, how to get to Blagnac, which course for whom.
+ * Copy: src/data/copy.json ("club-de-boxe-<slug>"), researched per commune
+ * from sourced facts and reviewed against the owner rules — a sentence that
+ * would stay true with another commune's name does not ship.
+ */
+import IntentPage from '@/components/IntentPage.astro';
+import { COMMUNES, commune, communeKey, kmFromBlagnac } from '@/data/communes';
+import { communeNode } from '@/data/schema';
+
+export function getStaticPaths() {
+  return COMMUNES.map((c) => ({ params: { commune: c.slug } }));
+}
+
+const c = commune(String(Astro.params.commune));
+---
+
+<IntentPage
+  copyKey={communeKey(c)}
+  photo={{ ...c.photo, caption: `${c.name} → Blagnac · ${kmFromBlagnac(c)} km entre les deux centres` }}
+  schema={communeNode(c)}
+/>

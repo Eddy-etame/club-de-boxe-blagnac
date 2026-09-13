@@ -28,6 +28,7 @@ import { LOCATION } from './seo-map';
 import { SITE, PUBLIC_PAGES, LOW_VALUE_PAGES, absoluteUrl } from './site';
 import { pageLastModified, siteLastModified } from '../lib/lastmod';
 import { ROUTES, ogId } from './routes';
+import { COMMUNES, communePath, type Commune } from './communes';
 
 const ENTITY = {
   boxing: {
@@ -55,14 +56,6 @@ const ENTITY = {
     wikipedia: 'https://fr.wikipedia.org/wiki/Occitanie_(r%C3%A9gion_administrative)'
   }
 } as const;
-
-/** Neighbouring communes, each anchored. Verified 2026-09-05. */
-const NEARBY_ENTITIES = [
-  { name: 'Beauzelle', qid: 'Q770307' },
-  { name: 'Cornebarrieu', qid: 'Q1344709' },
-  { name: 'Aussonne', qid: 'Q634738' },
-  { name: 'Colomiers', qid: 'Q318071' }
-];
 
 const id = (fragment: string) => `${SITE.url}/#${fragment}`;
 
@@ -123,8 +116,9 @@ const publisherNode = {
   },
   areaServed: [
     { '@id': id('place') },
-    ...NEARBY_ENTITIES.map((c) => ({
+    ...COMMUNES.map((c) => ({
       '@type': 'City',
+      '@id': id('commune-' + c.slug),
       name: c.name,
       sameAs: 'https://www.wikidata.org/wiki/' + c.qid
     }))
@@ -248,6 +242,31 @@ const courseNodes = DISCIPLINES.map((d) => ({
   }
 }));
 
+/**
+ * A neighbouring commune, in full, on its own page: the same @id the club's
+ * areaServed points to, so the two merge into one entity. Official figures
+ * only (src/data/communes.ts).
+ */
+export function communeNode(c: Commune) {
+  return {
+    '@type': ['City', 'AdministrativeArea'],
+    '@id': id('commune-' + c.slug),
+    name: c.name,
+    sameAs: 'https://www.wikidata.org/wiki/' + c.qid,
+    identifier: { '@type': 'PropertyValue', propertyID: 'Code officiel géographique (Insee)', value: c.insee },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: c.name,
+      postalCode: c.postalCode,
+      addressRegion: LOCATION.region,
+      addressCountry: 'FR'
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: c.centre.lat, longitude: c.centre.lon },
+    containedInPlace: { '@id': id('metropole') },
+    subjectOf: { '@id': absoluteUrl(communePath(c)) + '#webpage' }
+  };
+}
+
 /** One course node, shared by the hub and the course's own page. */
 export function courseNode(slug: string) {
   const node = courseNodes.find((c) => c['@id'] === courseId(slug));
@@ -301,6 +320,11 @@ const networkNode = {
   '@type': 'Organization',
   '@id': NETWORK.graphId,
   name: NETWORK.name,
+  /* Registry identity (recherche-entreprises.api.gouv.fr, 2026-09-13): the
+     ISO 6523 code 0002 is the SIREN, the one identifier no namesake shares. */
+  legalName: NETWORK.editor.legalName,
+  iso6523Code: '0002:' + NETWORK.editor.siren.replace(/\s/g, ''),
+  foundingDate: NETWORK.editor.registered,
   url: NETWORK.url,
   sameAs: [...NETWORK.sameAs],
   subOrganization: [

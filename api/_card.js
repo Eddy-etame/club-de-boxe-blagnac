@@ -51,7 +51,7 @@ export default {
     "humans": "https://www.club-boxe-blagnac.fr/humans.txt",
     "sitemap": "https://www.club-boxe-blagnac.fr/sitemap.xml"
   },
-  "updated": "2026-09-13T15:46:03+00:00",
+  "updated": "2026-09-13T17:38:40+00:00",
   "facts": {
     "club": {
       "name": "Club de Boxe Blagnac",
@@ -63,7 +63,7 @@ export default {
         "url": "https://boxingcenter.fr/"
       },
       "locality": "Blagnac (31700), Haute-Garonne, Occitanie, France",
-      "area": "Au nord-ouest de Toulouse ; adhérents de Beauzelle, Cornebarrieu, Aussonne, Colomiers, Seilh et Mondonville autant que de Blagnac.",
+      "area": "Au nord-ouest de Toulouse ; adhérents de Beauzelle, Seilh, Cornebarrieu et Aussonne autant que de Blagnac.",
       "openingHours": "Du lundi au samedi, de 10h à 21h30. Fermé le dimanche.",
       "season": "Inscriptions ouvertes toute l’année. Fermeture aux vacances de Noël et au mois d’août.",
       "contact": {
@@ -245,6 +245,30 @@ export default {
         "label": "Inscription",
         "question": "Comment s’inscrire au club de boxe de Blagnac, et que faut-il fournir ?",
         "answers": "Inscription toute l’année, ce que comprend l’adhésion, le certificat médical et le dossier."
+      },
+      {
+        "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-beauzelle/",
+        "label": "Boxe près de Beauzelle",
+        "question": "Où faire de la boxe anglaise quand on habite Beauzelle ?",
+        "answers": "Depuis Beauzelle, le tram T1 et le bus 70 vous mènent sans changement à Blagnac, dont le centre est à 3 km : boxe anglaise dès 3 ans, du lundi au samedi."
+      },
+      {
+        "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-seilh/",
+        "label": "Boxe près de Seilh",
+        "question": "Où faire de la boxe anglaise quand on habite Seilh ?",
+        "answers": "Vous habitez Seilh ? Nos six cours de boxe anglaise sont à Blagnac, 6 km au sud : bus 71 puis tram T1 à Andromède-Lycée en semaine, TAD 171 le samedi. Dès 3 ans."
+      },
+      {
+        "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-cornebarrieu/",
+        "label": "Boxe près de Cornebarrieu",
+        "question": "Où faire de la boxe anglaise quand on habite Cornebarrieu ?",
+        "answers": "Boxe près de Cornebarrieu : six cours de boxe anglaise dès 3 ans à Blagnac, dont le centre est à 5 km. Ligne 74 en semaine, TAD 171 le samedi."
+      },
+      {
+        "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-aussonne/",
+        "label": "Boxe près d’Aussonne",
+        "question": "Où faire de la boxe anglaise quand on habite Aussonne ?",
+        "answers": "Vous habitez Aussonne ? Nos six cours de boxe anglaise sont à Blagnac, à 6 km : tram T1 depuis MEETT, bus 71, TAD ou liO 388. Dès 3 ans, du lundi au samedi."
       },
       {
         "url": "https://www.club-boxe-blagnac.fr/premiere-seance/",

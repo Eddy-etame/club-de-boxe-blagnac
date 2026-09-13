@@ -3,6 +3,7 @@ import { LOW_VALUE_PAGES, PUBLIC_PAGES, SITE, absoluteUrl } from '@/data/site';
 import { DISCIPLINES } from '@/data/club';
 import { pageLastModified } from '@/lib/lastmod';
 import { ogId } from '@/data/routes';
+import { COMMUNES, communePath } from '@/data/communes';
 
 /**
  * Sitemap with the image extension.
@@ -21,10 +22,13 @@ const PAGE_IMAGES: Record<string, string[]> = {
   '/premiere-seance/': ['shadow-boxing-1400.jpg', 'accueil-club-1400.jpg'],
   '/faq/': ['coaching-individuel-1400.jpg', 'renforcement-groupe-1600.jpg'],
   '/acces-contact/': ['accueil-club-1400.jpg', 'salle-de-boxe-1600.jpg', 'boxe-corner-1600.jpg'],
-  '/boxe-enfant-blagnac/': ['boxe-detail-1000.jpg'],
+  '/boxe-enfant-blagnac/': ['boxe-enfant-blagnac-700.jpg'],
   '/boxe-femme-blagnac/': ['cours-collectif-sacs-1600.jpg'],
   '/horaires/': ['sacs-de-frappe-1400.jpg'],
   '/inscription/': ['conseil-coach-1400.jpg'],
+  ...Object.fromEntries(
+    COMMUNES.map((c) => [communePath(c), [c.photo.file + '-' + c.photo.widths[c.photo.widths.length - 1] + '.jpg']])
+  ),
   ...Object.fromEntries(
     DISCIPLINES.map((d) => [
       '/cours-de-boxe-blagnac/' + d.slug + '/',

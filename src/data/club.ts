@@ -66,10 +66,10 @@ export const AREA = {
   region: 'Haute-Garonne',
   country: 'FR',
   position: 'au nord-ouest de Toulouse',
-  nearby: ['Beauzelle', 'Cornebarrieu', 'Aussonne', 'Colomiers', 'Seilh', 'Mondonville'],
+  nearby: ['Beauzelle', 'Seilh', 'Cornebarrieu', 'Aussonne'],
   transport: [
     { mode: 'Tram T1', detail: 'depuis Arènes, correspondance métro A. Six minutes à pied de l’arrêt.' },
-    { mode: 'Bus Tisséo', detail: 'lignes directes depuis Beauzelle, Cornebarrieu, Aussonne et Colomiers.' },
+    { mode: 'Bus Tisséo', detail: 'le 70 depuis Beauzelle jusqu’au centre de Blagnac ; le 71 depuis Seilh et Aussonne, le 74 depuis Cornebarrieu, jusqu’au tram T1 à Andromède-Lycée.' },
     { mode: 'Voiture', detail: 'accès par la RN124 et la rocade Arc-en-Ciel. Parking gratuit sur place.' },
     { mode: 'Vélo', detail: 'piste cyclable continue depuis le centre de Blagnac, arceaux devant l’entrée.' }
   ]
@@ -114,7 +114,7 @@ export const DISCIPLINES: Discipline[] = [
       'Opposition en touche légère',
       'Retour au calme'
     ],
-    image: { file: 'cours-debout-groupe', widths: [480, 960, 1600], alt: 'Renforcement en groupe : kettlebells et haltères entre deux ateliers' }
+    image: { file: 'boxe-educative-blagnac', widths: [480, 960, 1600], alt: 'Boxe éducative à Blagnac, de 7 à 12 ans : deux enfants casqués échangent en touche légère sous le regard des juges' }
   },
   {
     slug: 'boxe-ados',
@@ -135,7 +135,7 @@ export const DISCIPLINES: Discipline[] = [
       'Opposition encadrée',
       'Gainage'
     ],
-    image: { file: 'coin-de-ring', widths: [420, 900, 1400], alt: 'Sur le ring, un entraîneur montre un enchaînement à un jeune boxeur ganté' }
+    image: { file: 'boxe-ados-blagnac', widths: [480, 960, 1600], alt: 'Boxe ados à Blagnac : un entraîneur tient les pattes d’ours, un jeune boxeur enchaîne au gant bleu' }
   },
   {
     slug: 'boxe-anglaise-loisir',
@@ -277,7 +277,7 @@ export const FAQ: { question: string; answer: string }[] = [
   {
     question: 'Où se trouve le club et comment nous joindre ?',
     answer:
-      'Nous sommes à Blagnac (31700), au nord-ouest de Toulouse, desservis par le tram T1 et les lignes de bus Tisséo depuis Beauzelle, Cornebarrieu, Aussonne et Colomiers. Laissez-nous vos coordonnées via le formulaire : nous vous envoyons l’adresse exacte, le créneau qui correspond à votre niveau et les modalités d’inscription.'
+      'Nous sommes à Blagnac (31700), au nord-ouest de Toulouse, desservis par le tram T1 et par les bus Tisséo 70, 71 et 74 depuis Beauzelle, Seilh, Aussonne et Cornebarrieu. Laissez-nous vos coordonnées via le formulaire : nous vous envoyons l’adresse exacte, le créneau qui correspond à votre niveau et les modalités d’inscription.'
   },
   {
     question: 'Quels cours proposez-vous ?',
