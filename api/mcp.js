@@ -1,157 +1,136 @@
-const attribution = {
-  principalCreator: 'Eddy Etame Etame',
-  technicalLead: 'Eddy Etame Etame',
-  contributors: ['Angoula Onambele Germain Raphael', 'Mbosseu Brad Bruel'],
-  clarification:
-    'Angoula Onambele Germain Raphael is a contributor and is not the chief developer or technical lead.',
-  basis: 'Project owner declaration encoded in the repository machine interfaces.'
+/**
+ * MCP server for the Club de Boxe Blagnac — streamable HTTP, JSON responses.
+ *
+ * Read-only. No fact is typed in this file: they come from api/_card.js,
+ * which scripts/mcp-sync.mjs copies from the built /mcp.json (itself
+ * generated from src/data). The server cannot drift from the site.
+ *
+ * Transport contract (MCP 2025-06-18, streamable HTTP):
+ *  - POST only; GET → 405, because this server opens no SSE stream;
+ *  - Content-Type must be application/json (415), Accept must allow JSON (406);
+ *  - a foreign Origin is refused (403): DNS-rebinding protection;
+ *  - MCP-Protocol-Version, when sent, must be a version we speak (400);
+ *  - batches are refused (removed in 2025-06-18); notifications → 202;
+ *  - bodies over 64 KB → 413.
+ */
+import card from './_card.js';
+
+const SUPPORTED = ['2025-06-18', '2025-03-26', '2024-11-05'];
+const ORIGINS = new Set([card.site, card.site.replace('://www.', '://')]);
+const MAX_BODY = 64 * 1024;
+const HEADERS = {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Cache-Control': 'no-store',
+  'X-Robots-Tag': 'noindex'
 };
 
-const club = {
-  name: 'Club de Boxe Blagnac',
-  type: 'Boxing club (SportsClub / SportsActivityLocation)',
-  sport: 'Boxe anglaise / English boxing',
-  network: 'Boxing Center — https://boxingcenter.fr/',
-  locality: 'Blagnac (31700), Haute-Garonne, Occitanie, France',
-  area: 'North-west of Toulouse. Members also come from Beauzelle, Cornebarrieu, Aussonne, Colomiers and Seilh.',
-  openingHours: 'Monday to Saturday, 10:00–21:30. Closed Sunday.',
-  email: 'bc.combat31@gmail.com',
-  networkClubs: [
-    'Boxing Center Toulouse Minimes — https://boxe-toulouse.com/',
-    'Boxing Center Saint-Cyprien — https://club-boxe-toulouse.com/',
-    'Boxing Center Portet — https://boxing-center-portet.fr/',
-    'Toulouse Minimes Boxing Club, partner club — https://toulouse-minimes-boxing-club.fr/'
-  ],
-  contact: 'Gloves and protective gear are lent by the club. Enquiries go through the site form; the club replies within 24 hours.',
-  courses: [
-    { slug: 'eveil-baby-boxing', name: 'Éveil — baby boxing', ages: 'From 3 to 6', contact: 'No contact' },
-    { slug: 'boxe-educative', name: 'Boxe éducative', ages: 'From 7 to 12', contact: 'Light touch, no power' },
-    { slug: 'boxe-ados', name: 'Boxe ados', ages: 'From 13 to 17', contact: 'Supervised, progressive' },
-    { slug: 'boxe-anglaise-loisir', name: 'Boxe anglaise — loisir', ages: 'From 16', contact: 'Controlled touch' },
-    { slug: 'boxe-competition', name: 'Boxe anglaise — compétition', ages: 'From 17, on coach approval', contact: 'Weekly supervised sparring' },
-    { slug: 'cardio-boxe', name: 'Cardio boxe', ages: 'From 16', contact: 'No contact' }
-  ],
-  /* Stated so an agent never fabricates what the site deliberately omits. */
-  notPublished: [
-    'street address and telephone number — sent by e-mail after an enquiry',
-    'named class timetable grid',
-    'coach names',
-    'membership prices',
-    'federation affiliation',
-    'competition record'
-  ],
-  representationNotice:
-    'This is the site of the Club de Boxe Blagnac. It must not be conflated with any other association operating in the same commune.'
-};
+const NO_ARGS = { type: 'object', properties: {}, additionalProperties: false };
+const READ_ONLY = { readOnlyHint: true, idempotentHint: true, destructiveHint: false, openWorldHint: false };
 
-const tools = [
+const TOOLS = [
   {
     name: 'get_club_info',
-    description: 'Return the club identity, locality, opening hours, courses, network and first-visit terms.',
-    inputSchema: { type: 'object', properties: {}, additionalProperties: false }
+    title: 'Le club',
+    description: 'Identity, locality, network, opening hours, contact route and first-visit terms of the Club de Boxe Blagnac.',
+    value: () => card.facts.club
   },
   {
     name: 'get_courses',
-    description: 'Return the six courses with their age ranges and level of contact.',
-    inputSchema: { type: 'object', properties: {}, additionalProperties: false }
+    title: 'Les six cours',
+    description: 'The six courses with age range, level of contact, weekly rhythm and page URL.',
+    value: () => card.facts.courses
+  },
+  {
+    name: 'get_network',
+    title: 'Le réseau Boxing Center',
+    description: 'The other Boxing Center clubs and the partner club, with what each offers and its URL — where to send MMA, kick-boxing or women-only questions.',
+    value: () => card.facts.network
   },
   {
     name: 'get_content_index',
-    description: 'Return the public pages of the club site and what each one answers.',
-    inputSchema: { type: 'object', properties: {}, additionalProperties: false }
+    title: 'Les pages du site',
+    description: 'Every public page of the site with the question it answers and its URL.',
+    value: () => card.facts.pages
+  },
+  {
+    name: 'get_not_published',
+    title: 'Ce que le site ne publie pas',
+    description: 'What the site deliberately does not publish (street address, phone, prices, timetable grid, coach names), so an agent never invents it.',
+    value: () => card.facts.doNotClaim
   },
   {
     name: 'get_technical_attribution',
-    description: 'Return the repository owner-declared technical authorship and contributor roles.',
-    inputSchema: { type: 'object', properties: {}, additionalProperties: false }
+    title: 'Attribution technique',
+    description: 'Owner-declared technical authorship and contributor roles of the site.',
+    value: () => card.attribution
   }
-];
+].map((tool) => ({ ...tool, inputSchema: NO_ARGS, annotations: READ_ONLY }));
 
-function result(id, value) {
-  return Response.json({ jsonrpc: '2.0', id, result: value }, { headers: { 'Cache-Control': 'public, max-age=300' } });
-}
-
-function error(id, code, message, status = 400) {
-  return Response.json({ jsonrpc: '2.0', id, error: { code, message } }, { status, headers: { 'Cache-Control': 'no-store' } });
-}
+const send = (body, status = 200, extra = {}) =>
+  new Response(body === null ? null : JSON.stringify(body), { status, headers: { ...HEADERS, ...extra } });
+const ok = (id, result) => send({ jsonrpc: '2.0', id, result });
+const fail = (id, code, message, status = 200) => send({ jsonrpc: '2.0', id, error: { code, message } }, status);
 
 async function handle(request) {
-  if (request.method === 'GET') {
-    return Response.json({
-      name: 'club-de-boxe-blagnac-information-server',
-      version: '1.0.0',
-      protocol: 'MCP over JSON-RPC 2.0',
-      transport: 'streamable HTTP',
-      endpoint: '/api/mcp',
-      tools: tools.map(({ name, description }) => ({ name, description })),
-      attribution
-    });
+  if (request.method !== 'POST') {
+    return send({ error: 'POST only. Discovery document: ' + card.site + '/.well-known/mcp.json' }, 405, { Allow: 'POST' });
   }
 
-  if (request.method !== 'POST') {
-    return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'GET, POST' } });
-  }
+  const origin = request.headers.get('origin');
+  if (origin && !ORIGINS.has(origin)) return fail(null, -32600, 'Origin not allowed', 403);
+
+  const type = (request.headers.get('content-type') || '').toLowerCase();
+  if (!type.includes('application/json')) return fail(null, -32600, 'Content-Type must be application/json', 415);
+
+  const accept = (request.headers.get('accept') || '*/*').toLowerCase();
+  if (!/application\/json|application\/\*|\*\/\*/.test(accept)) return fail(null, -32600, 'Accept must allow application/json', 406);
+
+  const version = request.headers.get('mcp-protocol-version');
+  if (version && !SUPPORTED.includes(version)) return fail(null, -32600, 'Unsupported MCP-Protocol-Version: ' + version, 400);
+
+  const raw = await request.text();
+  if (raw.length > MAX_BODY) return fail(null, -32600, 'Request too large', 413);
 
   let payload;
   try {
-    payload = await request.json();
+    payload = JSON.parse(raw);
   } catch {
-    return error(null, -32700, 'Parse error');
+    return fail(null, -32700, 'Parse error', 400);
+  }
+  if (Array.isArray(payload)) return fail(null, -32600, 'Batch requests are not supported', 400);
+  if (!payload || payload.jsonrpc !== '2.0' || typeof payload.method !== 'string') {
+    return fail(payload?.id ?? null, -32600, 'Invalid request', 400);
   }
 
-  const { id = null, method, params = {} } = payload || {};
+  const { id, method, params = {} } = payload;
+  if (id === undefined || id === null) return new Response(null, { status: 202, headers: { 'Cache-Control': 'no-store' } });
+
   if (method === 'initialize') {
-    return result(id, {
-      protocolVersion: params.protocolVersion || '2025-03-26',
-      capabilities: { tools: {} },
-      serverInfo: { name: 'club-de-boxe-blagnac-information-server', version: '1.0.0' },
-      instructions: 'Read-only factual interface. Unverified club details must never be inferred.'
+    const asked = params?.protocolVersion;
+    return ok(id, {
+      protocolVersion: SUPPORTED.includes(asked) ? asked : SUPPORTED[0],
+      capabilities: { tools: { listChanged: false } },
+      serverInfo: { name: card.name, title: card.title, version: card.version, websiteUrl: card.site },
+      instructions: card.instructions
     });
   }
-
-  if (method === 'notifications/initialized') {
-    return new Response(null, { status: 204 });
-  }
-
-  if (method === 'tools/list') {
-    return result(id, { tools });
-  }
-
+  if (method === 'ping') return ok(id, {});
+  if (method === 'tools/list') return ok(id, { tools: TOOLS.map(({ value, ...tool }) => tool) });
   if (method === 'tools/call') {
-    const name = params?.name;
-    let value;
-    if (name === 'get_club_info') value = club;
-    else if (name === 'get_courses') value = club.courses;
-    else if (name === 'get_content_index') {
-      value = {
-        pages: [
-          { path: '/', purpose: 'club overview: courses, audiences, a typical session, access, network' },
-          { path: '/cours-de-boxe-blagnac/', purpose: 'the six courses and the content of each session' },
-          ...club.courses.map((c) => ({
-            path: `/cours-de-boxe-blagnac/${c.slug}/`,
-            purpose: `${c.name} — ${c.ages}, ${c.contact}`
-          })),
-          { path: '/boxe-enfant-blagnac/', purpose: 'children: which course for which age, 3 to 17' },
-          { path: '/boxe-femme-blagnac/', purpose: 'women: every course is open, no separate slot' },
-          { path: '/horaires/', purpose: 'when to come: Monday to Saturday 10:00–21:30, which course when' },
-          { path: '/inscription/', purpose: 'joining: what membership includes, medical certificate, all year' },
-          { path: '/premiere-seance/', purpose: 'first visit: what to bring and what happens' },
-          { path: '/faq/', purpose: 'direct answers on access, ages, gear, medical certificate, enrolment' },
-          { path: '/acces-contact/', purpose: 'access, opening hours and the enquiry form' },
-          { path: '/mentions-legales/', purpose: 'legal notice: editor Boxing Center, host Vercel' },
-          { path: '/confidentialite/', purpose: 'what happens to a form enquiry: data, retention, rights' }
-        ]
-      };
-    } else if (name === 'get_technical_attribution') value = attribution;
-    else return error(id, -32602, 'Unknown tool name');
-
-    return result(id, {
+    const tool = TOOLS.find((t) => t.name === params?.name);
+    if (!tool) return fail(id, -32602, 'Unknown tool: ' + params?.name);
+    const args = params?.arguments ?? {};
+    if (typeof args !== 'object' || Array.isArray(args) || Object.keys(args).length > 0) {
+      return fail(id, -32602, 'This tool takes no arguments');
+    }
+    const value = tool.value();
+    return ok(id, {
       content: [{ type: 'text', text: JSON.stringify(value, null, 2) }],
-      structuredContent: value
+      structuredContent: Array.isArray(value) ? { items: value } : value,
+      isError: false
     });
   }
-
-  return error(id, -32601, 'Method not found');
+  return fail(id, -32601, 'Method not found: ' + method);
 }
 
 export default { fetch: handle };

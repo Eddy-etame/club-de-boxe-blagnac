@@ -92,7 +92,7 @@ export const GET: APIRoute = () =>
     '',
     `- Contexte complet : ${url('/llms-full.txt')}`,
     `- Politique d’usage pour les IA : ${url('/ai.txt')}`,
-    `- Serveur MCP : ${url('/.well-known/mcp.json')}`,
+    `- Serveur MCP : ${url('/api/mcp/')} (découverte : ${url('/.well-known/mcp.json')})`,
     `- Plan du site : ${url('/sitemap.xml')}`,
     `- Équipe et provenance : ${url('/humans.txt')}`,
     '',

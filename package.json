@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/lastmod.mjs && astro check && astro build && node scripts/audit-build.mjs && node --experimental-strip-types --no-warnings scripts/test-pow.mjs && node scripts/test-api.mjs",
+    "build": "node scripts/lastmod.mjs && astro check && astro build && node scripts/mcp-sync.mjs && node scripts/audit-build.mjs && node --experimental-strip-types --no-warnings scripts/test-pow.mjs && node scripts/test-api.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "audit": "node scripts/audit-build.mjs",

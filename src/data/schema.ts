@@ -25,7 +25,7 @@
 import { CLUB, DISCIPLINES, GEAR, FAQ } from './club';
 import { NETWORK, NETWORK_CLUBS, type NetworkClub } from './network';
 import { LOCATION } from './seo-map';
-import { SITE, PUBLIC_PAGES, absoluteUrl } from './site';
+import { SITE, PUBLIC_PAGES, LOW_VALUE_PAGES, absoluteUrl } from './site';
 import { pageLastModified, siteLastModified } from '../lib/lastmod';
 import { ROUTES, ogId } from './routes';
 
@@ -236,7 +236,6 @@ const courseNodes = DISCIPLINES.map((d) => ({
   about: { '@id': id('subject') },
   provider: { '@id': id('publisher') },
   courseMode: 'onsite',
-  educationalLevel: d.contact,
   spatialCoverage: { '@id': id('place') },
   isAccessibleForFree: false,
   hasCourseInstance: {
@@ -427,8 +426,10 @@ export function buildGraph({
     description,
     inLanguage: 'fr-FR',
     isPartOf: { '@id': id('website') },
-    about: { '@id': id('subject') },
-    mentions: [{ '@id': id('place') }, { '@id': id('subject') }],
+    /* Legal pages are about the club that publishes them, not about boxing. */
+    ...((LOW_VALUE_PAGES as readonly string[]).includes(pathname)
+      ? { about: { '@id': id('publisher') } }
+      : { about: { '@id': id('subject') }, mentions: [{ '@id': id('place') }, { '@id': id('subject') }] }),
     primaryImageOfPage: { '@id': id('primaryimage') },
     dateModified: pageLastModified(pathname),
     datePublished: '2026-09-04',

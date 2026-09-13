@@ -33,8 +33,8 @@ const PAPER = { r: 232, g: 229, b: 220, alpha: 1 };
      resize -> extend -> resize chain silently keeps the padded size. The mark
      is rendered at 80% into its own buffer, then composited centred onto a
      size x size ground. */
-  const render = async (size) => {
-    const inner = Math.round(size * 0.8);
+  const render = async (size, scale = 0.8) => {
+    const inner = Math.round(size * scale);
     const mark = await sharp(svg, { density: 384 })
       .resize(inner, inner, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
@@ -46,11 +46,14 @@ const PAPER = { r: 232, g: 229, b: 220, alpha: 1 };
       .toBuffer();
   };
 
-  const out = { 'favicon-32.png': 32, 'icon-192.png': 192, 'icon-512.png': 512, 'apple-touch-icon.png': 180 };
+  const out = { 'favicon-32.png': 32, 'favicon-96.png': 96, 'icon-192.png': 192, 'icon-512.png': 512, 'apple-touch-icon.png': 180 };
   for (const [file, size] of Object.entries(out)) fs.writeFileSync('public/' + file, await render(size));
+  /* Maskable: launchers crop to a circle of 80 % diameter, so the mark sits at 56 %. */
+  fs.writeFileSync('public/icon-maskable-512.png', await render(512, 0.56));
 
   const sizes = [16, 32, 48];
-  const pngs = await Promise.all(sizes.map(render));
+  /* Wrapped: map() would pass the index as render's scale argument. */
+  const pngs = await Promise.all(sizes.map((size) => render(size)));
   const header = Buffer.alloc(6);
   header.writeUInt16LE(0, 0);
   header.writeUInt16LE(1, 2);

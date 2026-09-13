@@ -144,7 +144,7 @@ if (productionIndexing) {
   }
 }
 
-for (const required of ['ai.txt', 'llms.txt', 'llms-full.txt', 'humans.txt', 'mcp-card.json', '.well-known/mcp.json']) {
+for (const required of ['ai.txt', 'llms.txt', 'llms-full.txt', 'humans.txt', 'mcp.json', 'security.txt']) {
   assert(existsSync(join(dist, required)), `Missing machine surface: ${required}.`);
 }
 
@@ -266,7 +266,8 @@ for (const file of files) {
 }
 
 /* Every machine surface must actually be reachable in the build. */
-for (const required of ['llms.txt', 'llms-full.txt', 'ai.txt', 'robots.txt', 'sitemap.xml', '.well-known/mcp.json']) {
+/* /.well-known/mcp.json is a Vercel rewrite of the generated /mcp.json. */
+for (const required of ['llms.txt', 'llms-full.txt', 'ai.txt', 'robots.txt', 'sitemap.xml', 'mcp.json']) {
   assert(existsSync(join(dist, required)), `Missing machine surface: ${required}.`);
 }
 
@@ -341,7 +342,7 @@ for (const file of files.filter((f) => relative(dist, f).startsWith('og') && f.e
 
 /* The MCP function is served from /api, outside dist: scan its source too. */
 const mcpSource = readFileSync(join(root, 'api', 'mcp.js'), 'utf8');
-for (const stale of [/free trial/i, /testimonial/i, /founded/i, /\b2011\b/, /\b240\b/]) {
+for (const stale of [/free trial/i, /testimonial/i, /founded/i, /\b2011\b/, /\b240\b/, /unverified/i, /must never be inferred/i]) {
   assert(!stale.test(mcpSource), 'api/mcp.js: stale claim matching ' + stale + '.');
 }
 
@@ -361,6 +362,136 @@ for (const [path, spec] of Object.entries(contract)) {
   for (const phrase of spec.priority || []) {
     assert(text.includes(norm(phrase)), path + ': priority phrase missing from visible text: "' + phrase + '".');
   }
+}
+
+/* ------------------------------------------------------------------ *
+ * Owner-rule firewall, on every surface the site serves.
+ * The club publishes no phone, no street address, no price and no class
+ * time slot. The legal notice is the one exception: it must print the
+ * editor's own address and phone, as the network's other sites do.
+ * ------------------------------------------------------------------ */
+const FIREWALL = [
+  [/(?:\+33\s?|\b0)[1-9](?:[\s.-]?\d{2}){4}\b/, 'a phone number'],
+  [/\b\d{1,3}(?:\s?bis)?,?\s(?:rue|avenue|chemin|allée|impasse|boulevard|place|route)\s/i, 'a street address'],
+  [/\d\s?€|\b\d+\s?euros?\b/i, 'a price'],
+  [/\b(?:[01]?\d|2[0-3])h[0-5]\d\s?(?:-|–|à)\s?(?:[01]?\d|2[0-3])h/i, 'a class time slot'],
+];
+const LEGAL_NOTICE = 'mentions-legales/index.html';
+const surfaces = [
+  ...htmlFiles.filter((f) => relative(dist, f).split('\\').join('/') !== LEGAL_NOTICE),
+  ...['llms.txt', 'llms-full.txt', 'ai.txt', 'humans.txt', 'robots.txt', 'mcp.json', 'sitemap.xml'].map((f) => join(dist, f)).filter((f) => existsSync(f)),
+];
+for (const file of surfaces) {
+  const text = readFileSync(file, 'utf8');
+  for (const [pattern, what] of FIREWALL) {
+    const m = text.match(pattern);
+    assert(!m, relative(dist, file) + ': contains ' + what + ' ("' + (m ? m[0] : '') + '"). The club publishes none.');
+  }
+}
+
+/* Rendered-output integrity: no control characters (mojibake, pasted junk). */
+for (const file of htmlFiles) {
+  assert(!/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(readFileSync(file, 'utf8')), relative(dist, file) + ': control character in the HTML.');
+}
+
+/* ------------------------------------------------------------------ *
+ * Structured data integrity: parse is not enough.
+ * ------------------------------------------------------------------ */
+const NETWORK_ORG = 'https://boxingcenter.fr/#organization';
+/* The site's graph is spread over its pages by design (WebSite.hasPart lists
+   every page; the club knowsAbout the six courses). A reference must resolve
+   somewhere on the site; one that resolves nowhere is the defect. */
+const siteDefined = new Set();
+const pendingRefs = [];
+function collectNodes(value, defined, refs) {
+  if (Array.isArray(value)) return value.forEach((v) => collectNodes(v, defined, refs));
+  if (!value || typeof value !== 'object') return;
+  const keys = Object.keys(value);
+  if (keys.length === 1 && keys[0] === '@id') refs.push(value['@id']);
+  else if (value['@id']) defined.add(value['@id']);
+  for (const k of keys) if (k !== '@id') collectNodes(value[k], defined, refs);
+}
+for (const file of htmlFiles) {
+  const rel = relative(dist, file).split('\\').join('/');
+  if (rel === '404.html') continue;
+  const html = readFileSync(file, 'utf8');
+  const block = html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1];
+  assert(Boolean(block), rel + ': no JSON-LD graph.');
+  if (!block) continue;
+  let graph;
+  try { graph = JSON.parse(block)['@graph']; } catch { continue; }
+  const defined = new Set();
+  const refs = [];
+  collectNodes(graph, defined, refs);
+  defined.forEach((d) => siteDefined.add(d));
+  refs.forEach((ref) => pendingRefs.push([rel, ref]));
+  assert(graph.filter((n) => n['@type'] === 'WebSite').length === 1, rel + ': expected exactly one WebSite node.');
+  const club = graph.find((n) => String(n['@id'] || '').endsWith('#publisher'));
+  assert(Boolean(club), rel + ': the club node is missing.');
+  if (club) {
+    assert(club.address?.addressLocality === 'Blagnac' && club.address?.postalCode === '31700', rel + ': the club node must be located in Blagnac 31700.');
+    for (const banned of ['streetAddress', 'telephone', 'priceRange', 'aggregateRating', 'offers', 'makesOffer']) {
+      assert(!(banned in club) && !(banned in (club.address || {})), rel + ': the club node must not carry ' + banned + '.');
+    }
+    assert(club.parentOrganization?.['@id'] === NETWORK_ORG, rel + ': the club node must point to the Boxing Center organisation.');
+  }
+  assert(!/"@type":\s*"(?:Offer|AggregateRating)"/.test(block), rel + ': JSON-LD must not declare offers or ratings.');
+  for (const m of block.matchAll(/"@type":\s*"Person",[^}]*?"name":\s*"([^"]+)"/g)) {
+    assert(m[1] === 'Axel Derewiany', rel + ': JSON-LD declares a person other than the photographer: ' + m[1] + '.');
+  }
+  const faqNode = graph.find((n) => n['@type'] === 'FAQPage');
+  const visibleQuestions = (html.match(/<summary[\s>]/g) || []).length;
+  if (faqNode) assert(faqNode.mainEntity.length === visibleQuestions, rel + ': FAQPage lists ' + faqNode.mainEntity.length + ' questions, the page shows ' + visibleQuestions + '.');
+  const crumbNode = graph.some((n) => n['@type'] === 'BreadcrumbList');
+  const crumbVisible = /class="crumbs[\s"]/.test(html);
+  assert(crumbNode === crumbVisible, rel + ': BreadcrumbList and visible breadcrumb disagree.');
+}
+
+for (const [rel, ref] of pendingRefs) assert(siteDefined.has(ref), rel + ': JSON-LD reference ' + ref + ' resolves to no node anywhere on the site.');
+
+/* ------------------------------------------------------------------ *
+ * Presence contract: what every indexable page must show.
+ * ------------------------------------------------------------------ */
+const LOW = ['mentions-legales/index.html', 'confidentialite/index.html', '404.html'];
+for (const file of htmlFiles) {
+  const rel = relative(dist, file).split('\\').join('/');
+  const html = readFileSync(file, 'utf8');
+  const body = stripNonVisible(html);
+  const text = body.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ');
+  if (rel !== '404.html') {
+    assert(/réseau Boxing Center/i.test(text) && body.includes('href="https://boxingcenter.fr/"'), rel + ': the Boxing Center network must be disclosed and linked.');
+  }
+  if (!LOW.includes(rel)) {
+    const words = text.split(' ').filter((w) => /\p{L}/u.test(w)).length;
+    assert(words >= 300, rel + ': only ' + words + ' visible words; an indexable page needs at least 300.');
+  }
+  /* Heading hierarchy: never skip a level going down (h2 → h4). */
+  let previous = 0;
+  for (const m of body.matchAll(/<h([1-6])[\s>]/gi)) {
+    const level = Number(m[1]);
+    assert(!(previous && level > previous + 1), rel + ': heading jumps from h' + previous + ' to h' + level + '.');
+    previous = level;
+  }
+  /* Alt honesty: no alt claims this club's room, and no alt repeats on a page. */
+  const alts = [...html.matchAll(/<img\s[^>]*alt="([^"]*)"/gi)].map((m) => m[1]).filter(Boolean);
+  for (const alt of alts) {
+    assert(!/\b(?:du|au) club\b|notre salle|la salle du club|club de boxe blagnac/i.test(alt), rel + ': alt claims the Blagnac room: "' + alt + '".');
+    assert(!/^(?:image|photo|illustration) (?:de|d’|d')/i.test(alt), rel + ': alt starts with "image/photo de": "' + alt + '".');
+  }
+  const seen = new Set();
+  for (const alt of alts) {
+    assert(!seen.has(alt), rel + ': the same alt appears twice: "' + alt + '".');
+    seen.add(alt);
+  }
+}
+
+/* The MCP server answers from api/_card.js: it must be the built discovery
+   document, byte for byte, or the server would drift from the site. */
+if (productionIndexing) {
+  const cardSource = readFileSync(join(root, 'api', '_card.js'), 'utf8').replace(/^[^\n]*\n/, '').replace(/^export default /, '').replace(/;\s*$/, '');
+  let synced = false;
+  try { synced = JSON.stringify(JSON.parse(cardSource)) === JSON.stringify(JSON.parse(readFileSync(join(dist, 'mcp.json'), 'utf8'))); } catch {}
+  assert(synced, 'api/_card.js is stale: run the build in production mode (scripts/mcp-sync.mjs) and commit it.');
 }
 
 if (failures.length) {

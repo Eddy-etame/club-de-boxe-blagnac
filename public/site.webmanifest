@@ -1,10 +1,20 @@
 {
+  "id": "/",
   "name": "Club de Boxe Blagnac",
   "short_name": "Boxe Blagnac",
+  "description": "Club de boxe anglaise à Blagnac (31700), réseau Boxing Center : six cours, du baby boxing dès 3 ans au groupe compétition.",
+  "lang": "fr",
+  "dir": "ltr",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#141411",
   "theme_color": "#141411",
+  "categories": [
+    "sports",
+    "fitness",
+    "health"
+  ],
   "icons": [
     {
       "src": "/favicon.svg",
@@ -14,13 +24,20 @@
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
