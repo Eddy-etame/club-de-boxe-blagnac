@@ -26,8 +26,10 @@ interface Props {
   pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'FAQPage' | 'CollectionPage';
   /** Extra nodes merged into this page's @graph (HowTo, ItemList…). */
   schema?: Record<string, unknown> | Record<string, unknown>[];
-  /** Emit the Course + glossary reference layer on this page. */
+  /** Emit the Course reference layer on this page. */
   withCourses?: boolean;
+  /** Emit the glossary — only on the page that shows it. */
+  withGlossary?: boolean;
   /** Emit the FAQ question nodes on this page. */
   withFaq?: boolean;
   /** Breadcrumb trail below Accueil, for pages deeper than one level. */
@@ -61,6 +63,7 @@ const {
   noindex = false,
   topTone = 'light',
   withCourses = false,
+  withGlossary = false,
   withFaq = false,
   crumbs,
   mainEntity,
@@ -81,9 +84,9 @@ const trail = crumbs ?? (route && route.path !== '/' ? [{ name: route.label, pat
 /* Three answers: locked/404 → noindex,nofollow; legal pages → noindex,follow
    (reachable, followed, not indexed); everything else → index. */
 const lowValue = (LOW_VALUE_PAGES as readonly string[]).includes(pathname);
-const robots = !SITE.indexable || noindex
+const robots = !SITE.indexable
   ? 'noindex,nofollow,noarchive,nosnippet'
-  : lowValue
+  : noindex || lowValue
     ? 'noindex,follow'
     : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 const modified = pageLastModified(pathname);
@@ -97,6 +100,7 @@ const graph = buildGraph({
   description,
   pageType,
   withCourses,
+  withGlossary,
   withFaq,
   crumbs: trail,
   mainEntity,
@@ -209,8 +213,8 @@ const graph = buildGraph({
     <meta name="twitter:image:alt" content={socialAlt} />
 
     {/* Photographer credit travels with the page, not only in the visible UI. */}
-    <meta name="image:credit" content="Axel Derewiany" />
-    <meta name="copyright" content="Photographies © Axel Derewiany" />
+    <meta name="image:credit" content="Axel Derewiany, Cécile Domenech" />
+    <meta name="copyright" content="Photographies © Axel Derewiany et Cécile Domenech" />
 
     {!noindex && <script is:inline type="application/ld+json" set:html={JSON.stringify(graph)} />}
   </head>

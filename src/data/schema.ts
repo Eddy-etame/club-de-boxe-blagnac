@@ -22,7 +22,7 @@
  *    adding any new one.
  */
 
-import { CLUB, DISCIPLINES, GEAR, FAQ } from './club';
+import { CLUB, DISCIPLINES, GEAR, FAQ, GLOSSARY } from './club';
 import { NETWORK, NETWORK_CLUBS, type NetworkClub } from './network';
 import { LOCATION } from './seo-map';
 import { SITE, PUBLIC_PAGES, LOW_VALUE_PAGES, absoluteUrl } from './site';
@@ -108,7 +108,6 @@ const publisherNode = {
   email: CLUB.email,
   image: { '@id': id('primaryimage') },
   logo: { '@type': 'ImageObject', url: absoluteUrl('/icon-512.png'), width: 512, height: 512 },
-  currenciesAccepted: 'EUR',
   knowsLanguage: ['fr-FR', 'en'],
   publicAccess: true,
   isAccessibleForFree: false,
@@ -157,6 +156,7 @@ const publisherNode = {
     ...DISCIPLINES.map((d) => ({ '@id': id(`course-${d.slug}`) }))
   ],
   parentOrganization: { '@id': NETWORK.graphId },
+  memberOf: { '@id': NETWORK.graphId },
   potentialAction: {
     '@type': 'CommunicateAction',
     name: 'Nous écrire',
@@ -229,7 +229,8 @@ const courseNodes = DISCIPLINES.map((d) => ({
   name: d.name,
   url: absoluteUrl(`/cours-de-boxe-blagnac/${d.slug}/`),
   description: d.body,
-  abstract: d.summary,
+  abstract: `${d.summary} ${d.contact}.`,
+  audience: { '@type': 'PeopleAudience', suggestedMinAge: d.minAge, ...(d.maxAge ? { suggestedMaxAge: d.maxAge } : {}) },
   inLanguage: 'fr-FR',
   teaches: d.session,
   typicalAgeRange: d.ages,
@@ -264,72 +265,13 @@ const glossaryNode = {
   '@id': id('glossaire'),
   name: 'Vocabulaire de la boxe anglaise',
   inLanguage: 'fr-FR',
-  hasDefinedTerm: [
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-touche-controlee'),
-      name: 'Touche contrôlée',
-      description:
-        'Opposition où le coup est porté sans puissance, l’objectif étant de toucher juste et non de faire mal. Règle de base des cours loisir et éducatifs.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    },
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-boxe-educative'),
-      name: 'Boxe éducative',
-      description:
-        'Format destiné aux enfants, pratiqué en touche légère et protections complètes, sans recherche de puissance et sans KO.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    },
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-baby-boxing'),
-      name: 'Baby boxing',
-      description:
-        'Séance d’éveil dès 3 ans, sans aucun contact : motricité, équilibre, réaction à un signal et jeux de déplacement.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    },
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-pattes-d-ours'),
-      name: 'Pattes d’ours',
-      description:
-        'Cibles rembourrées tenues par l’entraîneur, sur lesquelles le boxeur travaille ses enchaînements et sa précision.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    },
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-sparring'),
-      name: 'Sparring',
-      description:
-        'Combat d’entraînement encadré, à intensité convenue, réservé aux pratiquants ayant les automatismes nécessaires.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    },
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-garde'),
-      name: 'Garde',
-      description:
-        'Position de base des poings, des coudes et des appuis, qui protège la tête et le buste tout en permettant de frapper.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    },
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-shadow-boxing'),
-      name: 'Shadow boxing',
-      description:
-        'Travail technique sans partenaire ni sac, à vide, pour corriger la trajectoire du geste et le déplacement.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    },
-    {
-      '@type': 'DefinedTerm',
-      '@id': id('terme-cardio-boxe'),
-      name: 'Cardio boxe',
-      description:
-        'Séance de condition physique construite sur les mouvements de boxe, sans aucune opposition ni contact.',
-      inDefinedTermSet: { '@id': id('glossaire') }
-    }
-  ]
+  hasDefinedTerm: GLOSSARY.map((t) => ({
+    '@type': 'DefinedTerm',
+    '@id': id(`terme-${t.slug}`),
+    name: t.name,
+    description: t.description,
+    inDefinedTermSet: { '@id': id('glossaire') }
+  }))
 };
 
 /** Photography credit, licence and provenance, attached to the social image. */
@@ -397,8 +339,10 @@ export type GraphOptions = {
   faqItems?: { question: string; answer: string }[];
   /** Extra nodes specific to this page (HowTo, ItemList…). */
   extra?: Record<string, unknown>[];
-  /** Include the full course + glossary reference layer. */
+  /** Include the course reference layer. */
   withCourses?: boolean;
+  /** Include the glossary (only on the page that shows it). */
+  withGlossary?: boolean;
   /** Include the FAQ nodes. */
   withFaq?: boolean;
 };
@@ -413,6 +357,7 @@ export function buildGraph({
   faqItems,
   extra = [],
   withCourses = false,
+  withGlossary = false,
   withFaq = false
 }: GraphOptions) {
   const canonical = absoluteUrl(pathname);
@@ -485,7 +430,8 @@ export function buildGraph({
     });
   }
 
-  if (withCourses) nodes.push(...courseNodes, glossaryNode);
+  if (withCourses) nodes.push(...courseNodes);
+  if (withGlossary) nodes.push(glossaryNode);
 
   const faqList = faqItems ?? (withFaq ? FAQ : null);
   if (faqList) {

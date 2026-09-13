@@ -15,6 +15,7 @@ import ContactForm from '@/components/ContactForm.astro';
 import PartnerCta from '@/components/PartnerCta.astro';
 import { CLUB } from '@/data/club';
 import { copyFor } from '@/data/copy';
+import { photoRoom } from '@/data/photos';
 
 interface Props {
   copyKey: string;
@@ -78,7 +79,7 @@ const eyebrowOf = (i: number, eyebrow?: string) => eyebrow ?? `${String(i + 1).p
             />
             <img src={`/images/${photo.file}-${largest}.jpg`} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
           </picture>
-          <figcaption><span>{photo.caption}</span><span>Boxe anglaise</span></figcaption>
+          <figcaption><span>{photo.caption}</span><span>{photoRoom(photo.file)}</span></figcaption>
         </figure>
       )}
       <section class="intent-section shell page-copy" aria-labelledby={`section-${i}`}>
@@ -107,7 +108,7 @@ const eyebrowOf = (i: number, eyebrow?: string) => eyebrow ?? `${String(i + 1).p
     <div class="section-heading">
       <p class="eyebrow">Questions</p>
       <div>
-        <h2 id="intent-faq-title">Ce qu’on nous demande le plus.</h2>
+        <h2 id="intent-faq-title">{copy.h1Main} {copy.h1Em} : vos questions.</h2>
       </div>
     </div>
     <div class="intent-faq__list">

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { photoCaption, photoRoom } from '@/data/photos';
 import PartnerCta from '@/components/PartnerCta.astro';
 import { firstSessionSteps } from '@/data/seo';
 import { CLUB, GEAR } from '@/data/club';
@@ -28,7 +29,7 @@ const description =
         <p class="eyebrow eyebrow--signal">Première séance · Sur demande</p>
         <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>Votre premier cours <em>de boxe.</em></h1>
+      <h1>Votre premier cours de boxe <em>à Blagnac.</em></h1>
       <div class="page-hero__bottom">
         <p class="page-hero__lead">Vous n’avez jamais boxé ? Personne n’arrive en sachant boxer. Chez nous, ce qui se remarque n’est pas votre niveau — c’est si vous écoutez.</p>
         <p class="page-hero__note">Gants et protections prêtés. Aucune opposition à la première séance, quels que soient votre âge et votre condition physique.</p>
@@ -64,7 +65,7 @@ const description =
         <source srcset="/images/shadow-boxing-420.webp 420w, /images/shadow-boxing-900.webp 900w, /images/shadow-boxing-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 88vw" type="image/webp" />
         <img src="/images/shadow-boxing-1400.jpg" alt="Shadow boxing : travail de garde et de déplacement sans partenaire" width="1400" height="933" loading="lazy" />
       </picture>
-      <figcaption><span>Shadow boxing</span><span>Le premier geste appris</span></figcaption>
+      <figcaption><span>Shadow boxing, le premier geste appris</span><span>{photoRoom('shadow-boxing')}</span></figcaption>
     </figure>
   </section>
 
@@ -74,7 +75,7 @@ const description =
         <source srcset="/images/accueil-club-420.webp 420w, /images/accueil-club-900.webp 900w, /images/accueil-club-1400.webp 1400w" sizes="100vw" type="image/webp" />
         <img src="/images/accueil-club-1400.jpg" alt="L’accueil d’une salle de boxe, là où commence une première visite" width="1400" height="887" loading="lazy" />
       </picture>
-      <figcaption>L’accueil, où commence votre première visite</figcaption>
+      <figcaption>{photoCaption('accueil-club')}</figcaption>
     </figure>
   </section>
 

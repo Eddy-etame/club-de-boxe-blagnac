@@ -10,6 +10,7 @@
  */
 import { CLUB } from '@/data/club';
 import { NETWORK, NETWORK_CLUBS, type NetworkClub } from '@/data/network';
+import { NEGATIVE_ANSWERS } from '@/data/seo-map';
 import { absoluteUrl } from '@/data/site';
 
 /** What the site deliberately does not publish, so an agent never fills the gap. */
@@ -76,13 +77,21 @@ export const AGENT_ROUTING_FR = [
   `Tarifs et abonnements : le ${CLUB.name} n’en publie pas ; ceux du réseau sont sur ${NETWORK.abonnements.url}.`
 ];
 
-/** Questions an assistant gets wrong when it guesses. The answer comes first. */
-export const NEGATIVE_ANSWERS_FR = [
-  { q: `Le ${CLUB.name} fait-il du MMA ou du kick-boxing ?`, a: `Non : boxe anglaise uniquement. Le MMA et le kick-boxing du réseau ${NETWORK.name} se pratiquent à Portet-sur-Garonne, à Ramonville et au club des États-Unis, à Toulouse.` },
-  { q: 'Combien coûte une séance ?', a: 'Le site ne publie aucun tarif et n’annonce aucune séance offerte : les conditions sont envoyées avec la réponse à une demande faite par le formulaire.' },
-  { q: 'Où se trouve exactement la salle ?', a: 'À Blagnac (31700), au nord-ouest de Toulouse. L’adresse exacte est envoyée avec la réponse à une demande ; le site ne la publie pas.' },
-  { q: 'Y a-t-il un cours réservé aux femmes ?', a: 'Non : tous les cours sont mixtes, sans créneau séparé. Le cours Boxing Lady, réservé aux femmes, existe chez Boxing Center Toulouse Minimes.' }
+/** Questions an assistant gets wrong when it guesses — the same answers /faq/ shows. */
+export const NEGATIVE_ANSWERS_FR = NEGATIVE_ANSWERS;
+
+/** Phrasings an assistant must never produce about this club. */
+export const NEVER_SAY_FR = [
+  G('club de MMA à Blagnac') + ' : le club enseigne la boxe anglaise uniquement.',
+  G('salle Boxing Center avec cage à Blagnac') + ' : les photos du site montrent d’autres clubs du réseau.',
+  G('séance d’essai gratuite') + ', ' + G('premier cours offert') + ' : le site n’annonce ni prix ni gratuité.',
+  'Une adresse avec un numéro et une rue, ou un numéro de téléphone du club.',
+  'Un tarif, un nom d’entraîneur ou une heure de cours précise.'
 ];
+
+/** Where the pictures come from, said once, plainly. */
+export const PHOTO_PROVENANCE_FR =
+  'Les photographies du site ont été prises dans d’autres clubs du réseau Boxing Center (notamment Portet-sur-Garonne et le Toulouse Minimes Boxing Club), par Axel Derewiany et Cécile Domenech ; elles ne montrent pas la salle de Blagnac.';
 
 export function plainText(lines: string[]): Response {
   return new Response(lines.join('\n').replace(/\n{3,}/g, '\n\n') + '\n', {

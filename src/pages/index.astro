@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ContactForm from '@/components/ContactForm.astro';
+import { photoCaption } from '@/data/photos';
 import PartnerCta from '@/components/PartnerCta.astro';
 import {
   CLUB,
@@ -151,14 +152,14 @@ const audiences = [
         <source srcset="/images/salle-de-boxe-480.webp 480w, /images/salle-de-boxe-960.webp 960w, /images/salle-de-boxe-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
         <img src="/images/salle-de-boxe-1600.jpg" alt="Salle de boxe anglaise : ring et sacs de frappe" width="1600" height="919" loading="lazy" />
       </picture>
-      <figcaption>Le ring</figcaption>
+      <figcaption>{photoCaption('salle-de-boxe')}</figcaption>
     </figure>
     <figure>
       <picture>
         <source srcset="/images/espace-renforcement-420.webp 420w, /images/espace-renforcement-900.webp 900w, /images/espace-renforcement-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
         <img src="/images/espace-renforcement-1400.jpg" alt="Espace de renforcement musculaire d’une salle de boxe" width="1400" height="815" loading="lazy" />
       </picture>
-      <figcaption>L’espace renforcement</figcaption>
+      <figcaption>{photoCaption('espace-renforcement')}</figcaption>
     </figure>
   </section>
 

@@ -67,6 +67,44 @@ export const SHORT_ANSWERS: { q: string; a: string }[] = [
   }
 ];
 
+/**
+ * Negative answers: what an assistant gets wrong when it guesses. Shown on
+ * /faq/ right after the short answers, and reused verbatim by llms.txt.
+ * The answer comes first; the tone stays the club's.
+ */
+export const NEGATIVE_ANSWERS: { q: string; a: string }[] = [
+  {
+    q: 'Le club propose-t-il du MMA ou du kick-boxing ?',
+    a: 'Non : chez nous, c’est la boxe anglaise, et elle seule. Dans le réseau Boxing Center, le MMA se pratique à Portet-sur-Garonne, à Ramonville et au club des États-Unis, à Toulouse ; le kick-boxing à Portet.'
+  },
+  {
+    q: 'Quelle est l’adresse exacte du club ?',
+    a: 'Nous sommes à Blagnac (31700), au nord-ouest de Toulouse. Nous envoyons l’adresse exacte avec notre réponse, en même temps que le créneau qui vous correspond.'
+  },
+  {
+    q: 'Combien coûte l’adhésion ?',
+    a: 'Le tarif dépend du cours et du mois de votre arrivée : nous vous l’envoyons avec notre réponse, avec le créneau et l’adresse.'
+  },
+  {
+    q: 'Y a-t-il un cours réservé aux femmes ?',
+    a: 'Non : tous nos cours sont mixtes, sans créneau séparé. Pour un cours entre femmes, Boxing Center Toulouse Minimes propose Boxing Lady.'
+  }
+];
+
+/** The hub's légende: a search, the fact that answers it, the page that owns it. */
+export const LEGENDE: { query: string; fact: string; path: string; label: string }[] = [
+  { query: 'baby boxing Blagnac', fact: 'l’éveil, de 3 à 6 ans, sans aucun contact', path: '/cours-de-boxe-blagnac/eveil-baby-boxing/', label: 'Baby boxing à Blagnac, dès 3 ans' },
+  { query: 'boxe enfant Blagnac', fact: 'trois cours selon l’âge, de 3 à 17 ans', path: '/boxe-enfant-blagnac/', label: 'Boxe enfant à Blagnac' },
+  { query: 'boxe éducative Blagnac', fact: 'de 7 à 12 ans, en touche légère', path: '/cours-de-boxe-blagnac/boxe-educative/', label: 'Boxe éducative enfant à Blagnac' },
+  { query: 'boxe ado Blagnac', fact: 'de 13 à 17 ans, intensité progressive', path: '/cours-de-boxe-blagnac/boxe-ados/', label: 'Boxe ados à Blagnac, 13 à 17 ans' },
+  { query: 'boxe débutant Blagnac', fact: 'boxe anglaise loisir, dès 16 ans, sans opposition au premier cours', path: '/cours-de-boxe-blagnac/boxe-anglaise-loisir/', label: 'Boxe anglaise adulte à Blagnac' },
+  { query: 'boxe sans contact Blagnac', fact: 'cardio boxe, aucune opposition', path: '/cours-de-boxe-blagnac/cardio-boxe/', label: 'Cardio boxe à Blagnac, sans contact' },
+  { query: 'boxe femme Blagnac', fact: 'tous nos cours, sans créneau séparé', path: '/boxe-femme-blagnac/', label: 'Boxe femme à Blagnac' },
+  { query: 'sparring Blagnac', fact: 'groupe compétition, après une saison chez nous', path: '/cours-de-boxe-blagnac/boxe-competition/', label: 'Boxe anglaise compétition à Blagnac' },
+  { query: 'horaires boxe Blagnac', fact: 'du lundi au samedi, de 10h à 21h30', path: '/horaires/', label: 'Horaires du club' },
+  { query: 'inscription boxe Blagnac', fact: 'toute l’année, avec un certificat médical de moins d’un an', path: '/inscription/', label: 'Inscription au club' }
+];
+
 export const GEO = { lat: '43.6353', lon: '1.3897' } as const;
 
 export const AREA_SENTENCE =

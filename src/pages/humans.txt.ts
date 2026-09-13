@@ -29,7 +29,7 @@ export const GET: APIRoute = () =>
     '',
     '/* THANKS */',
     '',
-    'Photographies : Axel Derewiany',
+    'Photographies : Axel Derewiany, Cécile Domenech (photothèque du réseau Boxing Center)',
     `Réseau : ${NETWORK.name} — ${NETWORK.url}`,
     '',
     '/* SITE */',

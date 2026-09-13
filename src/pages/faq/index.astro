@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { photoCaption } from '@/data/photos';
 import PartnerCta from '@/components/PartnerCta.astro';
 import { launchFaq } from '@/data/seo';
-import { SHORT_ANSWERS } from '@/data/seo-map';
+import { NEGATIVE_ANSWERS, SHORT_ANSWERS } from '@/data/seo-map';
 import { CLUB } from '@/data/club';
 
 const title = 'Questions fréquentes sur la boxe à Blagnac';
@@ -29,7 +30,7 @@ const description =
         <p class="eyebrow eyebrow--signal">Questions fréquentes</p>
         <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>Les questions <em>qu’on se pose vraiment.</em></h1>
+      <h1>Questions sur la boxe <em>à Blagnac.</em></h1>
       <div class="page-hero__bottom">
         <p class="page-hero__lead">Accès, cours, âges, matériel, certificat médical, inscription : les réponses, sans détour.</p>
         <p class="page-hero__note">Une question qui n’est pas ici ? <a href="/acces-contact/#contact">Écrivez-nous</a>, on répond sous 24 h.</p>
@@ -42,13 +43,13 @@ const description =
       <div class="section-heading">
         <p class="eyebrow eyebrow--signal">L’essentiel</p>
         <div>
-          <h2 id="answers-title">L’essentiel en six phrases.</h2>
+          <h2 id="answers-title">L’essentiel, en réponses courtes.</h2>
           <p class="section-heading__intro">Si vous ne lisez rien d’autre, lisez ceci.</p>
         </div>
       </div>
 
       <dl class="answers__list sequence-reveal">
-        {SHORT_ANSWERS.map((item) => (
+        {[...SHORT_ANSWERS, ...NEGATIVE_ANSWERS].map((item) => (
           <div class="answers__item">
             <dt>{item.q}</dt>
             <dd>{item.a}</dd>
@@ -77,16 +78,16 @@ const description =
     <figure>
       <picture>
         <source srcset="/images/coaching-individuel-420.webp 420w, /images/coaching-individuel-900.webp 900w, /images/coaching-individuel-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
-        <img src="/images/coaching-individuel-1400.jpg" alt="Un entraîneur corrige la garde d’une boxeuse" width="1400" height="933" loading="lazy" />
+        <img src="/images/coaching-individuel-1400.jpg" alt="Une boxeuse soulève un haltère pendant le renforcement" width="1400" height="933" loading="lazy" />
       </picture>
-      <figcaption>Correction à chaque séance</figcaption>
+      <figcaption>{photoCaption('coaching-individuel')}</figcaption>
     </figure>
     <figure>
       <picture>
         <source srcset="/images/renforcement-groupe-480.webp 480w, /images/renforcement-groupe-960.webp 960w, /images/renforcement-groupe-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
-        <img src="/images/renforcement-groupe-1600.jpg" alt="Séance de renforcement en groupe" width="1600" height="895" loading="lazy" />
+        <img src="/images/renforcement-groupe-1600.jpg" alt="Gainage au sol en groupe, haltères en appui" width="1600" height="895" loading="lazy" />
       </picture>
-      <figcaption>Renforcement collectif</figcaption>
+      <figcaption>{photoCaption('renforcement-groupe')}</figcaption>
     </figure>
   </section>
 

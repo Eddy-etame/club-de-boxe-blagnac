@@ -97,7 +97,7 @@ const FORM_HEADINGS: Record<string, string> = {"eveil-baby-boxing": "Votre enfan
       <div class="section-heading">
         <p class="eyebrow">Le déroulé</p>
         <div>
-          <h2 id="session-title">Une séance, dans l’ordre.</h2>
+          <h2 id="session-title">Une séance de {copy.h1Main.toLowerCase()}, dans l’ordre.</h2>
           <p class="section-heading__intro">{discipline.rhythm}. L’ordre compte autant que le contenu.</p>
         </div>
       </div>
@@ -132,7 +132,7 @@ const FORM_HEADINGS: Record<string, string> = {"eveil-baby-boxing": "Votre enfan
   <section class="course-faq shell" aria-labelledby="course-faq-title">
     <div class="section-heading">
       <p class="eyebrow">Questions</p>
-      <div><h2 id="course-faq-title">Ce qu’on nous demande sur ce cours.</h2></div>
+      <div><h2 id="course-faq-title">{copy.h1Main} {copy.h1Em} : vos questions.</h2></div>
     </div>
     <div class="course-faq__list">
       {copy.faq.map((f, i) => (
@@ -147,7 +147,7 @@ const FORM_HEADINGS: Record<string, string> = {"eveil-baby-boxing": "Votre enfan
   <section class="course-page-others shell" aria-labelledby="others-title">
     <div class="section-heading">
       <p class="eyebrow">Les autres cours</p>
-      <div><h2 id="others-title">Ce n’est peut-être pas le bon.</h2></div>
+      <div><h2 id="others-title">Plutôt qu’un cours de {copy.h1Main.toLowerCase()} : les cinq autres.</h2></div>
     </div>
     <ul class="course-page-others__list sequence-reveal">
       {others.map((d) => (

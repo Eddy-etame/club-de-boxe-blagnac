@@ -110,7 +110,14 @@ const hasConfirmedUrl =
   && !/localhost|127\.0\.0\.1/i.test(configuredUrl);
 const isPreview = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production');
 const LOW_VALUE = ['mentions-legales/index.html', 'confidentialite/index.html'];
-const productionIndexing = indexRequested && releaseValidated && hasConfirmedUrl && !isPreview;
+/* The mode is read from what the build produced, not re-derived from env:
+   a standalone `npm run audit` must judge the artifact actually on disk. */
+const protectedArtifact = /^User-agent: \*\s*\nDisallow: \/\s*$/m.test(robots) && !/^Allow: \//m.test(robots);
+const productionIndexing = !protectedArtifact;
+const artifactOrigin = (robots.match(/^Sitemap: (https:\/\/[^/\s]+)/m) || [])[1] || configuredUrl;
+if (process.env.VERCEL_ENV === 'production' && protectedArtifact && process.env.PUBLIC_SITE_INDEXABLE !== 'false') {
+  failures.push('Production deployment built in protected mode (noindex). Set PUBLIC_SITE_INDEXABLE=false to confirm the lock, or finish the release validation.');
+}
 
 if (indexRequested) {
   assert(releaseValidated, 'Indexing request rejected: PUBLIC_RELEASE_VALIDATED does not confirm identity, legal publisher and photo rights.');
@@ -123,14 +130,14 @@ if (productionIndexing) {
   for (const file of htmlFiles) {
     const html = readFileSync(file, 'utf8');
     if (relative(dist, file) === '404.html') {
-      assert(/name="robots"\s+content="noindex,nofollow,noarchive,nosnippet"/i.test(html), '404.html must remain noindex.');
+      assert(/name="robots"\s+content="noindex,follow"/i.test(html), '404.html must be noindex,follow.');
     } else if (LOW_VALUE.includes(relative(dist, file).split('\\').join('/'))) {
       assert(/name="robots"\s+content="noindex,follow"/i.test(html), `${relative(dist, file)}: legal page must be noindex,follow.`);
       assert(!sitemap.includes('/' + relative(dist, file).split('\\').join('/').replace('index.html', '') + '<'), `${relative(dist, file)}: legal page must stay out of the sitemap.`);
     } else {
       assert(/name="robots"\s+content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/i.test(html), `${relative(dist, file)}: indexable build lacks index,follow.`);
       /* The canonical must be this exact page on the configured origin, not merely https. */
-      const expected = configuredUrl.replace(/\/$/, '') + '/' + relative(dist, file).split('\\').join('/').replace(/index\.html$/, '');
+      const expected = artifactOrigin.replace(/\/$/, '') + '/' + relative(dist, file).split('\\').join('/').replace(/index\.html$/, '');
       const got = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
       assert(got === expected, `${relative(dist, file)}: canonical ${got} should be ${expected}.`);
     }
@@ -492,6 +499,21 @@ if (productionIndexing) {
   let synced = false;
   try { synced = JSON.stringify(JSON.parse(cardSource)) === JSON.stringify(JSON.parse(readFileSync(join(dist, 'mcp.json'), 'utf8'))); } catch {}
   assert(synced, 'api/_card.js is stale: run the build in production mode (scripts/mcp-sync.mjs) and commit it.');
+}
+
+/* One H2, one page: a heading shared by two indexable pages is a page that
+   does not say what makes it different. */
+const h2Owner = new Map();
+for (const file of htmlFiles) {
+  const rel = relative(dist, file).split('\\').join('/');
+  if (['404.html', 'mentions-legales/index.html', 'confidentialite/index.html'].includes(rel)) continue;
+  const body = stripNonVisible(readFileSync(file, 'utf8'));
+  for (const m of body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)) {
+    const text = m[1].replace(/<[^>]+>/g, '').replace(/&nbsp;|\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!text) continue;
+    assert(!h2Owner.has(text), rel + ': H2 « ' + text + ' » also appears on ' + h2Owner.get(text) + '.');
+    h2Owner.set(text, rel);
+  }
 }
 
 if (failures.length) {

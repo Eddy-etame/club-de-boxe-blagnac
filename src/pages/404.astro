@@ -8,6 +8,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ROUTES } from '@/data/routes';
 import { LOW_VALUE_PAGES } from '@/data/site';
+import { NETWORK_CLUBS } from '@/data/network';
 
 const title = 'Page introuvable — Club de Boxe Blagnac';
 const description =
@@ -18,8 +19,8 @@ const pages = ROUTES.filter((r) => !(LOW_VALUE_PAGES as readonly string[]).inclu
 <BaseLayout {title} {description} pathname="/404/" noindex topTone="dark">
   <section class="not-found surface-dark">
     <div class="shell">
-      <p class="eyebrow eyebrow--signal">Erreur 404</p>
-      <h1>Hors du <em>ring.</em></h1>
+      <p class="eyebrow eyebrow--signal">Erreur 404 · Blagnac 31700</p>
+      <h1>Cette adresse <em>ne mène à aucun cours.</em></h1>
       <p class="not-found__lead">Cette page n’existe pas ou a changé d’adresse. Toutes nos pages sont ici, chacune avec la question à laquelle elle répond.</p>
       <ul class="not-found__routes">
         {pages.map((r) => (
@@ -31,10 +32,22 @@ const pages = ROUTES.filter((r) => !(LOW_VALUE_PAGES as readonly string[]).inclu
           </li>
         ))}
       </ul>
+      <h2 class="not-found__h2">Réseau Boxing Center</h2>
+      <ul class="not-found__routes">
+        {NETWORK_CLUBS.map((c) => (
+          <li>
+            <a href={c.url} rel="noopener">
+              <span class="not-found__label">{c.name}</span>
+              <span class="not-found__q">{c.area}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
       <p class="not-found__machine">
         <a href="/acces-contact/#contact">Nous écrire</a>
         <a href="/sitemap.xml">Plan du site</a>
         <a href="/llms.txt">llms.txt</a>
+        <a href="/llms-full.txt">llms-full.txt</a>
       </p>
     </div>
   </section>
@@ -53,7 +66,13 @@ const pages = ROUTES.filter((r) => !(LOW_VALUE_PAGES as readonly string[]).inclu
   }
 
   .not-found h1 {
-    font-size: clamp(6rem, 20vw, 20rem);
+    max-width: 14ch;
+    font-size: clamp(3.4rem, 9vw, 9rem);
+  }
+
+  .not-found__h2 {
+    margin-top: 1rem;
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
   }
 
   .not-found h1 em {

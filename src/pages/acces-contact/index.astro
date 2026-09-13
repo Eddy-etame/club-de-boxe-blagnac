@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { photoCaption } from '@/data/photos';
 import ContactForm from '@/components/ContactForm.astro';
 import PartnerCta from '@/components/PartnerCta.astro';
 import { NEARBY_SENTENCE } from '@/data/seo-map';
@@ -27,7 +28,7 @@ const description =
         <p class="eyebrow eyebrow--signal">Accès · Horaires · Contact</p>
         <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>Nous trouver, <em>et pousser la porte.</em></h1>
+      <h1>Venir au club de boxe <em>à Blagnac.</em></h1>
       <div class="page-hero__bottom">
         <p class="page-hero__lead">Blagnac (31700), au nord-ouest de Toulouse. Tram T1 et bus Tisséo, à quelques minutes à pied.</p>
         <p class="page-hero__note">{CLUB.openLine}</p>
@@ -76,14 +77,14 @@ const description =
         <source srcset="/images/accueil-club-420.webp 420w, /images/accueil-club-900.webp 900w, /images/accueil-club-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
         <img src="/images/accueil-club-1400.jpg" alt="L’accueil d’une salle de boxe anglaise" width="1400" height="887" loading="lazy" />
       </picture>
-      <figcaption>L’accueil</figcaption>
+      <figcaption>{photoCaption('accueil-club')}</figcaption>
     </figure>
     <figure>
       <picture>
         <source srcset="/images/salle-de-boxe-480.webp 480w, /images/salle-de-boxe-960.webp 960w, /images/salle-de-boxe-1600.webp 1600w" sizes="(max-width: 46rem) 92vw, 46vw" type="image/webp" />
         <img src="/images/salle-de-boxe-1600.jpg" alt="Salle de boxe anglaise avec ring et sacs de frappe" width="1600" height="919" loading="lazy" />
       </picture>
-      <figcaption>La salle</figcaption>
+      <figcaption>{photoCaption('salle-de-boxe')}</figcaption>
     </figure>
   </section>
 

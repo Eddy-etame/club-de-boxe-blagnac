@@ -26,6 +26,9 @@ export type Discipline = {
   name: string;
   /** Anchor text for internal links: names the query, never "en savoir plus". */
   linkLabel: string;
+  /** Ages as numbers, for the structured-data audience. */
+  minAge: number;
+  maxAge?: number;
   summary: string;
   body: string;
   ages: string;
@@ -63,7 +66,7 @@ export const AREA = {
   region: 'Haute-Garonne',
   country: 'FR',
   position: 'au nord-ouest de Toulouse',
-  nearby: ['Beauzelle', 'Cornebarrieu', 'Aussonne', 'Colomiers', 'Seilh'],
+  nearby: ['Beauzelle', 'Cornebarrieu', 'Aussonne', 'Colomiers', 'Seilh', 'Mondonville'],
   transport: [
     { mode: 'Tram T1', detail: 'depuis Arènes, correspondance métro A. Six minutes à pied de l’arrêt.' },
     { mode: 'Bus Tisséo', detail: 'lignes directes depuis Beauzelle, Cornebarrieu, Aussonne et Colomiers.' },
@@ -77,6 +80,8 @@ export const DISCIPLINES: Discipline[] = [
     slug: 'eveil-baby-boxing',
     name: 'Éveil — baby boxing',
     linkLabel: 'Baby boxing à Blagnac, dès 3 ans',
+    minAge: 3,
+    maxAge: 6,
     summary: 'La motricité avant la boxe, dès 3 ans.',
     body:
       'Nos séances d’éveil n’apprennent pas à frapper. Elles apprennent à tenir debout, à se déplacer, à réagir à un signal et à jouer avec un partenaire sans le bousculer. Parcours de motricité, jeux de réaction, sac mou : aucun contact, jamais. Les parents restent en salle s’ils le souhaitent.',
@@ -95,6 +100,8 @@ export const DISCIPLINES: Discipline[] = [
     slug: 'boxe-educative',
     name: 'Boxe éducative',
     linkLabel: 'Boxe éducative enfant à Blagnac',
+    minAge: 7,
+    maxAge: 12,
     summary: 'Boxe sans KO, de 7 à 12 ans.',
     body:
       'Touche légère, protections complètes, zéro recherche de puissance. Nos éducateurs travaillent la coordination, la lecture de la distance et le respect du partenaire — bien avant la frappe. Les séances passent par des jeux d’opposition plutôt que par des exercices imposés, et chaque enfant progresse à son rythme, sans classement.',
@@ -113,6 +120,8 @@ export const DISCIPLINES: Discipline[] = [
     slug: 'boxe-ados',
     name: 'Boxe ados',
     linkLabel: 'Boxe ados à Blagnac, 13 à 17 ans',
+    minAge: 13,
+    maxAge: 17,
     summary: 'Le passage vers la boxe adulte, 13–17 ans.',
     body:
       'Le groupe ados fait le pont entre l’éducative et le cours adulte. L’intensité monte progressivement, sous un cadre strict sur les protections. C’est aussi le moment où se décide, sans pression et sans que personne ne pousse, l’orientation vers la compétition ou vers une pratique de loisir.',
@@ -132,6 +141,7 @@ export const DISCIPLINES: Discipline[] = [
     slug: 'boxe-anglaise-loisir',
     name: 'Boxe anglaise — loisir',
     linkLabel: 'Boxe anglaise adulte à Blagnac',
+    minAge: 16,
     summary: 'Technique et condition, sans obligation de combat.',
     body:
       'Le cours de fond du club, et celui par lequel passent la plupart de nos adhérents. On y apprend la garde, le déplacement et les enchaînements, puis on les répète jusqu’à ce qu’ils tiennent sous fatigue. L’opposition se fait au gant, en touche contrôlée : personne n’est mis en difficulté pour le principe, et personne n’est obligé de monter sur un ring.',
@@ -145,12 +155,13 @@ export const DISCIPLINES: Discipline[] = [
       'Opposition souple au gant',
       'Gainage et étirements'
     ],
-    image: { file: 'travail-aux-pattes', widths: [420, 900, 1400], alt: 'Travail aux pattes d’ours en cours loisir' }
+    image: { file: 'travail-aux-pattes', widths: [420, 900, 1400], alt: 'Exercice à deux, l’un frappe et l’autre garde, sous l’œil d’un troisième boxeur' }
   },
   {
     slug: 'boxe-competition',
     name: 'Boxe anglaise — compétition',
     linkLabel: 'Boxe anglaise compétition à Blagnac',
+    minAge: 17,
     summary: 'Le groupe qui monte sur le ring.',
     body:
       'Groupe restreint, accès sur avis de nos entraîneurs après au moins une saison chez nous. Le volume monte, le sparring devient hebdomadaire et le travail se construit autour d’un calendrier de rencontres. La sélection n’est pas un jugement : elle protège des boxeurs qui n’ont pas encore les automatismes pour tenir un rythme de combat.',
@@ -169,6 +180,7 @@ export const DISCIPLINES: Discipline[] = [
     slug: 'cardio-boxe',
     name: 'Cardio boxe',
     linkLabel: 'Cardio boxe à Blagnac, sans contact',
+    minAge: 16,
     summary: 'Le geste de boxe, sans opposition.',
     body:
       'Déplacements, enchaînements, travail au sac et circuits de renforcement. Aucune opposition, aucun contact, jamais. C’est le format que choisissent les adhérents qui veulent la charge de travail de la boxe sans sa dimension d’affrontement — et c’est souvent par là qu’on bascule ensuite vers le cours loisir.',
@@ -307,6 +319,18 @@ export const FAQ: { question: string; answer: string }[] = [
     answer:
       'Toute l’année. La saison court de septembre à fin juin et les arrivées en cours d’année sont calculées au prorata des mois restants. Nous fermons aux vacances de Noël et au mois d’août.'
   }
+];
+
+/** Vocabulary the pages use. Shown on the hub; mirrored there as a DefinedTermSet. */
+export const GLOSSARY: { slug: string; name: string; description: string }[] = [
+  { slug: 'touche-controlee', name: 'Touche contrôlée', description: 'Opposition où le coup est porté sans puissance, l’objectif étant de toucher juste et non de faire mal. Règle de base des cours loisir et éducatifs.' },
+  { slug: 'boxe-educative', name: 'Boxe éducative', description: 'Format destiné aux enfants, pratiqué en touche légère et protections complètes, sans recherche de puissance et sans KO.' },
+  { slug: 'baby-boxing', name: 'Baby boxing', description: 'Séance d’éveil dès 3 ans, sans aucun contact : motricité, équilibre, réaction à un signal et jeux de déplacement.' },
+  { slug: 'pattes-d-ours', name: 'Pattes d’ours', description: 'Cibles rembourrées tenues par l’entraîneur, sur lesquelles le boxeur travaille ses enchaînements et sa précision.' },
+  { slug: 'sparring', name: 'Sparring', description: 'Combat d’entraînement encadré, à intensité convenue, réservé aux pratiquants ayant les automatismes nécessaires.' },
+  { slug: 'garde', name: 'Garde', description: 'Position de base des poings, des coudes et des appuis, qui protège la tête et le buste tout en permettant de frapper.' },
+  { slug: 'shadow-boxing', name: 'Shadow boxing', description: 'Travail technique sans partenaire ni sac, à vide, pour corriger la trajectoire du geste et le déplacement.' },
+  { slug: 'cardio-boxe', name: 'Cardio boxe', description: 'Séance de condition physique construite sur les mouvements de boxe, sans aucune opposition ni contact.' }
 ];
 
 export const DISCIPLINE_COUNT = DISCIPLINES.length;

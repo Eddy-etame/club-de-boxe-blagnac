@@ -1,8 +1,15 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { photoRoom } from '@/data/photos';
 import PartnerCta from '@/components/PartnerCta.astro';
-import { CLUB, DISCIPLINES } from '@/data/club';
+import { CLUB, DISCIPLINES, GLOSSARY } from '@/data/club';
+import { LEGENDE } from '@/data/seo-map';
+import { ROUTES } from '@/data/routes';
 import { disciplineList } from '@/data/schema';
+
+for (const l of LEGENDE) {
+  if (!ROUTES.some((r) => r.path === l.path)) throw new Error('LEGENDE: no route for ' + l.path);
+}
 
 const title = 'Cours de boxe à Blagnac — six cours, de 3 ans à adulte';
 const ogTitle = 'Six cours de boxe à Blagnac : lequel est fait pour vous ?';
@@ -20,6 +27,7 @@ const description =
   topTone="dark"
   pageType="CollectionPage"
   withCourses
+  withGlossary
   schema={disciplineList()}
   imageAlt="Cours collectif de boxe anglaise, travail au sac de frappe"
 >
@@ -90,6 +98,27 @@ const description =
     </div>
   </section>
 
+  <section class="legende shell" aria-labelledby="legende-title">
+    <div class="section-heading">
+      <p class="eyebrow">Recherches et réponses</p>
+      <div>
+        <h2 id="legende-title">Ce que veulent dire les recherches de boxe à Blagnac.</h2>
+        <p class="section-heading__intro">Une recherche à gauche, le cours qui y répond à droite.</p>
+      </div>
+    </div>
+    <dl class="legende__list">
+      {LEGENDE.map((l) => (
+        <div><dt>« {l.query} »</dt><dd>{l.fact} — <a href={l.path}>{l.label}</a></dd></div>
+      ))}
+    </dl>
+    <h2 id="glossaire-title" class="legende__glossary-title">Le vocabulaire de nos cours.</h2>
+    <dl class="legende__glossary">
+      {GLOSSARY.map((t) => (
+        <div id={`terme-${t.slug}`}><dt>{t.name}</dt><dd>{t.description}</dd></div>
+      ))}
+    </dl>
+  </section>
+
   <section class="course-list surface-dark" aria-labelledby="formats-title">
     <div class="shell">
       <div class="section-heading">
@@ -146,9 +175,9 @@ const description =
     <figure class="image-frame course-band shell reveal">
       <picture>
         <source srcset="/images/travail-aux-pattes-420.webp 420w, /images/travail-aux-pattes-900.webp 900w, /images/travail-aux-pattes-1400.webp 1400w" sizes="(max-width: 46rem) 92vw, 88vw" type="image/webp" />
-        <img src="/images/travail-aux-pattes-1400.jpg" alt="Travail aux pattes d’ours pendant un cours de boxe anglaise" width="1400" height="861" loading="lazy" />
+        <img src="/images/travail-aux-pattes-1400.jpg" alt="Exercice à deux : l’un frappe, l’autre garde, gants aux poings" width="1400" height="861" loading="lazy" />
       </picture>
-      <figcaption><span>Travail aux pattes d’ours</span><span>Technique encadrée</span></figcaption>
+      <figcaption><span>Exercice à deux, technique encadrée</span><span>{photoRoom('travail-aux-pattes')}</span></figcaption>
     </figure>
   </section>
 
@@ -411,5 +440,53 @@ const description =
 
   .course-compare tbody tr:hover {
     background: color-mix(in srgb, currentColor 5%, transparent);
+  }
+
+  .legende {
+    padding-block: clamp(3rem, 6vw, 6rem);
+  }
+
+  .legende__list,
+  .legende__glossary {
+    display: grid;
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .legende__list > div,
+  .legende__glossary > div {
+    display: grid;
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    gap: 0.4rem 2rem;
+    padding-block: 0.95rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .legende__list dt {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+  }
+
+  .legende__glossary dt {
+    font-variation-settings: 'wdth' 88, 'wght' 720;
+  }
+
+  .legende__list dd,
+  .legende__glossary dd {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .legende__glossary-title {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(1.9rem, 3.8vw, 3.2rem);
+  }
+
+  @media (max-width: 40rem) {
+    .legende__list > div,
+    .legende__glossary > div {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
