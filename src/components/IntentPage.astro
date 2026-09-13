@@ -1,0 +1,227 @@
+---
+/**
+ * Template of the intent pages: boxe enfant, boxe femme, horaires, inscription.
+ *
+ * Each of these pages answers ONE question that no course page owns (the
+ * route registry holds the question). The copy lives in src/data/copy.json,
+ * drafted against the keyword registry and reviewed against the owner rules;
+ * this component only lays it out:
+ *
+ *   hero (answer-first lead) → sections → one photo → visible FAQ (mirrored
+ *   as FAQPage because it is on the page) → form → network block.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ContactForm from '@/components/ContactForm.astro';
+import PartnerCta from '@/components/PartnerCta.astro';
+import { CLUB } from '@/data/club';
+import { copyFor } from '@/data/copy';
+
+interface Props {
+  copyKey: string;
+  photo: {
+    file: string;
+    widths: number[];
+    width: number;
+    height: number;
+    /** Describes the scene. Never claims the room is the Blagnac venue. */
+    alt: string;
+    /** Short scene label under the photo. */
+    caption: string;
+  };
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { copyKey, photo, schema } = Astro.props;
+const copy = copyFor(copyKey);
+if (!copy || !copy.path) throw new Error(`copy.json: no page copy for "${copyKey}"`);
+
+const largest = photo.widths[photo.widths.length - 1];
+/* The photo breaks the reading after the second section. */
+const photoAt = Math.min(2, copy.sections.length - 1);
+const eyebrowOf = (i: number, eyebrow?: string) => eyebrow ?? `${String(i + 1).padStart(2, '0')} · ${copy.label ?? ''}`;
+---
+
+<BaseLayout
+  title={copy.title}
+  ogTitle={copy.ogTitle}
+  description={copy.description}
+  pathname={copy.path}
+  topTone="dark"
+  network={copyKey}
+  faq={copy.faq}
+  imageAlt={photo.alt}
+  schema={schema}
+>
+  <header class="page-hero intent-hero">
+    <div class="shell">
+      <div class="page-hero__meta">
+        <p class="eyebrow eyebrow--signal">{copy.eyebrow}</p>
+        <p class="mono">{CLUB.openShort}</p>
+      </div>
+      <h1>{copy.h1Main} <em>{copy.h1Em}</em></h1>
+      <div class="page-hero__bottom">
+        <p class="page-hero__lead">{copy.lead}</p>
+        <p class="page-hero__note">{copy.note}</p>
+      </div>
+    </div>
+  </header>
+
+  {copy.sections.map((s, i) => (
+    <Fragment>
+      {i === photoAt && (
+        <figure class="intent-photo image-frame shell reveal">
+          <picture>
+            <source
+              srcset={photo.widths.map((w) => `/images/${photo.file}-${w}.webp ${w}w`).join(', ')}
+              sizes="(max-width: 46rem) 92vw, 88vw"
+              type="image/webp"
+            />
+            <img src={`/images/${photo.file}-${largest}.jpg`} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+          </picture>
+          <figcaption><span>{photo.caption}</span><span>Boxe anglaise</span></figcaption>
+        </figure>
+      )}
+      <section class="intent-section shell page-copy" aria-labelledby={`section-${i}`}>
+        <div class="page-copy__grid">
+          <p class="eyebrow">{eyebrowOf(i, s.eyebrow)}</p>
+          <div class="prose">
+            <h2 id={`section-${i}`}>{s.h2}</h2>
+            {s.paragraphs.map((p) => <p>{p}</p>)}
+            {s.bullets && s.bullets.length > 0 && (
+              <ul class="intent-bullets">
+                {s.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+            )}
+            {s.links && s.links.length > 0 && (
+              <p class="intent-links">
+                {s.links.map((l) => <a class="inline-link" href={l.href}>{l.label} →</a>)}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+    </Fragment>
+  ))}
+
+  <section class="intent-faq shell" aria-labelledby="intent-faq-title">
+    <div class="section-heading">
+      <p class="eyebrow">Questions</p>
+      <div>
+        <h2 id="intent-faq-title">Ce qu’on nous demande le plus.</h2>
+      </div>
+    </div>
+    <div class="intent-faq__list">
+      {copy.faq.map((f, i) => (
+        <details open={i === 0}>
+          <summary>{f.question}</summary>
+          <p>{f.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="signal surface-dark" id="essai">
+    <div class="signal__inner shell">
+      <div class="signal__heading">
+        <p class="eyebrow eyebrow--signal">Nous écrire</p>
+        <h2>{copy.formHeading ?? 'Dites-nous ce que vous cherchez.'}</h2>
+        <p>{copy.formText ?? 'Indiquez le cours qui vous intéresse et vos disponibilités. Nous vous répondons sous 24 h avec le créneau adapté, l’adresse et les conditions.'}</p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+
+  <PartnerCta context={copyKey} heading={copy.networkHeading} intro={copy.networkIntro} tone="light" />
+</BaseLayout>
+
+<style>
+  .intent-hero h1 {
+    max-width: 12ch;
+  }
+
+  .intent-section {
+    padding-block: clamp(3rem, 6vw, 6rem) 0;
+  }
+
+  .intent-section h2 {
+    max-width: 20ch;
+    margin-bottom: 0.7em;
+    font-size: clamp(1.9rem, 3.8vw, 3.4rem);
+  }
+
+  .intent-bullets {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.1em;
+  }
+
+  .intent-bullets li::marker {
+    color: var(--signal);
+  }
+
+  .intent-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+  }
+
+  .intent-photo {
+    margin-top: clamp(3rem, 6vw, 6rem);
+  }
+
+  .intent-faq {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .intent-faq__list {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .intent-faq details {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .intent-faq summary {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1.2rem 0;
+    cursor: pointer;
+    font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+    font-variation-settings: 'wdth' 88, 'wght' 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    list-style: none;
+  }
+
+  .intent-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .intent-faq summary::after {
+    content: '+';
+    flex: none;
+    color: var(--signal);
+    font-family: var(--font-mono);
+    transition: transform 200ms ease;
+  }
+
+  .intent-faq details[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .intent-faq details p {
+    max-width: 64ch;
+    padding-bottom: 1.4rem;
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intent-faq summary::after {
+      transition: none;
+    }
+  }
+</style>

@@ -30,7 +30,7 @@ export type Topic =
 export type NetworkLink = { label: string; url: string };
 
 export type NetworkClub = {
-  id: 'minimes' | 'tmbc' | 'saint-cyprien' | 'portet';
+  id: 'minimes' | 'tmbc' | 'saint-cyprien' | 'portet' | 'ramonville' | 'etats-unis';
   name: string;
   short: string;
   url: string;
@@ -133,6 +133,33 @@ export const NETWORK_CLUBS: NetworkClub[] = [
       activites: { label: 'Les activités à Portet', url: 'https://boxing-center-portet.fr/activites/' },
       plannings: { label: 'Les horaires à Portet', url: 'https://boxing-center-portet.fr/plannings/' }
     }
+  },
+  {
+    id: 'ramonville',
+    name: 'Boxing Center Ramonville',
+    short: 'Ramonville',
+    url: 'https://mmatoulouse.com/',
+    inNetwork: true,
+    graphId: 'https://mmatoulouse.com/#salle',
+    area: 'Ramonville-Saint-Agne · sud-est de Toulouse',
+    locality: 'Ramonville-Saint-Agne',
+    pitch: 'Le club du sud-est, au terminus du métro B : boxe et MMA, débutants bienvenus.',
+    links: {
+      activites: { label: 'Les cours à Ramonville', url: 'https://mmatoulouse.com/activites' },
+      plannings: { label: 'Les horaires à Ramonville', url: 'https://mmatoulouse.com/plannings' }
+    }
+  },
+  {
+    /* Deep pages of clubmma.fr answered 404 on 2026-09-12: home page only. */
+    id: 'etats-unis',
+    name: 'Boxing Center Toulouse États-Unis',
+    short: 'États-Unis',
+    url: 'https://clubmma.fr/',
+    inNetwork: true,
+    area: 'Toulouse · quartier des États-Unis',
+    locality: 'Toulouse',
+    pitch: 'Le club MMA du réseau, au nord de Toulouse : cage, grappling et boxe.',
+    links: {}
   }
 ];
 
@@ -166,9 +193,36 @@ export const PICKS: Record<string, Pick> = {
       { id: 'minimes', topics: ['club', 'activites', 'plannings'] },
       { id: 'tmbc', topics: ['club', 'activites', 'galerie'] },
       { id: 'saint-cyprien', topics: ['activites', 'plannings', 'salle'] },
-      { id: 'portet', topics: ['activites', 'plannings'] }
+      { id: 'portet', topics: ['activites', 'plannings'] },
+      { id: 'ramonville', topics: ['activites', 'plannings'] }
     ],
     extras: [NETWORK.salles, NETWORK.abonnements]
+  },
+  'boxe-enfant-blagnac': KIDS,
+  'boxe-femme-blagnac': {
+    clubs: [
+      { id: 'minimes', topics: ['activites', 'club'] },
+      { id: 'saint-cyprien', topics: ['activites'] },
+      { id: 'ramonville', topics: ['activites'] }
+    ],
+    extras: [NETWORK.salles]
+  },
+  horaires: {
+    clubs: [
+      { id: 'minimes', topics: ['plannings'] },
+      { id: 'saint-cyprien', topics: ['plannings'] },
+      { id: 'portet', topics: ['plannings'] },
+      { id: 'ramonville', topics: ['plannings'] }
+    ],
+    extras: [NETWORK.salles]
+  },
+  inscription: {
+    clubs: [
+      { id: 'minimes', topics: ['club', 'premiere-seance'] },
+      { id: 'tmbc', topics: ['club'] },
+      { id: 'ramonville', topics: ['activites'] }
+    ],
+    extras: [NETWORK.abonnements]
   },
   hub: {
     clubs: [
@@ -270,6 +324,22 @@ export const POPUPS: Record<string, Popup> = {
   },
   'eveil-baby-boxing': KIDS_POPUP,
   'boxe-educative': KIDS_POPUP,
+  'boxe-enfant-blagnac': KIDS_POPUP,
+  'boxe-femme-blagnac': {
+    heading: 'Un cours 100 % féminin ?',
+    text: 'Tous nos cours sont mixtes. Si vous cherchez un cours réservé aux femmes, Boxing Center Toulouse Minimes propose Boxing Lady.',
+    links: [networkLink('minimes', 'activites'), networkLink('saint-cyprien', 'activites')]
+  },
+  horaires: {
+    heading: 'Nos horaires ne vous vont pas ?',
+    text: 'Les autres clubs Boxing Center publient leurs plannings : de quoi boxer près du travail ou de l’école.',
+    links: [networkLink('minimes', 'plannings'), networkLink('saint-cyprien', 'plannings'), networkLink('ramonville', 'plannings')]
+  },
+  inscription: {
+    heading: 'S’inscrire ailleurs dans le réseau ?',
+    text: 'Les autres clubs Boxing Center de l’agglomération présentent leurs cours et leurs formules en ligne.',
+    links: [networkLink('minimes', 'club'), networkLink('ramonville', 'activites')]
+  },
   'boxe-ados': {
     heading: 'Toulouse, après les cours ?',
     text: 'Si le lycée ou le trajet passe par Toulouse, voyez les activités des clubs du réseau aux Minimes.',

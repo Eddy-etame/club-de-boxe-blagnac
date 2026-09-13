@@ -91,6 +91,34 @@ export const ROUTES: Route[] = [
     };
   }),
   {
+    path: '/boxe-enfant-blagnac/',
+    label: 'Boxe enfant à Blagnac',
+    question: 'Quelle boxe pour mon enfant à Blagnac, selon son âge, et est-ce sans danger ?',
+    answers: 'Trois cours selon l’âge, de 3 à 17 ans : éveil sans contact, boxe éducative, groupe ados.',
+    og: { word: 'Boxe enfant', kicker: 'De 3 à 17 ans · trois cours', photo: 'boxe-detail-1000.jpg' }
+  },
+  {
+    path: '/boxe-femme-blagnac/',
+    label: 'Boxe femme à Blagnac',
+    question: 'Une femme peut-elle boxer à Blagnac, dans quel cours et avec qui ?',
+    answers: 'Tous nos cours sont ouverts aux femmes, sans créneau séparé, du cardio boxe à la compétition.',
+    og: { word: 'Boxe femme', kicker: 'Tous nos cours · débutantes', photo: 'cours-collectif-sacs-1600.jpg' }
+  },
+  {
+    path: '/horaires/',
+    label: 'Horaires',
+    question: 'Quand peut-on boxer à Blagnac : le midi, le soir, le samedi ?',
+    answers: 'Du lundi au samedi, de 10h à 21h30 : quels cours le midi, le soir, le mercredi et le samedi matin.',
+    og: { word: 'Horaires', kicker: 'Midi, soir, samedi matin', photo: 'sacs-de-frappe-1400.jpg' }
+  },
+  {
+    path: '/inscription/',
+    label: 'Inscription',
+    question: 'Comment s’inscrire au club de boxe de Blagnac, et que faut-il fournir ?',
+    answers: 'Inscription toute l’année, ce que comprend l’adhésion, le certificat médical et le dossier.',
+    og: { word: 'Inscription', kicker: 'Toute l’année · certificat', photo: 'conseil-coach-1400.jpg' }
+  },
+  {
     path: '/premiere-seance/',
     label: 'Première séance',
     question: 'Comment se passe un premier cours de boxe, et que faut-il apporter ?',

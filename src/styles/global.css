@@ -387,6 +387,61 @@
     max-width: 48rem;
   }
 
+  /* Contact-form section and inline links: shared by the home, course and
+     intent pages (moved from the home page, where they were scoped). */
+  .signal {
+    padding-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  .signal__inner {
+    display: grid;
+    gap: clamp(3rem, 8vw, 9rem);
+    grid-template-columns: minmax(16rem, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .signal__heading {
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+  }
+
+  .signal__heading h2 {
+    max-width: 11ch;
+    font-size: clamp(3rem, 6.5vw, 7rem);
+  }
+
+  .signal__heading > p:last-child {
+    max-width: 30rem;
+    color: var(--mist);
+  }
+
+  .signal__direct {
+    margin-top: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    line-height: 1.9;
+  }
+
+  .signal__direct a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  .inline-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-underline-offset: 0.3em;
+  }
+
+  @media (max-width: 52rem) {
+    .signal__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .notice {
     display: grid;
     gap: 1.25rem;

@@ -36,6 +36,8 @@ interface Props {
   mainEntity?: string;
   /** Network context: picks the slide-in card and the contact pill. */
   network?: string;
+  /** Visible Q&A of this page, mirrored as FAQPage (only what the page shows). */
+  faq?: { question: string; answer: string }[];
   noindex?: boolean;
   /** Tone of the first block on the page, so the header renders with correct
    *  contrast before the surface tracker runs. */
@@ -63,6 +65,7 @@ const {
   crumbs,
   mainEntity,
   network,
+  faq,
   preloadImage
 } = Astro.props;
 
@@ -89,6 +92,7 @@ const graph = buildGraph({
   withFaq,
   crumbs: trail,
   mainEntity,
+  faqItems: faq,
   extra: schema ? (Array.isArray(schema) ? schema : [schema]) : []
 });
 ---

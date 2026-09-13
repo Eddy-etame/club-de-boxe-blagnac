@@ -40,6 +40,7 @@ export const NAV = [
   { href: '/', label: 'Le club' },
   { href: '/cours-de-boxe-blagnac/', label: 'Les cours' },
   { href: '/premiere-seance/', label: 'Première séance' },
+  { href: '/horaires/', label: 'Horaires' },
   { href: '/faq/', label: 'Questions' },
   { href: '/acces-contact/', label: 'Accès & contact' }
 ] as const;
@@ -50,6 +51,10 @@ export const PUBLIC_PAGES = [
   '/',
   '/cours-de-boxe-blagnac/',
   ...COURSE_PAGES,
+  '/boxe-enfant-blagnac/',
+  '/boxe-femme-blagnac/',
+  '/horaires/',
+  '/inscription/',
   '/premiere-seance/',
   '/faq/',
   '/acces-contact/',

@@ -3,15 +3,20 @@
  * One page per course.
  *
  * Six pages instead of six anchors on a single page. Each one targets its own
- * query cluster — "boxe enfant Blagnac" and "cardio boxe Blagnac" are not the
- * same search and should not compete for the same URL — and each carries its
- * own title, description, Course graph and internal links. This is the single
- * biggest structural SEO gain available on a site this size.
+ * query cluster — "baby boxing Blagnac" and "cardio boxe Blagnac" are not the
+ * same search and should not compete for the same URL.
+ *
+ * Two sources, never mixed: the course FACTS (ages, contact, rhythm, session
+ * steps, body) come from src/data/club.ts; the SEARCH COPY (title, social
+ * title, answer-first lead, extra sections, visible FAQ, network lines) comes
+ * from src/data/copy.json, written against the keyword registry and checked
+ * by the build's keyword contract.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PartnerCta from '@/components/PartnerCta.astro';
 import ContactForm from '@/components/ContactForm.astro';
 import { CLUB, DISCIPLINES } from '@/data/club';
+import { copyFor } from '@/data/copy';
 import { courseId, courseNode } from '@/data/schema';
 
 export function getStaticPaths() {
@@ -23,74 +28,35 @@ export function getStaticPaths() {
 
 const { discipline } = Astro.props;
 const url = `/cours-de-boxe-blagnac/${discipline.slug}/`;
-
-/** Per-course search framing, so no two pages chase the same query. */
-const SEO: Record<string, { title: string; description: string; intent: string }> = {
-  'eveil-baby-boxing': {
-    title: 'Baby boxing à Blagnac — éveil dès 3 ans',
-    description:
-      'Éveil et baby boxing dès 3 ans au Club de Boxe Blagnac : motricité, équilibre, jeux de réaction, aucun contact. Deux séances par semaine. Écrivez-nous.',
-    intent: 'boxe enfant 3 ans, éveil sportif, baby boxing'
-  },
-  'boxe-educative': {
-    title: 'Boxe éducative enfant à Blagnac — 7 à 12 ans',
-    description:
-      'Boxe éducative pour les 7-12 ans à Blagnac : touche légère, protections complètes, aucune recherche de puissance. Trois séances par semaine. Écrivez-nous.',
-    intent: 'boxe enfant Blagnac, boxe éducative, boxe sans KO'
-  },
-  'boxe-ados': {
-    title: 'Boxe ados à Blagnac — cours 13 à 17 ans',
-    description:
-      'Cours de boxe pour adolescents de 13 à 17 ans à Blagnac : intensité progressive, cadre strict sur les protections. Trois séances par semaine. Écrivez-nous.',
-    intent: 'boxe adolescent Blagnac, boxe 13 ans, boxe collège lycée'
-  },
-  'boxe-anglaise-loisir': {
-    title: 'Boxe anglaise loisir à Blagnac — adultes débutants',
-    description:
-      'Cours de boxe anglaise loisir à Blagnac pour adultes, débutants bienvenus : technique, condition physique, touche contrôlée. Cinq séances par semaine, midi et soir.',
-    intent: 'boxe adulte Blagnac, boxe débutant, boxe loisir'
-  },
-  'boxe-competition': {
-    title: 'Boxe compétition à Blagnac — sparring et rencontres',
-    description:
-      'Groupe compétition de boxe anglaise à Blagnac : sparring hebdomadaire encadré, calendrier de rencontres, suivi individuel. Accès sur avis de l’encadrement.',
-    intent: 'boxe compétition Blagnac, sparring, combat amateur'
-  },
-  'cardio-boxe': {
-    title: 'Cardio boxe à Blagnac — sans contact ni opposition',
-    description:
-      'Cardio boxe à Blagnac : déplacements, enchaînements, sac et circuits de renforcement, sans aucune opposition ni contact. Quatre séances par semaine dont deux le midi.',
-    intent: 'cardio boxe Blagnac, fitness boxe, boxe sans contact'
-  }
-};
-
-const seo = SEO[discipline.slug];
+const copy = copyFor(discipline.slug);
+if (!copy) throw new Error(`copy.json: no copy for course "${discipline.slug}"`);
 const others = DISCIPLINES.filter((d) => d.slug !== discipline.slug);
 const largest = discipline.image.widths[discipline.image.widths.length - 1];
-
 ---
 
 <BaseLayout
-  title={seo.title}
-  description={seo.description}
+  title={copy.title}
+  ogTitle={copy.ogTitle}
+  description={copy.description}
   pathname={url}
   topTone="dark"
   schema={courseNode(discipline.slug)}
   mainEntity={courseId(discipline.slug)}
   crumbs={[{ name: 'Cours de boxe à Blagnac', path: '/cours-de-boxe-blagnac/' }, { name: discipline.name, path: url }]}
   network={discipline.slug}
+  faq={copy.faq}
   imageAlt={discipline.image.alt}
 >
   <header class="page-hero course-page-hero">
     <div class="shell">
       <div class="page-hero__meta">
-        <p class="eyebrow eyebrow--signal">{discipline.ages} · {discipline.contact}</p>
+        <p class="eyebrow eyebrow--signal">{copy.eyebrow}</p>
         <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>{discipline.name}</h1>
+      <h1>{copy.h1Main} <em>{copy.h1Em}</em></h1>
       <div class="page-hero__bottom">
-        <p class="page-hero__lead course-page__summary">{discipline.summary}</p>
-        <p class="page-hero__note">{discipline.rhythm}. Gants et protections prêtés — écrivez-nous pour venir voir.</p>
+        <p class="page-hero__lead course-page__summary">{copy.lead}</p>
+        <p class="page-hero__note">{copy.note}</p>
       </div>
     </div>
   </header>
@@ -139,6 +105,42 @@ const largest = discipline.image.widths[discipline.image.widths.length - 1];
     </div>
   </section>
 
+  {copy.sections.map((s, i) => (
+    <section class="course-extra shell page-copy" aria-labelledby={`extra-${i}`}>
+      <div class="page-copy__grid">
+        <p class="eyebrow">{s.eyebrow ?? `${String(i + 1).padStart(2, '0')} · ${discipline.name}`}</p>
+        <div class="prose">
+          <h2 id={`extra-${i}`}>{s.h2}</h2>
+          {s.paragraphs.map((p) => <p>{p}</p>)}
+          {s.bullets && s.bullets.length > 0 && (
+            <ul class="course-extra__bullets">
+              {s.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+          )}
+          {s.links && s.links.length > 0 && (
+            <p class="course-extra__links">
+              {s.links.map((l) => <a class="inline-link" href={l.href}>{l.label} →</a>)}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="course-faq shell" aria-labelledby="course-faq-title">
+    <div class="section-heading">
+      <p class="eyebrow">Questions</p>
+      <div><h2 id="course-faq-title">Ce qu’on nous demande sur ce cours.</h2></div>
+    </div>
+    <div class="course-faq__list">
+      {copy.faq.map((f, i) => (
+        <details open={i === 0}>
+          <summary>{f.question}</summary>
+          <p>{f.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
 
   <section class="course-page-others shell" aria-labelledby="others-title">
     <div class="section-heading">
@@ -149,7 +151,7 @@ const largest = discipline.image.widths[discipline.image.widths.length - 1];
       {others.map((d) => (
         <li>
           <a href={`/cours-de-boxe-blagnac/${d.slug}/`}>
-            <span class="course-page-others__name">{d.name}</span>
+            <span class="course-page-others__name">{d.linkLabel}</span>
             <span class="course-page-others__meta">{d.ages}</span>
             <span class="course-page-others__sum">{d.summary}</span>
           </a>
@@ -171,12 +173,7 @@ const largest = discipline.image.widths[discipline.image.widths.length - 1];
     </div>
   </section>
 
-  <PartnerCta
-    context={discipline.slug}
-    heading="Ce cours, ailleurs dans le réseau."
-    intro="Le Club de Boxe Blagnac fait partie du réseau Boxing Center. Si un autre club est plus proche de chez vous ou de votre travail, allez le voir de notre part."
-    tone="light"
-  />
+  <PartnerCta context={discipline.slug} heading={copy.networkHeading} intro={copy.networkIntro} tone="light" />
 </BaseLayout>
 
 <style>
@@ -336,5 +333,81 @@ const largest = discipline.image.widths[discipline.image.widths.length - 1];
     .course-page__grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  .course-extra {
+    padding-block: clamp(3rem, 6vw, 6rem) 0;
+  }
+
+  .course-extra h2 {
+    max-width: 20ch;
+    margin-bottom: 0.7em;
+    font-size: clamp(1.9rem, 3.8vw, 3.4rem);
+  }
+
+  .course-extra__bullets {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.1em;
+  }
+
+  .course-extra__bullets li::marker {
+    color: var(--signal);
+  }
+
+  .course-extra__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+  }
+
+  .course-faq {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .course-faq__list {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .course-faq details {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .course-faq summary {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1.2rem 0;
+    cursor: pointer;
+    font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+    font-variation-settings: 'wdth' 88, 'wght' 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    list-style: none;
+  }
+
+  .course-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .course-faq summary::after {
+    content: '+';
+    flex: none;
+    color: var(--signal);
+    font-family: var(--font-mono);
+    transition: transform 200ms ease;
+  }
+
+  .course-faq details[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .course-faq details p {
+    max-width: 64ch;
+    padding-bottom: 1.4rem;
+    font-size: 1.02rem;
+    line-height: 1.6;
   }
 </style>

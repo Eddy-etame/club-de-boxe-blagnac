@@ -4,10 +4,11 @@
  * "Une question ?" pastille and their mid-page promo block.
  *
  * 1. A slide-in card pointing to the network pages that match this page
- *    (POPUPS in src/data/network.ts). It opens once the visitor has read a
- *    real part of the page — 40 % scroll depth, never before 6 s — or after
- *    35 s, once per page type per session, and never while a form field has
- *    focus. It is non-modal: it neither steals focus nor covers the page,
+ *    (POPUPS in src/data/network.ts). It opens only once the visitor has
+ *    read a real part of the page — 40 % scroll depth, never before 6 s —
+ *    once per page type per session, never while a form is on screen or a
+ *    form field has focus. No timer: a card shown to someone who has not
+ *    read the page is an interruption, not an offer. It is non-modal: it neither steals focus nor covers the page,
  *    which keeps it clear of Google's intrusive-interstitial rules on mobile.
  * 2. A "Écrivez-nous" pill that follows the reader after the first screen,
  *    points at the form on this page when there is one, and steps aside
@@ -116,7 +117,7 @@ const pop = POPUPS[context];
   }
 
   function openCard() {
-    if (!pop || opened || store.get(KEY) || typing()) return;
+    if (!pop || opened || store.get(KEY) || typing() || visibleForms.size > 0) return;
     opened = true;
     pop.hidden = false;
     root.classList.add('net-pop-open');
@@ -141,7 +142,6 @@ const pop = POPUPS[context];
 
   window.addEventListener('scroll', update, { passive: true });
   window.setTimeout(update, 6100);
-  window.setTimeout(openCard, 35000);
   pop?.querySelector('[data-net-pop-close]')?.addEventListener('click', closeCard);
   pop?.querySelectorAll('[data-net-pop-link]').forEach((a) => a.addEventListener('click', () => store.set(KEY)));
   document.addEventListener('keydown', (e) => {

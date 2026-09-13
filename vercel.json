@@ -89,7 +89,17 @@
       "permanent": true
     },
     {
+      "source": "/club-de-boxe-blagnac/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/club-boxe-blagnac",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/club-boxe-blagnac/",
       "destination": "/",
       "permanent": true
     },
@@ -99,17 +109,37 @@
       "permanent": true
     },
     {
+      "source": "/boxe-blagnac/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/boxe-anglaise-blagnac",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/salle-de-boxe-blagnac",
+      "source": "/boxe-anglaise-blagnac/",
       "destination": "/",
       "permanent": true
     },
     {
+      "source": "/salle-de-boxe-blagnac",
+      "destination": "/acces-contact/",
+      "permanent": true
+    },
+    {
+      "source": "/salle-de-boxe-blagnac/",
+      "destination": "/acces-contact/",
+      "permanent": true
+    },
+    {
       "source": "/cours",
+      "destination": "/cours-de-boxe-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/cours/",
       "destination": "/cours-de-boxe-blagnac/",
       "permanent": true
     },
@@ -119,7 +149,17 @@
       "permanent": true
     },
     {
+      "source": "/cours-de-boxe/",
+      "destination": "/cours-de-boxe-blagnac/",
+      "permanent": true
+    },
+    {
       "source": "/cours-boxe-blagnac",
+      "destination": "/cours-de-boxe-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/cours-boxe-blagnac/",
       "destination": "/cours-de-boxe-blagnac/",
       "permanent": true
     },
@@ -129,7 +169,17 @@
       "permanent": true
     },
     {
+      "source": "/baby-boxing-blagnac/",
+      "destination": "/cours-de-boxe-blagnac/eveil-baby-boxing/",
+      "permanent": true
+    },
+    {
       "source": "/baby-boxe-blagnac",
+      "destination": "/cours-de-boxe-blagnac/eveil-baby-boxing/",
+      "permanent": true
+    },
+    {
+      "source": "/baby-boxe-blagnac/",
       "destination": "/cours-de-boxe-blagnac/eveil-baby-boxing/",
       "permanent": true
     },
@@ -139,12 +189,17 @@
       "permanent": true
     },
     {
-      "source": "/boxe-enfant-blagnac",
-      "destination": "/cours-de-boxe-blagnac/boxe-educative/",
+      "source": "/boxe-3-ans-blagnac/",
+      "destination": "/cours-de-boxe-blagnac/eveil-baby-boxing/",
       "permanent": true
     },
     {
       "source": "/boxe-educative-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-educative/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-educative-blagnac/",
       "destination": "/cours-de-boxe-blagnac/boxe-educative/",
       "permanent": true
     },
@@ -154,7 +209,27 @@
       "permanent": true
     },
     {
+      "source": "/boxe-ado-blagnac/",
+      "destination": "/cours-de-boxe-blagnac/boxe-ados/",
+      "permanent": true
+    },
+    {
       "source": "/boxe-adulte-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-anglaise-loisir/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-adulte-blagnac/",
+      "destination": "/cours-de-boxe-blagnac/boxe-anglaise-loisir/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-debutant-blagnac",
+      "destination": "/cours-de-boxe-blagnac/boxe-anglaise-loisir/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-debutant-blagnac/",
       "destination": "/cours-de-boxe-blagnac/boxe-anglaise-loisir/",
       "permanent": true
     },
@@ -164,12 +239,117 @@
       "permanent": true
     },
     {
+      "source": "/boxe-competition-blagnac/",
+      "destination": "/cours-de-boxe-blagnac/boxe-competition/",
+      "permanent": true
+    },
+    {
       "source": "/cardio-boxe-blagnac",
       "destination": "/cours-de-boxe-blagnac/cardio-boxe/",
       "permanent": true
     },
     {
+      "source": "/cardio-boxe-blagnac/",
+      "destination": "/cours-de-boxe-blagnac/cardio-boxe/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-enfant",
+      "destination": "/boxe-enfant-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-enfant/",
+      "destination": "/boxe-enfant-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-enfants",
+      "destination": "/boxe-enfant-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-enfants/",
+      "destination": "/boxe-enfant-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-femme",
+      "destination": "/boxe-femme-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-femme/",
+      "destination": "/boxe-femme-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-feminine-blagnac",
+      "destination": "/boxe-femme-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/boxe-feminine-blagnac/",
+      "destination": "/boxe-femme-blagnac/",
+      "permanent": true
+    },
+    {
+      "source": "/planning",
+      "destination": "/horaires/",
+      "permanent": true
+    },
+    {
+      "source": "/planning/",
+      "destination": "/horaires/",
+      "permanent": true
+    },
+    {
+      "source": "/plannings",
+      "destination": "/horaires/",
+      "permanent": true
+    },
+    {
+      "source": "/plannings/",
+      "destination": "/horaires/",
+      "permanent": true
+    },
+    {
+      "source": "/tarifs",
+      "destination": "/inscription/",
+      "permanent": true
+    },
+    {
+      "source": "/tarifs/",
+      "destination": "/inscription/",
+      "permanent": true
+    },
+    {
+      "source": "/tarif",
+      "destination": "/inscription/",
+      "permanent": true
+    },
+    {
+      "source": "/tarif/",
+      "destination": "/inscription/",
+      "permanent": true
+    },
+    {
+      "source": "/adhesion",
+      "destination": "/inscription/",
+      "permanent": true
+    },
+    {
+      "source": "/adhesion/",
+      "destination": "/inscription/",
+      "permanent": true
+    },
+    {
       "source": "/contact",
+      "destination": "/acces-contact/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
       "destination": "/acces-contact/",
       "permanent": true
     },
@@ -179,12 +359,7 @@
       "permanent": true
     },
     {
-      "source": "/horaires",
-      "destination": "/acces-contact/",
-      "permanent": true
-    },
-    {
-      "source": "/plannings",
+      "source": "/acces/",
       "destination": "/acces-contact/",
       "permanent": true
     },
@@ -194,12 +369,27 @@
       "permanent": true
     },
     {
+      "source": "/essai/",
+      "destination": "/premiere-seance/",
+      "permanent": true
+    },
+    {
       "source": "/premier-cours",
       "destination": "/premiere-seance/",
       "permanent": true
     },
     {
+      "source": "/premier-cours/",
+      "destination": "/premiere-seance/",
+      "permanent": true
+    },
+    {
       "source": "/questions",
+      "destination": "/faq/",
+      "permanent": true
+    },
+    {
+      "source": "/questions/",
       "destination": "/faq/",
       "permanent": true
     }

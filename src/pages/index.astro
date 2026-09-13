@@ -11,9 +11,10 @@ import {
 } from '@/data/club';
 import { LOCATION, NEARBY_SENTENCE } from '@/data/seo-map';
 
-const title = 'Club de boxe à Blagnac — cours de boxe anglaise, Toulouse';
+const title = 'Club de Boxe Blagnac (31700) — boxe anglaise dès 3 ans';
+const ogTitle = 'Un club de boxe anglaise à Blagnac, du baby boxing à la compétition';
 const description =
-  'Club de boxe anglaise à Blagnac (31700) : baby boxing dès 3 ans, boxe éducative, ados, loisir adulte, compétition et cardio boxe, du lundi au samedi. Écrivez-nous.';
+  'Club de boxe anglaise à Blagnac, au nord-ouest de Toulouse, membre du réseau Boxing Center : six cours, de l’éveil dès 3 ans au groupe compétition. Nous écrire.';
 
 const audiences = [
   {
@@ -41,6 +42,7 @@ const audiences = [
 
 <BaseLayout
   {title}
+  {ogTitle}
   {description}
   pathname="/"
   network="home"
@@ -450,7 +452,6 @@ const audiences = [
     50% { border-color: transparent; }
   }
 
-
   /* The floor has to let "à BLAGNAC" — the widest line — fit inside
      (100vw - 2 × page-pad - offset). A 4.5rem floor was wider than a 375px
      viewport could hold, so the final C was clipped. Sized off vw only,
@@ -806,32 +807,6 @@ const audiences = [
     transform: translateX(0.4rem);
   }
 
-  .signal {
-    padding-block: clamp(5rem, 10vw, 10rem);
-  }
-
-  .signal__inner {
-    display: grid;
-    gap: clamp(3rem, 8vw, 9rem);
-    grid-template-columns: minmax(16rem, 0.75fr) minmax(0, 1.25fr);
-  }
-
-  .signal__heading {
-    display: grid;
-    gap: 1.5rem;
-    align-content: start;
-  }
-
-  .signal__heading h2 {
-    max-width: 11ch;
-    font-size: clamp(3rem, 6.5vw, 7rem);
-  }
-
-  .signal__heading > p:last-child {
-    max-width: 30rem;
-    color: var(--mist);
-  }
-
   .closing-image {
     position: relative;
     height: min(70rem, 88vh);
@@ -903,9 +878,6 @@ const audiences = [
     .home-hero__top,
     .home-hero__bottom,
     .manifesto__grid,
-    .signal__inner {
-      grid-template-columns: 1fr;
-    }
 
     .home-hero__coordinates {
       display: none;
@@ -1155,19 +1127,6 @@ const audiences = [
     font-size: 0.64rem;
     letter-spacing: 0.03em;
     opacity: 0.72;
-  }
-
-  .signal__direct {
-    margin-top: 1.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.03em;
-    line-height: 1.9;
-  }
-
-  .signal__direct a {
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.25em;
   }
 
   @media (max-width: 64rem) {
@@ -1517,7 +1476,6 @@ const audiences = [
     }
   }
 
-
   /* ---- Preuves chiffrées ---- */
   .proof {
     padding-block: clamp(2.5rem, 5vw, 4.5rem);
@@ -1630,14 +1588,6 @@ const audiences = [
     font-size: 0.78rem;
     letter-spacing: 0.03em;
     line-height: 2;
-  }
-
-  .inline-link {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-underline-offset: 0.3em;
   }
 
   @media (max-width: 60rem) {

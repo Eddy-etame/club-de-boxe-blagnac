@@ -1,0 +1,20 @@
+---
+/**
+ * Boxe enfant à Blagnac — which course for which age, and is it safe.
+ * Owns the parent's question across the three youth courses; each course
+ * page owns its own age band. Copy: src/data/copy.json ("boxe-enfant-blagnac").
+ */
+import IntentPage from '@/components/IntentPage.astro';
+---
+
+<IntentPage
+  copyKey="boxe-enfant-blagnac"
+  photo={{
+    file: 'boxe-detail',
+    widths: [480, 700, 1000],
+    width: 1000,
+    height: 606,
+    alt: 'Un jeune boxeur, bandes rouges aux mains, travaille sa garde sur un ring',
+    caption: 'La garde, avant tout le reste'
+  }}
+/>

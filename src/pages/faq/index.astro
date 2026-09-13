@@ -5,14 +5,16 @@ import { launchFaq } from '@/data/seo';
 import { SHORT_ANSWERS } from '@/data/seo-map';
 import { CLUB } from '@/data/club';
 
-const title = 'Questions fréquentes — Club de Boxe Blagnac';
+const title = 'Questions fréquentes sur la boxe à Blagnac';
+const ogTitle = 'Âge, matériel, certificat : les réponses du club, sans détour';
 const description =
-  'Où nous trouver, quels cours, à partir de quel âge, quel matériel, certificat médical, inscription : toutes les réponses sur le Club de Boxe Blagnac.';
+  'Âge minimum, matériel, certificat médical, femmes, débutants, inscription : les réponses directes du Club de Boxe Blagnac aux questions qu’on nous pose le plus.';
 
 ---
 
 <BaseLayout
   {title}
+  {ogTitle}
   {description}
   pathname="/faq/"
   pageType="WebPage"

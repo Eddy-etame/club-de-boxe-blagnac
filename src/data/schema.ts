@@ -392,6 +392,8 @@ export type GraphOptions = {
   crumbs?: { name: string; path: string }[];
   /** @id of the entity the page is about. */
   mainEntity?: string;
+  /** Visible FAQ of this page: emitted as FAQPage only because it is on the page. */
+  faqItems?: { question: string; answer: string }[];
   /** Extra nodes specific to this page (HowTo, ItemList…). */
   extra?: Record<string, unknown>[];
   /** Include the full course + glossary reference layer. */
@@ -407,6 +409,7 @@ export function buildGraph({
   pageType = 'WebPage',
   crumbs,
   mainEntity,
+  faqItems,
   extra = [],
   withCourses = false,
   withFaq = false
@@ -471,14 +474,15 @@ export function buildGraph({
 
   if (withCourses) nodes.push(...courseNodes, glossaryNode);
 
-  if (withFaq) {
+  const faqList = faqItems ?? (withFaq ? FAQ : null);
+  if (faqList) {
     nodes.push({
       '@type': 'FAQPage',
       '@id': `${canonical}#faq`,
       inLanguage: 'fr-FR',
       isPartOf: { '@id': id('website') },
       about: { '@id': id('subject') },
-      mainEntity: FAQ.map((item, i) => ({
+      mainEntity: faqList.map((item, i) => ({
         '@type': 'Question',
         '@id': `${canonical}#q${i + 1}`,
         name: item.question,

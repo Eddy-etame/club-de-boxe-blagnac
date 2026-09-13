@@ -131,6 +131,10 @@ async function handle(request) {
             path: `/cours-de-boxe-blagnac/${c.slug}/`,
             purpose: `${c.name} — ${c.ages}, ${c.contact}`
           })),
+          { path: '/boxe-enfant-blagnac/', purpose: 'children: which course for which age, 3 to 17' },
+          { path: '/boxe-femme-blagnac/', purpose: 'women: every course is open, no separate slot' },
+          { path: '/horaires/', purpose: 'when to come: Monday to Saturday 10:00–21:30, which course when' },
+          { path: '/inscription/', purpose: 'joining: what membership includes, medical certificate, all year' },
           { path: '/premiere-seance/', purpose: 'first visit: what to bring and what happens' },
           { path: '/faq/', purpose: 'direct answers on access, ages, gear, medical certificate, enrolment' },
           { path: '/acces-contact/', purpose: 'access, opening hours and the enquiry form' },

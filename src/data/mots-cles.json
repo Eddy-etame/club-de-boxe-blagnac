@@ -1,46 +1,325 @@
 {
   "/": {
-    "priority": [],
-    "secondary": []
+    "priority": [
+      "club de boxe à Blagnac",
+      "club de boxe anglaise",
+      "nord-ouest de Toulouse",
+      "réseau Boxing Center",
+      "Blagnac (31700)"
+    ],
+    "secondary": [
+      "club de boxe Blagnac",
+      "boxe Blagnac",
+      "club de boxe 31700",
+      "club de boxe près de Blagnac",
+      "club de boxe proche de Blagnac",
+      "club de boxe le plus proche de Blagnac",
+      "club de boxe nord-ouest toulousain",
+      "club de boxe Haute-Garonne Blagnac",
+      "sport de combat Blagnac",
+      "Boxing Center Blagnac",
+      "club de boxe blagnacais",
+      "y a-t-il un club de boxe à Blagnac",
+      "où faire de la boxe à Blagnac",
+      "Toulouse Métropole"
+    ]
   },
   "/cours-de-boxe-blagnac/": {
-    "priority": [],
-    "secondary": []
-  },
-  "/cours-de-boxe-blagnac/eveil-baby-boxing/": {
-    "priority": [],
-    "secondary": []
-  },
-  "/cours-de-boxe-blagnac/boxe-educative/": {
-    "priority": [],
-    "secondary": []
-  },
-  "/cours-de-boxe-blagnac/boxe-ados/": {
-    "priority": [],
-    "secondary": []
-  },
-  "/cours-de-boxe-blagnac/boxe-anglaise-loisir/": {
-    "priority": [],
-    "secondary": []
-  },
-  "/cours-de-boxe-blagnac/boxe-competition/": {
-    "priority": [],
-    "secondary": []
-  },
-  "/cours-de-boxe-blagnac/cardio-boxe/": {
-    "priority": [],
-    "secondary": []
+    "priority": [
+      "cours de boxe à Blagnac",
+      "six cours",
+      "niveau de contact",
+      "quel cours choisir",
+      "du lundi au samedi"
+    ],
+    "secondary": [
+      "cours de boxe Blagnac",
+      "cours de boxe près de Blagnac",
+      "cours de boxe autour de Blagnac",
+      "quel cours de boxe choisir à Blagnac",
+      "boxe tous niveaux Blagnac",
+      "cours de boxe tous âges",
+      "entraînement de boxe Blagnac",
+      "trouver son cours de boxe à Blagnac"
+    ]
   },
   "/premiere-seance/": {
-    "priority": [],
-    "secondary": []
+    "priority": [
+      "première séance",
+      "premier cours de boxe",
+      "jamais boxé",
+      "gants et protections",
+      "tenue de sport"
+    ],
+    "secondary": [
+      "première séance de boxe Blagnac",
+      "premier cours de boxe Blagnac",
+      "commencer la boxe Blagnac",
+      "jamais fait de boxe",
+      "que faut-il apporter à un cours de boxe",
+      "faut-il des gants pour commencer la boxe",
+      "gants de boxe débutant",
+      "protège-dents boxe",
+      "matériel boxe débutant",
+      "prend-on des coups au premier cours de boxe"
+    ]
   },
   "/faq/": {
-    "priority": [],
-    "secondary": []
+    "priority": [
+      "à quel âge un enfant peut-il commencer",
+      "je n'ai jamais boxé",
+      "faut-il un certificat médical",
+      "quels cours proposez-vous"
+    ],
+    "secondary": [
+      "questions club de boxe Blagnac",
+      "combien de temps dure un cours de boxe",
+      "règles de la boxe anglaise",
+      "combien de séances de boxe par semaine"
+    ]
   },
   "/acces-contact/": {
-    "priority": [],
-    "secondary": []
+    "priority": [
+      "salle de boxe",
+      "tram T1",
+      "bus Tisséo",
+      "Beauzelle",
+      "Cornebarrieu",
+      "Aussonne"
+    ],
+    "secondary": [
+      "salle de boxe Blagnac",
+      "salle de boxe à Blagnac",
+      "club de boxe Blagnac tram",
+      "aller au club de boxe de Blagnac sans voiture",
+      "où se trouve le club de boxe de Blagnac",
+      "contact club de boxe Blagnac",
+      "boxe Beauzelle",
+      "club de boxe Beauzelle",
+      "boxe Cornebarrieu",
+      "club de boxe Cornebarrieu",
+      "boxe Aussonne",
+      "club de boxe Aussonne",
+      "boxe Seilh",
+      "boxe Mondonville"
+    ]
+  },
+  "/mentions-legales/": {
+    "priority": [
+      "éditeur du site",
+      "hébergement",
+      "propriété intellectuelle"
+    ],
+    "secondary": [
+      "mentions légales Club de Boxe Blagnac"
+    ]
+  },
+  "/confidentialite/": {
+    "priority": [
+      "données collectées",
+      "durée de conservation",
+      "vos droits"
+    ],
+    "secondary": [
+      "politique de confidentialité Club de Boxe Blagnac"
+    ]
+  },
+  "/cours-de-boxe-blagnac/boxe-educative/": {
+    "priority": [
+      "boxe éducative",
+      "de 7 à 12 ans",
+      "touche légère",
+      "sans KO",
+      "respect du partenaire"
+    ],
+    "secondary": [
+      "boxe éducative Blagnac",
+      "boxe éducative enfants",
+      "cours de boxe éducative",
+      "boxe enfant 7 à 12 ans",
+      "boxe sans KO",
+      "boxe éducative filles et garçons Blagnac",
+      "boxe enfant 8 ans",
+      "boxe enfant 10 ans"
+    ]
+  },
+  "/cours-de-boxe-blagnac/boxe-competition/": {
+    "priority": [
+      "groupe compétition",
+      "sparring encadré",
+      "calendrier de rencontres",
+      "au moins une saison",
+      "sur avis de l’encadrement"
+    ],
+    "secondary": [
+      "boxe compétition Blagnac",
+      "boxe anglaise compétition Blagnac",
+      "sparring Blagnac",
+      "club de boxe compétition Blagnac",
+      "rencontres de boxe amateur",
+      "club de boxe avec ring Blagnac",
+      "faire de la compétition de boxe à Blagnac"
+    ]
+  },
+  "/cours-de-boxe-blagnac/eveil-baby-boxing/": {
+    "priority": [
+      "baby boxing",
+      "baby boxe",
+      "dès 3 ans",
+      "de 3 à 6 ans",
+      "aucun contact"
+    ],
+    "secondary": [
+      "baby boxing Blagnac",
+      "baby boxe Blagnac",
+      "boxe 3 ans Blagnac",
+      "boxe dès 3 ans",
+      "éveil boxe enfant",
+      "boxe enfant 3 à 6 ans",
+      "éveil sportif boxe Blagnac",
+      "motricité enfant boxe"
+    ]
+  },
+  "/cours-de-boxe-blagnac/boxe-anglaise-loisir/": {
+    "priority": [
+      "boxe anglaise loisir",
+      "débutant ou confirmé",
+      "touche contrôlée",
+      "midi et soir",
+      "après 40 ans"
+    ],
+    "secondary": [
+      "boxe anglaise Blagnac",
+      "boxe anglaise adulte Blagnac",
+      "boxe loisir Blagnac",
+      "boxe adulte Blagnac",
+      "cours de boxe adulte Blagnac",
+      "boxe débutant Blagnac",
+      "cours de boxe débutant Blagnac",
+      "boxe anglaise débutant Blagnac",
+      "apprendre à boxer Blagnac",
+      "commencer la boxe après 40 ans",
+      "noble art Blagnac",
+      "pattes d’ours"
+    ]
+  },
+  "/cours-de-boxe-blagnac/cardio-boxe/": {
+    "priority": [
+      "cardio boxe",
+      "sans contact",
+      "sans opposition",
+      "au sac",
+      "remise en forme"
+    ],
+    "secondary": [
+      "cardio boxe Blagnac",
+      "cardio boxing Blagnac",
+      "boxe fitness Blagnac",
+      "boxing fitness Blagnac",
+      "boxe sans contact Blagnac",
+      "boxe sans opposition",
+      "boxe sans combat Blagnac",
+      "remise en forme boxe Blagnac",
+      "reprendre le sport Blagnac",
+      "salle de sport boxe Blagnac"
+    ]
+  },
+  "/boxe-femme-blagnac/": {
+    "priority": [
+      "boxe femme",
+      "sans créneau séparé",
+      "sur tous nos cours",
+      "débutantes",
+      "cardio boxe"
+    ],
+    "secondary": [
+      "boxe femme Blagnac",
+      "cours de boxe femme Blagnac",
+      "boxe féminine Blagnac",
+      "cours de boxe pour femme Blagnac",
+      "boxe femme débutante",
+      "cardio boxe femme Blagnac",
+      "boxing fitness femme Blagnac",
+      "cours de boxe réservé aux femmes Blagnac",
+      "boxe anglaise féminine"
+    ]
+  },
+  "/cours-de-boxe-blagnac/boxe-ados/": {
+    "priority": [
+      "boxe ado",
+      "de 13 à 17 ans",
+      "adolescents",
+      "intensité progressive",
+      "en soirée"
+    ],
+    "secondary": [
+      "boxe ado Blagnac",
+      "boxe adolescent Blagnac",
+      "cours de boxe ado Blagnac",
+      "boxe 13 ans",
+      "boxe collège lycée Blagnac",
+      "boxe anglaise ado"
+    ]
+  },
+  "/horaires/": {
+    "priority": [
+      "du lundi au samedi",
+      "de 10h à 21h30",
+      "fermé le dimanche",
+      "le midi et le soir",
+      "samedi matin",
+      "vacances de Noël"
+    ],
+    "secondary": [
+      "horaires club de boxe Blagnac",
+      "horaires boxe Blagnac",
+      "planning boxe Blagnac",
+      "cours de boxe le soir Blagnac",
+      "boxe le midi Blagnac",
+      "boxe le samedi Blagnac",
+      "cours de boxe après le travail Blagnac",
+      "club de boxe ouvert le samedi",
+      "horaires salle de boxe 31700"
+    ]
+  },
+  "/boxe-enfant-blagnac/": {
+    "priority": [
+      "boxe enfant",
+      "de 3 à 17 ans",
+      "filles et garçons",
+      "selon son âge",
+      "protections prêtées"
+    ],
+    "secondary": [
+      "boxe enfant Blagnac",
+      "cours de boxe enfant Blagnac",
+      "boxe enfants près de Blagnac",
+      "sport de combat enfant Blagnac",
+      "école de boxe enfant Blagnac",
+      "boxe fille Blagnac",
+      "à partir de quel âge faire de la boxe",
+      "la boxe rend-elle les enfants violents",
+      "boxe enfant timide",
+      "boxe pour canaliser un enfant",
+      "cours de boxe pour mon fils à Blagnac"
+    ]
+  },
+  "/inscription/": {
+    "priority": [
+      "inscription au club",
+      "ce que comprend l’adhésion",
+      "certificat médical",
+      "toute l’année",
+      "de septembre à fin juin"
+    ],
+    "secondary": [
+      "inscription boxe Blagnac",
+      "s’inscrire club de boxe Blagnac",
+      "adhésion club de boxe Blagnac",
+      "certificat médical boxe",
+      "tarif boxe Blagnac",
+      "inscription en cours d’année",
+      "dossier d’inscription boxe"
+    ]
   }
 }

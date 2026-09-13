@@ -5,14 +5,16 @@ import { firstSessionSteps } from '@/data/seo';
 import { CLUB, GEAR } from '@/data/club';
 import { firstSessionHowTo } from '@/data/schema';
 
-const title = 'Votre première séance — Club de Boxe Blagnac';
+const title = 'Première séance de boxe à Blagnac — ce qui vous attend';
+const ogTitle = 'Votre premier cours de boxe : on vous dit tout, étape par étape';
 const description =
-  'Votre première séance au Club de Boxe Blagnac : ce qu’il faut apporter, ce qui va se passer, et pourquoi il n’y a jamais d’opposition le premier jour.';
+  'Votre première séance au Club de Boxe Blagnac : ce qu’il faut apporter, comment elle se déroule, et pourquoi personne ne fait d’opposition le premier jour.';
 
 ---
 
 <BaseLayout
   {title}
+  {ogTitle}
   {description}
   pathname="/premiere-seance/"
   network="first"
@@ -26,9 +28,9 @@ const description =
         <p class="eyebrow eyebrow--signal">Première séance · Sur demande</p>
         <p class="mono">{CLUB.openShort}</p>
       </div>
-      <h1>Votre <em>premier</em> cours.</h1>
+      <h1>Votre premier cours <em>de boxe.</em></h1>
       <div class="page-hero__bottom">
-        <p class="page-hero__lead">Personne n’arrive en sachant boxer. Chez nous, ce qui se remarque n’est pas votre niveau — c’est si vous écoutez.</p>
+        <p class="page-hero__lead">Vous n’avez jamais boxé ? Personne n’arrive en sachant boxer. Chez nous, ce qui se remarque n’est pas votre niveau — c’est si vous écoutez.</p>
         <p class="page-hero__note">Gants et protections prêtés. Aucune opposition à la première séance, quels que soient votre âge et votre condition physique.</p>
       </div>
     </div>

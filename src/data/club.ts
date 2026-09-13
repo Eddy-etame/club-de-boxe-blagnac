@@ -89,7 +89,7 @@ export const DISCIPLINES: Discipline[] = [
       'Découverte du sac mou et des gants légers',
       'Retour au calme et rituel de fin'
     ],
-    image: { file: 'cours-enfants', widths: [420, 900, 1400], alt: 'Séance de boxe pour enfants au club de Blagnac' }
+    image: { file: 'cours-enfants', widths: [420, 900, 1400], alt: 'Échauffement collectif : appuis fléchis face à face, plots au sol' }
   },
   {
     slug: 'boxe-educative',

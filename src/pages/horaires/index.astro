@@ -1,0 +1,20 @@
+---
+/**
+ * Horaires — when to come: opening hours and which course runs when of the
+ * week (days and moments, never a timetable grid). Copy: src/data/copy.json
+ * ("horaires").
+ */
+import IntentPage from '@/components/IntentPage.astro';
+---
+
+<IntentPage
+  copyKey="horaires"
+  photo={{
+    file: 'sacs-de-frappe',
+    widths: [420, 900, 1400],
+    width: 1400,
+    height: 935,
+    alt: 'Une boxeuse en garde face au sac de frappe, en noir et blanc',
+    caption: 'Travail au sac'
+  }}
+/>

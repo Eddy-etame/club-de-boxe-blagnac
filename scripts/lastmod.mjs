@@ -16,7 +16,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
 const OUT = 'src/data/lastmod.json';
-const DATA = ['src/data/club.ts', 'src/data/seo.ts', 'src/data/seo-map.ts'];
+const DATA = ['src/data/club.ts', 'src/data/seo.ts', 'src/data/seo-map.ts', 'src/data/copy.json', 'src/data/routes.ts', 'src/data/network.ts'];
 
 function git(args) {
   return execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();

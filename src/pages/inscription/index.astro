@@ -1,0 +1,20 @@
+---
+/**
+ * Inscription — how to join, what membership includes, the medical
+ * certificate. No price is published: the conditions come with our reply,
+ * which is exactly what this page says. Copy: src/data/copy.json ("inscription").
+ */
+import IntentPage from '@/components/IntentPage.astro';
+---
+
+<IntentPage
+  copyKey="inscription"
+  photo={{
+    file: 'conseil-coach',
+    widths: [420, 900, 1400],
+    width: 1400,
+    height: 933,
+    alt: 'Un entraîneur tient le sac et donne une consigne à une boxeuse',
+    caption: 'Une correction à chaque séance'
+  }}
+/>

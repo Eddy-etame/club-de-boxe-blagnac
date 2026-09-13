@@ -4,14 +4,16 @@ import PartnerCta from '@/components/PartnerCta.astro';
 import { CLUB, DISCIPLINES } from '@/data/club';
 import { disciplineList } from '@/data/schema';
 
-const title = 'Cours de boxe à Blagnac — six cours, dès 3 ans';
+const title = 'Cours de boxe à Blagnac — six cours, de 3 ans à adulte';
+const ogTitle = 'Six cours de boxe à Blagnac : lequel est fait pour vous ?';
 const description =
-  'Nos six cours de boxe anglaise à Blagnac : baby boxing dès 3 ans, boxe éducative, ados, loisir adulte, compétition et cardio boxe. Du lundi au samedi.';
+  'Nos six cours de boxe anglaise à Blagnac, côte à côte : âge, niveau de contact, rythme de la semaine. De l’éveil dès 3 ans à la compétition, du lundi au samedi.';
 
 ---
 
 <BaseLayout
   {title}
+  {ogTitle}
   {description}
   pathname="/cours-de-boxe-blagnac/"
   network="hub"
@@ -37,7 +39,7 @@ const description =
 
   <section class="course-intro shell page-copy">
     <div class="page-copy__grid">
-      <p class="eyebrow">Comment choisir</p>
+      <p class="eyebrow">Quel cours choisir</p>
       <div class="prose">
         <p>
           Choisir son cours revient à trancher trois questions : quel âge, quel niveau de contact, et combien de fois par semaine vous pouvez venir. Nos six cours répondent à des intentions différentes ; aucun n’est une version dégradée d’un autre.
@@ -50,6 +52,41 @@ const description =
           <p>Quel que soit le cours et quel que soit votre niveau : on regarde d’abord comment vous vous déplacez.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="course-compare shell" aria-labelledby="compare-title">
+    <div class="section-heading">
+      <p class="eyebrow">En un coup d’œil</p>
+      <div>
+        <h2 id="compare-title">Les six cours, côte à côte.</h2>
+        <p class="section-heading__intro">L’âge, le niveau de contact et le rythme de chaque cours de boxe à Blagnac. Le déroulé de chaque séance suit juste en dessous.</p>
+      </div>
+    </div>
+    <div class="course-compare__scroll" role="region" aria-labelledby="compare-title" tabindex="0">
+      <table>
+        <caption>Club de Boxe Blagnac · {CLUB.openLine}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Cours</th>
+            <th scope="col">Âges</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Rythme</th>
+            <th scope="col">L’idée</th>
+          </tr>
+        </thead>
+        <tbody>
+          {DISCIPLINES.map((d) => (
+            <tr>
+              <th scope="row"><a href={'/cours-de-boxe-blagnac/' + d.slug + '/'}>{d.name}</a></th>
+              <td>{d.ages}</td>
+              <td>{d.contact}</td>
+              <td>{d.rhythm}</td>
+              <td>{d.summary}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -295,5 +332,84 @@ const description =
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-underline-offset: 0.3em;
+  }
+
+  .course-compare {
+    padding-block: clamp(3rem, 6vw, 6rem);
+  }
+
+  .course-compare__scroll {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    overflow-x: auto;
+    border-top: 1px solid var(--line);
+    overscroll-behavior-x: contain;
+  }
+
+  .course-compare__scroll:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 4px;
+  }
+
+  .course-compare table {
+    width: 100%;
+    min-width: 52rem;
+    border-collapse: collapse;
+  }
+
+  .course-compare caption {
+    padding-top: 1rem;
+    caption-side: bottom;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    text-align: left;
+  }
+
+  .course-compare th,
+  .course-compare td {
+    padding: 1.05rem 1.25rem 1.05rem 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .course-compare thead th {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    opacity: 0.72;
+    text-transform: uppercase;
+  }
+
+  .course-compare tbody th {
+    min-width: 13rem;
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    font-variation-settings: 'wdth' 84, 'wght' 760;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .course-compare tbody th a {
+    text-decoration: none;
+  }
+
+  .course-compare tbody th a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .course-compare td {
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
+  .course-compare tbody tr {
+    transition: background-color 200ms ease;
+  }
+
+  .course-compare tbody tr:hover {
+    background: color-mix(in srgb, currentColor 5%, transparent);
   }
 </style>

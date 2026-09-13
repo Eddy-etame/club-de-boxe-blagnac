@@ -5,13 +5,15 @@ import PartnerCta from '@/components/PartnerCta.astro';
 import { NEARBY_SENTENCE } from '@/data/seo-map';
 import { CLUB, AREA } from '@/data/club';
 
-const title = 'Accès et contact — Club de Boxe Blagnac (31700)';
+const title = 'Salle de boxe à Blagnac — accès en tram, bus et contact';
+const ogTitle = 'Tram T1, bus ou vélo : comment venir nous voir à Blagnac';
 const description =
-  'Club de boxe à Blagnac (31700), ouvert du lundi au samedi de 10h à 21h30. Tram T1 et bus Tisséo. Écrivez-nous, réponse sous 24 h.';
+  'Venir à notre salle de boxe de Blagnac en tram T1, en bus Tisséo, à vélo ou en voiture, depuis Beauzelle, Cornebarrieu, Aussonne ou Seilh. Réponse sous 24 h.';
 ---
 
 <BaseLayout
   {title}
+  {ogTitle}
   {description}
   pathname="/acces-contact/"
   network="access"
