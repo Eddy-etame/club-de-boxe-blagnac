@@ -15,10 +15,16 @@ import { ogId } from '@/data/routes';
  */
 
 const PAGE_IMAGES: Record<string, string[]> = {
-  '/': ['garde-boxeuse-1600.jpg', 'cours-collectif-sacs-1600.jpg', 'salle-de-boxe-1600.jpg', 'frappe-au-sac-1600.jpg'],
+  /* Only the photos each page actually renders (checked against dist by the audit). */
+  '/': ['garde-boxeuse-1600.jpg', 'salle-de-boxe-1600.jpg', 'espace-renforcement-1400.jpg', 'frappe-au-sac-1600.jpg'],
   '/cours-de-boxe-blagnac/': ['travail-aux-pattes-1400.jpg'],
-  '/premiere-seance/': ['shadow-boxing-1400.jpg'],
-  '/acces-contact/': ['boxe-corner-1600.jpg'],
+  '/premiere-seance/': ['shadow-boxing-1400.jpg', 'accueil-club-1400.jpg'],
+  '/faq/': ['coaching-individuel-1400.jpg', 'renforcement-groupe-1600.jpg'],
+  '/acces-contact/': ['accueil-club-1400.jpg', 'salle-de-boxe-1600.jpg', 'boxe-corner-1600.jpg'],
+  '/boxe-enfant-blagnac/': ['boxe-detail-1000.jpg'],
+  '/boxe-femme-blagnac/': ['cours-collectif-sacs-1600.jpg'],
+  '/horaires/': ['sacs-de-frappe-1400.jpg'],
+  '/inscription/': ['conseil-coach-1400.jpg'],
   ...Object.fromEntries(
     DISCIPLINES.map((d) => [
       '/cours-de-boxe-blagnac/' + d.slug + '/',

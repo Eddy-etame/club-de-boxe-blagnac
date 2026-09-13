@@ -516,6 +516,20 @@ for (const file of htmlFiles) {
   }
 }
 
+/* Every image the sitemap declares must exist, and must be rendered by the
+   page that declares it (its file name appears in that page's HTML). */
+for (const block of sitemap.split('<url>').slice(1)) {
+  const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] || '';
+  const page = outputForUrl(loc.replace(/^https?:\/\/[^/]+/, ''));
+  const html = page && existsSync(page) ? readFileSync(page, 'utf8') : '';
+  for (const m of block.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)) {
+    const path = m[1].replace(/^https?:\/\/[^/]+/, '');
+    assert(existsSync(join(dist, path)), 'sitemap declares a missing image: ' + path);
+    const name = path.split('/').pop().replace(/-\d+\.jpg$|\.jpg$/, '');
+    if (!path.startsWith('/og/')) assert(html.includes('/images/' + name + '-'), 'sitemap declares ' + name + ' on ' + loc + ', which does not render it.');
+  }
+}
+
 if (failures.length) {
   console.error(`Build audit failed (${failures.length}):\n- ${failures.join('\n- ')}`);
   process.exit(1);
