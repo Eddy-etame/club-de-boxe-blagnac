@@ -32,6 +32,8 @@ const copy = copyFor(discipline.slug);
 if (!copy) throw new Error(`copy.json: no copy for course "${discipline.slug}"`);
 const others = DISCIPLINES.filter((d) => d.slug !== discipline.slug);
 const largest = discipline.image.widths[discipline.image.widths.length - 1];
+/* Each form opens on this course's own question, never the same line on every page. */
+const FORM_HEADINGS: Record<string, string> = {"eveil-baby-boxing": "Votre enfant a entre 3 et 6 ans ?", "boxe-educative": "Votre enfant a entre 7 et 12 ans ?", "boxe-ados": "Un ado qui veut boxer ?", "boxe-anglaise-loisir": "Envie d’apprendre à boxer ?", "boxe-competition": "Vous visez le ring ?", "cardio-boxe": "Transpirer sans prendre de coups ?"};
 ---
 
 <BaseLayout
@@ -164,7 +166,7 @@ const largest = discipline.image.widths[discipline.image.widths.length - 1];
     <div class="signal__inner shell">
       <div class="signal__heading">
         <p class="eyebrow eyebrow--signal">{discipline.name}</p>
-        <h2>Dites-nous ce que vous cherchez.</h2>
+        <h2>{FORM_HEADINGS[discipline.slug] ?? 'Dites-nous ce que vous cherchez.'}</h2>
         <p>
           Indiquez vos disponibilités et votre niveau. Nous vous répondons sous 24 h avec les créneaux de ce cours, l’adresse et les conditions.
         </p>

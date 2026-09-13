@@ -63,7 +63,8 @@ for (const file of htmlFiles) {
   assert(h1Count === 1, `${rel}: expected one h1, found ${h1Count}.`);
   assert(Boolean(title && title.length <= 68), `${rel}: missing or oversized title (${title?.length || 0}).`);
   assert(Boolean(description && description.length >= 80 && description.length <= 180), `${rel}: description should be 80–180 chars (${description?.length || 0}).`);
-  assert(Boolean(canonical?.startsWith('https://')), `${rel}: canonical must be absolute HTTPS.`);
+  if (rel !== '404.html') assert(Boolean(canonical?.startsWith('https://')), `${rel}: canonical must be absolute HTTPS.`);
+  else assert(!canonical, '404.html must not declare a canonical.');
   assert(!/Eddy Etame Etame|Angoula Onambele|Mbosseu Brad/i.test(visible), `${rel}: technical attribution leaked into visible body.`);
 
   for (const link of links) {
@@ -108,6 +109,7 @@ const hasConfirmedUrl =
   && !/\.(?:invalid|example)(?:\/|$)/i.test(configuredUrl)
   && !/localhost|127\.0\.0\.1/i.test(configuredUrl);
 const isPreview = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production');
+const LOW_VALUE = ['mentions-legales/index.html', 'confidentialite/index.html'];
 const productionIndexing = indexRequested && releaseValidated && hasConfirmedUrl && !isPreview;
 
 if (indexRequested) {
@@ -122,8 +124,15 @@ if (productionIndexing) {
     const html = readFileSync(file, 'utf8');
     if (relative(dist, file) === '404.html') {
       assert(/name="robots"\s+content="noindex,nofollow,noarchive,nosnippet"/i.test(html), '404.html must remain noindex.');
+    } else if (LOW_VALUE.includes(relative(dist, file).split('\\').join('/'))) {
+      assert(/name="robots"\s+content="noindex,follow"/i.test(html), `${relative(dist, file)}: legal page must be noindex,follow.`);
+      assert(!sitemap.includes('/' + relative(dist, file).split('\\').join('/').replace('index.html', '') + '<'), `${relative(dist, file)}: legal page must stay out of the sitemap.`);
     } else {
       assert(/name="robots"\s+content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/i.test(html), `${relative(dist, file)}: indexable build lacks index,follow.`);
+      /* The canonical must be this exact page on the configured origin, not merely https. */
+      const expected = configuredUrl.replace(/\/$/, '') + '/' + relative(dist, file).split('\\').join('/').replace(/index\.html$/, '');
+      const got = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
+      assert(got === expected, `${relative(dist, file)}: canonical ${got} should be ${expected}.`);
     }
   }
 } else {

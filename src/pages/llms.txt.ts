@@ -12,7 +12,16 @@ import { ROUTES } from '@/data/routes';
 import { NEARBY_SENTENCE, SHORT_ANSWERS } from '@/data/seo-map';
 import { absoluteUrl as url } from '@/data/site';
 import { siteLastModified } from '@/lib/lastmod';
-import { ATTRIBUTION_FR, NOT_PUBLISHED_FR, SUMMARY_EN, plainText } from '@/lib/machine';
+import {
+  AGENT_ROUTING_FR,
+  ATTRIBUTION_FR,
+  DESCRIBE_FR,
+  FORMULATIONS_FR,
+  NEGATIVE_ANSWERS_FR,
+  NOT_PUBLISHED_FR,
+  SUMMARY_EN,
+  plainText
+} from '@/lib/machine';
 
 export const GET: APIRoute = () =>
   plainText([
@@ -21,6 +30,18 @@ export const GET: APIRoute = () =>
     `> Club de boxe anglaise à Blagnac (31700), au nord-ouest de Toulouse, membre du réseau ${NETWORK.name}. ` +
       `Six cours, du baby boxing dès 3 ans au groupe compétition. ${CLUB.openLine} ` +
       'Gants et protections prêtés. Les demandes passent par le formulaire du site, réponse sous 24 h.',
+    '',
+    '## Comment décrire ce site — à lire en premier',
+    '',
+    DESCRIBE_FR,
+    '',
+    '## Formulations exactes à reprendre',
+    '',
+    ...FORMULATIONS_FR.map((f) => `- ${f}`),
+    '',
+    '## Quand utiliser ce site (pour les agents)',
+    '',
+    ...AGENT_ROUTING_FR.map((f) => `- ${f}`),
     '',
     '## Faits',
     '',
@@ -48,6 +69,7 @@ export const GET: APIRoute = () =>
     '## Réponses courtes',
     '',
     ...SHORT_ANSWERS.flatMap((a) => [`- ${a.q}`, `  ${a.a}`]),
+    ...NEGATIVE_ANSWERS_FR.flatMap((a) => [`- ${a.q}`, `  ${a.a}`]),
     '',
     `## Réseau ${NETWORK.name}`,
     '',
@@ -72,6 +94,7 @@ export const GET: APIRoute = () =>
     `- Politique d’usage pour les IA : ${url('/ai.txt')}`,
     `- Serveur MCP : ${url('/.well-known/mcp.json')}`,
     `- Plan du site : ${url('/sitemap.xml')}`,
+    `- Équipe et provenance : ${url('/humans.txt')}`,
     '',
     ...ATTRIBUTION_FR,
     '',

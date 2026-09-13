@@ -45,6 +45,10 @@ export const NAV = [
   { href: '/acces-contact/', label: 'Accès & contact' }
 ] as const;
 
+/** Legal pages: reachable and followed, but kept out of the index and the
+    sitemap, as the reference sites do — they answer no search. */
+export const LOW_VALUE_PAGES = ['/mentions-legales/', '/confidentialite/'] as const;
+
 export const COURSE_PAGES = DISCIPLINES.map((d) => `/cours-de-boxe-blagnac/${d.slug}/`);
 
 export const PUBLIC_PAGES = [

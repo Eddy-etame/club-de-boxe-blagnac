@@ -1,19 +1,41 @@
 ---
+/**
+ * 404 — never a dead end. Every public page is listed with the question it
+ * answers (the route registry), plus the machine files an agent can use to
+ * find its way. noindex, and no canonical or structured data: a page that
+ * does not exist asserts nothing.
+ */
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ROUTES } from '@/data/routes';
+import { LOW_VALUE_PAGES } from '@/data/site';
 
 const title = 'Page introuvable — Club de Boxe Blagnac';
-const description = 'Cette page n’existe pas ou a changé de trajectoire. Revenez à l’accueil du Club de Boxe Blagnac.';
+const description =
+  'Cette page n’existe pas ou a changé d’adresse. Voici toutes les pages du Club de Boxe Blagnac, avec la question à laquelle chacune répond.';
+const pages = ROUTES.filter((r) => !(LOW_VALUE_PAGES as readonly string[]).includes(r.path));
 ---
 
-<BaseLayout {title} {description} pathname="/404/" noindex
-  topTone="dark"
->
+<BaseLayout {title} {description} pathname="/404/" noindex topTone="dark">
   <section class="not-found surface-dark">
     <div class="shell">
       <p class="eyebrow eyebrow--signal">Erreur 404</p>
       <h1>Hors du <em>ring.</em></h1>
-      <p>Cette page n’existe pas ou a changé de trajectoire.</p>
-      <a class="button button--signal" href="/">Retour au club</a>
+      <p class="not-found__lead">Cette page n’existe pas ou a changé d’adresse. Toutes nos pages sont ici, chacune avec la question à laquelle elle répond.</p>
+      <ul class="not-found__routes">
+        {pages.map((r) => (
+          <li>
+            <a href={r.path}>
+              <span class="not-found__label">{r.label}</span>
+              <span class="not-found__q">{r.question}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="not-found__machine">
+        <a href="/acces-contact/#contact">Nous écrire</a>
+        <a href="/sitemap.xml">Plan du site</a>
+        <a href="/llms.txt">llms.txt</a>
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -21,9 +43,7 @@ const description = 'Cette page n’existe pas ou a changé de trajectoire. Reve
 <style>
   .not-found {
     min-height: 100svh;
-    display: grid;
-    place-items: center;
-    padding-block: calc(var(--header-height) + 4rem) 4rem;
+    padding-block: calc(var(--header-height) + 4rem) 5rem;
   }
 
   .not-found .shell {
@@ -33,7 +53,7 @@ const description = 'Cette page n’existe pas ou a changé de trajectoire. Reve
   }
 
   .not-found h1 {
-    font-size: clamp(7rem, 24vw, 24rem);
+    font-size: clamp(6rem, 20vw, 20rem);
   }
 
   .not-found h1 em {
@@ -42,7 +62,56 @@ const description = 'Cette page n’existe pas ou a changé de trajectoire. Reve
     font-weight: 400;
   }
 
-  .not-found p:not(.eyebrow) {
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
+  .not-found__lead {
+    max-width: 44rem;
+    font-size: clamp(1.15rem, 2vw, 1.6rem);
+  }
+
+  .not-found__routes {
+    display: grid;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgb(255 255 255 / 20%);
+    list-style: none;
+  }
+
+  .not-found__routes a {
+    display: grid;
+    gap: 0.25rem 2rem;
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    padding-block: 0.95rem;
+    border-bottom: 1px solid rgb(255 255 255 / 20%);
+    text-decoration: none;
+  }
+
+  .not-found__label {
+    font-variation-settings: 'wdth' 88, 'wght' 720;
+    letter-spacing: -0.01em;
+  }
+
+  .not-found__q {
+    color: var(--mist);
+  }
+
+  .not-found__routes a:hover .not-found__label {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .not-found__machine {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 40rem) {
+    .not-found__routes a {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -9,7 +9,7 @@ import Header from '@/components/Header.astro';
 import FlightLine from '@/components/FlightLine.astro';
 import NetworkPopup from '@/components/NetworkPopup.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import { SITE, absoluteUrl } from '@/data/site';
+import { SITE, LOW_VALUE_PAGES, absoluteUrl } from '@/data/site';
 import { LOCATION } from '@/data/seo-map';
 import { pageLastModified } from '@/lib/lastmod';
 import { buildGraph } from '@/data/schema';
@@ -74,10 +74,18 @@ const canonical = absoluteUrl(pathname);
 const route = ROUTES.find((r) => r.path === pathname);
 const socialImage = absoluteUrl(image ?? (route ? '/og/' + ogId(route.path) + '.jpg' : SITE.socialImage));
 /* One trail for the visible breadcrumb AND the BreadcrumbList. */
+/* The social card: described as what it shows (a word and a line), not as a photo. */
+const socialAlt = !image && route ? route.og.word + ' — ' + route.og.kicker + ' · Club de Boxe Blagnac, réseau Boxing Center' : imageAlt;
+const squareCard = !image && route ? absoluteUrl('/og/' + ogId(route.path) + '-carre.jpg') : null;
 const trail = crumbs ?? (route && route.path !== '/' ? [{ name: route.label, path: route.path }] : undefined);
-const robots = SITE.indexable && !noindex
-  ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
-  : 'noindex,nofollow,noarchive,nosnippet';
+/* Three answers: locked/404 → noindex,nofollow; legal pages → noindex,follow
+   (reachable, followed, not indexed); everything else → index. */
+const lowValue = (LOW_VALUE_PAGES as readonly string[]).includes(pathname);
+const robots = !SITE.indexable || noindex
+  ? 'noindex,nofollow,noarchive,nosnippet'
+  : lowValue
+    ? 'noindex,follow'
+    : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 const modified = pageLastModified(pathname);
 
 /* One consolidated @graph per page. See src/data/schema.ts for why the nodes
@@ -119,12 +127,12 @@ const graph = buildGraph({
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     {/* Language targeting. One locale today, but declaring it (plus x-default)
         stops search engines guessing, and makes adding a second trivial. */}
-    <link rel="alternate" hreflang="fr-FR" href={canonical} />
-    <link rel="alternate" hreflang="x-default" href={canonical} />
+    {!noindex && <link rel="alternate" hreflang="fr-FR" href={canonical} />}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={canonical} />}
 
     {/* Region and commune only. No coordinates: without a published street
         address, a point on a map would assert a location we do not give. */}
@@ -151,9 +159,10 @@ const graph = buildGraph({
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="format-detection" content="telephone=no" />
 
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8e5dc" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141411" />
-    <meta name="color-scheme" content="light dark" />
+    {/* One scheme: the site has no dark mode, so native controls must stay light.
+        The browser chrome takes the ink of the heroes. */}
+    <meta name="theme-color" content="#141411" />
+    <meta name="color-scheme" content="light" />
 
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -171,6 +180,7 @@ const graph = buildGraph({
       />
     )}
     <link rel="manifest" href="/site.webmanifest" />
+    {squareCard && <link rel="image_src" href={squareCard} />}
     <link rel="author" href="/humans.txt" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="Informations pour agents" />
@@ -186,7 +196,7 @@ const graph = buildGraph({
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:secure_url" content={socialImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:alt" content={socialAlt} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:updated_time" content={modified} />
@@ -195,13 +205,13 @@ const graph = buildGraph({
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <meta name="twitter:image:alt" content={imageAlt} />
+    <meta name="twitter:image:alt" content={socialAlt} />
 
     {/* Photographer credit travels with the page, not only in the visible UI. */}
     <meta name="image:credit" content="Axel Derewiany" />
     <meta name="copyright" content="Photographies © Axel Derewiany" />
 
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(graph)} />
+    {!noindex && <script is:inline type="application/ld+json" set:html={JSON.stringify(graph)} />}
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>

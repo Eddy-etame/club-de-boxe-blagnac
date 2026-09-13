@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { PUBLIC_PAGES, SITE, absoluteUrl } from '@/data/site';
+import { LOW_VALUE_PAGES, PUBLIC_PAGES, SITE, absoluteUrl } from '@/data/site';
 import { DISCIPLINES } from '@/data/club';
 import { pageLastModified } from '@/lib/lastmod';
 import { ogId } from '@/data/routes';
@@ -37,7 +37,7 @@ const escape = (value: string) =>
 
 export const GET: APIRoute = () => {
   const entries = SITE.indexable
-    ? PUBLIC_PAGES.map((path) => {
+    ? PUBLIC_PAGES.filter((path) => !(LOW_VALUE_PAGES as readonly string[]).includes(path)).map((path) => {
         /* The page's photos, then its own social card (src/pages/og). */
         const images = [...(PAGE_IMAGES[path] ?? []).map((file) => '/images/' + file), '/og/' + ogId(path) + '-carre.jpg']
           .map((src) => '\n    <image:image><image:loc>' + escape(absoluteUrl(src)) + '</image:loc></image:image>')

@@ -107,7 +107,7 @@ export const DISCIPLINES: Discipline[] = [
       'Opposition en touche légère',
       'Retour au calme'
     ],
-    image: { file: 'cours-debout-groupe', widths: [480, 960, 1600], alt: 'Cours de boxe éducative en groupe' }
+    image: { file: 'cours-debout-groupe', widths: [480, 960, 1600], alt: 'Renforcement en groupe : kettlebells et haltères entre deux ateliers' }
   },
   {
     slug: 'boxe-ados',
@@ -126,7 +126,7 @@ export const DISCIPLINES: Discipline[] = [
       'Opposition encadrée',
       'Gainage'
     ],
-    image: { file: 'coin-de-ring', widths: [420, 900, 1400], alt: 'Adolescents encadrés au coin du ring' }
+    image: { file: 'coin-de-ring', widths: [420, 900, 1400], alt: 'Sur le ring, un entraîneur montre un enchaînement à un jeune boxeur ganté' }
   },
   {
     slug: 'boxe-anglaise-loisir',
@@ -163,7 +163,7 @@ export const DISCIPLINES: Discipline[] = [
       'Sparring encadré, rounds de deux minutes',
       'Renforcement et récupération'
     ],
-    image: { file: 'sparring-ring', widths: [480, 960, 1600], alt: 'Sparring encadré sur le ring du club' }
+    image: { file: 'sparring-ring', widths: [480, 960, 1600], alt: 'Sparring sur un ring de boxe anglaise, sous le regard de l’entraîneur' }
   },
   {
     slug: 'cardio-boxe',

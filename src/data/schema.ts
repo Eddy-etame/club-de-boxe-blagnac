@@ -91,7 +91,9 @@ const websiteNode = {
  * club.ts, so the markup can never drift from the visible page.
  */
 const publisherNode = {
-  '@type': ['SportsClub', 'SportsActivityLocation', 'LocalBusiness'],
+  /* No 'LocalBusiness': SportsActivityLocation already is one, and the
+     explicit type makes validators demand a street address we do not publish. */
+  '@type': ['SportsClub', 'SportsActivityLocation'],
   '@id': id('publisher'),
   name: CLUB.name,
   url: `${SITE.url}/`,
@@ -437,9 +439,19 @@ export function buildGraph({
   const route = ROUTES.find((r) => r.path === pathname);
   if (route) {
     const card = absoluteUrl('/og/' + ogId(route.path));
+    const caption = route.og.word + ' — ' + route.og.kicker + '. Club de Boxe Blagnac, réseau Boxing Center.';
+    pageNode.primaryImageOfPage = {
+      '@type': 'ImageObject',
+      '@id': `${canonical}#primaryimage`,
+      url: card + '-carre.jpg',
+      contentUrl: card + '-carre.jpg',
+      width: 1200,
+      height: 1200,
+      caption
+    };
     pageNode.image = [
-      { '@type': 'ImageObject', url: card + '.jpg', width: 1200, height: 630 },
-      { '@type': 'ImageObject', url: card + '-carre.jpg', width: 1200, height: 1200 }
+      { '@type': 'ImageObject', url: card + '.jpg', width: 1200, height: 630, caption },
+      { '@id': `${canonical}#primaryimage` }
     ];
   }
 

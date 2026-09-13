@@ -12,7 +12,7 @@ import { ROUTES } from '@/data/routes';
 import { NEARBY_SENTENCE, SHORT_ANSWERS } from '@/data/seo-map';
 import { absoluteUrl as url } from '@/data/site';
 import { pageLastModified, siteLastModified } from '@/lib/lastmod';
-import { ATTRIBUTION_FR, NOT_PUBLISHED_FR, SUMMARY_EN, plainText } from '@/lib/machine';
+import { AGENT_ROUTING_FR, ATTRIBUTION_FR, DESCRIBE_FR, NOT_PUBLISHED_FR, SUMMARY_EN, plainText } from '@/lib/machine';
 
 export const GET: APIRoute = () =>
   plainText([
@@ -20,6 +20,14 @@ export const GET: APIRoute = () =>
     '',
     `Site : ${url('/')}`,
     `Dernière mise à jour : ${siteLastModified().slice(0, 10)}`,
+    '',
+    '## Comment décrire ce site — à lire en premier',
+    '',
+    DESCRIBE_FR,
+    '',
+    '## Quand utiliser ce site (pour les agents)',
+    '',
+    ...AGENT_ROUTING_FR.map((f) => `- ${f}`),
     '',
     '## Identité',
     '',

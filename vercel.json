@@ -60,15 +60,23 @@
         {
           "key": "Cache-Control",
           "value": "no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
         }
       ]
     },
     {
-      "source": "/(llms\\.txt|llms-full\\.txt|ai\\.txt|mcp\\.json|mcp-card\\.json)",
+      "source": "/(llms\\.txt|llms-full\\.txt|ai\\.txt|humans\\.txt|security\\.txt|mcp\\.json|mcp-card\\.json)",
       "headers": [
         {
           "key": "X-Robots-Tag",
           "value": "noindex"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, stale-while-revalidate=86400"
         }
       ]
     },
