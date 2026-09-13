@@ -108,7 +108,6 @@ const hasConfirmedUrl =
   /^https:\/\//i.test(configuredUrl)
   && !/\.(?:invalid|example)(?:\/|$)/i.test(configuredUrl)
   && !/localhost|127\.0\.0\.1/i.test(configuredUrl);
-const isPreview = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production');
 const LOW_VALUE = ['mentions-legales/index.html', 'confidentialite/index.html'];
 /* The mode is read from what the build produced, not re-derived from env:
    a standalone `npm run audit` must judge the artifact actually on disk. */
