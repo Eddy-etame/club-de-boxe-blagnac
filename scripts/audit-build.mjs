@@ -130,10 +130,13 @@ if (productionIndexing) {
     const html = readFileSync(file, 'utf8');
     if (relative(dist, file) === '404.html') {
       assert(/name="robots"\s+content="noindex,follow"/i.test(html), '404.html must be noindex,follow.');
-    } else if (LOW_VALUE.includes(relative(dist, file).split('\\').join('/'))) {
-      assert(/name="robots"\s+content="noindex,follow"/i.test(html), `${relative(dist, file)}: legal page must be noindex,follow.`);
-      assert(!sitemap.includes('/' + relative(dist, file).split('\\').join('/').replace('index.html', '') + '<'), `${relative(dist, file)}: legal page must stay out of the sitemap.`);
     } else {
+      /* 26/09 — règle d'Eddy : en production, une page de contenu se range dans
+         Google. Les pages légales passent par le contrôle commun (index +
+         canonique exacte) et doivent figurer dans le plan du site. */
+      if (LOW_VALUE.includes(relative(dist, file).split('\\').join('/'))) {
+        assert(sitemap.includes('/' + relative(dist, file).split('\\').join('/').replace('index.html', '') + '<'), `${relative(dist, file)}: legal page must be in the sitemap (production pages are indexed).`);
+      }
       assert(/name="robots"\s+content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/i.test(html), `${relative(dist, file)}: indexable build lacks index,follow.`);
       /* The canonical must be this exact page on the configured origin, not merely https. */
       const expected = artifactOrigin.replace(/\/$/, '') + '/' + relative(dist, file).split('\\').join('/').replace(/index\.html$/, '');

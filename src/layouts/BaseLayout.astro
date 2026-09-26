@@ -10,7 +10,7 @@ import Header from '@/components/Header.astro';
 import FlightLine from '@/components/FlightLine.astro';
 import NetworkPopup from '@/components/NetworkPopup.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import { SITE, LOW_VALUE_PAGES, absoluteUrl } from '@/data/site';
+import { SITE, absoluteUrl } from '@/data/site';
 import { LOCATION } from '@/data/seo-map';
 import { pageLastModified } from '@/lib/lastmod';
 import { buildGraph } from '@/data/schema';
@@ -87,12 +87,12 @@ const socialImage = absoluteUrl(image ?? (route ? '/og/' + ogId(route.path) + '.
 const socialAlt = !image && route ? route.og.word + ' — ' + route.og.kicker + ' · Club de Boxe Blagnac, réseau Boxing Center' : imageAlt;
 const squareCard = !image && route ? absoluteUrl('/og/' + ogId(route.path) + '-carre.jpg') : null;
 const trail = crumbs ?? (route && route.path !== '/' ? [{ name: route.label, path: route.path }] : undefined);
-/* Three answers: locked/404 → noindex,nofollow; legal pages → noindex,follow
-   (reachable, followed, not indexed); everything else → index. */
-const lowValue = (LOW_VALUE_PAGES as readonly string[]).includes(pathname);
+/* Deux réponses (26/09) : site verrouillé → noindex,nofollow ; la 404 (prop
+   `noindex`) → noindex,follow ; TOUT le reste → index, pages légales comprises.
+   Règle d'Eddy : en production, une page de contenu se range dans Google. */
 const robots = !SITE.indexable
   ? 'noindex,nofollow,noarchive,nosnippet'
-  : noindex || lowValue
+  : noindex
     ? 'noindex,follow'
     : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 const modified = pageLastModified(pathname);
