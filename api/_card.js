@@ -51,7 +51,7 @@ export default {
     "humans": "https://www.club-boxe-blagnac.fr/humans.txt",
     "sitemap": "https://www.club-boxe-blagnac.fr/sitemap.xml"
   },
-  "updated": "2026-09-26T07:55:20+00:00",
+  "updated": "2026-09-26T08:27:19+00:00",
   "facts": {
     "club": {
       "name": "Club de Boxe Blagnac",

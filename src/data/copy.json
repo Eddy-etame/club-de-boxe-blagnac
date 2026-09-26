@@ -32,6 +32,14 @@
           {
             "label": "Comment se passe une première séance",
             "href": "/premiere-seance/"
+          },
+          {
+            "label": "Venir de Beauzelle : tram T1 et bus 70",
+            "href": "/club-de-boxe-beauzelle/"
+          },
+          {
+            "label": "Venir d’Aussonne : tram T1 depuis MEETT",
+            "href": "/club-de-boxe-aussonne/"
           }
         ]
       },
@@ -78,6 +86,10 @@
       {
         "question": "Peut-on l’inscrire en cours d’année, et que faut-il fournir ?",
         "answer": "Oui, toute l’année : la saison court de septembre à fin juin, et une arrivée en cours de saison est calculée au prorata des mois restants. À l’inscription, vous nous remettez un certificat médical de non-contre-indication à la boxe de moins d’un an. Écrivez-nous l’âge de votre enfant et les jours qui vous arrangent parmi le lundi, le mercredi et le vendredi : nous répondons avec le créneau et l’adresse."
+      },
+      {
+        "question": "Depuis Beauzelle, Seilh ou Aussonne, un enfant peut-il venir en bus le lundi, le mercredi et le vendredi ?",
+        "answer": "Oui, accompagné : ce sont trois jours de semaine. Depuis Beauzelle, le bus 70 arrive au centre de Blagnac ; depuis Seilh et Aussonne, le bus 71 rejoint le tram T1 à Andromède-Lycée ; depuis Cornebarrieu, la ligne 74 fait de même. Ces deux lignes ne roulent pas le samedi, mais la boxe éducative n’a pas lieu ce jour-là."
       }
     ],
     "formHeading": "Dites-nous l’âge de votre enfant.",
@@ -134,6 +146,16 @@
           "Le sparring encadré a lieu chaque samedi, sur le ring du club, en rounds de deux minutes. Avant le premier coup de cloche, l’entraîneur donne à chaque binôme une consigne et une intensité : travailler le jab, sortir sur le côté, toucher au corps. On ne vient pas gagner un round, on vient réussir la consigne.",
           "Casque et coquille sont prêtés, le protège-dents est le vôtre. Les binômes se forment au gabarit et à l’expérience, et tournent d’un round à l’autre. L’entraîneur reste au bord du ring : dès qu’une touche dépasse ce qui a été annoncé, il arrête l’échange, et le round reprend à l’intensité prévue ou s’arrête là.",
           "Les trois autres séances de la semaine préparent ce samedi : séquences tactiques, distance, timing, renforcement. Un samedi manqué ne se rattrape pas par un sparring improvisé en semaine."
+        ],
+        "links": [
+          {
+            "label": "Venir de Cornebarrieu : ligne 74",
+            "href": "/club-de-boxe-cornebarrieu/"
+          },
+          {
+            "label": "Venir de Seilh : bus 71, TAD 171 le samedi",
+            "href": "/club-de-boxe-seilh/"
+          }
         ]
       },
       {
@@ -176,6 +198,10 @@
       {
         "question": "Quel certificat médical faut-il pour boxer en compétition ?",
         "answer": "Un examen médical plus complet que le certificat de non-contre-indication de moins d’un an demandé pour les autres cours, renouvelé chaque saison. Tant qu’il n’est pas remis, vous vous entraînez avec le groupe, mais sans sparring ni rencontre."
+      },
+      {
+        "question": "Le sparring du samedi : comment venir de Seilh, Cornebarrieu ou Aussonne ?",
+        "answer": "Le samedi, le bus 71 et la ligne 74 ne circulent pas. Le TAD 171 de Tisséo dessert alors tous les arrêts de Seilh, Cornebarrieu et Aussonne, sur réservation, jusqu’à Aéroconstellation, où le tram T1 descend vers le centre de Blagnac. Depuis Beauzelle, le T1 et le bus 70 roulent le week-end."
       }
     ],
     "formHeading": "Dites-nous d’où vous partez.",
@@ -224,6 +250,14 @@
           {
             "label": "Comment se passe une première venue",
             "href": "/premiere-seance/"
+          },
+          {
+            "label": "Venir de Beauzelle : tram T1 et bus 70",
+            "href": "/club-de-boxe-beauzelle/"
+          },
+          {
+            "label": "Venir de Seilh : bus 71, TAD 171 le samedi",
+            "href": "/club-de-boxe-seilh/"
           }
         ]
       },
@@ -266,6 +300,10 @@
       {
         "question": "Peut-on l’inscrire en cours d’année ?",
         "answer": "Oui. Les inscriptions sont ouvertes toute l’année, au prorata des mois restants d’une saison qui court de septembre à fin juin ; nous fermons aux vacances de Noël et au mois d’août. Écrivez-nous l’âge de votre enfant et le matin qui vous arrange, mercredi ou samedi : nous vous répondons sous 24 h avec le créneau et l’adresse exacte."
+      },
+      {
+        "question": "Le samedi matin, comment venir à l’éveil sans voiture ?",
+        "answer": "Depuis Beauzelle, le tram T1 et le bus 70 roulent le week-end jusqu’au centre de Blagnac. Depuis Seilh, Cornebarrieu et Aussonne, le bus 71 et la ligne 74 ne circulent pas le samedi : le TAD 171 de Tisséo dessert ces trois communes sur réservation jusqu’à Aéroconstellation, où le T1 prend le relais vers Blagnac."
       }
     ],
     "formHeading": "Dites-nous l’âge de votre enfant.",
@@ -325,6 +363,14 @@
           {
             "label": "Cardio boxe à Blagnac, sans contact",
             "href": "/cours-de-boxe-blagnac/cardio-boxe/"
+          },
+          {
+            "label": "Venir de Cornebarrieu : ligne 74",
+            "href": "/club-de-boxe-cornebarrieu/"
+          },
+          {
+            "label": "Venir de Beauzelle : tram T1 et bus 70",
+            "href": "/club-de-boxe-beauzelle/"
           }
         ]
       },
@@ -368,6 +414,10 @@
       {
         "question": "On peut s’inscrire en cours d’année ?",
         "answer": "Oui, toute l’année. La saison court de septembre à fin juin, et une arrivée en cours de saison est calculée au prorata des mois restants. Le club ferme aux vacances de Noël et au mois d’août."
+      },
+      {
+        "question": "Après une séance du soir, y a-t-il encore un tram ?",
+        "answer": "Oui. Tisséo fait rouler le T1 jusqu’à 0h40 du dimanche au mercredi et jusqu’à 1h20 du jeudi au samedi, et les trams du soir remontent jusqu’aux stations de Beauzelle et au MEETT. Les bus s’arrêtent plus tôt : le dernier 70 vers Beauzelle quitte Place du Relais avant 21h30, et la dernière 74 vers Cornebarrieu quitte Andromède-Lycée à 21h en période scolaire."
       }
     ],
     "formHeading": "Dites-nous votre niveau et votre créneau.",
@@ -421,6 +471,14 @@
           {
             "label": "Votre première séance, étape par étape",
             "href": "/premiere-seance/"
+          },
+          {
+            "label": "Venir de Beauzelle : tram T1 et bus 70",
+            "href": "/club-de-boxe-beauzelle/"
+          },
+          {
+            "label": "Venir d’Aussonne : tram T1 depuis MEETT",
+            "href": "/club-de-boxe-aussonne/"
           }
         ]
       },
@@ -468,6 +526,10 @@
       {
         "question": "Le cours est-il mixte, ou y a-t-il un créneau réservé aux femmes ?",
         "answer": "Le cours est mixte, sans créneau séparé, comme tous nos cours à Blagnac. Beaucoup de femmes commencent la boxe par le cardio boxe, justement parce qu’on n’y prend pas de coups. Si vous cherchez un cours réservé aux femmes, la Boxing Lady se pratique à Boxing Center Toulouse Minimes, dans le réseau."
+      },
+      {
+        "question": "Je travaille vers Andromède ou le MEETT : la séance du midi est-elle faisable ?",
+        "answer": "Oui. Depuis Andromède-Lycée, Aéroconstellation ou le MEETT, le parc des expositions, le tram T1 descend au centre de Blagnac sans changement, à midi comme le soir, toutes les 12 minutes en semaine à Andromède-Lycée. Deux de nos quatre séances de cardio boxe ont lieu le midi, et chacune dure une heure trente."
       }
     ],
     "networkHeading": "Le même effort, ailleurs dans le réseau.",
@@ -532,6 +594,14 @@
           {
             "label": "Cardio boxe à Blagnac, sans contact",
             "href": "/cours-de-boxe-blagnac/cardio-boxe/"
+          },
+          {
+            "label": "Venir de Cornebarrieu : ligne 74",
+            "href": "/club-de-boxe-cornebarrieu/"
+          },
+          {
+            "label": "Venir d’Aussonne : tram T1 depuis MEETT",
+            "href": "/club-de-boxe-aussonne/"
           }
         ]
       },
@@ -628,6 +698,10 @@
       {
         "question": "Peut-on s’inscrire en cours d’année ?",
         "answer": "Oui, toute l’année. La saison court de septembre à fin juin, et une arrivée en cours d’année est calculée au prorata des mois restants. Il faut un certificat médical de non-contre-indication à la boxe de moins d’un an. Le club ferme aux vacances de Noël et au mois d’août."
+      },
+      {
+        "question": "Depuis Cornebarrieu ou Aussonne, plutôt le midi ou le soir ?",
+        "answer": "Les deux marchent en semaine, mais les derniers bus partent avant notre fermeture : la dernière 74 vers Cornebarrieu quitte Andromède-Lycée à 21h en période scolaire, et le dernier TAD 171 vers Aussonne quitte Aéroconstellation à 20h50. Une séance du soir se termine donc en tram T1, ou en voiture ; le cardio boxe du midi évite la question."
       }
     ],
     "networkHeading": "Entre femmes, dans le réseau Boxing Center",
@@ -698,6 +772,14 @@
           {
             "label": "S’inscrire en cours d’année",
             "href": "/inscription/"
+          },
+          {
+            "label": "Venir de Seilh : bus 71, TAD 171 le samedi",
+            "href": "/club-de-boxe-seilh/"
+          },
+          {
+            "label": "Venir de Beauzelle : tram T1 et bus 70",
+            "href": "/club-de-boxe-beauzelle/"
           }
         ]
       },
@@ -745,6 +827,10 @@
       {
         "question": "Comment faire venir mon enfant à une première séance ?",
         "answer": "Écrivez-nous via le formulaire : son âge, s’il a déjà boxé, les soirs où il est libre. Nous répondons sous 24 h avec les soirs du groupe et l’adresse exacte. Il arrive un quart d’heure avant, en tenue de sport, avec une bouteille d’eau et des chaussures propres réservées à l’intérieur ; gants et protections sont prêtés. Vous pouvez rester le temps de la séance."
+      },
+      {
+        "question": "Un ado de Beauzelle ou de Seilh peut-il venir seul après le collège ?",
+        "answer": "Du lundi au vendredi, le bus 71 relie l’arrêt Collège Elisa Deroche, à Beauzelle, à la station Andromède-Lycée, à côté du lycée Saint-Exupéry, où le tram T1 descend vers le centre de Blagnac. Au retour, le dernier 71 vers Seilh quitte Andromède-Lycée à 20h32 en période scolaire ; le T1, lui, roule jusqu’après minuit."
       }
     ],
     "formHeading": "Dites-nous l’âge de votre ado.",
@@ -824,6 +910,14 @@
           {
             "label": "Les horaires à Saint-Cyprien",
             "href": "https://club-boxe-toulouse.com/plannings"
+          },
+          {
+            "label": "Venir de Seilh : bus 71, TAD 171 le samedi",
+            "href": "/club-de-boxe-seilh/"
+          },
+          {
+            "label": "Venir de Cornebarrieu : ligne 74",
+            "href": "/club-de-boxe-cornebarrieu/"
           }
         ]
       },
@@ -920,6 +1014,10 @@
       {
         "question": "Peut-on commencer en cours de saison ?",
         "answer": "Oui, les inscriptions sont ouvertes toute l’année. La saison va de septembre à fin juin, et une arrivée en cours d’année est calculée au prorata des mois restants."
+      },
+      {
+        "question": "Que reste-t-il comme transport après une séance du soir ?",
+        "answer": "Le tram T1 roule jusqu’à 0h40 du dimanche au mercredi et jusqu’à 1h20 du jeudi au samedi. Les bus s’arrêtent avant notre fermeture à 21h30 : le dernier 70 vers Beauzelle quitte Place du Relais avant 21h30, le dernier 71 vers Seilh quitte Andromède-Lycée à 20h32 et la dernière 74 vers Cornebarrieu à 21h, en période scolaire ; le dernier TAD 171 vers Aussonne quitte Aéroconstellation à 20h50."
       }
     ],
     "networkHeading": "Les horaires du réseau Boxing Center",
@@ -985,6 +1083,14 @@
           {
             "label": "Baby boxing à Blagnac, dès 3 ans",
             "href": "/cours-de-boxe-blagnac/eveil-baby-boxing/"
+          },
+          {
+            "label": "Venir de Beauzelle : tram T1 et bus 70",
+            "href": "/club-de-boxe-beauzelle/"
+          },
+          {
+            "label": "Venir de Seilh : bus 71, TAD 171 le samedi",
+            "href": "/club-de-boxe-seilh/"
           }
         ]
       },
@@ -1074,6 +1180,10 @@
       {
         "question": "Je cherche un cours de boxe pour mon fils à Blagnac : que faut-il vous écrire ?",
         "answer": "Son âge, les jours où il est libre après l’école et s’il a déjà pratiqué un sport de combat. Avec ces trois informations, nous vous répondons sous 24 h avec le cours qui lui correspond, le créneau et l’adresse exacte de la salle. Le message est le même pour une fille."
+      },
+      {
+        "question": "Depuis Beauzelle, Seilh, Cornebarrieu ou Aussonne, comment un enfant vient-il au cours ?",
+        "answer": "Accompagné jusqu’à 12 ans. Depuis Beauzelle, le bus 70 et le tram T1 arrivent au centre de Blagnac sept jours sur sept. Depuis Seilh et Aussonne, le bus 71, et depuis Cornebarrieu la ligne 74, rejoignent le T1 à Andromède-Lycée du lundi au vendredi ; le samedi, jour de l’éveil, ces deux lignes laissent place au TAD 171, sur réservation."
       }
     ],
     "networkHeading": "Si la semaine se passe à Toulouse",
@@ -1136,6 +1246,14 @@
           {
             "label": "Les jours et les rythmes de chaque cours",
             "href": "/horaires/"
+          },
+          {
+            "label": "Venir de Beauzelle : tram T1 et bus 70",
+            "href": "/club-de-boxe-beauzelle/"
+          },
+          {
+            "label": "Venir d’Aussonne : tram T1 depuis MEETT",
+            "href": "/club-de-boxe-aussonne/"
           }
         ]
       },
@@ -1240,6 +1358,10 @@
       {
         "question": "Mon enfant a 6 ans et demi : éveil ou boxe éducative ?",
         "answer": "Il reste en éveil, qui accueille les enfants de 3 à 6 ans, et passe en boxe éducative à 7 ans. Indiquez sa date de naissance dans votre message : nous vous répondons avec son groupe et ses jours, le mercredi et le samedi matin pour l’éveil, le lundi, le mercredi et le vendredi pour l’éducative."
+      },
+      {
+        "question": "Faut-il habiter Blagnac pour s’inscrire ?",
+        "answer": "Non. Nos adhérents viennent de Beauzelle, Seilh, Cornebarrieu et Aussonne autant que de Blagnac, et l’inscription est la même pour tous. Notre réponse au formulaire donne l’adresse exacte de la salle, et donc l’arrêt du tram T1 ou du bus où descendre depuis votre commune."
       }
     ],
     "networkHeading": "Vous vivez côté Toulouse ?",

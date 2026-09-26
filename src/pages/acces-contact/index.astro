@@ -8,6 +8,14 @@ import { CLUB, AREA } from '@/data/club';
 
 const title = 'Salle de boxe à Blagnac — accès en tram, bus et contact';
 const ogTitle = 'Tram T1, bus ou vélo : comment venir nous voir à Blagnac';
+/* The four communes this site covers, one line each. Every fact comes from the
+   commune page it links to, where the Tisséo sources are listed. */
+const LINES = [
+  { commune: 'Beauzelle', href: '/club-de-boxe-beauzelle/', text: 'Tram T1 et bus 70 jusqu’au centre de Blagnac, sept jours sur sept. Le dernier 70 vers Beauzelle quitte Place du Relais avant 21h30 ; le T1 roule bien plus tard.' },
+  { commune: 'Seilh', href: '/club-de-boxe-seilh/', text: 'Bus 71 jusqu’à Andromède-Lycée, puis T1, du lundi au vendredi ; dernier 71 vers Seilh à 20h32 en période scolaire. Le samedi, TAD 171 sur réservation.' },
+  { commune: 'Cornebarrieu', href: '/club-de-boxe-cornebarrieu/', text: 'Ligne 74 de Mairie Cornebarrieu à Andromède-Lycée, puis T1, du lundi au vendredi ; dernier retour à 21h en période scolaire. Le samedi, TAD 171.' },
+  { commune: 'Aussonne', href: '/club-de-boxe-aussonne/', text: 'Tram T1 depuis MEETT ; bus 71 et TAD 170 en semaine, TAD 171 le week-end et le soir (dernier départ d’Aéroconstellation à 20h50), liO 388 tous les jours sauf le 1er mai.' },
+];
 const description =
   'Venir à notre salle de boxe de Blagnac en tram T1, en bus Tisséo, à vélo ou en voiture, depuis Beauzelle, Cornebarrieu, Aussonne ou Seilh. Réponse sous 24 h.';
 ---
@@ -71,6 +79,25 @@ const description =
     </div>
   </section>
 
+  <section class="access-lines shell" aria-labelledby="access-lines-title">
+    <div class="section-heading">
+      <p class="eyebrow">02 · Communes voisines</p>
+      <div>
+        <h2 id="access-lines-title">Ligne par ligne, depuis Beauzelle, Seilh, Cornebarrieu et Aussonne.</h2>
+        <p class="section-heading__intro">Chaque commune a sa page, avec ses arrêts, ses horaires et ses sources. En résumé :</p>
+      </div>
+    </div>
+    <ul class="access-lines__list">
+      {LINES.map((l) => (
+        <li>
+          <a class="inline-link" href={l.href}>{l.commune}</a>
+          <span>{l.text}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="access-lines__note">Après une séance du soir, le tram T1 roule jusqu’à 0h40 du dimanche au mercredi et jusqu’à 1h20 du jeudi au samedi, et remonte jusqu’aux stations de Beauzelle et au MEETT.</p>
+  </section>
+
   <section class="access-band" aria-label="La salle">
     <figure>
       <picture>
@@ -126,6 +153,53 @@ const description =
     padding-block: clamp(3.5rem, 7vw, 7rem);
   }
 
+  .access-lines {
+    padding-block: 0 clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .access-lines__list {
+    display: grid;
+    gap: 0;
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .access-lines__list li {
+    display: grid;
+    grid-template-columns: minmax(8rem, 0.28fr) 1fr;
+    gap: 1rem 2rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .access-lines__list a {
+    font-variation-settings: 'wdth' 88, 'wght' 720;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.15rem, 2vw, 1.6rem);
+    line-height: 1.1;
+    align-self: start;
+  }
+
+  .access-lines__list span {
+    max-width: 62ch;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .access-lines__note {
+    max-width: 62ch;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 40rem) {
+    .access-lines__list li {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+  }
+
   .access__list {
     display: grid;
     gap: 0;
@@ -145,7 +219,7 @@ const description =
   }
 
   .access__n {
-    color: var(--signal);
+    color: var(--signal-text);
     font-family: var(--font-mono);
     font-size: 0.62rem;
     letter-spacing: 0.08em;
@@ -204,7 +278,7 @@ const description =
 
   .contact-panel__copy {
     max-width: 34rem;
-    color: var(--mist);
+    color: var(--mist-text);
     line-height: 1.55;
   }
 

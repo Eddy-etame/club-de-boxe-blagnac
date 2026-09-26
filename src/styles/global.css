@@ -52,6 +52,10 @@
     --signal: #ff633e;
     --flight: #b9ff4b;
     --mist: #aaa79d;
+    /* Accent and grey as TEXT on paper: 4.8:1 and 4.8:1 (the brand values only reach 2.35 and 1.91).
+       On ink the brand values come back (6.3:1 and 7.7:1). */
+    --signal-text: #b43516;
+    --mist-text: #65625a;
     --line: color-mix(in srgb, currentColor 22%, transparent);
     --font-display: 'Archivo Variable', 'Arial Narrow', sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
@@ -242,7 +246,7 @@
     gap: 1rem;
     grid-template-columns: 1fr auto;
     margin-bottom: clamp(2rem, 5vw, 4rem);
-    color: var(--mist);
+    color: var(--mist-text);
   }
 
   .page-hero h1 {
@@ -274,7 +278,7 @@
 
   .page-hero__note {
     max-width: 31rem;
-    color: var(--mist);
+    color: var(--mist-text);
     font-family: var(--font-mono);
     font-size: 0.74rem;
     line-height: 1.65;
@@ -412,7 +416,7 @@
 
   .signal__heading > p:last-child {
     max-width: 30rem;
-    color: var(--mist);
+    color: var(--mist-text);
   }
 
   .signal__direct {
@@ -515,7 +519,7 @@
   }
 
   .faq-list summary::after {
-    color: var(--signal);
+    color: var(--signal-text);
     content: '+';
     font-family: var(--font-mono);
     font-size: 1.2rem;
@@ -668,6 +672,17 @@
   .surface-dark {
     color: var(--paper-bright);
     background: var(--ink);
+  }
+
+  /* Every ink-backgrounded surface: accent text returns to the brand values. */
+  .surface-dark,
+  .page-hero,
+  .closing-image,
+  .site-header,
+  .faq-links__grid a,
+  .course-page-others__list a:hover {
+    --signal-text: var(--signal);
+    --mist-text: var(--mist);
   }
 
   .surface-signal {
