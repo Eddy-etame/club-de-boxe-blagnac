@@ -110,6 +110,9 @@ export const communePath = (c: Pick<Commune, 'slug'>) => `/club-de-boxe-${c.slug
 export const communeKey = (c: Pick<Commune, 'slug'>) => `club-de-boxe-${c.slug}`;
 export const COMMUNE_PAGES = COMMUNES.map(communePath);
 
+/** « près de Beauzelle », « près d’Aussonne » : le français élide devant une voyelle. */
+export const presDe = (c: Pick<Commune, 'name'>) => (/^[aeiouyéèêh]/i.test(c.name) ? 'près d’' : 'près de ') + c.name;
+
 const rad = (deg: number) => (deg * Math.PI) / 180;
 
 /** Distance between the two centres, rounded to the kilometre. */

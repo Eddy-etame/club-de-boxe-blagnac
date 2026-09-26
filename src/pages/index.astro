@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ContactForm from '@/components/ContactForm.astro';
-import { photoCaption } from '@/data/photos';
+import { photo, photoCaption, photoRoom } from '@/data/photos';
 import PartnerCta from '@/components/PartnerCta.astro';
 import {
   CLUB,
@@ -16,7 +16,7 @@ import CommuneLinks from '@/components/CommuneLinks.astro';
 const title = 'Club de Boxe Blagnac (31700) — boxe anglaise dès 3 ans';
 const ogTitle = 'Un club de boxe anglaise à Blagnac, du baby boxing à la compétition';
 const description =
-  'Club de boxe anglaise à Blagnac, au nord-ouest de Toulouse, membre du réseau Boxing Center : six cours, de l’éveil dès 3 ans au groupe compétition. Nous écrire.';
+  'Club de boxe anglaise à Blagnac, au nord-ouest de Toulouse, membre du réseau Boxing Center : six cours, de l’éveil dès 3 ans au groupe compétition.';
 
 const audiences = [
   {
@@ -59,10 +59,10 @@ const audiences = [
   }}
 >
   <section class="home-hero surface-dark">
-    <div class="home-hero__media" aria-hidden="true">
+    <div class="home-hero__media">
       <picture>
         <source srcset="/images/garde-boxeuse-480.webp 480w, /images/garde-boxeuse-960.webp 960w, /images/garde-boxeuse-1600.webp 1600w" sizes="100vw" type="image/webp" />
-        <img src="/images/garde-boxeuse-1600.jpg" alt="" width="1600" height="1067" fetchpriority="high" />
+        <img src="/images/garde-boxeuse-1600.jpg" alt={photo('garde-boxeuse').scene} width="1600" height="1067" fetchpriority="high" />
       </picture>
     </div>
     <div class="home-hero__shade" aria-hidden="true"></div>
@@ -86,7 +86,7 @@ const audiences = [
         <div class="home-hero__actions hero-enter hero-enter--actions">
           <a class="button button--signal" href="#essai">Nous écrire</a>
           <span>{CLUB.openLine}<br />Réponse sous 24 h.</span>
-          <span class="home-hero__credit">Photo © Axel Derewiany</span>
+          <span class="home-hero__credit">{photoRoom('garde-boxeuse')}</span>
         </div>
       </div>
     </div>
@@ -263,10 +263,10 @@ const audiences = [
   </section>
 
   <section class="local surface-dark" aria-labelledby="local-title">
-    <div class="local__media" aria-hidden="true">
+    <div class="local__media">
       <picture>
         <source srcset="/images/ring-encadrement-480.webp 480w, /images/ring-encadrement-960.webp 960w, /images/ring-encadrement-1600.webp 1600w" sizes="100vw" type="image/webp" />
-        <img src="/images/ring-encadrement-1600.jpg" alt="" width="1600" height="1049" loading="lazy" />
+        <img src="/images/ring-encadrement-1600.jpg" alt={photo('ring-encadrement').scene} width="1600" height="1049" loading="lazy" />
       </picture>
     </div>
     <div class="local__inner shell">

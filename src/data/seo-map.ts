@@ -28,7 +28,7 @@ export const LOCATION = {
     { mode: 'Tram T1', detail: 'dessert Blagnac depuis Arènes, avec correspondance métro A.' },
     { mode: 'Tram T2', detail: 'relie l’aéroport de Toulouse-Blagnac à Palais de Justice.' },
     { mode: 'Bus Tisséo', detail: 'le 70 depuis Beauzelle jusqu’au centre de Blagnac ; le 71 depuis Seilh et Aussonne, le 74 depuis Cornebarrieu, jusqu’au tram T1 à Andromède-Lycée.' },
-    { mode: 'Voiture', detail: 'accès par la RN124 et la rocade Arc-en-Ciel, parking gratuit sur place.' }
+    { mode: 'Voiture', detail: 'par la rocade et l’A621 vers l’aéroport, puis la M902 ; depuis Beauzelle et Seilh, par la route de Grenade (M2). Parking gratuit sur place.' }
   ]
 } as const;
 

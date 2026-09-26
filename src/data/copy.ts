@@ -41,6 +41,8 @@ export type PageCopy = {
   ogWord?: string;
   ogKicker?: string;
   priority: string[];
+  /** Every URL a fact on the page comes from (commune pages). Rendered, followed. */
+  sources?: string[];
 };
 
 export const COPY = data as unknown as Record<string, PageCopy>;

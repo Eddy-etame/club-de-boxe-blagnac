@@ -16,6 +16,7 @@ import PartnerCta from '@/components/PartnerCta.astro';
 import { CLUB } from '@/data/club';
 import { copyFor } from '@/data/copy';
 import { photoRoom } from '@/data/photos';
+import { pageLastModified } from '@/lib/lastmod';
 
 interface Props {
   copyKey: string;
@@ -40,6 +41,14 @@ const largest = photo.widths[photo.widths.length - 1];
 /* The photo breaks the reading after the second section. */
 const photoAt = Math.min(2, copy.sections.length - 1);
 const eyebrowOf = (i: number, eyebrow?: string) => eyebrow ?? `${String(i + 1).padStart(2, '0')} · ${copy.label ?? ''}`;
+/* 2026-09-26 → 26.09.2026: the page's real last change, from git. */
+const updated = pageLastModified(copy.path).slice(0, 10).split('-').reverse().join('.');
+/* A source is named by its host and path, never by a title it may not carry. */
+const sourceLabel = (u: string) => {
+  const { hostname, pathname } = new URL(u);
+  const path = pathname.replace(/\/$/, '');
+  return hostname.replace(/^www\./, '') + (path.length > 48 ? path.slice(0, 45) + '…' : path);
+};
 ---
 
 <BaseLayout
@@ -57,7 +66,7 @@ const eyebrowOf = (i: number, eyebrow?: string) => eyebrow ?? `${String(i + 1).p
     <div class="shell">
       <div class="page-hero__meta">
         <p class="eyebrow eyebrow--signal">{copy.eyebrow}</p>
-        <p class="mono">{CLUB.openShort}</p>
+        <p class="mono">{CLUB.openShort} · Mis à jour le {updated}</p>
       </div>
       <h1>{copy.h1Main} <em>{copy.h1Em}</em></h1>
       <div class="page-hero__bottom">
@@ -121,6 +130,21 @@ const eyebrowOf = (i: number, eyebrow?: string) => eyebrow ?? `${String(i + 1).p
     </div>
   </section>
 
+  {copy.sources && copy.sources.length > 0 && (
+    <section class="intent-sources shell" aria-labelledby="intent-sources-title">
+      <div class="section-heading">
+        <p class="eyebrow">Sources</p>
+        <div>
+          <h2 id="intent-sources-title">Sources : {copy.ogWord}.</h2>
+          <p class="section-heading__intro">Les lignes, arrêts, horaires et chiffres de cette page viennent des documents ci-dessous, consultés en septembre 2026. Une ligne change ? Écrivez-nous, nous corrigeons.</p>
+        </div>
+      </div>
+      <ul class="intent-sources__list">
+        {copy.sources.map((u) => <li><a class="inline-link" href={u} rel="noopener">{sourceLabel(u)}</a></li>)}
+      </ul>
+    </section>
+  )}
+
   <section class="signal surface-dark" id="essai">
     <div class="signal__inner shell">
       <div class="signal__heading">
@@ -172,6 +196,22 @@ const eyebrowOf = (i: number, eyebrow?: string) => eyebrow ?? `${String(i + 1).p
 
   .intent-faq {
     padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .intent-sources {
+    padding-block: 0 clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .intent-sources__list {
+    display: grid;
+    gap: 0.45rem 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
   }
 
   .intent-faq__list {

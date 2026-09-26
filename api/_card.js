@@ -51,7 +51,7 @@ export default {
     "humans": "https://www.club-boxe-blagnac.fr/humans.txt",
     "sitemap": "https://www.club-boxe-blagnac.fr/sitemap.xml"
   },
-  "updated": "2026-09-13T17:38:40+00:00",
+  "updated": "2026-09-26T07:55:20+00:00",
   "facts": {
     "club": {
       "name": "Club de Boxe Blagnac",
@@ -250,13 +250,13 @@ export default {
         "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-beauzelle/",
         "label": "Boxe près de Beauzelle",
         "question": "Où faire de la boxe anglaise quand on habite Beauzelle ?",
-        "answers": "Depuis Beauzelle, le tram T1 et le bus 70 vous mènent sans changement à Blagnac, dont le centre est à 3 km : boxe anglaise dès 3 ans, du lundi au samedi."
+        "answers": "Depuis Beauzelle, le tram T1 et le bus 70 mènent sans changement à Blagnac, dont le centre est à 3 km : boxe anglaise dès 3 ans, du lundi au samedi."
       },
       {
         "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-seilh/",
         "label": "Boxe près de Seilh",
         "question": "Où faire de la boxe anglaise quand on habite Seilh ?",
-        "answers": "Vous habitez Seilh ? Nos six cours de boxe anglaise sont à Blagnac, 6 km au sud : bus 71 puis tram T1 à Andromède-Lycée en semaine, TAD 171 le samedi. Dès 3 ans."
+        "answers": "Vous habitez Seilh ? Nos six cours de boxe anglaise sont à Blagnac, 6 km au sud : bus 71 puis tram T1 à Andromède-Lycée en semaine, TAD 171 le samedi."
       },
       {
         "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-cornebarrieu/",
@@ -268,7 +268,7 @@ export default {
         "url": "https://www.club-boxe-blagnac.fr/club-de-boxe-aussonne/",
         "label": "Boxe près d’Aussonne",
         "question": "Où faire de la boxe anglaise quand on habite Aussonne ?",
-        "answers": "Vous habitez Aussonne ? Nos six cours de boxe anglaise sont à Blagnac, à 6 km : tram T1 depuis MEETT, bus 71, TAD ou liO 388. Dès 3 ans, du lundi au samedi."
+        "answers": "Vous habitez Aussonne ? Nos six cours de boxe anglaise sont à Blagnac, à 6 km : tram T1 depuis MEETT, bus 71, TAD ou liO 388. Du lundi au samedi."
       },
       {
         "url": "https://www.club-boxe-blagnac.fr/premiere-seance/",

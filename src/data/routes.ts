@@ -36,7 +36,7 @@ export const ogId = (path: string): string =>
 const COURSES: Record<string, { question: string; word: string; kicker: string }> = {
   'eveil-baby-boxing': {
     question: 'Peut-on faire de la boxe dès 3 ans à Blagnac ?',
-    word: 'Baby boxing',
+    word: 'Baby boxe',
     kicker: 'Dès 3 ans · sans contact'
   },
   'boxe-educative': {

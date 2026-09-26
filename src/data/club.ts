@@ -70,7 +70,7 @@ export const AREA = {
   transport: [
     { mode: 'Tram T1', detail: 'depuis Arènes, correspondance métro A. Six minutes à pied de l’arrêt.' },
     { mode: 'Bus Tisséo', detail: 'le 70 depuis Beauzelle jusqu’au centre de Blagnac ; le 71 depuis Seilh et Aussonne, le 74 depuis Cornebarrieu, jusqu’au tram T1 à Andromède-Lycée.' },
-    { mode: 'Voiture', detail: 'accès par la RN124 et la rocade Arc-en-Ciel. Parking gratuit sur place.' },
+    { mode: 'Voiture', detail: 'par la rocade et l’A621 vers l’aéroport, puis la M902 ; depuis Beauzelle et Seilh, par la route de Grenade (M2). Parking gratuit sur place.' },
     { mode: 'Vélo', detail: 'piste cyclable continue depuis le centre de Blagnac, arceaux devant l’entrée.' }
   ]
 } as const;

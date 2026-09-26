@@ -4,8 +4,10 @@
  * committed, so a shallow build clone cannot falsify it.
  */
 import dates from '@/data/lastmod.json';
+import firsts from '@/data/published.json';
 
 const map = dates as Record<string, string>;
+const published = firsts as Record<string, string>;
 
 export function siteLastModified(): string {
   return Object.values(map).sort().pop() ?? '2026-09-04T00:00:00+00:00';
@@ -13,4 +15,9 @@ export function siteLastModified(): string {
 
 export function pageLastModified(pathname: string): string {
   return map[pathname] ?? siteLastModified();
+}
+
+/** The day the page's source first entered the repository (src/data/published.json). */
+export function pagePublished(pathname: string): string {
+  return (published[pathname] ?? '2026-09-04T00:00:00+00:00').slice(0, 10);
 }

@@ -26,7 +26,7 @@ import { CLUB, DISCIPLINES, GEAR, FAQ, GLOSSARY } from './club';
 import { NETWORK, NETWORK_CLUBS, type NetworkClub } from './network';
 import { LOCATION } from './seo-map';
 import { SITE, PUBLIC_PAGES, LOW_VALUE_PAGES, absoluteUrl } from './site';
-import { pageLastModified, siteLastModified } from '../lib/lastmod';
+import { pageLastModified, pagePublished, siteLastModified } from '../lib/lastmod';
 import { ROUTES, ogId } from './routes';
 import { COMMUNES, communePath, type Commune } from './communes';
 
@@ -86,7 +86,7 @@ const websiteNode = {
 const publisherNode = {
   /* No 'LocalBusiness': SportsActivityLocation already is one, and the
      explicit type makes validators demand a street address we do not publish. */
-  '@type': ['SportsClub', 'SportsActivityLocation'],
+  '@type': ['SportsClub', 'SportsOrganization', 'SportsActivityLocation'],
   '@id': id('publisher'),
   name: CLUB.name,
   url: `${SITE.url}/`,
@@ -96,7 +96,7 @@ const publisherNode = {
   /* Blagnac has other boxing associations, one with a near-identical name.
      Stated so answer engines keep the entities apart. */
   disambiguatingDescription:
-    'Club de boxe anglaise du réseau Boxing Center à Blagnac, distinct des autres associations de boxe de la commune.',
+    'Club de boxe anglaise du réseau Boxing Center (SAS Boxing Center) à Blagnac ; distinct du Blagnac Boxing Club, association de boxe anglaise, et du Punch Blagnac, club de savate boxe française.',
   sport: { '@id': id('subject') },
   email: CLUB.email,
   image: { '@id': id('primaryimage') },
@@ -157,7 +157,6 @@ const publisherNode = {
     target: {
       '@type': 'EntryPoint',
       urlTemplate: absoluteUrl('/acces-contact/#contact'),
-      inLanguage: 'fr-FR',
       actionPlatform: ['https://schema.org/DesktopWebPlatform', 'https://schema.org/MobileWebPlatform']
     }
   }
@@ -230,7 +229,6 @@ const courseNodes = DISCIPLINES.map((d) => ({
   typicalAgeRange: d.ages,
   about: { '@id': id('subject') },
   provider: { '@id': id('publisher') },
-  courseMode: 'onsite',
   spatialCoverage: { '@id': id('place') },
   isAccessibleForFree: false,
   hasCourseInstance: {
@@ -334,7 +332,7 @@ const networkNode = {
 };
 
 const partnerNodes = NETWORK_CLUBS.map((club) => ({
-  '@type': 'SportsClub',
+  '@type': ['SportsClub', 'SportsOrganization'],
   '@id': clubGraphId(club),
   name: club.name,
   url: club.url,
@@ -401,7 +399,7 @@ export function buildGraph({
       : { about: { '@id': id('subject') }, mentions: [{ '@id': id('place') }, { '@id': id('subject') }] }),
     primaryImageOfPage: { '@id': id('primaryimage') },
     dateModified: pageLastModified(pathname),
-    datePublished: '2026-09-04',
+    datePublished: pagePublished(pathname),
     isAccessibleForFree: true
   };
 
@@ -412,7 +410,7 @@ export function buildGraph({
     const caption = route.og.word + ' — ' + route.og.kicker + '. Club de Boxe Blagnac, réseau Boxing Center.';
     pageNode.primaryImageOfPage = {
       '@type': 'ImageObject',
-      '@id': `${canonical}#primaryimage`,
+      '@id': `${canonical}#pageimage`,
       url: card + '-carre.jpg',
       contentUrl: card + '-carre.jpg',
       width: 1200,
@@ -421,7 +419,7 @@ export function buildGraph({
     };
     pageNode.image = [
       { '@type': 'ImageObject', url: card + '.jpg', width: 1200, height: 630, caption },
-      { '@id': `${canonical}#primaryimage` }
+      { '@id': `${canonical}#pageimage` }
     ];
   }
 

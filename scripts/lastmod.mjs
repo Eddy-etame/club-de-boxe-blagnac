@@ -12,10 +12,12 @@
  * renders from. Uncommitted edits count as now, because they are about to ship.
  */
 import { execFileSync } from 'node:child_process';
-import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
 const OUT = 'src/data/lastmod.json';
+/* First commit of each page's source: written once, never re-dated. */
+const PUBLISHED = 'src/data/published.json';
 const DATA = ['src/data/club.ts', 'src/data/seo.ts', 'src/data/seo-map.ts', 'src/data/copy.json', 'src/data/routes.ts', 'src/data/network.ts', 'src/data/communes.ts'];
 
 function git(args) {
@@ -43,6 +45,11 @@ function dateOf(file) {
 
 const newest = (dates) => dates.filter(Boolean).sort().pop() || null;
 
+function firstCommit(file) {
+  const added = git(['log', '--diff-filter=A', '--follow', '--format=%cI', '--', file]).split(String.fromCharCode(10)).filter(Boolean).pop();
+  return added ? iso(added) : now;
+}
+
 function walk(dir) {
   return readdirSync(dir).flatMap((name) => {
     const path = join(dir, name);
@@ -50,25 +57,32 @@ function walk(dir) {
   });
 }
 
-const slugs = [...readFileSync('src/data/club.ts', 'utf8').matchAll(/slug: '([^']+)'/g)].map((m) => m[1]);
+/* Course slugs only: club.ts also holds glossary slugs, which are not pages. */
+const disciplines = readFileSync('src/data/club.ts', 'utf8').split('export const DISCIPLINES')[1].split(String.fromCharCode(10) + '];')[0];
+const slugs = [...disciplines.matchAll(/slug: '([^']+)'/g)].map((m) => m[1]);
 const communes = [...readFileSync('src/data/communes.ts', 'utf8').matchAll(/slug: '([^']+)'/g)].map((m) => m[1]);
 const dataDate = newest(DATA.map(dateOf));
 const map = {};
+const published = existsSync(PUBLISHED) ? JSON.parse(readFileSync(PUBLISHED, 'utf8')) : {};
+const firsts = {};
 
 for (const file of walk('src/pages')) {
   const rel = relative('src/pages', file).split(sep).join('/');
   if (!rel.endsWith('.astro') || rel === '404.astro') continue;
   const date = newest([dateOf(file.split(sep).join('/')), dataDate]);
-  if (rel.includes('[slug]')) {
-    const base = '/' + rel.replace('[slug].astro', '');
-    for (const slug of slugs) map[base + slug + '/'] = date;
-  } else if (rel.includes('[commune]')) {
-    for (const slug of communes) map['/' + rel.replace('[commune]', slug).replace(/index\.astro$/, '')] = date;
-  } else {
-    map['/' + rel.replace(/index\.astro$/, '').replace(/\.astro$/, '/')] = date;
+  const born = firstCommit(file.split(sep).join('/'));
+  const routesOf = rel.includes('[slug]')
+    ? slugs.map((slug) => '/' + rel.replace('[slug].astro', '') + slug + '/')
+    : rel.includes('[commune]')
+      ? communes.map((slug) => '/' + rel.replace('[commune]', slug).replace(/index\.astro$/, ''))
+      : ['/' + rel.replace(/index\.astro$/, '').replace(/\.astro$/, '/')];
+  for (const route of routesOf) {
+    map[route] = date;
+    firsts[route] = published[route] ?? born;
   }
 }
 
 const sorted = Object.fromEntries(Object.entries(map).sort(([a], [b]) => a.localeCompare(b)));
 writeFileSync(OUT, JSON.stringify(sorted, null, 2) + '\n');
+writeFileSync(PUBLISHED, JSON.stringify(Object.fromEntries(Object.entries(firsts).sort(([a], [b]) => a.localeCompare(b))), null, 2) + '\n');
 console.log('lastmod: ' + Object.keys(sorted).length + ' routes dated, newest ' + newest(Object.values(sorted)) + '.');

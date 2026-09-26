@@ -62,7 +62,7 @@ for (const file of htmlFiles) {
 
   assert(h1Count === 1, `${rel}: expected one h1, found ${h1Count}.`);
   assert(Boolean(title && title.length <= 68), `${rel}: missing or oversized title (${title?.length || 0}).`);
-  assert(Boolean(description && description.length >= 80 && description.length <= 180), `${rel}: description should be 80–180 chars (${description?.length || 0}).`);
+  assert(Boolean(description && description.length >= 80 && description.length <= 158), `${rel}: description should be 80–158 chars (${description?.length || 0}).`);
   if (rel !== '404.html') assert(Boolean(canonical?.startsWith('https://')), `${rel}: canonical must be absolute HTTPS.`);
   else assert(!canonical, '404.html must not declare a canonical.');
   assert(!/Eddy Etame Etame|Angoula Onambele|Mbosseu Brad/i.test(visible), `${rel}: technical attribution leaked into visible body.`);

@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/archivo';
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '@/styles/global.css';
@@ -178,6 +179,8 @@ const graph = buildGraph({
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    {/* The display face paints the H1; fetched before the CSS asks for it, the swap is early enough to move nothing. */}
+    <link rel="preload" as="font" type="font/woff2" href={archivoLatin} crossorigin />
     {preloadImage && (
       <link
         rel="preload"
