@@ -51,7 +51,7 @@ export default {
     "humans": "https://www.club-boxe-blagnac.fr/humans.txt",
     "sitemap": "https://www.club-boxe-blagnac.fr/sitemap.xml"
   },
-  "updated": "2026-09-26T08:27:19+00:00",
+  "updated": "2026-10-02T00:01:19+00:00",
   "facts": {
     "club": {
       "name": "Club de Boxe Blagnac",
@@ -269,6 +269,18 @@ export default {
         "label": "Boxe près d’Aussonne",
         "question": "Où faire de la boxe anglaise quand on habite Aussonne ?",
         "answers": "Vous habitez Aussonne ? Nos six cours de boxe anglaise sont à Blagnac, à 6 km : tram T1 depuis MEETT, bus 71, TAD ou liO 388. Du lundi au samedi."
+      },
+      {
+        "url": "https://www.club-boxe-blagnac.fr/gants-de-boxe-enfant/",
+        "label": "Gants de boxe enfant",
+        "question": "Quels gants de boxe pour un enfant, et à partir de quand en acheter ?",
+        "answers": "Gants de boxe enfant : 4 oz de 5 à 7 ans, 6 oz de 7 à 10 ans, 8 oz de 10 à 13 ans, 10 oz pour les ados. Au club de Blagnac, on les prête pour commencer."
+      },
+      {
+        "url": "https://www.club-boxe-blagnac.fr/sac-de-sport-boxe/",
+        "label": "Le sac de sport du boxeur",
+        "question": "Que mettre dans son sac de sport pour aller à la boxe ?",
+        "answers": "Tenue, chaussures d’intérieur, eau, bandes, protège-dents : ce qu’il faut dans un sac de sport pour la boxe, dans l’ordre des achats, et ce que le club prête."
       },
       {
         "url": "https://www.club-boxe-blagnac.fr/premiere-seance/",

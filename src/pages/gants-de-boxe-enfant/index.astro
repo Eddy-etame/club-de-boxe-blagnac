@@ -1,0 +1,20 @@
+---
+/**
+ * Gants de boxe enfant — la taille selon l'âge, calée sur les trois cours du
+ * club (éveil, boxe éducative, ados). Rien à acheter pour commencer : le club
+ * prête. Copy: src/data/copy.json ("gants-de-boxe-enfant").
+ */
+import IntentPage from '@/components/IntentPage.astro';
+---
+
+<IntentPage
+  copyKey="gants-de-boxe-enfant"
+  photo={{
+    file: 'boxe-ados-blagnac',
+    widths: [480, 960, 1600],
+    width: 1600,
+    height: 1066,
+    alt: 'Un adolescent, gants bleus aux mains, frappe les pattes d’ours orange que lui présente un entraîneur',
+    caption: 'Des gants à sa main, aux pattes d’ours'
+  }}
+/>

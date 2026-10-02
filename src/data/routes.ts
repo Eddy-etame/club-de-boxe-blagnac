@@ -137,6 +137,19 @@ export const ROUTES: Route[] = [
       }
     };
   }),
+  /* Two advice pages on equipment (2026-10-02): each owns one question and
+     links out, from its sections, to the network's equipment shop. */
+  ...(['gants-de-boxe-enfant', 'sac-de-sport-boxe'] as const).map((key) => {
+    const copy = copyFor(key);
+    if (!copy?.path || !copy.question || !copy.label || !copy.ogWord || !copy.ogKicker) throw new Error(`routes.ts: no page copy for advice page "${key}"`);
+    return {
+      path: copy.path,
+      label: copy.label,
+      question: copy.question,
+      answers: copy.description,
+      og: { word: copy.ogWord, kicker: copy.ogKicker, photo: key === 'gants-de-boxe-enfant' ? 'cours-debout-groupe-1600.jpg' : 'espace-renforcement-1400.jpg' }
+    };
+  }),
   {
     path: '/premiere-seance/',
     label: 'Première séance',

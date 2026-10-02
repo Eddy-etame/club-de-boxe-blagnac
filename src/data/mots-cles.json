@@ -388,5 +388,33 @@
       "boxe anglaise Aussonne",
       "salle de boxe près d’Aussonne"
     ]
+  },
+  "/gants-de-boxe-enfant/": {
+    "priority": [
+      "gants de boxe enfant",
+      "le poids suit l’âge",
+      "prêtés pour commencer"
+    ],
+    "secondary": [
+      "gants de boxe enfant taille",
+      "gants de boxe 6 oz enfant",
+      "quelle taille de gants de boxe pour un enfant",
+      "gants de boxe enfant 8 ans",
+      "gants de boxe ado"
+    ]
+  },
+  "/sac-de-sport-boxe/": {
+    "priority": [
+      "sac de sport",
+      "réservées à l’intérieur",
+      "premier achat"
+    ],
+    "secondary": [
+      "sac de sport boxe",
+      "que mettre dans son sac de boxe",
+      "matériel boxe débutant",
+      "quoi apporter à un cours de boxe",
+      "ordre des achats boxe"
+    ]
   }
 }

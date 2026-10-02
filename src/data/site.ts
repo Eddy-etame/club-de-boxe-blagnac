@@ -61,6 +61,8 @@ export const PUBLIC_PAGES = [
   '/horaires/',
   '/inscription/',
   ...COMMUNE_PAGES,
+  '/gants-de-boxe-enfant/',
+  '/sac-de-sport-boxe/',
   '/premiere-seance/',
   '/faq/',
   '/acces-contact/',

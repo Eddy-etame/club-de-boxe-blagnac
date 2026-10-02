@@ -26,6 +26,8 @@ const PAGE_IMAGES: Record<string, string[]> = {
   '/boxe-femme-blagnac/': ['cours-collectif-sacs-1600.jpg'],
   '/horaires/': ['sacs-de-frappe-1400.jpg'],
   '/inscription/': ['conseil-coach-1400.jpg'],
+  '/gants-de-boxe-enfant/': ['boxe-ados-blagnac-1600.jpg'],
+  '/sac-de-sport-boxe/': ['boxe-detail-1000.jpg'],
   ...Object.fromEntries(
     COMMUNES.map((c) => [communePath(c), [c.photo.file + '-' + c.photo.widths[c.photo.widths.length - 1] + '.jpg']])
   ),

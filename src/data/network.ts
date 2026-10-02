@@ -225,6 +225,7 @@ export const PICKS: Record<string, Pick> = {
     extras: [NETWORK.salles, NETWORK.abonnements]
   },
   'boxe-enfant-blagnac': KIDS,
+  'gants-de-boxe-enfant': KIDS,
   'boxe-femme-blagnac': {
     clubs: [
       { id: 'minimes', topics: ['activites', 'club'] },
@@ -358,6 +359,7 @@ export const POPUPS: Record<string, Popup> = {
   'eveil-baby-boxing': KIDS_POPUP,
   'boxe-educative': KIDS_POPUP,
   'boxe-enfant-blagnac': KIDS_POPUP,
+  'gants-de-boxe-enfant': KIDS_POPUP,
   'boxe-femme-blagnac': {
     heading: 'Un cours 100 % féminin ?',
     text: 'Tous nos cours sont mixtes. Si vous cherchez un cours réservé aux femmes, Boxing Center Toulouse Minimes propose Boxing Lady.',

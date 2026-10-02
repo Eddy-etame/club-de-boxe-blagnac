@@ -1,0 +1,19 @@
+---
+/**
+ * Le sac de sport du boxeur — ce qu'on y met, dans l'ordre réel des achats, et
+ * ce que le club prête. Copy: src/data/copy.json ("sac-de-sport-boxe").
+ */
+import IntentPage from '@/components/IntentPage.astro';
+---
+
+<IntentPage
+  copyKey="sac-de-sport-boxe"
+  photo={{
+    file: 'boxe-detail',
+    widths: [240, 480, 700, 1000],
+    width: 1000,
+    height: 606,
+    alt: 'Un jeune boxeur en débardeur blanc, mains bandées de rouge, se tient en garde devant les cordes d’un ring',
+    caption: 'Les bandes, sous les gants'
+  }}
+/>
